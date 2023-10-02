@@ -6,6 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 public class ThirdClassDeflector : Deflectors
 {
     private int _deflectorconditionlevel;
+    private int _asteroidDamage;
+    private int _meteoriteDamage;
+    private int _spaceWhaleDamage;
     private bool _isaPhotonDeflectorInstalled;
     private bool _isDeflectorWorking;
     private IPhotonicDeflectors _photonicDeflector;
@@ -15,6 +18,9 @@ public class ThirdClassDeflector : Deflectors
     {
         _photonicDeflector = photonicDeflector;
         _deflectorconditionlevel = 7340;
+        _asteroidDamage = 100;
+        _meteoriteDamage = 334;
+        _spaceWhaleDamage = 7340;
         _isaPhotonDeflectorInstalled = false;
         _isDeflectorWorking = true;
     }
@@ -36,19 +42,19 @@ public class ThirdClassDeflector : Deflectors
 
     public override void AsteroidDamage()
     {
-        _deflectorconditionlevel -= 100;
+        _deflectorconditionlevel -= _asteroidDamage;
         IsDeflectorWorking();
     }
 
     public override void MeteoriteDamage()
     {
-        _deflectorconditionlevel -= 334;
+        _deflectorconditionlevel -= _meteoriteDamage;
         IsDeflectorWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
-        _deflectorconditionlevel -= 7340;
+        _deflectorconditionlevel -= _spaceWhaleDamage;
         IsDeflectorWorking();
     }
 
@@ -56,15 +62,15 @@ public class ThirdClassDeflector : Deflectors
     {
         if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += 7340;
+            _deflectorconditionlevel += _spaceWhaleDamage;
         }
         else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += 334;
+            _deflectorconditionlevel += _meteoriteDamage;
         }
         else
         {
-            _deflectorconditionlevel += 100;
+            _deflectorconditionlevel += _asteroidDamage;
         }
     }
 

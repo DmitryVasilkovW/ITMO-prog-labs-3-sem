@@ -4,6 +4,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 public class FirstClassArmor : Entities.Armor
 {
     private int _armorconditionlevel;
+    private int _asteroidDamage;
+    private int _meteoriteDamage;
+    private int _spaceWhaleDamage;
     private bool _isArmorWorking;
     private int _weightDimensionsOfTheShip;
 
@@ -11,6 +14,9 @@ public class FirstClassArmor : Entities.Armor
         : base(weightDimensionsOfTheShip)
     {
         _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
+        _asteroidDamage = 1000;
+        _meteoriteDamage = 2000;
+        _spaceWhaleDamage = 6000;
         _armorconditionlevel = 1000;
         _isArmorWorking = true;
     }
@@ -27,19 +33,19 @@ public class FirstClassArmor : Entities.Armor
 
     public override void AsteroidDamage()
     {
-        _armorconditionlevel -= 1000 / _weightDimensionsOfTheShip;
+        _armorconditionlevel -= _asteroidDamage / _weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
     public override void MeteoriteDamage()
     {
-        _armorconditionlevel -= 2000 / _weightDimensionsOfTheShip;
+        _armorconditionlevel -= _meteoriteDamage / _weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
-        _armorconditionlevel -= 6000 / _weightDimensionsOfTheShip;
+        _armorconditionlevel -= _spaceWhaleDamage / _weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
@@ -47,15 +53,15 @@ public class FirstClassArmor : Entities.Armor
     {
         if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
         {
-            _armorconditionlevel += 6000 / _weightDimensionsOfTheShip;
+            _armorconditionlevel += _spaceWhaleDamage / _weightDimensionsOfTheShip;
         }
         else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
         {
-            _armorconditionlevel += 2000 / _weightDimensionsOfTheShip;
+            _armorconditionlevel += _meteoriteDamage / _weightDimensionsOfTheShip;
         }
         else
         {
-            _armorconditionlevel += 1000 / _weightDimensionsOfTheShip;
+            _armorconditionlevel += _asteroidDamage / _weightDimensionsOfTheShip;
         }
     }
 }

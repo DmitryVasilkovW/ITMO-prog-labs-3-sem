@@ -6,6 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 public class SecondClassDeflector : Deflectors
 {
     private int _deflectorconditionlevel;
+    private int _asteroidDamage;
+    private int _meteoriteDamage;
+    private int _spaceWhaleDamage;
     private bool _isaPhotonDeflectorInstalled;
     private bool _isDeflectorWorking;
     private IPhotonicDeflectors _photonicDeflector;
@@ -13,6 +16,9 @@ public class SecondClassDeflector : Deflectors
     public SecondClassDeflector(IPhotonicDeflectors photonicDeflector)
         : base(photonicDeflector)
     {
+        _asteroidDamage = 734;
+        _meteoriteDamage = 2447;
+        _spaceWhaleDamage = 8000;
         _photonicDeflector = photonicDeflector;
         _deflectorconditionlevel = 7340;
         _isaPhotonDeflectorInstalled = false;
@@ -36,19 +42,19 @@ public class SecondClassDeflector : Deflectors
 
     public override void AsteroidDamage()
     {
-        _deflectorconditionlevel -= 734;
+        _deflectorconditionlevel -= _asteroidDamage;
         IsDeflectorWorking();
     }
 
     public override void MeteoriteDamage()
     {
-        _deflectorconditionlevel -= 2447;
+        _deflectorconditionlevel -= _meteoriteDamage;
         IsDeflectorWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
-         _deflectorconditionlevel -= 8000;
+         _deflectorconditionlevel -= _spaceWhaleDamage;
          IsDeflectorWorking();
     }
 
@@ -56,15 +62,15 @@ public class SecondClassDeflector : Deflectors
     {
         if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += 8000;
+            _deflectorconditionlevel += _spaceWhaleDamage;
         }
         else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += 2447;
+            _deflectorconditionlevel += _meteoriteDamage;
         }
         else
         {
-            _deflectorconditionlevel += 734;
+            _deflectorconditionlevel += _asteroidDamage;
         }
     }
 
