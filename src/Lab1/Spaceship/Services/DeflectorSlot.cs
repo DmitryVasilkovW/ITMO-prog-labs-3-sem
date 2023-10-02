@@ -12,19 +12,16 @@ public class DeflectorSlot : Entities.Deflectors
         _photonicDeflector = photonicDeflector;
     }
 
-    public override int AsteroidDamage()
+    public override void AsteroidDamage()
     {
-        return 0;
     }
 
-    public override int MeteoriteDamage()
+    public override void MeteoriteDamage()
     {
-        return 0;
     }
 
-    public override int SpaceWhaleDamage()
+    public override void SpaceWhaleDamage()
     {
-        return 0;
     }
 
     public override void SavingStatusOfTheDeflector(string damagetype)

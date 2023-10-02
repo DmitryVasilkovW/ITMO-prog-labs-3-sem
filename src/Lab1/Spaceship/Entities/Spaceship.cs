@@ -58,6 +58,11 @@ public abstract class Spaceship
         get { return _deflector; }
     }
 
+    public virtual Armor Armor
+    {
+        get { return _armor; }
+    }
+
     public virtual AdditionalSafetyDevices Equipment
     {
         get { return _equipment; }

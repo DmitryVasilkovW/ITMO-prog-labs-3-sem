@@ -25,16 +25,19 @@ public class FirstClassArmor : Entities.Armor
     public override void AsteroidDamage()
     {
         _armorconditionlevel -= 1000;
+        IsArmorWorking();
     }
 
     public override void MeteoriteDamage()
     {
         _armorconditionlevel -= 2000;
+        IsArmorWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
         _armorconditionlevel -= 3000;
+        IsArmorWorking();
     }
 
     public override void SavingStatusOfTheArmor(string damagetype)

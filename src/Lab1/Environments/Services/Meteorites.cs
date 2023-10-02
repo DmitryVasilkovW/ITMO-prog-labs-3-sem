@@ -1,3 +1,5 @@
+using System;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class Meteorites : Entities.IObstacles
@@ -16,9 +18,29 @@ public class Meteorites : Entities.IObstacles
 
     public void Damage(Spaceship.Entities.Spaceship ship)
     {
-        if (ship != null && ship.IsDeflectorWorking)
+        if (ship.IsDeflectorWorking)
         {
-            ship.Deflector.MeteoriteDamage();
+            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
+            {
+                ship.SafetyEquipmentOperation();
+                ship.Deflector.MeteoriteDamage();
+            }
+            else
+            {
+                ship.Deflector.MeteoriteDamage();
+            }
+        }
+        else
+        {
+            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
+            {
+                ship.SafetyEquipmentOperation();
+                ship.Armor.MeteoriteDamage();
+            }
+            else
+            {
+                ship.Armor.MeteoriteDamage();
+            }
         }
     }
 }

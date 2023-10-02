@@ -30,11 +30,11 @@ public abstract class Deflectors
         return _isDeflectorWorking;
     }
 
-    public abstract int AsteroidDamage();
+    public abstract void AsteroidDamage();
 
-    public abstract int MeteoriteDamage();
+    public abstract void MeteoriteDamage();
 
-    public abstract int SpaceWhaleDamage();
+    public abstract void SpaceWhaleDamage();
 
     public void AntimatterFlashesDamage()
     {

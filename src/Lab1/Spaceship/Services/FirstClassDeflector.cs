@@ -34,19 +34,22 @@ public class FirstClassDeflector : Deflectors
         return _isDeflectorWorking;
     }
 
-    public override int AsteroidDamage()
+    public override void AsteroidDamage()
     {
-        return _deflectorconditionlevel -= 3670;
+        _deflectorconditionlevel -= 3670;
+        IsDeflectorWorking();
     }
 
-    public override int MeteoriteDamage()
+    public override void MeteoriteDamage()
     {
-        return _deflectorconditionlevel -= 7340;
+        _deflectorconditionlevel -= 7340;
+        IsDeflectorWorking();
     }
 
-    public override int SpaceWhaleDamage()
+    public override void SpaceWhaleDamage()
     {
-        return _deflectorconditionlevel -= 10000;
+        _deflectorconditionlevel -= 10000;
+        IsDeflectorWorking();
     }
 
     public new void AntimatterFlashesDamage()

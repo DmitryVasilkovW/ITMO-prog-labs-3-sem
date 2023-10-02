@@ -25,5 +25,17 @@ public class SpaceWhale : Entities.IObstacles
                 ship.Deflector.SpaceWhaleDamage();
             }
         }
+        else
+        {
+            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
+            {
+                ship.SafetyEquipmentOperation();
+                ship.Armor.SpaceWhaleDamage();
+            }
+            else
+            {
+                ship.Armor.SpaceWhaleDamage();
+            }
+        }
     }
 }

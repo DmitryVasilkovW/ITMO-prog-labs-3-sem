@@ -35,6 +35,16 @@ public class Vaklas : Entities.Spaceship
         _weightDimensionCharacteristics = weightDimensionCharacteristics;
     }
 
+    public new Deflectors Deflector
+    {
+        get { return _deflector; }
+    }
+
+    public new Armor Armor
+    {
+        get { return _armor; }
+    }
+
     public override int WeightDimensionCharacteristics
     {
         get { return _weightDimensionCharacteristics; }

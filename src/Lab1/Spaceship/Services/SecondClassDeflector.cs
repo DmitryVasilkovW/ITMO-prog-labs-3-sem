@@ -34,19 +34,22 @@ public class SecondClassDeflector : Deflectors
         return _isDeflectorWorking;
     }
 
-    public override int AsteroidDamage()
+    public override void AsteroidDamage()
     {
-        return _deflectorconditionlevel -= 734;
+        _deflectorconditionlevel -= 734;
+        IsDeflectorWorking();
     }
 
-    public override int MeteoriteDamage()
+    public override void MeteoriteDamage()
     {
-        return _deflectorconditionlevel -= 2447;
+        _deflectorconditionlevel -= 2447;
+        IsDeflectorWorking();
     }
 
-    public override int SpaceWhaleDamage()
+    public override void SpaceWhaleDamage()
     {
-        return _deflectorconditionlevel -= 8000;
+         _deflectorconditionlevel -= 8000;
+         IsDeflectorWorking();
     }
 
     public override void SavingStatusOfTheDeflector(string damagetype)

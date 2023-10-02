@@ -1,3 +1,5 @@
+using System;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class Asteroid : Entities.IObstacles
@@ -16,9 +18,29 @@ public class Asteroid : Entities.IObstacles
 
     public void Damage(Spaceship.Entities.Spaceship ship)
     {
-        if (ship != null && ship.IsDeflectorWorking)
+        if (ship.IsDeflectorWorking)
         {
-            ship.Deflector.AsteroidDamage();
+            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
+            {
+                ship.SafetyEquipmentOperation();
+                ship.Deflector.AsteroidDamage();
+            }
+            else
+            {
+                ship.Deflector.AsteroidDamage();
+            }
+        }
+        else
+        {
+            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
+            {
+                ship.SafetyEquipmentOperation();
+                ship.Armor.AsteroidDamage();
+            }
+            else
+            {
+                ship.Armor.AsteroidDamage();
+            }
         }
     }
 }
