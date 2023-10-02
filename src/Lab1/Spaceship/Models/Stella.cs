@@ -20,12 +20,12 @@ public class Stella : Entities.Spaceship
 
     public Stella()
     {
-        var engine = new ClassCPulseEngine();
-        var jumpengine = new JumpEngineOmega();
+        var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
+        var jumpengine = new JumpEngineOmega(_weightDimensionCharacteristics);
         var deflector = new FirstClassDeflector(new PhotonDeflectorSlot());
-        var armor = new FirstClassArmor();
+        var armor = new FirstClassArmor(_weightDimensionCharacteristics);
         string engineType = "Jumpengine";
-        int weightDimensionCharacteristics = 241;
+        int weightDimensionCharacteristics = 1;
 
         _armor = armor;
         _deflector = deflector;

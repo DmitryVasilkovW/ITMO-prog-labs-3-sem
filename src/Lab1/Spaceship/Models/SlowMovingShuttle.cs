@@ -12,13 +12,16 @@ public class SlowMovingShuttle : Entities.Spaceship
     private bool _crew;
 
     private IEnginesType _engine;
+    private Armor _armor;
 
     public SlowMovingShuttle()
     {
-        var engine = new ClassCPulseEngine();
+        var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
+        var armor = new FirstClassArmor(_weightDimensionCharacteristics);
         string engineType = "PulseEngine";
-        int weightDimensionCharacteristics = 239;
+        int weightDimensionCharacteristics = 1;
 
+        _armor = armor;
         _engine = engine;
         _engineType = engineType;
         _weightDimensionCharacteristics = weightDimensionCharacteristics;

@@ -23,8 +23,8 @@ public abstract class Spaceship
         var fslot = new PhotonDeflectorSlot();
         var slot = new DeflectorSlot(fslot);
         var jumpengineslot = new JumpEngineSlot();
-        var engine = new ClassCPulseEngine();
-        var armor = new FirstClassArmor();
+        var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
+        var armor = new FirstClassArmor(1);
         var equipment = new AdditionalSafetyDevicesSlot(" ");
 
         _equipment = equipment;
@@ -33,7 +33,7 @@ public abstract class Spaceship
         _engine = engine;
         _jumpengine = jumpengineslot;
         _engineType = "d";
-        _weightDimensionCharacteristics = 228;
+        _weightDimensionCharacteristics = 1;
         _crew = true;
     }
 

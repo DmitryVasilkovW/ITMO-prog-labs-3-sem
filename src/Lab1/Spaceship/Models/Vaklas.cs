@@ -20,12 +20,12 @@ public class Vaklas : Entities.Spaceship
 
     public Vaklas()
     {
-        var engine = new ClassEPulseEngine();
-        var jumpengine = new JumpEngineGamma();
+        var engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
+        var jumpengine = new JumpEngineGamma(_weightDimensionCharacteristics);
         var deflector = new FirstClassDeflector(new PhotonDeflectorSlot());
-        var armor = new SecondClassArmor();
+        var armor = new SecondClassArmor(_weightDimensionCharacteristics);
         string engineType = "PulseEngine";
-        int weightDimensionCharacteristics = 241;
+        int weightDimensionCharacteristics = 2;
 
         _armor = armor;
         _deflector = deflector;

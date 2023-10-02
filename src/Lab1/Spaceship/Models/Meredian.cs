@@ -18,12 +18,12 @@ public class Meredian : Entities.Spaceship
 
     public Meredian()
     {
-        var engine = new ClassEPulseEngine();
+        var engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
         var deflector = new SecondClassDeflector(new PhotonDeflectorSlot());
-        var armor = new SecondClassArmor();
+        var armor = new SecondClassArmor(_weightDimensionCharacteristics);
         var equipment = new AntiNitrinoEmitter("SpaceWhale");
         string engineType = "PulseEngine";
-        int weightDimensionCharacteristics = 241;
+        int weightDimensionCharacteristics = 2;
 
         _equipment = equipment;
         _armor = armor;

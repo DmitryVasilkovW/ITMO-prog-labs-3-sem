@@ -4,9 +4,11 @@ public abstract class Armor
 {
     private int _armorconditionlevel;
     private bool _isArmorWorking;
+    private int _weightDimensionsOfTheShip;
 
-    protected Armor()
+    protected Armor(int weightDimensionsOfTheShip)
     {
+        _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
         _armorconditionlevel = 1000;
         _isArmorWorking = false;
     }

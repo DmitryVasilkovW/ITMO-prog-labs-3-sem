@@ -20,12 +20,12 @@ public class Augur : Entities.Spaceship
 
     public Augur()
     {
-        var engine = new ClassEPulseEngine();
-        var jumpengine = new JumpEngineAlpha();
+        var engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
+        var jumpengine = new JumpEngineAlpha(_weightDimensionCharacteristics);
         var deflector = new ThirdClassDeflector(new PhotonDeflectorSlot());
-        var armor = new ThirdClassArmor();
+        var armor = new ThirdClassArmor(_weightDimensionCharacteristics);
         string engineType = "PulseEngine";
-        int weightDimensionCharacteristics = 241;
+        int weightDimensionCharacteristics = 3;
 
         _crew = true;
         _armor = armor;
