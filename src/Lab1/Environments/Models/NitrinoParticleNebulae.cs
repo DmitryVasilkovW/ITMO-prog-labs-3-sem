@@ -1,3 +1,5 @@
+using System;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
 public class NitrinoParticleNebulae : Entities.Environment
@@ -5,14 +7,29 @@ public class NitrinoParticleNebulae : Entities.Environment
     private Services.Nebulae _nebulae;
     private Services.SpaceWhale _spaceWhale;
     private Spaceship.Entities.Spaceship _ship;
+    private string _requiredEngine;
+    private string _requiredMotorOperationType;
+    private int _length;
 
-    public NitrinoParticleNebulae(Services.Nebulae obstacles, Services.SpaceWhale spaceWhale, Spaceship.Entities.Spaceship ship)
-        : base(obstacles, spaceWhale, ship)
+    public NitrinoParticleNebulae(Services.Nebulae obstacles, Services.SpaceWhale spaceWhale, Spaceship.Entities.Spaceship ship, int length)
+        : base(obstacles, spaceWhale, ship, length)
     {
         _spaceWhale = spaceWhale;
         _nebulae = obstacles;
         _ship = ship;
-        RequiredEngine = "PulseEngine";
+        _requiredEngine = "PulseEngine";
+        _requiredMotorOperationType = "Exponent";
+        _length = length;
+    }
+
+    public bool IsCanEnterTheEnvironment()
+    {
+        if (_ship.EngineType.Equals(_requiredEngine, StringComparison.Ordinal) && _ship.Engine.MotorOperationType.Equals(_requiredMotorOperationType, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void NebulaeDamage()

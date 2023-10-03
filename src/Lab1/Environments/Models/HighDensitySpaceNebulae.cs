@@ -6,20 +6,24 @@ public class HighDensitySpaceNebulae : Entities.Environment
 {
     private Nebulae _nebulae;
     private Spaceship.Entities.Spaceship _ship;
-    private int _subspaceChannelLength;
+    private int _length;
 
-    public HighDensitySpaceNebulae(Nebulae firstObstacles, Spaceship.Entities.Spaceship ship)
-        : base(firstObstacles, ship)
+    public HighDensitySpaceNebulae(Nebulae firstObstacles, Spaceship.Entities.Spaceship ship, int length)
+        : base(firstObstacles, ship, length)
     {
          _nebulae = firstObstacles;
          _ship = ship;
-         RequiredEngine = "JumpEngine";
-         _subspaceChannelLength = 100;
+         _length = length;
     }
 
-    public int SubspaceChannelLength
+    public bool IsCanEnterTheEnvironment()
     {
-        get { return _subspaceChannelLength; }
+        if (!_ship.IsjumpEngineInstalled())
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void NebulaDamage()

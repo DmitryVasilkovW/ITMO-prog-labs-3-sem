@@ -35,6 +35,16 @@ public class Vaklas : Entities.Spaceship
         _weightDimensionCharacteristics = weightDimensionCharacteristics;
     }
 
+    public new IEnginesType Engine
+    {
+        get { return _engine; }
+    }
+
+    public new IJumpEngine JumpEngine
+    {
+        get { return _jumpengine; }
+    }
+
     public new Deflectors Deflector
     {
         get { return _deflector; }
@@ -55,10 +65,20 @@ public class Vaklas : Entities.Spaceship
         get { return _engineType; }
     }
 
-    public override void Engine()
+    public override void Enginew()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+    }
+
+    public new bool IsjumpEngineInstalled()
+    {
+        if (_jumpengine.ISSlot())
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public override void StaffAssault()
@@ -71,7 +91,7 @@ public class Vaklas : Entities.Spaceship
         _speed -= speedReduction;
     }
 
-    public override void JumpEngine()
+    public override void JumpEnginew()
     {
         _range = _jumpengine.Range(_range);
         _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);

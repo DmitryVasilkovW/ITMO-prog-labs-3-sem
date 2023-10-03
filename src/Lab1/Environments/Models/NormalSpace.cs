@@ -1,3 +1,4 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
@@ -7,14 +8,27 @@ public class NormalSpace : Entities.Environment
     private Asteroid _asteroid;
     private Meteorites _meteorites;
     private Spaceship.Entities.Spaceship _ship;
+    private string _requiredEngine;
+    private int _length;
 
-    public NormalSpace(Asteroid firstObstacles, Meteorites secondObstacles, Spaceship.Entities.Spaceship ship)
-        : base(firstObstacles, secondObstacles, ship)
+    public NormalSpace(Asteroid firstObstacles, Meteorites secondObstacles, Spaceship.Entities.Spaceship ship, int length)
+        : base(firstObstacles, secondObstacles, ship, length)
     {
         _asteroid = firstObstacles;
         _meteorites = secondObstacles;
         _ship = ship;
-        RequiredEngine = "PulseEngine";
+        _requiredEngine = "PulseEngine";
+        _length = length;
+    }
+
+    public bool IsCanEnterTheEnvironment()
+    {
+        if (_ship.EngineType.Equals(_requiredEngine, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void AsteroidDamage()

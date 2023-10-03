@@ -5,10 +5,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 public class ClassEPulseEngine : Entities.IEnginesType
 {
     private int _weightDimensionsOfTheShip;
+    private string _motorOperationType;
 
     public ClassEPulseEngine(int weightDimensionsOfTheShip)
     {
+        _motorOperationType = "Exponent";
         _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
+    }
+
+    public string MotorOperationType
+    {
+        get { return _motorOperationType; }
     }
 
     public int Speed(int speed)

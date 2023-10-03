@@ -53,6 +53,16 @@ public abstract class Spaceship
          get { return _deflector.IsDeflectorWorking(); }
     }
 
+    public virtual IEnginesType Engine
+    {
+        get { return _engine; }
+    }
+
+    public virtual IJumpEngine JumpEngine
+    {
+        get { return _jumpengine; }
+    }
+
     public virtual Deflectors Deflector
     {
         get { return _deflector; }
@@ -78,7 +88,17 @@ public abstract class Spaceship
         get { return _engineType; }
     }
 
-    public virtual void Engine()
+    public bool IsjumpEngineInstalled()
+    {
+        if (_jumpengine.ISSlot())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public virtual void Enginew()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
@@ -106,7 +126,7 @@ public abstract class Spaceship
         _speed -= speedReduction;
     }
 
-    public virtual void JumpEngine()
+    public virtual void JumpEnginew()
     {
         _range = _jumpengine.Range(_range);
         _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);

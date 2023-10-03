@@ -6,10 +6,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 public class JumpEngineOmega : IJumpEngine
 {
     private int _weightDimensionsOfTheShip;
+    private string _motorOperationType;
 
     public JumpEngineOmega(int weightDimensionsOfTheShip)
     {
+        _motorOperationType = "Logarithmic";
         _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
+    }
+
+    public string MotorOperationType
+    {
+        get { return _motorOperationType; }
+    }
+
+    public bool ISSlot()
+    {
+        return false;
     }
 
     public int Range(int range)

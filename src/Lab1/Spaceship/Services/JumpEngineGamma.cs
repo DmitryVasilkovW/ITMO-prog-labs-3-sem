@@ -5,10 +5,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 public class JumpEngineGamma : IJumpEngine
 {
     private int _weightDimensionsOfTheShip;
+    private string _motorOperationType;
 
     public JumpEngineGamma(int weightDimensionsOfTheShip)
     {
+        _motorOperationType = "Quadratic";
         _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
+    }
+
+    public string MotorOperationType
+    {
+        get { return _motorOperationType; }
+    }
+
+    public bool ISSlot()
+    {
+        return false;
     }
 
     public int Range(int range)

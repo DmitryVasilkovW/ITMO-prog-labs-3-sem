@@ -6,27 +6,24 @@ public abstract class Environment : IEnvironment
     private IObstacles _secondObstacles;
     private Spaceship.Entities.Spaceship _ship;
     private string _requiredEngine;
+    private int _length;
 
-    protected Environment(IObstacles obstacles, Spaceship.Entities.Spaceship ship)
+    protected Environment(IObstacles obstacles, Spaceship.Entities.Spaceship ship, int length)
     {
         _firstObstacles = obstacles;
         _secondObstacles = obstacles;
         _ship = ship;
         _requiredEngine = "tmp";
+        _length = length;
     }
 
-    protected Environment(IObstacles firstObstacles, IObstacles secondObstacles, Spaceship.Entities.Spaceship ship)
+    protected Environment(IObstacles firstObstacles, IObstacles secondObstacles, Spaceship.Entities.Spaceship ship, int length)
     {
         _firstObstacles = firstObstacles;
         _secondObstacles = secondObstacles;
         _ship = ship;
         _requiredEngine = "tmp";
-    }
-
-    protected string RequiredEngine
-    {
-        get { return _requiredEngine; }
-        set { _requiredEngine = value; }
+        _length = length;
     }
 
     public bool IsEngineQualified()

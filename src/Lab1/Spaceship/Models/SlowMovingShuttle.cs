@@ -12,6 +12,7 @@ public class SlowMovingShuttle : Entities.Spaceship
     private bool _crew;
 
     private IEnginesType _engine;
+    private IJumpEngine _jumpEngine;
     private Armor _armor;
 
     public SlowMovingShuttle()
@@ -19,12 +20,19 @@ public class SlowMovingShuttle : Entities.Spaceship
         var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
         var armor = new FirstClassArmor(_weightDimensionCharacteristics);
         string engineType = "PulseEngine";
+        var jumpEngine = new JumpEngineSlot();
         int weightDimensionCharacteristics = 1;
 
+        _jumpEngine = jumpEngine;
         _armor = armor;
         _engine = engine;
         _engineType = engineType;
         _weightDimensionCharacteristics = weightDimensionCharacteristics;
+    }
+
+    public new IEnginesType Engine
+    {
+        get { return _engine; }
     }
 
     public override int WeightDimensionCharacteristics
@@ -37,7 +45,17 @@ public class SlowMovingShuttle : Entities.Spaceship
         get { return _engineType; }
     }
 
-    public override void Engine()
+    public new bool IsjumpEngineInstalled()
+    {
+        if (_jumpEngine.ISSlot())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public override void Enginew()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
