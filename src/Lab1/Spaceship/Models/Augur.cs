@@ -19,7 +19,8 @@ public class Augur : Entities.Spaceship
     private Deflectors _deflector;
     private Armor _armor;
 
-    public Augur()
+    public Augur(bool whethertoInstallAPhotonicDeflector)
+        : base(whethertoInstallAPhotonicDeflector)
     {
         var engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
         var jumpengine = new JumpEngineAlpha(_weightDimensionCharacteristics);
@@ -36,6 +37,11 @@ public class Augur : Entities.Spaceship
         _engine = engine;
         _engineType = engineType;
         _weightDimensionCharacteristics = weightDimensionCharacteristics;
+
+        if (whethertoInstallAPhotonicDeflector)
+        {
+            _deflector.PhotonDeflectorInstallation(new StandardPhotonicDeflectors());
+        }
     }
 
     public new IEnginesType Engine

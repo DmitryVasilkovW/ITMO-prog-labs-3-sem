@@ -17,6 +17,7 @@ public class SlowMovingShuttle : Entities.Spaceship
     private Armor _armor;
 
     public SlowMovingShuttle()
+        : base()
     {
         var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
         var armor = new FirstClassArmor(_weightDimensionCharacteristics);

@@ -46,7 +46,7 @@ public abstract class Deflectors
 
     public abstract void SavingStatusOfTheDeflector(string damagetype);
 
-    protected void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
+    public void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
         _isaPhotonDeflectorInstalled = true;

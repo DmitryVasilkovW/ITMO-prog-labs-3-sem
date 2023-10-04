@@ -82,7 +82,7 @@ public class SecondClassDeflector : Deflectors
         }
     }
 
-    protected new void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
+    public new void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
         _isaPhotonDeflectorInstalled = true;

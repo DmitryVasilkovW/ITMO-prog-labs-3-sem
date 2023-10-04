@@ -4,7 +4,7 @@ public class StandardPhotonicDeflectors : Entities.IPhotonicDeflectors
 {
     private int _antimatterFlareResidueBeforeDamage;
 
-    protected StandardPhotonicDeflectors()
+    public StandardPhotonicDeflectors()
     {
         _antimatterFlareResidueBeforeDamage = 3;
     }

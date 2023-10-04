@@ -18,7 +18,8 @@ public class Meredian : Entities.Spaceship
     private Armor _armor;
     private AdditionalSafetyDevices _equipment;
 
-    public Meredian()
+    public Meredian(bool whethertoInstallAPhotonicDeflector)
+        : base(whethertoInstallAPhotonicDeflector)
     {
         var engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
         var deflector = new SecondClassDeflector(new PhotonDeflectorSlot());
@@ -36,6 +37,11 @@ public class Meredian : Entities.Spaceship
         _engine = engine;
         _engineType = engineType;
         _weightDimensionCharacteristics = weightDimensionCharacteristics;
+
+        if (whethertoInstallAPhotonicDeflector)
+        {
+            _deflector.PhotonDeflectorInstallation(new StandardPhotonicDeflectors());
+        }
     }
 
     public new IEnginesType Engine

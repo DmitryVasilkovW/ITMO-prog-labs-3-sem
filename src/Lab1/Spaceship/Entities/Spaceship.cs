@@ -19,6 +19,30 @@ public abstract class Spaceship
     private Armor _armor;
     private AdditionalSafetyDevices _equipment;
 
+    protected Spaceship(bool whethertoInstallAPhotonicDeflector)
+    {
+        var fslot = new PhotonDeflectorSlot();
+        var slot = new DeflectorSlot(fslot);
+        var jumpengineslot = new JumpEngineSlot();
+        var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
+        var armor = new FirstClassArmor(1);
+        var equipment = new AdditionalSafetyDevicesSlot(" ");
+
+        _nebulaDamage = 1000;
+        _equipment = equipment;
+        _armor = armor;
+        _deflector = slot;
+        _engine = engine;
+        _jumpengine = jumpengineslot;
+        _engineType = "d";
+        _weightDimensionCharacteristics = 1;
+        _crew = true;
+
+        if (whethertoInstallAPhotonicDeflector)
+        {
+        }
+    }
+
     protected Spaceship()
     {
         var fslot = new PhotonDeflectorSlot();
