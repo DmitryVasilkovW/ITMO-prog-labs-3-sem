@@ -1,4 +1,5 @@
 using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
@@ -10,15 +11,17 @@ public class NitrinoParticleNebulae : Entities.Environment
     private string _requiredEngine;
     private string _requiredMotorOperationType;
     private int _length;
+    private int _countOfObstracles;
 
-    public NitrinoParticleNebulae(Services.Nebulae obstacles, Services.SpaceWhale spaceWhale, Spaceship.Entities.Spaceship ship, int length)
-        : base(obstacles, spaceWhale, ship, length)
+    public NitrinoParticleNebulae(int length, int countOfObstracles, Spaceship.Entities.Spaceship ship)
+        : base(length, countOfObstracles, ship)
     {
-        _spaceWhale = spaceWhale;
-        _nebulae = obstacles;
-        _ship = ship;
         _requiredEngine = "PulseEngine";
         _requiredMotorOperationType = "Exponent";
+        _spaceWhale = new SpaceWhale();
+        _nebulae = new Nebulae();
+        _ship = ship;
+        _countOfObstracles = countOfObstracles;
         _length = length;
     }
 

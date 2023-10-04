@@ -10,14 +10,16 @@ public class NormalSpace : Entities.Environment
     private Spaceship.Entities.Spaceship _ship;
     private string _requiredEngine;
     private int _length;
+    private int _countOfObstracles;
 
-    public NormalSpace(Asteroid firstObstacles, Meteorites secondObstacles, Spaceship.Entities.Spaceship ship, int length)
-        : base(firstObstacles, secondObstacles, ship, length)
+    public NormalSpace(int length, int countOfObstracles, Spaceship.Entities.Spaceship ship)
+        : base(length, countOfObstracles, ship)
     {
-        _asteroid = firstObstacles;
-        _meteorites = secondObstacles;
-        _ship = ship;
+        _asteroid = new Asteroid();
+        _meteorites = new Meteorites();
         _requiredEngine = "PulseEngine";
+        _ship = ship;
+        _countOfObstracles = countOfObstracles;
         _length = length;
     }
 

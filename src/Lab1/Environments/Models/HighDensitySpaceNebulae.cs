@@ -7,12 +7,14 @@ public class HighDensitySpaceNebulae : Entities.Environment
     private Nebulae _nebulae;
     private Spaceship.Entities.Spaceship _ship;
     private int _length;
+    private int _countOfObstracles;
 
-    public HighDensitySpaceNebulae(Nebulae firstObstacles, Spaceship.Entities.Spaceship ship, int length)
-        : base(firstObstacles, ship, length)
+    public HighDensitySpaceNebulae(int length, int countOfObstracles, Spaceship.Entities.Spaceship ship)
+        : base(length, countOfObstracles, ship)
     {
-         _nebulae = firstObstacles;
+         _nebulae = new Nebulae();
          _ship = ship;
+         _countOfObstracles = countOfObstracles;
          _length = length;
     }
 
