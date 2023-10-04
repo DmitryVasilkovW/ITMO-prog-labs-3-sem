@@ -26,7 +26,12 @@ public abstract class Environment : IEnvironment
         _length = length;
     }
 
-    public bool IsEngineQualified()
+    public int Length
+    {
+        get { return _length; }
+    }
+
+    public virtual bool IsCanEnterTheEnvironment()
     {
         if (_ship.EngineType == _requiredEngine)
         {

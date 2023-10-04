@@ -22,7 +22,12 @@ public class NitrinoParticleNebulae : Entities.Environment
         _length = length;
     }
 
-    public bool IsCanEnterTheEnvironment()
+    public new int Length
+    {
+        get { return _length; }
+    }
+
+    public override bool IsCanEnterTheEnvironment()
     {
         if (_ship.EngineType.Equals(_requiredEngine, StringComparison.Ordinal) && _ship.Engine.MotorOperationType.Equals(_requiredMotorOperationType, StringComparison.Ordinal))
         {

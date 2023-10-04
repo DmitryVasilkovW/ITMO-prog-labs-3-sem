@@ -16,7 +16,12 @@ public class HighDensitySpaceNebulae : Entities.Environment
          _length = length;
     }
 
-    public bool IsCanEnterTheEnvironment()
+    public new int Length
+    {
+        get { return _length; }
+    }
+
+    public override bool IsCanEnterTheEnvironment()
     {
         if (!_ship.IsjumpEngineInstalled())
         {

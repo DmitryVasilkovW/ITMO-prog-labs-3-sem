@@ -53,6 +53,11 @@ public abstract class Spaceship
          get { return _deflector.IsDeflectorWorking(); }
     }
 
+    public virtual int Speed
+    {
+        get { return _speed; }
+    }
+
     public virtual IEnginesType Engine
     {
         get { return _engine; }
