@@ -10,27 +10,43 @@ public class NormalSpace : Entities.Environment
     private Spaceship.Entities.Spaceship _ship;
     private string _requiredEngine;
     private int _length;
-    private int _countOfObstracles;
+    private int _countOfFirstTypeObstracles;
+    private int _countOfSecondTypeObstracles;
 
-    public NormalSpace(int length, int countOfObstracles, Spaceship.Entities.Spaceship ship)
-        : base(length, countOfObstracles, ship)
+    public NormalSpace(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.Spaceship ship)
+        : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
         _asteroid = new Asteroid();
         _meteorites = new Meteorites();
         _requiredEngine = "PulseEngine";
         _ship = ship;
-        _countOfObstracles = countOfObstracles;
+        _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
+        _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
         _length = length;
-    }
-
-    public new int CountOfObstracles
-    {
-        get { return _countOfObstracles; }
     }
 
     public new int Length
     {
         get { return _length; }
+    }
+
+    public new bool IsTheShipWasAbleToRemainInService()
+    {
+        TakingDamageFromAllObstaclesOfTheFirstType();
+
+        if (!IsShipAlive())
+        {
+            return false;
+        }
+
+        TakingDamageFromAllObstaclesOfTheSecondType();
+
+        if (!IsShipAlive())
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public override bool IsCanEnterTheEnvironment()
@@ -51,5 +67,31 @@ public class NormalSpace : Entities.Environment
     public void MeteoriteDamage()
     {
         _meteorites.Damage(_ship);
+    }
+
+    protected new bool IsShipAlive()
+    {
+        if (_ship.IsShipAlive())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void TakingDamageFromAllObstaclesOfTheFirstType()
+    {
+        while (_countOfFirstTypeObstracles-- > 0)
+        {
+            _ship = _asteroid.Damage(_ship);
+        }
+    }
+
+    protected override void TakingDamageFromAllObstaclesOfTheSecondType()
+    {
+        while (_countOfSecondTypeObstracles-- > 0)
+        {
+            _ship = _meteorites.Damage(_ship);
+        }
     }
 }

@@ -35,17 +35,17 @@ public class Route
     public void ShipHandling()
     {
         int indexForShips = 0;
-        int indexForEnvironments = 0;
 
         foreach (ValuesForTheEnvironment values in _environments)
         {
             foreach (Spaceship.Entities.Spaceship ship in _ships)
             {
-                Environment environment = new TheFactoryOfTheMedium(
+                Environment environment = new TheFactoryOfTheEnvironment(
                         values.Environment,
                         values.Ship,
                         values.Length,
-                        values.CountOfObstracles).Create();
+                        values.CountOfFirstTypeObstracles,
+                        values.CountOfSecondTypeObstracles).Create();
 
                 if (!environment.IsCanEnterTheEnvironment())
                 {
@@ -64,9 +64,19 @@ public class Route
                 }
                 else
                 {
-                    int numberOfObstracles = environment.CountOfObstracles;
-                    while (numberOfObstracles-- > 0)
+                    if (environment.IsTheShipWasAbleToRemainInService())
                     {
+                        _shipStatus[indexForShips] = _successStatusForTheShip;
+
+                        indexForShips++;
+                        continue;
+                    }
+                    else
+                    {
+                        _shipStatus[indexForShips] = _statusShipDestruction;
+
+                        indexForShips++;
+                        continue;
                     }
                 }
             }

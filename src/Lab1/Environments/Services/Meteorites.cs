@@ -16,7 +16,7 @@ public class Meteorites : Entities.IObstacles
         get { return _damageType; }
     }
 
-    public void Damage(Spaceship.Entities.Spaceship ship)
+    public Spaceship.Entities.Spaceship Damage(Spaceship.Entities.Spaceship ship)
     {
         if (ship.IsDeflectorWorking)
         {
@@ -42,5 +42,7 @@ public class Meteorites : Entities.IObstacles
                 ship.Armor.MeteoriteDamage();
             }
         }
+
+        return ship;
     }
 }

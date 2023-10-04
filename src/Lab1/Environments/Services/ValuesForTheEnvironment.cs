@@ -5,14 +5,16 @@ public class ValuesForTheEnvironment
     private string _environment;
     private Spaceship.Entities.Spaceship _ship;
     private int _length;
-    private int _countOfObstracles;
+    private int _countOfFirstTypeObstracles;
+    private int _countOfSecondTypeObstracles;
 
-    public ValuesForTheEnvironment(string environment, Spaceship.Entities.Spaceship ship, int length, int countOfObstracles)
+    public ValuesForTheEnvironment(string environment, Spaceship.Entities.Spaceship ship, int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles)
     {
         _environment = environment;
         _length = length;
         _ship = ship;
-        _countOfObstracles = countOfObstracles;
+        _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
+        _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
     }
 
     public string Environment
@@ -30,8 +32,13 @@ public class ValuesForTheEnvironment
         get { return _length; }
     }
 
-    public int CountOfObstracles
+    public int CountOfFirstTypeObstracles
     {
-        get { return _countOfObstracles; }
+        get { return _countOfFirstTypeObstracles; }
+    }
+
+    public int CountOfSecondTypeObstracles
+    {
+        get { return _countOfSecondTypeObstracles; }
     }
 }

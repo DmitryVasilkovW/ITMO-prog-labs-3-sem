@@ -14,7 +14,7 @@ public class AntimatterFlashes : Entities.IObstacles
         get { return _damageType; }
     }
 
-    public void Damage(Spaceship.Entities.Spaceship ship)
+    public Spaceship.Entities.Spaceship Damage(Spaceship.Entities.Spaceship ship)
     {
         if (ship.IsDeflectorWorking && ship.Deflector.IsaPhotonDeflectorInstalled)
         {
@@ -24,5 +24,7 @@ public class AntimatterFlashes : Entities.IObstacles
         {
             ship.StaffAssault();
         }
+
+        return ship;
     }
 }

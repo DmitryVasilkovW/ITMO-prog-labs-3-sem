@@ -11,28 +11,44 @@ public class NitrinoParticleNebulae : Entities.Environment
     private string _requiredEngine;
     private string _requiredMotorOperationType;
     private int _length;
-    private int _countOfObstracles;
+    private int _countOfFirstTypeObstracles;
+    private int _countOfSecondTypeObstracles;
 
-    public NitrinoParticleNebulae(int length, int countOfObstracles, Spaceship.Entities.Spaceship ship)
-        : base(length, countOfObstracles, ship)
+    public NitrinoParticleNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.Spaceship ship)
+        : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
         _requiredEngine = "PulseEngine";
         _requiredMotorOperationType = "Exponent";
         _spaceWhale = new SpaceWhale();
         _nebulae = new Nebulae();
         _ship = ship;
-        _countOfObstracles = countOfObstracles;
+        _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
+        _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
         _length = length;
-    }
-
-    public new int CountOfObstracles
-    {
-        get { return _countOfObstracles; }
     }
 
     public new int Length
     {
         get { return _length; }
+    }
+
+    public new bool IsTheShipWasAbleToRemainInService()
+    {
+        TakingDamageFromAllObstaclesOfTheFirstType();
+
+        if (!IsShipAlive())
+        {
+            return false;
+        }
+
+        TakingDamageFromAllObstaclesOfTheSecondType();
+
+        if (!IsShipAlive())
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public override bool IsCanEnterTheEnvironment()
@@ -54,5 +70,37 @@ public class NitrinoParticleNebulae : Entities.Environment
     public void SpaceWhaleDamage()
     {
         _spaceWhale.Damage(_ship);
+    }
+
+    protected new bool IsShipAlive()
+    {
+        if (_ship.IsShipAlive())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void TakingDamageFromAllObstaclesOfTheFirstType()
+    {
+        while (_countOfFirstTypeObstracles-- > 0)
+        {
+            if (_ship.Speed > 0)
+            {
+                _ship = _nebulae.Damage(_ship);
+            }
+        }
+    }
+
+    protected override void TakingDamageFromAllObstaclesOfTheSecondType()
+    {
+        while (_countOfSecondTypeObstracles-- > 0)
+        {
+            if (_ship.IsShipAlive())
+            {
+                _ship = _spaceWhale.Damage(_ship);
+            }
+        }
     }
 }

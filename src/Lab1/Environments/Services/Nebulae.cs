@@ -16,11 +16,13 @@ public class Nebulae : Entities.IObstacles
         get { return _damageType; }
     }
 
-    public void Damage(Spaceship.Entities.Spaceship ship)
+    public Spaceship.Entities.Spaceship Damage(Spaceship.Entities.Spaceship ship)
     {
-        if (ship.EngineType.Equals("PulseEngine", StringComparison.Ordinal))
+        if (ship.EngineType.Equals("PulseEngine", StringComparison.Ordinal) || !ship.Engine.MotorOperationType.Equals("Exponent", StringComparison.Ordinal))
         {
-            ship.ObstructionOfFlight(100);
+            ship.ObstructionOfFlight();
         }
+
+        return ship;
     }
 }

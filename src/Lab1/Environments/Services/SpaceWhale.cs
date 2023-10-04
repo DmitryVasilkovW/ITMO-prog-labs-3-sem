@@ -11,7 +11,7 @@ public class SpaceWhale : Entities.IObstacles
         _damageType = "SpaceWhale";
     }
 
-    public void Damage(Spaceship.Entities.Spaceship ship)
+    public Spaceship.Entities.Spaceship Damage(Spaceship.Entities.Spaceship ship)
     {
         if (ship.IsDeflectorWorking)
         {
@@ -37,5 +37,7 @@ public class SpaceWhale : Entities.IObstacles
                 ship.Armor.SpaceWhaleDamage();
             }
         }
+
+        return ship;
     }
 }

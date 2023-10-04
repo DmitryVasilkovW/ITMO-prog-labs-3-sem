@@ -103,6 +103,16 @@ public abstract class Spaceship
         return true;
     }
 
+    public bool IsShipAlive()
+    {
+        if (_armor.IsArmorWorking() || _deflector.IsDeflectorWorking() || _speed > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public virtual void Enginew()
     {
         _speed = _engine.Speed(_speed);
@@ -112,6 +122,17 @@ public abstract class Spaceship
     public virtual void StaffAssault()
     {
         _crew ^= true;
+    }
+
+    // сделать это в кораблях
+    public virtual bool IsTheStaffAlive()
+    {
+        if (_crew)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public virtual void SafetyEquipmentOperation()
@@ -126,9 +147,9 @@ public abstract class Spaceship
         }
     }
 
-    public virtual void ObstructionOfFlight(int speedReduction)
+    public virtual void ObstructionOfFlight()
     {
-        _speed -= speedReduction;
+        _speed -= 1000;
     }
 
     public virtual void JumpEnginew()
