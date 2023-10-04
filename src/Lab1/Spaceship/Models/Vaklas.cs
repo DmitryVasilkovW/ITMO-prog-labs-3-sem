@@ -12,6 +12,7 @@ public class Vaklas : Entities.Spaceship
     private string _engineType;
     private int _weightDimensionCharacteristics;
     private bool _crew;
+    private int _nebulaDamage;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
@@ -27,6 +28,7 @@ public class Vaklas : Entities.Spaceship
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 2;
 
+        _nebulaDamage = 1000;
         _armor = armor;
         _deflector = deflector;
         _jumpengine = jumpengine;
@@ -71,6 +73,16 @@ public class Vaklas : Entities.Spaceship
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
     }
 
+    public new bool IsTheStaffAlive()
+    {
+        if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public new bool IsjumpEngineInstalled()
     {
         if (_jumpengine.ISSlot())
@@ -86,9 +98,9 @@ public class Vaklas : Entities.Spaceship
         _crew ^= true;
     }
 
-    public override void ObstructionOfFlight(int speedReduction)
+    public new void ObstructionOfFlight()
     {
-        _speed -= speedReduction;
+        _speed -= _nebulaDamage;
     }
 
     public override void JumpEnginew()

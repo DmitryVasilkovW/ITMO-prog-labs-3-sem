@@ -10,6 +10,7 @@ public class SlowMovingShuttle : Entities.Spaceship
     private string _engineType;
     private int _weightDimensionCharacteristics;
     private bool _crew;
+    private int _nebulaDamage;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpEngine;
@@ -23,6 +24,7 @@ public class SlowMovingShuttle : Entities.Spaceship
         var jumpEngine = new JumpEngineSlot();
         int weightDimensionCharacteristics = 1;
 
+        _nebulaDamage = 1000;
         _jumpEngine = jumpEngine;
         _armor = armor;
         _engine = engine;
@@ -55,6 +57,16 @@ public class SlowMovingShuttle : Entities.Spaceship
         return true;
     }
 
+    public new bool IsTheStaffAlive()
+    {
+        if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public override void Enginew()
     {
         _speed = _engine.Speed(_speed);
@@ -66,8 +78,8 @@ public class SlowMovingShuttle : Entities.Spaceship
         _crew ^= true;
     }
 
-    public override void ObstructionOfFlight(int speedReduction)
+    public new void ObstructionOfFlight()
     {
-        _speed -= speedReduction;
+        _speed -= _nebulaDamage;
     }
 }

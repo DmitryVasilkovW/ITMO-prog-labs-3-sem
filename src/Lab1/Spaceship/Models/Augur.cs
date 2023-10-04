@@ -12,6 +12,7 @@ public class Augur : Entities.Spaceship
     private string _engineType;
     private int _weightDimensionCharacteristics;
     private bool _crew;
+    private int _nebulaDamage;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
@@ -27,6 +28,7 @@ public class Augur : Entities.Spaceship
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 3;
 
+        _nebulaDamage = 1000;
         _crew = true;
         _armor = armor;
         _deflector = deflector;
@@ -87,9 +89,19 @@ public class Augur : Entities.Spaceship
         _crew ^= true;
     }
 
-    public override void ObstructionOfFlight(int speedReduction)
+    public new bool IsTheStaffAlive()
     {
-        _speed -= speedReduction;
+        if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public new void ObstructionOfFlight()
+    {
+        _speed -= _nebulaDamage;
     }
 
     public override void JumpEnginew()

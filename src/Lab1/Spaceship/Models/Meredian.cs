@@ -10,6 +10,7 @@ public class Meredian : Entities.Spaceship
     private string _engineType;
     private int _weightDimensionCharacteristics;
     private bool _crew;
+    private int _nebulaDamage;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
@@ -27,6 +28,7 @@ public class Meredian : Entities.Spaceship
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 2;
 
+        _nebulaDamage = 1000;
         _jumpengine = jumpEngine;
         _equipment = equipment;
         _armor = armor;
@@ -61,6 +63,16 @@ public class Meredian : Entities.Spaceship
         get { return _engineType; }
     }
 
+    public new bool IsTheStaffAlive()
+    {
+        if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public new bool IsjumpEngineInstalled()
     {
         if (_jumpengine.ISSlot())
@@ -82,9 +94,9 @@ public class Meredian : Entities.Spaceship
         _crew ^= true;
     }
 
-    public override void ObstructionOfFlight(int speedReduction)
+    public new void ObstructionOfFlight()
     {
-        _speed -= speedReduction;
+        _speed -= _nebulaDamage;
     }
 
     public override void JumpEnginew()

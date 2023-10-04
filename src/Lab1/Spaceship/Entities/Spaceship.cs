@@ -11,6 +11,7 @@ public abstract class Spaceship
     private string _engineType;
     private int _weightDimensionCharacteristics;
     private bool _crew;
+    private int _nebulaDamage;
 
     private Deflectors _deflector;
     private IEnginesType _engine;
@@ -27,6 +28,7 @@ public abstract class Spaceship
         var armor = new FirstClassArmor(1);
         var equipment = new AdditionalSafetyDevicesSlot(" ");
 
+        _nebulaDamage = 1000;
         _equipment = equipment;
         _armor = armor;
         _deflector = slot;
@@ -147,9 +149,9 @@ public abstract class Spaceship
         }
     }
 
-    public virtual void ObstructionOfFlight()
+    public void ObstructionOfFlight()
     {
-        _speed -= 1000;
+        _speed -= _nebulaDamage;
     }
 
     public virtual void JumpEnginew()

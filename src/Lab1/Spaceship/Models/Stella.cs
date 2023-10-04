@@ -12,6 +12,7 @@ public class Stella : Entities.Spaceship
     private string _engineType;
     private int _weightDimensionCharacteristics;
     private bool _crew;
+    private int _nebulaDamage;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
@@ -27,6 +28,7 @@ public class Stella : Entities.Spaceship
         string engineType = "Jumpengine";
         int weightDimensionCharacteristics = 1;
 
+        _nebulaDamage = 1000;
         _armor = armor;
         _deflector = deflector;
         _jumpengine = jumpengine;
@@ -75,6 +77,16 @@ public class Stella : Entities.Spaceship
         return true;
     }
 
+    public new bool IsTheStaffAlive()
+    {
+        if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public override void Enginew()
     {
         _speed = _engine.Speed(_speed);
@@ -86,9 +98,9 @@ public class Stella : Entities.Spaceship
         _crew ^= true;
     }
 
-    public override void ObstructionOfFlight(int speedReduction)
+    public new void ObstructionOfFlight()
     {
-        _speed -= speedReduction;
+        _speed -= _nebulaDamage;
     }
 
     public override void JumpEnginew()
