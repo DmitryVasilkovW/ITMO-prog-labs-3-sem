@@ -18,6 +18,11 @@ public class HighDensitySpaceNebulae : Entities.Environment
          _length = length;
     }
 
+    public new int CountOfObstracles
+    {
+        get { return _countOfObstracles; }
+    }
+
     public new int Length
     {
         get { return _length; }

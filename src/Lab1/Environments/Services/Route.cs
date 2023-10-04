@@ -54,9 +54,20 @@ public class Route
                     indexForShips++;
                     continue;
                 }
-                if (ship.)
+
+                if (!ship.Deflector.IsaPhotonDeflectorInstalled)
                 {
-                    
+                    _shipStatus[indexForShips] = _statusCrewDeath;
+
+                    indexForShips++;
+                    continue;
+                }
+                else
+                {
+                    int numberOfObstracles = environment.CountOfObstracles;
+                    while (numberOfObstracles-- > 0)
+                    {
+                    }
                 }
             }
         }

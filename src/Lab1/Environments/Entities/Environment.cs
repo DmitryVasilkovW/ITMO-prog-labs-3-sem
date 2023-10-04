@@ -41,6 +41,11 @@ public abstract class Environment : IEnvironment
         _length = length;
     }
 
+    public int CountOfObstracles
+    {
+        get { return _countOfObstracles; }
+    }
+
     public int Length
     {
         get { return _length; }
