@@ -30,13 +30,13 @@ public class JumpEngineOmega : IJumpEngine
 
         designrange = Math.Log(designrange);
 
-        return range += range * (int)designrange / _weightDimensionsOfTheShip;
+        return range += Math.Abs(range * (int)designrange / _weightDimensionsOfTheShip);
     }
 
     public int FuelConsumption(int gravitonmatter)
     {
         double amountoffuel = Math.Log(gravitonmatter);
 
-        return gravitonmatter -= (int)amountoffuel * _weightDimensionsOfTheShip;
+        return gravitonmatter -= Math.Abs((int)amountoffuel * _weightDimensionsOfTheShip);
     }
 }

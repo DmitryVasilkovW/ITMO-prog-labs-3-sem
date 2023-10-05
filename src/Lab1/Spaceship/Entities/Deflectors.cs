@@ -1,3 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 public abstract class Deflectors
@@ -11,16 +13,24 @@ public abstract class Deflectors
     {
         _photonicDeflector = photonicDeflector;
         _deflectorconditionlevel = 7340;
-        _isaPhotonDeflectorInstalled = false;
-        _isDeflectorWorking = false;
+        _isaPhotonDeflectorInstalled = true;
+        _isDeflectorWorking = true;
     }
 
-    public bool IsaPhotonDeflectorInstalled
+    protected Deflectors()
+    {
+        _photonicDeflector = new PhotonDeflectorSlot();
+        _deflectorconditionlevel = 7340;
+        _isaPhotonDeflectorInstalled = false;
+        _isDeflectorWorking = true;
+    }
+
+    public virtual bool IsaPhotonDeflectorInstalled
     {
         get { return _isaPhotonDeflectorInstalled; }
     }
 
-    public bool IsDeflectorWorking()
+    public virtual bool IsDeflectorWorking()
     {
         if (_deflectorconditionlevel < 0)
         {
@@ -36,7 +46,7 @@ public abstract class Deflectors
 
     public abstract void SpaceWhaleDamage();
 
-    public void AntimatterFlashesDamage()
+    public virtual void AntimatterFlashesDamage()
     {
         if (IsaPhotonDeflectorInstalled)
         {
@@ -46,7 +56,7 @@ public abstract class Deflectors
 
     public abstract void SavingStatusOfTheDeflector(string damagetype);
 
-    public void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
+    public virtual void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
         _isaPhotonDeflectorInstalled = true;

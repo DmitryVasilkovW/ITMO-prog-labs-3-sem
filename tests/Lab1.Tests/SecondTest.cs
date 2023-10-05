@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
@@ -6,16 +7,15 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FirstTest
+public class SecondTest
 {
     public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
     {
         for (int i = 0; i < shipStatus.Count; i++)
         {
-            for (int j = 0; j < expectedValues.Count; j++)
+            if (!shipStatus[i].Equals(expectedValues[i], StringComparison.Ordinal))
             {
-                if (shipStatus[i] != expectedValues[j])
-                    return false;
+                return false;
             }
         }
 
@@ -35,8 +35,8 @@ public class FirstTest
         environments.Add(environmentForSecondShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValues.Add("Destruction of the ship");
-        expectedValues.Add("Destruction of the ship");
+        expectedValues.Add("Success");
+        expectedValues.Add("Crew deaths");
 
         shipStatus = new Route(239, environments, ships).ShipHandling();
 
@@ -51,20 +51,20 @@ public class FirstTest
         {
             new object[]
             {
-                new SlowMovingShuttle(),
-                new Augur(false),
+                new Vaklas(true),
+                new Vaklas(false),
                 new ValuesForTheEnvironment(
                     "HighDensitySpaceNebulae",
-                    new SlowMovingShuttle(),
+                    new Vaklas(true),
                     Length,
-                    30,
-                    0),
+                    0,
+                    2),
                 new ValuesForTheEnvironment(
                     "HighDensitySpaceNebulae",
-                    new Augur(false),
+                    new Vaklas(false),
                     Length,
-                    50,
-                    0),
+                    0,
+                    239),
             },
         };
 

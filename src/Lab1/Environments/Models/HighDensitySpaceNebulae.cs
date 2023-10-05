@@ -22,18 +22,29 @@ public class HighDensitySpaceNebulae : Entities.Environment
          _length = length;
     }
 
-    public new int CountOfSecondTypeObstracles
+    public override int CountOfSecondTypeObstracles
     {
         get { return _countOfSecondTypeObstracles; }
     }
 
-    public new int Length
+    public override int Length
     {
         get { return _length; }
     }
 
-    public new bool IsTheShipWasAbleToRemainInService()
+    public override string FirstTypeObstracleType
     {
+        get { return _nebulae.DamageType; }
+    }
+
+    public override string SecondTypeObstracleType
+    {
+        get { return _antimatterFlashes.DamageType; }
+    }
+
+    public override bool IsTheShipWasAbleToRemainInService()
+    {
+        _ship.Enginew();
         TakingDamageFromAllObstaclesOfTheFirstType();
 
         if (!IsShipAlive())
@@ -66,7 +77,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
         _ship.Deflector.AsteroidDamage();
     }
 
-    protected new bool IsShipAlive()
+    protected override bool IsShipAlive()
     {
         if (_ship.IsShipAlive())
         {

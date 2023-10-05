@@ -1,3 +1,4 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
@@ -25,11 +26,11 @@ public class JumpEngineAlpha : IJumpEngine
 
     public int Range(int range)
     {
-        return range += (range * 2) / _weightDimensionsOfTheShip;
+        return range += Math.Abs((range * 2) / _weightDimensionsOfTheShip);
     }
 
     public int FuelConsumption(int gravitonmatter)
     {
-        return gravitonmatter -= gravitonmatter / (2 * _weightDimensionsOfTheShip);
+        return gravitonmatter -= Math.Abs(gravitonmatter / (2 * _weightDimensionsOfTheShip));
     }
 }

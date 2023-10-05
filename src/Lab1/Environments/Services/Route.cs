@@ -1,5 +1,6 @@
+using System;
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.Environment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
@@ -34,17 +35,17 @@ public class Route
 
     public IList<string> ShipHandling()
     {
-        foreach (ValuesForTheEnvironment values in _environments)
+        int indexForShips = 0;
+        foreach (Spaceship.Entities.Spaceship ship in _ships)
         {
-            int indexForShips = 0;
-            foreach (Spaceship.Entities.Spaceship ship in _ships)
+            for (int i = indexForShips; i < _environments.Count; i += _ships.Count)
             {
                 Environment environment = new TheFactoryOfTheEnvironment(
-                        values.Environment,
-                        values.Ship,
-                        values.Length,
-                        values.CountOfFirstTypeObstracles,
-                        values.CountOfSecondTypeObstracles).Create();
+                        _environments[i].Environment,
+                        _environments[i].Ship,
+                        _environments[i].Length,
+                        _environments[i].CountOfFirstTypeObstracles,
+                        _environments[i].CountOfSecondTypeObstracles).Create();
 
                 if (!environment.IsCanEnterTheEnvironment())
                 {
@@ -54,7 +55,7 @@ public class Route
                     continue;
                 }
 
-                if (!ship.Deflector.IsaPhotonDeflectorInstalled && environment.CountOfSecondTypeObstracles > 0)
+                if (!ship.IsPhotonDeflectorWorking && environment.SecondTypeObstracleType.Equals("Antimatter Flash", StringComparison.Ordinal) && environment.CountOfSecondTypeObstracles > 0)
                 {
                     _shipStatus[indexForShips] = _statusCrewDeath;
 

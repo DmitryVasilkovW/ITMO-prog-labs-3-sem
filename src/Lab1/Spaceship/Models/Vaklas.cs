@@ -20,18 +20,16 @@ public class Vaklas : Entities.Spaceship
     private Armor _armor;
 
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
-        : base(whethertoInstallAPhotonicDeflector)
     {
-        var engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
-        var jumpengine = new JumpEngineGamma(_weightDimensionCharacteristics);
-        var deflector = new FirstClassDeflector(new PhotonDeflectorSlot());
-        var armor = new SecondClassArmor(_weightDimensionCharacteristics);
+        var engine = new ClassEPulseEngine(2);
+        var jumpengine = new JumpEngineGamma(2);
+        var armor = new SecondClassArmor(2);
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 2;
 
+        _speed = 100;
         _nebulaDamage = 1000;
         _armor = armor;
-        _deflector = deflector;
         _jumpengine = jumpengine;
         _engine = engine;
         _engineType = engineType;
@@ -39,26 +37,37 @@ public class Vaklas : Entities.Spaceship
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            _deflector.PhotonDeflectorInstallation(new StandardPhotonicDeflectors());
+            var deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
+            _deflector = deflector;
+        }
+        else
+        {
+            var deflector = new FirstClassDeflector();
+            _deflector = deflector;
         }
     }
 
-    public new IEnginesType Engine
+    public override bool IsPhotonDeflectorWorking
+    {
+        get { return _deflector.IsaPhotonDeflectorInstalled; }
+    }
+
+    public override IEnginesType Engine
     {
         get { return _engine; }
     }
 
-    public new IJumpEngine JumpEngine
+    public override IJumpEngine JumpEngine
     {
         get { return _jumpengine; }
     }
 
-    public new Deflectors Deflector
+    public override Deflectors Deflector
     {
         get { return _deflector; }
     }
 
-    public new Armor Armor
+    public override Armor Armor
     {
         get { return _armor; }
     }
@@ -79,9 +88,19 @@ public class Vaklas : Entities.Spaceship
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
     }
 
-    public new bool IsTheStaffAlive()
+    public override bool IsTheStaffAlive()
     {
         if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public override bool IsShipAlive()
+    {
+        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
         {
             return true;
         }
@@ -104,7 +123,7 @@ public class Vaklas : Entities.Spaceship
         _crew ^= true;
     }
 
-    public new void ObstructionOfFlight()
+    public override void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
     }

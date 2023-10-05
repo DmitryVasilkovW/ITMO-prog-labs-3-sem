@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
@@ -6,16 +7,15 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FirstTest
+public class ThirdTest
 {
     public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
     {
         for (int i = 0; i < shipStatus.Count; i++)
         {
-            for (int j = 0; j < expectedValues.Count; j++)
+            if (!shipStatus[i].Equals(expectedValues[i], StringComparison.Ordinal))
             {
-                if (shipStatus[i] != expectedValues[j])
-                    return false;
+                return false;
             }
         }
 
@@ -24,7 +24,7 @@ public class FirstTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.Spaceship firstShip, Spaceship.Entities.Spaceship secondShip, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.Spaceship firstShip, Spaceship.Entities.Spaceship secondShip, Spaceship.Entities.Spaceship thirdship, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip, ValuesForTheEnvironment environmentForThirdShip)
     {
         IList<Spaceship.Entities.Spaceship> ships = new List<Spaceship.Entities.Spaceship>();
         IList<string> shipStatus;
@@ -33,10 +33,13 @@ public class FirstTest
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
+        environments.Add(environmentForThirdShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
+        ships.Add(thirdship);
         expectedValues.Add("Destruction of the ship");
-        expectedValues.Add("Destruction of the ship");
+        expectedValues.Add("Success");
+        expectedValues.Add("Success");
 
         shipStatus = new Route(239, environments, ships).ShipHandling();
 
@@ -51,19 +54,26 @@ public class FirstTest
         {
             new object[]
             {
-                new SlowMovingShuttle(),
+                new Vaklas(false),
                 new Augur(false),
+                new Meredian(false),
                 new ValuesForTheEnvironment(
-                    "HighDensitySpaceNebulae",
-                    new SlowMovingShuttle(),
+                    "NitrinoParticleNebulae",
+                    new Vaklas(false),
                     Length,
-                    30,
+                    10,
                     0),
                 new ValuesForTheEnvironment(
-                    "HighDensitySpaceNebulae",
+                    "NitrinoParticleNebulae",
                     new Augur(false),
                     Length,
-                    50,
+                    1,
+                    0),
+                new ValuesForTheEnvironment(
+                    "NitrinoParticleNebulae",
+                    new Meredian(false),
+                    Length,
+                    1,
                     0),
             },
         };

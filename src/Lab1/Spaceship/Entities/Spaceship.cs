@@ -12,6 +12,7 @@ public abstract class Spaceship
     private int _weightDimensionCharacteristics;
     private bool _crew;
     private int _nebulaDamage;
+    private string _shipName;
 
     private Deflectors _deflector;
     private IEnginesType _engine;
@@ -21,17 +22,15 @@ public abstract class Spaceship
 
     protected Spaceship(bool whethertoInstallAPhotonicDeflector)
     {
-        var fslot = new PhotonDeflectorSlot();
-        var slot = new DeflectorSlot(fslot);
         var jumpengineslot = new JumpEngineSlot();
         var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
         var armor = new FirstClassArmor(1);
         var equipment = new AdditionalSafetyDevicesSlot(" ");
 
+        _shipName = " ";
         _nebulaDamage = 1000;
         _equipment = equipment;
         _armor = armor;
-        _deflector = slot;
         _engine = engine;
         _jumpengine = jumpengineslot;
         _engineType = "d";
@@ -40,6 +39,13 @@ public abstract class Spaceship
 
         if (whethertoInstallAPhotonicDeflector)
         {
+            var deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
+            _deflector = deflector;
+        }
+        else
+        {
+            var deflector = new FirstClassDeflector();
+            _deflector = deflector;
         }
     }
 
@@ -52,7 +58,9 @@ public abstract class Spaceship
         var armor = new FirstClassArmor(1);
         var equipment = new AdditionalSafetyDevicesSlot(" ");
 
+        _shipName = " ";
         _nebulaDamage = 1000;
+        _speed = 100;
         _equipment = equipment;
         _armor = armor;
         _deflector = slot;
@@ -63,20 +71,19 @@ public abstract class Spaceship
         _crew = true;
     }
 
-    private Spaceship(Deflectors deflector, IEnginesType engine, IJumpEngine jumpengine, string engineType, int weightDimensionCharacteristics, Armor armor, AdditionalSafetyDevices equipment)
+    public virtual string ShipName
     {
-        _deflector = deflector;
-        _equipment = equipment;
-        _engine = engine;
-        _armor = armor;
-        _jumpengine = jumpengine;
-        _engineType = engineType;
-        _weightDimensionCharacteristics = weightDimensionCharacteristics;
+        get { return _shipName; }
     }
 
     public virtual bool IsDeflectorWorking
     {
          get { return _deflector.IsDeflectorWorking(); }
+    }
+
+    public virtual bool IsPhotonDeflectorWorking
+    {
+        get { return _deflector.IsaPhotonDeflectorInstalled; }
     }
 
     public virtual int Speed
@@ -129,9 +136,9 @@ public abstract class Spaceship
         return true;
     }
 
-    public bool IsShipAlive()
+    public virtual bool IsShipAlive()
     {
-        if (_armor.IsArmorWorking() || _deflector.IsDeflectorWorking() || _speed > 0)
+        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
         {
             return true;
         }
@@ -173,7 +180,7 @@ public abstract class Spaceship
         }
     }
 
-    public void ObstructionOfFlight()
+    public virtual void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
     }

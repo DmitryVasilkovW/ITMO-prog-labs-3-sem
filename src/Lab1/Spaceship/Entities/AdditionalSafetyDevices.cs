@@ -11,12 +11,12 @@ public abstract class AdditionalSafetyDevices
         _damageType = damageType;
     }
 
-    public string DamageType
+    public virtual string DamageType
     {
         get { return _damageType; }
     }
 
-    public bool Isoperates
+    public virtual bool Isoperates
     {
         get { return _isoperates; }
         protected set { _isoperates = value; }

@@ -21,10 +21,10 @@ public class Stella : Entities.Spaceship
 
     public Stella()
     {
-        var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
-        var jumpengine = new JumpEngineOmega(_weightDimensionCharacteristics);
+        var engine = new ClassCPulseEngine(1);
+        var jumpengine = new JumpEngineOmega(1);
         var deflector = new FirstClassDeflector(new PhotonDeflectorSlot());
-        var armor = new FirstClassArmor(_weightDimensionCharacteristics);
+        var armor = new FirstClassArmor(1);
         string engineType = "Jumpengine";
         int weightDimensionCharacteristics = 1;
 
@@ -37,22 +37,22 @@ public class Stella : Entities.Spaceship
         _weightDimensionCharacteristics = weightDimensionCharacteristics;
     }
 
-    public new IEnginesType Engine
+    public override IEnginesType Engine
     {
         get { return _engine; }
     }
 
-    public new IJumpEngine JumpEngine
+    public override IJumpEngine JumpEngine
     {
         get { return _jumpengine; }
     }
 
-    public new Deflectors Deflector
+    public override Deflectors Deflector
     {
         get { return _deflector; }
     }
 
-    public new Armor Armor
+    public override Armor Armor
     {
         get { return _armor; }
     }
@@ -77,9 +77,19 @@ public class Stella : Entities.Spaceship
         return true;
     }
 
-    public new bool IsTheStaffAlive()
+    public override bool IsTheStaffAlive()
     {
         if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public override bool IsShipAlive()
+    {
+        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
         {
             return true;
         }
@@ -98,7 +108,7 @@ public class Stella : Entities.Spaceship
         _crew ^= true;
     }
 
-    public new void ObstructionOfFlight()
+    public override void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
     }

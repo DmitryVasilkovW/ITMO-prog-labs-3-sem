@@ -1,3 +1,5 @@
+using System;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class ClassCPulseEngine : Entities.IEnginesType
@@ -18,11 +20,11 @@ public class ClassCPulseEngine : Entities.IEnginesType
 
     public int Speed(int speed)
     {
-        return speed += 100 / _weightDimensionsOfTheShip;
+        return speed += Math.Abs(100 / _weightDimensionsOfTheShip);
     }
 
     public int FuelConsumption(int fuelreserve)
     {
-        return fuelreserve -= 10 * _weightDimensionsOfTheShip;
+        return fuelreserve -= Math.Abs(10 * _weightDimensionsOfTheShip);
     }
 }

@@ -32,6 +32,16 @@ public class NitrinoParticleNebulae : Entities.Environment
         get { return _length; }
     }
 
+    public override string FirstTypeObstracleType
+    {
+        get { return _nebulae.DamageType; }
+    }
+
+    public override string SecondTypeObstracleType
+    {
+        get { return _spaceWhale.DamageType; }
+    }
+
     public new bool IsTheShipWasAbleToRemainInService()
     {
         TakingDamageFromAllObstaclesOfTheFirstType();
@@ -72,7 +82,7 @@ public class NitrinoParticleNebulae : Entities.Environment
         _spaceWhale.Damage(_ship);
     }
 
-    protected new bool IsShipAlive()
+    protected override bool IsShipAlive()
     {
         if (_ship.IsShipAlive())
         {
@@ -86,9 +96,9 @@ public class NitrinoParticleNebulae : Entities.Environment
     {
         while (_countOfFirstTypeObstracles-- > 0)
         {
-            if (_ship.Speed > 0)
+            if (_ship.IsShipAlive())
             {
-                _ship = _nebulae.Damage(_ship);
+                _ship = _spaceWhale.Damage(_ship);
             }
         }
     }
@@ -97,9 +107,9 @@ public class NitrinoParticleNebulae : Entities.Environment
     {
         while (_countOfSecondTypeObstracles-- > 0)
         {
-            if (_ship.IsShipAlive())
+            if (_ship.Speed > 0)
             {
-                _ship = _spaceWhale.Damage(_ship);
+                _ship = _nebulae.Damage(_ship);
             }
         }
     }

@@ -13,7 +13,7 @@ public abstract class Armor
         _isArmorWorking = false;
     }
 
-    public bool IsArmorWorking()
+    public virtual bool IsArmorWorking()
     {
         if (_armorconditionlevel < 0)
         {

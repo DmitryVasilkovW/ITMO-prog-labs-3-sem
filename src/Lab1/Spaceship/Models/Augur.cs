@@ -22,15 +22,16 @@ public class Augur : Entities.Spaceship
     public Augur(bool whethertoInstallAPhotonicDeflector)
         : base(whethertoInstallAPhotonicDeflector)
     {
-        var engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
-        var jumpengine = new JumpEngineAlpha(_weightDimensionCharacteristics);
+        var engine = new ClassEPulseEngine(3);
+        var jumpengine = new JumpEngineAlpha(3);
         var deflector = new ThirdClassDeflector(new PhotonDeflectorSlot());
-        var armor = new ThirdClassArmor(_weightDimensionCharacteristics);
+        var armor = new ThirdClassArmor(3);
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 3;
 
         _nebulaDamage = 1000;
         _crew = true;
+        _speed = 100;
         _armor = armor;
         _deflector = deflector;
         _jumpengine = jumpengine;
@@ -44,22 +45,22 @@ public class Augur : Entities.Spaceship
         }
     }
 
-    public new IEnginesType Engine
+    public override IEnginesType Engine
     {
         get { return _engine; }
     }
 
-    public new IJumpEngine JumpEngine
+    public override IJumpEngine JumpEngine
     {
         get { return _jumpengine; }
     }
 
-    public new Deflectors Deflector
+    public override Deflectors Deflector
     {
         get { return _deflector; }
     }
 
-    public new Armor Armor
+    public override Armor Armor
     {
         get { return _armor; }
     }
@@ -84,6 +85,16 @@ public class Augur : Entities.Spaceship
         return true;
     }
 
+    public override bool IsShipAlive()
+    {
+        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public override void Enginew()
     {
         _speed = _engine.Speed(_speed);
@@ -95,7 +106,7 @@ public class Augur : Entities.Spaceship
         _crew ^= true;
     }
 
-    public new bool IsTheStaffAlive()
+    public override bool IsTheStaffAlive()
     {
         if (_crew)
         {
@@ -105,7 +116,7 @@ public class Augur : Entities.Spaceship
         return false;
     }
 
-    public new void ObstructionOfFlight()
+    public override void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
     }

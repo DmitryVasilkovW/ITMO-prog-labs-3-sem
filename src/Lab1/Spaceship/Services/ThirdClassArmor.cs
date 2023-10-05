@@ -21,7 +21,7 @@ public class ThirdClassArmor : Entities.Armor
         _isArmorWorking = true;
     }
 
-    public new bool IsArmorWorking()
+    public override bool IsArmorWorking()
     {
         if (_armorconditionlevel < 0)
         {

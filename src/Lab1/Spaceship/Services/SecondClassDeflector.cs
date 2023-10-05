@@ -25,12 +25,12 @@ public class SecondClassDeflector : Deflectors
         _isDeflectorWorking = true;
     }
 
-    public new bool IsaPhotonDeflectorInstalled
+    public override bool IsaPhotonDeflectorInstalled
     {
         get { return _isaPhotonDeflectorInstalled; }
     }
 
-    public new bool IsDeflectorWorking()
+    public override bool IsDeflectorWorking()
     {
         if (_deflectorconditionlevel < 0)
         {
@@ -74,7 +74,7 @@ public class SecondClassDeflector : Deflectors
         }
     }
 
-    public new void AntimatterFlashesDamage()
+    public override void AntimatterFlashesDamage()
     {
         if (IsaPhotonDeflectorInstalled)
         {
@@ -82,7 +82,7 @@ public class SecondClassDeflector : Deflectors
         }
     }
 
-    public new void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
+    public override void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
         _isaPhotonDeflectorInstalled = true;

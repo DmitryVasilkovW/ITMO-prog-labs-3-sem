@@ -7,15 +7,17 @@ public class ShipSelection
 {
     private IList<Spaceship.Entities.Spaceship> _shipes = new List<Spaceship.Entities.Spaceship>();
     private FuelExchange _fuelExchange;
-    private Entities.Environment _environment;
+    private IList<Entities.Environment> _environments;
     private List<List<int>> _pricesAndIndices = new List<List<int>>();
     private List<int> _canFly = new List<int>();
+    private int _length;
 
-    public ShipSelection(IList<Spaceship.Entities.Spaceship> shipes, FuelExchange fuelExchange, Entities.Environment environment)
+    public ShipSelection(IList<Spaceship.Entities.Spaceship> shipes, FuelExchange fuelExchange, IList<Entities.Environment> environments, int length)
     {
         _shipes = shipes;
         _fuelExchange = fuelExchange;
-        _environment = environment;
+        _environments = environments;
+        _length = length;
 
         int countOfShips = shipes.Count;
 
@@ -51,9 +53,12 @@ public class ShipSelection
     {
         for (int i = 0; i < _shipes.Count; i++)
         {
-            if (!_environment.IsCanEnterTheEnvironment())
+            for (int j = 0; j < _environments.Count; j += _shipes.Count)
             {
-                _canFly[i] = 0;
+                if (!_environments[j].IsCanEnterTheEnvironment())
+                {
+                    _canFly[i] = 0;
+                }
             }
         }
     }
@@ -64,7 +69,7 @@ public class ShipSelection
 
         for (int i = 0; i < _shipes.Count; i++)
         {
-            int price = _environment.Length / _shipes[i].Speed;
+            int price = _length / _shipes[i].Speed;
 
             _pricesAndIndices.Add(new List<int>() { price, indexOfShip });
 

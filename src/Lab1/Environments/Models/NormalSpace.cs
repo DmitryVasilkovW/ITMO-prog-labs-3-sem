@@ -25,12 +25,22 @@ public class NormalSpace : Entities.Environment
         _length = length;
     }
 
-    public new int Length
+    public override int Length
     {
         get { return _length; }
     }
 
-    public new bool IsTheShipWasAbleToRemainInService()
+    public override string FirstTypeObstracleType
+    {
+        get { return _asteroid.DamageType; }
+    }
+
+    public override string SecondTypeObstracleType
+    {
+        get { return _meteorites.DamageType; }
+    }
+
+    public override bool IsTheShipWasAbleToRemainInService()
     {
         TakingDamageFromAllObstaclesOfTheFirstType();
 
@@ -69,7 +79,7 @@ public class NormalSpace : Entities.Environment
         _meteorites.Damage(_ship);
     }
 
-    protected new bool IsShipAlive()
+    protected override bool IsShipAlive()
     {
         if (_ship.IsShipAlive())
         {

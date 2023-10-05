@@ -14,9 +14,19 @@ public class FirstClassDeflector : Deflectors
     private IPhotonicDeflectors _photonicDeflector;
 
     public FirstClassDeflector(IPhotonicDeflectors photonicDeflector)
-        : base(photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
+        _asteroidDamage = 3670;
+        _meteoriteDamage = 7340;
+        _spaceWhaleDamage = 10000;
+        _deflectorconditionlevel = 7340;
+        _isaPhotonDeflectorInstalled = true;
+        _isDeflectorWorking = true;
+    }
+
+    public FirstClassDeflector()
+    {
+        _photonicDeflector = new PhotonDeflectorSlot();
         _asteroidDamage = 3670;
         _meteoriteDamage = 7340;
         _spaceWhaleDamage = 10000;
@@ -25,12 +35,12 @@ public class FirstClassDeflector : Deflectors
         _isDeflectorWorking = true;
     }
 
-    public new bool IsaPhotonDeflectorInstalled
+    public override bool IsaPhotonDeflectorInstalled
     {
         get { return _isaPhotonDeflectorInstalled; }
     }
 
-    public new bool IsDeflectorWorking()
+    public override bool IsDeflectorWorking()
     {
         if (_deflectorconditionlevel < 0)
         {
@@ -58,7 +68,7 @@ public class FirstClassDeflector : Deflectors
         IsDeflectorWorking();
     }
 
-    public new void AntimatterFlashesDamage()
+    public override void AntimatterFlashesDamage()
     {
         if (IsaPhotonDeflectorInstalled)
         {
@@ -82,9 +92,9 @@ public class FirstClassDeflector : Deflectors
         }
     }
 
-    public new void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
+    public override void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
-        _isaPhotonDeflectorInstalled = true;
+        _isaPhotonDeflectorInstalled ^= false;
     }
 }

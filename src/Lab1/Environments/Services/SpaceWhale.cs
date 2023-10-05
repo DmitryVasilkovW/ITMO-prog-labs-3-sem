@@ -11,6 +11,11 @@ public class SpaceWhale : Entities.IObstacles
         _damageType = "SpaceWhale";
     }
 
+    public string DamageType
+    {
+        get { return _damageType; }
+    }
+
     public Spaceship.Entities.Spaceship Damage(Spaceship.Entities.Spaceship ship)
     {
         if (ship.IsDeflectorWorking)

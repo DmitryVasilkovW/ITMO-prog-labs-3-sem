@@ -8,6 +8,6 @@ public class PhotonDeflectorSlot : Entities.IPhotonicDeflectors
 
     public bool IsPhotonicDeflectorBroken()
     {
-        return false;
+        return true;
     }
 }

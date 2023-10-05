@@ -12,28 +12,6 @@ public abstract class Environment : IEnvironment
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
-    protected Environment(IObstacles obstacles, Spaceship.Entities.Spaceship ship, int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles)
-    {
-        _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
-        _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
-        _firstObstacles = obstacles;
-        _secondObstacles = obstacles;
-        _ship = ship;
-        _requiredEngine = "tmp";
-        _length = length;
-    }
-
-    protected Environment(IObstacles firstObstacles, IObstacles secondObstacles, Spaceship.Entities.Spaceship ship, int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles)
-    {
-        _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
-        _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
-        _firstObstacles = firstObstacles;
-        _secondObstacles = secondObstacles;
-        _ship = ship;
-        _requiredEngine = "tmp";
-        _length = length;
-    }
-
     protected Environment(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.Spaceship ship)
     {
         _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
@@ -45,23 +23,34 @@ public abstract class Environment : IEnvironment
         _length = length;
     }
 
+    public virtual string FirstTypeObstracleType
+    {
+        get { return _firstObstacles.DamageType; }
+    }
+
+    public virtual string SecondTypeObstracleType
+    {
+        get { return _secondObstacles.DamageType; }
+    }
+
     public int CountOfFirstTypeObstracles
     {
         get { return _countOfFirstTypeObstracles; }
     }
 
-    public int CountOfSecondTypeObstracles
+    public virtual int CountOfSecondTypeObstracles
     {
         get { return _countOfSecondTypeObstracles; }
     }
 
-    public int Length
+    public virtual int Length
     {
         get { return _length; }
     }
 
-    public bool IsTheShipWasAbleToRemainInService()
+    public virtual bool IsTheShipWasAbleToRemainInService()
     {
+        _ship.Enginew();
         TakingDamageFromAllObstaclesOfTheFirstType();
 
         if (!IsShipAlive())
@@ -79,7 +68,6 @@ public abstract class Environment : IEnvironment
         return true;
     }
 
-    // проверить
     public virtual bool IsCanEnterTheEnvironment()
     {
         if (_ship.EngineType == _requiredEngine)
@@ -90,7 +78,7 @@ public abstract class Environment : IEnvironment
         return false;
     }
 
-    protected bool IsShipAlive()
+    protected virtual bool IsShipAlive()
     {
         if (_ship.IsShipAlive())
         {

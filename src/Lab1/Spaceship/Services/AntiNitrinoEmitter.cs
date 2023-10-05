@@ -12,12 +12,12 @@ public class AntiNitrinoEmitter : Entities.AdditionalSafetyDevices
         _damageType = damageType;
     }
 
-    public new string DamageType
+    public override string DamageType
     {
         get { return _damageType; }
     }
 
-    public new bool Isoperates
+    public override bool Isoperates
     {
         get { return _isoperates; }
         protected set { _isoperates = value; }

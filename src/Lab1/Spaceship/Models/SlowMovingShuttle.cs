@@ -11,29 +11,36 @@ public class SlowMovingShuttle : Entities.Spaceship
     private int _weightDimensionCharacteristics;
     private bool _crew;
     private int _nebulaDamage;
+    private string _shipName;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpEngine;
     private Armor _armor;
 
     public SlowMovingShuttle()
-        : base()
     {
-        var engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
-        var armor = new FirstClassArmor(_weightDimensionCharacteristics);
+        var engine = new ClassCPulseEngine(1);
+        var armor = new FirstClassArmor(1);
         string engineType = "PulseEngine";
         var jumpEngine = new JumpEngineSlot();
         int weightDimensionCharacteristics = 1;
 
+        _shipName = "SlowMovingShuttle";
         _nebulaDamage = 1000;
         _jumpEngine = jumpEngine;
+        _speed = 100;
         _armor = armor;
         _engine = engine;
         _engineType = engineType;
         _weightDimensionCharacteristics = weightDimensionCharacteristics;
     }
 
-    public new IEnginesType Engine
+    public override string ShipName
+    {
+        get { return _shipName; }
+    }
+
+    public override IEnginesType Engine
     {
         get { return _engine; }
     }
@@ -58,9 +65,19 @@ public class SlowMovingShuttle : Entities.Spaceship
         return true;
     }
 
-    public new bool IsTheStaffAlive()
+    public override bool IsTheStaffAlive()
     {
         if (_crew)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public override bool IsShipAlive()
+    {
+        if (_armor.IsArmorWorking() && _speed > 0)
         {
             return true;
         }
@@ -79,7 +96,7 @@ public class SlowMovingShuttle : Entities.Spaceship
         _crew ^= true;
     }
 
-    public new void ObstructionOfFlight()
+    public override void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
     }
