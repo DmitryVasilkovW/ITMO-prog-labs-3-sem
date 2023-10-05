@@ -32,12 +32,11 @@ public class Route
         }
     }
 
-    public void ShipHandling()
+    public IList<string> ShipHandling()
     {
-        int indexForShips = 0;
-
         foreach (ValuesForTheEnvironment values in _environments)
         {
+            int indexForShips = 0;
             foreach (Spaceship.Entities.Spaceship ship in _ships)
             {
                 Environment environment = new TheFactoryOfTheEnvironment(
@@ -55,7 +54,7 @@ public class Route
                     continue;
                 }
 
-                if (!ship.Deflector.IsaPhotonDeflectorInstalled)
+                if (!ship.Deflector.IsaPhotonDeflectorInstalled && environment.CountOfSecondTypeObstracles > 0)
                 {
                     _shipStatus[indexForShips] = _statusCrewDeath;
 
@@ -81,5 +80,7 @@ public class Route
                 }
             }
         }
+
+        return _shipStatus;
     }
 }
