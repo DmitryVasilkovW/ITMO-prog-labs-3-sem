@@ -24,7 +24,7 @@ public class FirstTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void AllNumbersAreOddWithClassData(string firstExpectedValue, string secondExpectedValue)
+    public void AllNumbersAreOddWithClassData(Spaceship.Entities.Spaceship firstShip, Spaceship.Entities.Spaceship secondShip)
     {
         IList<Spaceship.Entities.Spaceship> ships = new List<Spaceship.Entities.Spaceship>();
         IList<string> shipStatus;
@@ -34,10 +34,10 @@ public class FirstTest
         environments.Add(firstValue);
         var secondValue = new ValuesForTheEnvironment("HighDensitySpaceNebulae", new Augur(false), 239, 10, 0);
         environments.Add(secondValue);
-        ships.Add(new SlowMovingShuttle());
-        ships.Add(new Augur(false));
-        expectedValues.Add(firstExpectedValue);
-        expectedValues.Add(secondExpectedValue);
+        ships.Add(firstShip);
+        ships.Add(secondShip);
+        expectedValues.Add("Destruction of the ship");
+        expectedValues.Add("Destruction of the ship");
 
         shipStatus = new Route(239, environments, ships).ShipHandling();
 
@@ -48,7 +48,7 @@ public class FirstTest
     {
         private readonly List<object[]> _data = new List<object[]>
         {
-            new object[] { "Destruction of the ship", "Destruction of the ship" },
+            new object[] { new SlowMovingShuttle(), new Augur(false) },
         };
 
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
