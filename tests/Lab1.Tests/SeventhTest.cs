@@ -41,7 +41,7 @@ public class SeventhTest
         ships.Add(firstShip);
         ships.Add(secondShip);
         expectedValues.Add("Loss of ship");
-        expectedValues.Add("Success");
+        expectedValues.Add("Destruction of the ship");
 
         shipStatus = new Route(239, environments, ships).ShipHandling();
 
@@ -74,13 +74,13 @@ public class SeventhTest
                     "NitrinoParticleNebulae",
                     new SlowMovingShuttle(),
                     Length,
-                    10,
+                    0,
                     0),
                 new ValuesForTheEnvironment(
                     "NitrinoParticleNebulae",
                     new Augur(false),
                     Length,
-                    1,
+                    0,
                     0),
             },
         };
