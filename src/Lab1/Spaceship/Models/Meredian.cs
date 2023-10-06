@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
-public class Meredian : Entities.Spaceship
+public class Meredian : Entities.ISpaceship
 {
     private int _speed;
     private int _fuelreserve;
@@ -17,9 +17,11 @@ public class Meredian : Entities.Spaceship
     private Deflectors _deflector;
     private Armor _armor;
     private AdditionalSafetyDevices _equipment;
+    private string _shipName;
+    private int _gravitonmatter;
+    private int _range;
 
     public Meredian(bool whethertoInstallAPhotonicDeflector)
-        : base(whethertoInstallAPhotonicDeflector)
     {
         var engine = new ClassEPulseEngine(2);
         var deflector = new SecondClassDeflector(new PhotonDeflectorSlot());
@@ -29,6 +31,8 @@ public class Meredian : Entities.Spaceship
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 2;
 
+        _range = 100;
+        _shipName = "Meredian";
         _speed = 100;
         _nebulaDamage = 1000;
         _jumpengine = jumpEngine;
@@ -45,32 +49,69 @@ public class Meredian : Entities.Spaceship
         }
     }
 
-    public override IEnginesType Engine
+    public bool IsPhotonDeflectorWorking
     {
-        get { return _engine; }
+        get { return _deflector.IsaPhotonDeflectorInstalled; }
     }
 
-    public override Deflectors Deflector
+    public Deflectors Deflector
     {
         get { return _deflector; }
     }
 
-    public override Armor Armor
+    public Armor Armor
     {
         get { return _armor; }
     }
 
-    public override int WeightDimensionCharacteristics
+    public int Speed
+    {
+        get { return _speed; }
+    }
+
+    public string ShipName
+    {
+        get { return _shipName; }
+    }
+
+    public IEnginesType Engine
+    {
+        get { return _engine; }
+    }
+
+    public IJumpEngine JumpEngine
+    {
+        get { return _jumpengine; }
+    }
+
+    public AdditionalSafetyDevices Equipment
+    {
+        get { return _equipment; }
+    }
+
+    public int WeightDimensionCharacteristics
     {
         get { return _weightDimensionCharacteristics; }
     }
 
-    public override string EngineType
+    public string EngineType
     {
         get { return _engineType; }
     }
 
-    public override bool IsTheStaffAlive()
+    public void SafetyEquipmentOperation()
+    {
+        if (_deflector.IsDeflectorWorking())
+        {
+            _equipment.Effect(_deflector);
+        }
+        else
+        {
+            _equipment.Effect(_armor);
+        }
+    }
+
+    public bool IsTheStaffAlive()
     {
         if (_crew)
         {
@@ -80,17 +121,7 @@ public class Meredian : Entities.Spaceship
         return false;
     }
 
-    public new bool IsjumpEngineInstalled()
-    {
-        if (_jumpengine.ISSlot())
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    public override bool IsShipAlive()
+    public bool IsShipAlive()
     {
         if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
         {
@@ -100,23 +131,35 @@ public class Meredian : Entities.Spaceship
         return false;
     }
 
-    public override void Enginew()
+    public void Enginew()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
     }
 
-    public override void StaffAssault()
+    public bool IsjumpEngineInstalled()
+    {
+        if (_jumpengine.ISSlot())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void StaffAssault()
     {
         _crew ^= true;
     }
 
-    public override void ObstructionOfFlight()
+    public void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
     }
 
-    public override void JumpEnginew()
+    public void JumpEnginew()
     {
+        _range = _jumpengine.Range(_speed);
+        _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
     }
 }

@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
-public class Augur : Entities.Spaceship
+public class Augur : Entities.ISpaceship
 {
     private int _speed;
     private int _range;
@@ -18,9 +18,10 @@ public class Augur : Entities.Spaceship
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
     private Armor _armor;
+    private AdditionalSafetyDevices _equipment;
+    private string _shipName;
 
     public Augur(bool whethertoInstallAPhotonicDeflector)
-        : base(whethertoInstallAPhotonicDeflector)
     {
         var engine = new ClassEPulseEngine(3);
         var jumpengine = new JumpEngineAlpha(3);
@@ -29,7 +30,9 @@ public class Augur : Entities.Spaceship
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 3;
 
-        _nebulaDamage = 1000;
+        _shipName = "Augur";
+        _equipment = new AdditionalSafetyDevicesSlot("no protection");
+        _nebulaDamage = 923333333;
         _crew = true;
         _speed = 100;
         _armor = armor;
@@ -45,37 +48,57 @@ public class Augur : Entities.Spaceship
         }
     }
 
-    public override IEnginesType Engine
+    public bool IsPhotonDeflectorWorking
+    {
+        get { return _deflector.IsaPhotonDeflectorInstalled; }
+    }
+
+    public int Speed
+    {
+        get { return _speed; }
+    }
+
+    public string ShipName
+    {
+        get { return _shipName; }
+    }
+
+    public IEnginesType Engine
     {
         get { return _engine; }
     }
 
-    public override IJumpEngine JumpEngine
+    public IJumpEngine JumpEngine
     {
         get { return _jumpengine; }
     }
 
-    public override Deflectors Deflector
+    public Deflectors Deflector
     {
         get { return _deflector; }
     }
 
-    public override Armor Armor
+    public Armor Armor
     {
         get { return _armor; }
     }
 
-    public override int WeightDimensionCharacteristics
+    public AdditionalSafetyDevices Equipment
+    {
+        get { return _equipment; }
+    }
+
+    public int WeightDimensionCharacteristics
     {
         get { return _weightDimensionCharacteristics; }
     }
 
-    public override string EngineType
+    public string EngineType
     {
         get { return _engineType; }
     }
 
-    public new bool IsjumpEngineInstalled()
+    public bool IsjumpEngineInstalled()
     {
         if (_jumpengine.ISSlot())
         {
@@ -85,7 +108,19 @@ public class Augur : Entities.Spaceship
         return true;
     }
 
-    public override bool IsShipAlive()
+    public void SafetyEquipmentOperation()
+    {
+        if (_deflector.IsDeflectorWorking())
+        {
+            _equipment.Effect(_deflector);
+        }
+        else
+        {
+            _equipment.Effect(_armor);
+        }
+    }
+
+    public bool IsShipAlive()
     {
         if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
         {
@@ -95,18 +130,18 @@ public class Augur : Entities.Spaceship
         return false;
     }
 
-    public override void Enginew()
+    public void Enginew()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
     }
 
-    public override void StaffAssault()
+    public void StaffAssault()
     {
         _crew ^= true;
     }
 
-    public override bool IsTheStaffAlive()
+    public bool IsTheStaffAlive()
     {
         if (_crew)
         {
@@ -116,12 +151,12 @@ public class Augur : Entities.Spaceship
         return false;
     }
 
-    public override void ObstructionOfFlight()
+    public void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
     }
 
-    public override void JumpEnginew()
+    public void JumpEnginew()
     {
         _range = _jumpengine.Range(_range);
         _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);

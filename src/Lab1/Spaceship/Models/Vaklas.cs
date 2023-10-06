@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
-public class Vaklas : Entities.Spaceship
+public class Vaklas : Entities.ISpaceship
 {
     private int _speed;
     private int _range;
@@ -13,11 +13,13 @@ public class Vaklas : Entities.Spaceship
     private int _weightDimensionCharacteristics;
     private bool _crew;
     private int _nebulaDamage;
+    private string _shipName;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
     private Armor _armor;
+    private AdditionalSafetyDevices _equipment;
 
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
@@ -27,8 +29,10 @@ public class Vaklas : Entities.Spaceship
         string engineType = "PulseEngine";
         int weightDimensionCharacteristics = 2;
 
+        _equipment = new AdditionalSafetyDevicesSlot("none");
+        _shipName = "Vaklas";
         _speed = 100;
-        _nebulaDamage = 1000;
+        _nebulaDamage = 923333333;
         _armor = armor;
         _jumpengine = jumpengine;
         _engine = engine;
@@ -47,48 +51,60 @@ public class Vaklas : Entities.Spaceship
         }
     }
 
-    public override bool IsPhotonDeflectorWorking
+    public bool IsPhotonDeflectorWorking
     {
         get { return _deflector.IsaPhotonDeflectorInstalled; }
     }
 
-    public override IEnginesType Engine
+    public string ShipName
+    {
+        get { return _shipName; }
+    }
+
+    public int Speed => _speed;
+
+    public IEnginesType Engine
     {
         get { return _engine; }
     }
 
-    public override IJumpEngine JumpEngine
+    public IJumpEngine JumpEngine
     {
         get { return _jumpengine; }
     }
 
-    public override Deflectors Deflector
+    public Deflectors Deflector
     {
         get { return _deflector; }
     }
 
-    public override Armor Armor
+    public Armor Armor
     {
         get { return _armor; }
     }
 
-    public override int WeightDimensionCharacteristics
+    public int WeightDimensionCharacteristics
     {
         get { return _weightDimensionCharacteristics; }
     }
 
-    public override string EngineType
+    public string EngineType
     {
         get { return _engineType; }
     }
 
-    public override void Enginew()
+    public AdditionalSafetyDevices Equipment
+    {
+        get { return _equipment; }
+    }
+
+    public void Enginew()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
     }
 
-    public override bool IsTheStaffAlive()
+    public bool IsTheStaffAlive()
     {
         if (_crew)
         {
@@ -98,17 +114,29 @@ public class Vaklas : Entities.Spaceship
         return false;
     }
 
-    public override bool IsShipAlive()
+    public void SafetyEquipmentOperation()
     {
-        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
+        if (_deflector.IsDeflectorWorking())
         {
-            return true;
+            _equipment.Effect(_deflector);
         }
-
-        return false;
+        else
+        {
+            _equipment.Effect(_armor);
+        }
     }
 
-    public new bool IsjumpEngineInstalled()
+    public bool IsShipAlive()
+    {
+        if (!_armor.IsArmorWorking() || _speed < 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool IsjumpEngineInstalled()
     {
         if (_jumpengine.ISSlot())
         {
@@ -118,17 +146,17 @@ public class Vaklas : Entities.Spaceship
         return true;
     }
 
-    public override void StaffAssault()
+    public void StaffAssault()
     {
         _crew ^= true;
     }
 
-    public override void ObstructionOfFlight()
+    public void ObstructionOfFlight()
     {
-        _speed -= _nebulaDamage;
+        _speed /= _nebulaDamage;
     }
 
-    public override void JumpEnginew()
+    public void JumpEnginew()
     {
         _range = _jumpengine.Range(_range);
         _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
