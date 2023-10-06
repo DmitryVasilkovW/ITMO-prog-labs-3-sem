@@ -24,5 +24,5 @@ public abstract class AdditionalSafetyDevices
 
     public abstract void Effect(Deflectors deflector);
 
-    public abstract void Effect(Armor armor);
+    public abstract void Effect(IArmor armor);
 }

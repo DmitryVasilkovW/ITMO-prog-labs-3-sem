@@ -17,7 +17,7 @@ public class Augur : Entities.ISpaceship
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
-    private Armor _armor;
+    private IArmor _armor;
     private AdditionalSafetyDevices _equipment;
     private string _shipName;
 
@@ -87,7 +87,7 @@ public class Augur : Entities.ISpaceship
         get { return _deflector; }
     }
 
-    public Armor Armor
+    public IArmor Armor
     {
         get { return _armor; }
     }

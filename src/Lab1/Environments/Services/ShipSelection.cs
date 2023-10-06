@@ -51,7 +51,7 @@ public class ShipSelection
 
     private void SelectionOfShipsThatCanEnterTheEnvironment()
     {
-        int shipindex = 0;
+        int shipindex = -1;
 
         for (int i = 0; i < _shipes.Count; i++)
         {

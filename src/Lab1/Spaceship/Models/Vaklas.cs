@@ -18,7 +18,7 @@ public class Vaklas : Entities.ISpaceship
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
-    private Armor _armor;
+    private IArmor _armor;
     private AdditionalSafetyDevices _equipment;
 
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
@@ -78,7 +78,7 @@ public class Vaklas : Entities.ISpaceship
         get { return _deflector; }
     }
 
-    public Armor Armor
+    public IArmor Armor
     {
         get { return _armor; }
     }
@@ -142,7 +142,7 @@ public class Vaklas : Entities.ISpaceship
 
     public bool IsShipAlive()
     {
-        if (!_armor.IsArmorWorking() || _speed < 0)
+        if (!_armor.IsArmorWorking())
         {
             return false;
         }

@@ -1,7 +1,7 @@
 using System;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class SecondClassArmor : Entities.Armor
+public class SecondClassArmor : Entities.IArmor
 {
     private int _armorconditionlevel;
     private int _asteroidDamage;
@@ -11,7 +11,6 @@ public class SecondClassArmor : Entities.Armor
     private int _weightDimensionsOfTheShip;
 
     public SecondClassArmor(int weightDimensionsOfTheShip)
-        : base(weightDimensionsOfTheShip)
     {
         _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
         _asteroidDamage = 200;
@@ -21,7 +20,7 @@ public class SecondClassArmor : Entities.Armor
         _isArmorWorking = true;
     }
 
-    public override bool IsArmorWorking()
+    public bool IsArmorWorking()
     {
         if (_armorconditionlevel < 0)
         {
@@ -31,25 +30,25 @@ public class SecondClassArmor : Entities.Armor
         return _isArmorWorking;
     }
 
-    public override void AsteroidDamage()
+    public void AsteroidDamage()
     {
         _armorconditionlevel -= _asteroidDamage / _weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
-    public override void MeteoriteDamage()
+    public void MeteoriteDamage()
     {
         _armorconditionlevel -= _meteoriteDamage / _weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
-    public override void SpaceWhaleDamage()
+    public void SpaceWhaleDamage()
     {
         _armorconditionlevel -= _spaceWhaleDamage / _weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
-    public override void SavingStatusOfTheArmor(string damagetype)
+    public void SavingStatusOfTheArmor(string damagetype)
     {
         if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
         {

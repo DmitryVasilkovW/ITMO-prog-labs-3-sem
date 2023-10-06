@@ -14,7 +14,7 @@ public interface ISpaceship
 
     Deflectors Deflector { get; }
 
-    Armor Armor { get; }
+    IArmor Armor { get; }
     AdditionalSafetyDevices Equipment { get; }
 
     int WeightDimensionCharacteristics { get; }

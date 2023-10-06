@@ -18,7 +18,7 @@ public class Stella : Entities.ISpaceship
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
-    private Armor _armor;
+    private IArmor _armor;
     private AdditionalSafetyDevices _equipment;
 
     public Stella(bool whethertoInstallAPhotonicDeflector)
@@ -86,7 +86,7 @@ public class Stella : Entities.ISpaceship
         get { return _deflector; }
     }
 
-    public Armor Armor
+    public IArmor Armor
     {
         get { return _armor; }
     }

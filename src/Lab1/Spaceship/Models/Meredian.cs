@@ -15,7 +15,7 @@ public class Meredian : Entities.ISpaceship
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
-    private Armor _armor;
+    private IArmor _armor;
     private AdditionalSafetyDevices _equipment;
     private string _shipName;
     private int _gravitonmatter;
@@ -73,7 +73,7 @@ public class Meredian : Entities.ISpaceship
         }
     }
 
-    public Armor Armor
+    public IArmor Armor
     {
         get { return _armor; }
     }
@@ -137,7 +137,7 @@ public class Meredian : Entities.ISpaceship
 
     public bool IsShipAlive()
     {
-        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
+        if (_armor.IsArmorWorking() || _deflector.IsDeflectorWorking())
         {
             return true;
         }

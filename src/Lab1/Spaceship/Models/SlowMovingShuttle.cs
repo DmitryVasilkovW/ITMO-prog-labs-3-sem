@@ -16,7 +16,7 @@ public class SlowMovingShuttle : Entities.ISpaceship
     private int _range;
 
     private IEnginesType _engine;
-    private Armor _armor;
+    private IArmor _armor;
     private Deflectors _deflector;
     private IJumpEngine _jumpEngine;
     private AdditionalSafetyDevices _equipment;
@@ -62,7 +62,7 @@ public class SlowMovingShuttle : Entities.ISpaceship
         get { return _deflector; }
     }
 
-    public Armor Armor
+    public IArmor Armor
     {
         get { return _armor; }
     }

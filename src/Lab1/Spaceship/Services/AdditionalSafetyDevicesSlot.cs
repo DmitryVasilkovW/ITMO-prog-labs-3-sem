@@ -29,7 +29,7 @@ public class AdditionalSafetyDevicesSlot : Entities.AdditionalSafetyDevices
     {
     }
 
-    public override void Effect(Armor armor)
+    public override void Effect(IArmor armor)
     {
     }
 }
