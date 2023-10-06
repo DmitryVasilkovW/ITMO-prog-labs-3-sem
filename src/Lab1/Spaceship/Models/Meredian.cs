@@ -7,41 +7,33 @@ public class Meredian : Entities.ISpaceship
 {
     private int _speed;
     private int _fuelreserve;
-    private string _engineType;
     private int _weightDimensionCharacteristics;
-    private bool _crew;
+    private int _gravitonmatter;
+    private int _range;
     private int _nebulaDamage;
+    private bool _crew;
+    private string _engineType;
+    private string _shipName;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
     private IArmor _armor;
     private AdditionalSafetyDevices _equipment;
-    private string _shipName;
-    private int _gravitonmatter;
-    private int _range;
 
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
-        var engine = new ClassEPulseEngine(2);
-        var deflector = new SecondClassDeflector(new PhotonDeflectorSlot());
-        var armor = new SecondClassArmor(2);
-        var equipment = new AntiNitrinoEmitter("SpaceWhale");
-        var jumpEngine = new JumpEngineSlot();
-        string engineType = "PulseEngine";
-        int weightDimensionCharacteristics = 2;
-
+        _weightDimensionCharacteristics = 2;
         _range = 100;
         _shipName = "Meredian";
         _speed = 100;
         _nebulaDamage = 1000;
-        _jumpengine = jumpEngine;
-        _equipment = equipment;
-        _armor = armor;
-        _deflector = deflector;
-        _engine = engine;
-        _engineType = engineType;
-        _weightDimensionCharacteristics = weightDimensionCharacteristics;
+        _jumpengine = new JumpEngineSlot();
+        _equipment = new AntiNitrinoEmitter("SpaceWhale");
+        _armor = new SecondClassArmor(_weightDimensionCharacteristics);
+        _deflector = new SecondClassDeflector(new PhotonDeflectorSlot());
+        _engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
+        _engineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {

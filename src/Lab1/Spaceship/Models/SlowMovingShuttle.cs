@@ -8,12 +8,12 @@ public class SlowMovingShuttle : Entities.ISpaceship
     private int _speed;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private string _engineType;
     private int _weightDimensionCharacteristics;
-    private bool _crew;
     private int _nebulaDamage;
-    private string _shipName;
     private int _range;
+    private bool _crew;
+    private string _shipName;
+    private string _engineType;
 
     private IEnginesType _engine;
     private IArmor _armor;
@@ -23,23 +23,17 @@ public class SlowMovingShuttle : Entities.ISpaceship
 
     public SlowMovingShuttle()
     {
-        var engine = new ClassCPulseEngine(1);
-        var armor = new FirstClassArmor(1);
-        string engineType = "PulseEngine";
-        var jumpEngine = new JumpEngineSlot();
-        int weightDimensionCharacteristics = 1;
-
+        _weightDimensionCharacteristics = 1;
         _equipment = new AdditionalSafetyDevicesSlot("none");
         _deflector = new DeflectorSlot(new PhotonDeflectorSlot());
         _shipName = "SlowMovingShuttle";
         _nebulaDamage = 1000;
-        _jumpEngine = jumpEngine;
+        _jumpEngine = new JumpEngineSlot();
         _speed = 100;
         _range = 0;
-        _armor = armor;
-        _engine = engine;
-        _engineType = engineType;
-        _weightDimensionCharacteristics = weightDimensionCharacteristics;
+        _armor = new FirstClassArmor(_weightDimensionCharacteristics);
+        _engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
+        _engineType = "PulseEngine";
     }
 
     public bool IsPhotonDeflectorWorking

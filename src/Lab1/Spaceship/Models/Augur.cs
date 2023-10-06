@@ -9,38 +9,31 @@ public class Augur : Entities.ISpaceship
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private string _engineType;
     private int _weightDimensionCharacteristics;
-    private bool _crew;
     private int _nebulaDamage;
+    private string _engineType;
+    private string _shipName;
+    private bool _crew;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
     private IArmor _armor;
     private AdditionalSafetyDevices _equipment;
-    private string _shipName;
 
     public Augur(bool whethertoInstallAPhotonicDeflector)
     {
-        var engine = new ClassEPulseEngine(3);
-        var jumpengine = new JumpEngineAlpha(3);
-        var deflector = new ThirdClassDeflector(new PhotonDeflectorSlot());
-        var armor = new ThirdClassArmor(3);
-        string engineType = "PulseEngine";
-        int weightDimensionCharacteristics = 3;
-
+        _weightDimensionCharacteristics = 3;
         _shipName = "Augur";
         _equipment = new AdditionalSafetyDevicesSlot("no protection");
         _nebulaDamage = 923333333;
         _crew = true;
         _speed = 100;
-        _armor = armor;
-        _deflector = deflector;
-        _jumpengine = jumpengine;
-        _engine = engine;
-        _engineType = engineType;
-        _weightDimensionCharacteristics = weightDimensionCharacteristics;
+        _armor = new ThirdClassArmor(_weightDimensionCharacteristics);
+        _deflector = new ThirdClassDeflector(new PhotonDeflectorSlot());
+        _jumpengine = new JumpEngineAlpha(_weightDimensionCharacteristics);
+        _engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
+        _engineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {

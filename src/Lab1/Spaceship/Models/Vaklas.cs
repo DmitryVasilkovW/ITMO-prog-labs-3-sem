@@ -9,10 +9,10 @@ public class Vaklas : Entities.ISpaceship
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private string _engineType;
     private int _weightDimensionCharacteristics;
-    private bool _crew;
     private int _nebulaDamage;
+    private bool _crew;
+    private string _engineType;
     private string _shipName;
 
     private IEnginesType _engine;
@@ -23,21 +23,15 @@ public class Vaklas : Entities.ISpaceship
 
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
-        var engine = new ClassEPulseEngine(2);
-        var jumpengine = new JumpEngineGamma(2);
-        var armor = new SecondClassArmor(2);
-        string engineType = "PulseEngine";
-        int weightDimensionCharacteristics = 2;
-
+        _weightDimensionCharacteristics = 2;
         _equipment = new AdditionalSafetyDevicesSlot("none");
         _shipName = "Vaklas";
         _speed = 100;
         _nebulaDamage = 923333333;
-        _armor = armor;
-        _jumpengine = jumpengine;
-        _engine = engine;
-        _engineType = engineType;
-        _weightDimensionCharacteristics = weightDimensionCharacteristics;
+        _armor = new SecondClassArmor(_weightDimensionCharacteristics);
+        _jumpengine = new JumpEngineGamma(_weightDimensionCharacteristics);
+        _engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
+        _engineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {

@@ -9,11 +9,11 @@ public class Stella : Entities.ISpaceship
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private string _engineType;
     private int _weightDimensionCharacteristics;
-    private bool _crew;
     private int _nebulaDamage;
+    private bool _crew;
     private string _shipName;
+    private string _engineType;
 
     private IEnginesType _engine;
     private IJumpEngine _jumpengine;
@@ -23,20 +23,14 @@ public class Stella : Entities.ISpaceship
 
     public Stella(bool whethertoInstallAPhotonicDeflector)
     {
-        var engine = new ClassCPulseEngine(1);
-        var jumpengine = new JumpEngineOmega(1);
-        var armor = new FirstClassArmor(1);
-        string engineType = "Jumpengine";
-        int weightDimensionCharacteristics = 1;
-
+        _weightDimensionCharacteristics = 1;
         _equipment = new AdditionalSafetyDevicesSlot("none");
         _shipName = "Stella";
         _nebulaDamage = 1000;
-        _armor = armor;
-        _jumpengine = jumpengine;
-        _engine = engine;
-        _engineType = engineType;
-        _weightDimensionCharacteristics = weightDimensionCharacteristics;
+        _armor = new FirstClassArmor(_weightDimensionCharacteristics);
+        _jumpengine = new JumpEngineOmega(_weightDimensionCharacteristics);
+        _engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
+        _engineType = "Jumpengine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
