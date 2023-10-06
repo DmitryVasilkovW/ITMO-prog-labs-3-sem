@@ -24,23 +24,15 @@ public class Route
         _statusLosingAShip = "Loss of ship";
         _statusShipDestruction = "Destruction of the ship";
         _statusCrewDeath = "Crew deaths";
-
-        int countOfShips = ships.Count;
-
-        while (countOfShips-- != 0)
-        {
-            _shipStatus.Add(" ");
-        }
     }
 
     public IList<string> ShipHandling()
     {
-        int indexForShips = 0;
         int indexForEnvironments = -1;
         foreach (Spaceship.Entities.ISpaceship ship in _ships)
         {
             indexForEnvironments++;
-            for (int i = indexForShips; i < _environments.Count; i += _ships.Count)
+            for (int i = indexForEnvironments; i < _environments.Count; i += _ships.Count)
             {
                 Environment environment = new TheFactoryOfTheEnvironment(
                         _environments[i].Environment,
@@ -51,33 +43,29 @@ public class Route
 
                 if (!environment.IsCanEnterTheEnvironment())
                 {
-                    _shipStatus[indexForShips] = _statusLosingAShip;
+                    _shipStatus.Add(_statusLosingAShip);
 
-                    indexForShips++;
                     continue;
                 }
 
                 if (!ship.IsPhotonDeflectorWorking && environment.SecondTypeObstracleType.Equals("Antimatter Flash", StringComparison.Ordinal) && environment.CountOfSecondTypeObstracles > 0)
                 {
-                    _shipStatus[indexForShips] = _statusCrewDeath;
+                    _shipStatus.Add(_statusCrewDeath);
 
-                    indexForShips++;
                     continue;
                 }
                 else
                 {
                     if (environment.IsTheShipWasAbleToRemainInService())
                     {
-                        _shipStatus[indexForShips] = _successStatusForTheShip;
+                        _shipStatus.Add(_successStatusForTheShip);
 
-                        indexForShips++;
                         continue;
                     }
                     else
                     {
-                        _shipStatus[indexForShips] = _statusShipDestruction;
+                        _shipStatus.Add(_statusShipDestruction);
 
-                        indexForShips++;
                         continue;
                     }
                 }

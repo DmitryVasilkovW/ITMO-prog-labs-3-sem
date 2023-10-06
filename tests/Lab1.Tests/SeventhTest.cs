@@ -10,10 +10,16 @@ public class SeventhTest
 {
     public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
     {
-        for (int i = 0; i < shipStatus.Count; i++)
+        int indexForShip = 0;
+
+        for (int i = 0; i < expectedValues.Count; i += 2)
         {
-            if (shipStatus[i] != expectedValues[i])
+            if (shipStatus[indexForShip] != expectedValues[i])
+            {
                 return false;
+            }
+
+            indexForShip++;
         }
 
         return true;
