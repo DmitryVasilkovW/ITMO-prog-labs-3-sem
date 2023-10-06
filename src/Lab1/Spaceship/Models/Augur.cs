@@ -29,15 +29,19 @@ public class Augur : Entities.ISpaceship
         _nebulaDamage = 923333333;
         _crew = true;
         _speed = 100;
+        _range = 100;
         _armor = new ThirdClassArmor(_weightDimensionCharacteristics);
-        _deflector = new ThirdClassDeflector(new PhotonDeflectorSlot());
         _jumpengine = new JumpEngineAlpha(_weightDimensionCharacteristics);
         _engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
         _engineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            _deflector.PhotonDeflectorInstallation(new StandardPhotonicDeflectors());
+            _deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
+        }
+        else
+        {
+            _deflector = new FirstClassDeflector();
         }
     }
 
@@ -70,7 +74,7 @@ public class Augur : Entities.ISpaceship
     {
         get
         {
-            Enginew();
+            EngineWork();
             return _fuelreserve;
         }
     }
@@ -137,7 +141,7 @@ public class Augur : Entities.ISpaceship
         return false;
     }
 
-    public void Enginew()
+    public void EngineWork()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
@@ -165,7 +169,7 @@ public class Augur : Entities.ISpaceship
 
     public void JumpEnginew()
     {
-        _range = _jumpengine.Range(_range);
+        _range = _jumpengine.Range(_speed);
         _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
     }
 }

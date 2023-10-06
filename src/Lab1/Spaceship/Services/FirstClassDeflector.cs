@@ -95,6 +95,6 @@ public class FirstClassDeflector : Deflectors
     public override void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
-        _isaPhotonDeflectorInstalled ^= false;
+        _isaPhotonDeflectorInstalled = true;
     }
 }

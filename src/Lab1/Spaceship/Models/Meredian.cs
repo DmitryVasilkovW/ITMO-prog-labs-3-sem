@@ -31,13 +31,16 @@ public class Meredian : Entities.ISpaceship
         _jumpengine = new JumpEngineSlot();
         _equipment = new AntiNitrinoEmitter("SpaceWhale");
         _armor = new SecondClassArmor(_weightDimensionCharacteristics);
-        _deflector = new SecondClassDeflector(new PhotonDeflectorSlot());
         _engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
         _engineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            _deflector.PhotonDeflectorInstallation(new StandardPhotonicDeflectors());
+            _deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
+        }
+        else
+        {
+            _deflector = new FirstClassDeflector();
         }
     }
 
@@ -60,7 +63,7 @@ public class Meredian : Entities.ISpaceship
     {
         get
         {
-            Enginew();
+            EngineWork();
             return _fuelreserve;
         }
     }
@@ -137,10 +140,18 @@ public class Meredian : Entities.ISpaceship
         return false;
     }
 
-    public void Enginew()
+    public void EngineWork()
     {
-        _speed = _engine.Speed(_speed);
-        _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+        if (_jumpengine is not JumpEngineSlot)
+        {
+            _range = _jumpengine.Range(_range);
+            _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
+        }
+        else
+        {
+            _speed = _engine.Speed(_speed);
+            _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+        }
     }
 
     public bool IsjumpEngineInstalled()

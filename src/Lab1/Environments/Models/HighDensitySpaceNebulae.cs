@@ -44,7 +44,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
 
     public override bool IsTheShipWasAbleToRemainInService()
     {
-        _ship.Enginew();
+        _ship.EngineWork();
         TakingDamageFromAllObstaclesOfTheFirstType();
 
         if (!_ship.IsShipAlive())

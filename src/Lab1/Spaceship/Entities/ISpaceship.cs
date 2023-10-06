@@ -28,7 +28,7 @@ public interface ISpaceship
 
     bool IsShipAlive();
 
-    void Enginew();
+    void EngineWork();
 
     void StaffAssault();
 

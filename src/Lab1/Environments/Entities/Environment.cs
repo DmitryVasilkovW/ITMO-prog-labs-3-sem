@@ -50,7 +50,7 @@ public abstract class Environment : IEnvironment
 
     public virtual bool IsTheShipWasAbleToRemainInService()
     {
-        _ship.Enginew();
+        _ship.EngineWork();
         TakingDamageFromAllObstaclesOfTheFirstType();
 
         if (!IsShipAlive())

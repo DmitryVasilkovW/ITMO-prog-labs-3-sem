@@ -35,13 +35,11 @@ public class Vaklas : Entities.ISpaceship
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            var deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
-            _deflector = deflector;
+           _deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
         }
         else
         {
-            var deflector = new FirstClassDeflector();
-            _deflector = deflector;
+            _deflector = new FirstClassDeflector();
         }
     }
 
@@ -96,7 +94,7 @@ public class Vaklas : Entities.ISpaceship
     {
         get
         {
-            Enginew();
+            EngineWork();
             return _fuelreserve;
         }
     }
@@ -106,10 +104,18 @@ public class Vaklas : Entities.ISpaceship
         get { return _deflector.IsDeflectorWorking(); }
     }
 
-    public void Enginew()
+    public void EngineWork()
     {
-        _speed = _engine.Speed(_speed);
-        _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+        if (_jumpengine is not JumpEngineSlot)
+        {
+            _range = _jumpengine.Range(_range);
+            _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
+        }
+        else
+        {
+            _speed = _engine.Speed(_speed);
+            _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+        }
     }
 
     public bool IsTheStaffAlive()

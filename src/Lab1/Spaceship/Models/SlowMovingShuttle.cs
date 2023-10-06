@@ -95,7 +95,7 @@ public class SlowMovingShuttle : Entities.ISpaceship
     {
         get
         {
-            Enginew();
+            EngineWork();
             return _fuelreserve;
         }
     }
@@ -142,10 +142,18 @@ public class SlowMovingShuttle : Entities.ISpaceship
         return false;
     }
 
-    public void Enginew()
+    public void EngineWork()
     {
-        _speed = _engine.Speed(_speed);
-        _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+        if (_jumpEngine is not JumpEngineSlot)
+        {
+            _range = _jumpEngine.Range(_range);
+            _gravitonmatter = _jumpEngine.FuelConsumption(_gravitonmatter);
+        }
+        else
+        {
+            _speed = _engine.Speed(_speed);
+            _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+        }
     }
 
     public void StaffAssault()

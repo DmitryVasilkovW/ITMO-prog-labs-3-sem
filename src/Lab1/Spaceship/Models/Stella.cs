@@ -27,6 +27,8 @@ public class Stella : Entities.ISpaceship
         _equipment = new AdditionalSafetyDevicesSlot("none");
         _shipName = "Stella";
         _nebulaDamage = 1000;
+        _speed = 100;
+        _range = 100;
         _armor = new FirstClassArmor(_weightDimensionCharacteristics);
         _jumpengine = new JumpEngineOmega(_weightDimensionCharacteristics);
         _engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
@@ -34,13 +36,11 @@ public class Stella : Entities.ISpaceship
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            var deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
-            _deflector = deflector;
+            _deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
         }
         else
         {
-            var deflector = new FirstClassDeflector();
-            _deflector = deflector;
+            _deflector = new FirstClassDeflector();
         }
     }
 
@@ -55,7 +55,7 @@ public class Stella : Entities.ISpaceship
     {
         get
         {
-            Enginew();
+            EngineWork();
             return _fuelreserve;
         }
     }
@@ -147,7 +147,7 @@ public class Stella : Entities.ISpaceship
         return false;
     }
 
-    public void Enginew()
+    public void EngineWork()
     {
         _speed = _engine.Speed(_speed);
         _fuelreserve = _engine.FuelConsumption(_fuelreserve);
