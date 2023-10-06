@@ -22,6 +22,8 @@ public interface ISpaceship
     string EngineType { get; }
     bool IsDeflectorWorking { get; }
 
+    int Fuelreserve { get; }
+
     bool IsjumpEngineInstalled();
 
     bool IsShipAlive();

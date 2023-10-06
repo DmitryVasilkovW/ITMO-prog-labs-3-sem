@@ -73,6 +73,15 @@ public class Augur : Entities.ISpaceship
         get { return _jumpengine; }
     }
 
+    public int Fuelreserve
+    {
+        get
+        {
+            Enginew();
+            return _fuelreserve;
+        }
+    }
+
     public Deflectors Deflector
     {
         get { return _deflector; }

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
-using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
@@ -10,7 +9,7 @@ using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.En
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FifthTest
+public class SixthTest
 {
     public static bool ResultsVerification(Spaceship.Entities.ISpaceship shipStatus, string expectedValues)
     {
@@ -35,9 +34,9 @@ public class FifthTest
         environments.Add(environmentForSecondShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValue = "Stella";
+        expectedValue = "Vaklas";
 
-        ship = new ShipSelection(
+        ship = new Environments.Services.ShipSelection(
             ships,
             new FuelExchange(2, 3, 4, 5, 6, 7, 8, 9),
             environments,
@@ -54,10 +53,10 @@ public class FifthTest
         {
             new object[]
             {
-                new Augur(false),
-                new Stella(false),
-                new HighDensitySpaceNebulae(Length, 0, 0, new Augur(false)),
-                new HighDensitySpaceNebulae(Length, 0, 0, new Stella(false)),
+                new SlowMovingShuttle(),
+                new Vaklas(false),
+                new NitrinoParticleNebulae(Length, 0, 0, new SlowMovingShuttle()),
+                new NitrinoParticleNebulae(Length, 0, 0, new Vaklas(false)),
             },
         };
 

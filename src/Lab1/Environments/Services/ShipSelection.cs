@@ -51,9 +51,12 @@ public class ShipSelection
 
     private void SelectionOfShipsThatCanEnterTheEnvironment()
     {
+        int shipindex = 0;
+
         for (int i = 0; i < _shipes.Count; i++)
         {
-            for (int j = 0; j < _environments.Count; j += _shipes.Count)
+            shipindex++;
+            for (int j = shipindex; j < _environments.Count; j += _shipes.Count)
             {
                 if (!_environments[j].IsCanEnterTheEnvironment())
                 {
@@ -69,7 +72,7 @@ public class ShipSelection
 
         for (int i = 0; i < _shipes.Count; i++)
         {
-            int price = _length / _shipes[i].Speed;
+            int price = _length * _shipes[i].Fuelreserve;
 
             _pricesAndIndices.Add(new List<int>() { price, indexOfShip });
 

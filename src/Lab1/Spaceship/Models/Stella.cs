@@ -57,6 +57,15 @@ public class Stella : Entities.ISpaceship
         get { return _speed; }
     }
 
+    public int Fuelreserve
+    {
+        get
+        {
+            Enginew();
+            return _fuelreserve;
+        }
+    }
+
     public string ShipName
     {
         get { return _shipName; }

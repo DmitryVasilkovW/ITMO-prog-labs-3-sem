@@ -36,8 +36,10 @@ public class Route
     public IList<string> ShipHandling()
     {
         int indexForShips = 0;
+        int indexForEnvironments = -1;
         foreach (Spaceship.Entities.ISpaceship ship in _ships)
         {
+            indexForEnvironments++;
             for (int i = indexForShips; i < _environments.Count; i += _ships.Count)
             {
                 Environment environment = new TheFactoryOfTheEnvironment(

@@ -97,6 +97,15 @@ public class SlowMovingShuttle : Entities.ISpaceship
         get { return _deflector.IsDeflectorWorking(); }
     }
 
+    public int Fuelreserve
+    {
+        get
+        {
+            Enginew();
+            return _fuelreserve;
+        }
+    }
+
     public void SafetyEquipmentOperation()
     {
         if (_deflector.IsDeflectorWorking())

@@ -98,6 +98,15 @@ public class Vaklas : Entities.ISpaceship
         get { return _equipment; }
     }
 
+    public int Fuelreserve
+    {
+        get
+        {
+            Enginew();
+            return _fuelreserve;
+        }
+    }
+
     public bool IsDeflectorWorking
     {
         get { return _deflector.IsDeflectorWorking(); }
