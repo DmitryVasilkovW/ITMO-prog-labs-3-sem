@@ -5,14 +5,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class ShipSelection
 {
-    private IList<Spaceship.Entities.Spaceship> _shipes = new List<Spaceship.Entities.Spaceship>();
+    private IList<Spaceship.Entities.ISpaceship> _shipes = new List<Spaceship.Entities.ISpaceship>();
     private FuelExchange _fuelExchange;
     private IList<Entities.Environment> _environments;
     private List<List<int>> _pricesAndIndices = new List<List<int>>();
     private List<int> _canFly = new List<int>();
     private int _length;
 
-    public ShipSelection(IList<Spaceship.Entities.Spaceship> shipes, FuelExchange fuelExchange, IList<Entities.Environment> environments, int length)
+    public ShipSelection(IList<Spaceship.Entities.ISpaceship> shipes, FuelExchange fuelExchange, IList<Entities.Environment> environments, int length)
     {
         _shipes = shipes;
         _fuelExchange = fuelExchange;
@@ -27,7 +27,7 @@ public class ShipSelection
         }
     }
 
-    public Spaceship.Entities.Spaceship Select()
+    public Spaceship.Entities.ISpaceship Select()
     {
         SelectionOfShipsThatCanEnterTheEnvironment();
         FuelPriceCalculation();

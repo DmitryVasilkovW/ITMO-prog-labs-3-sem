@@ -59,6 +59,11 @@ public class Meredian : Entities.ISpaceship
         get { return _deflector; }
     }
 
+    public bool IsDeflectorWorking
+    {
+        get { return _deflector.IsDeflectorWorking(); }
+    }
+
     public Armor Armor
     {
         get { return _armor; }

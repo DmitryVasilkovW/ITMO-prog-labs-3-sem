@@ -24,9 +24,9 @@ public class ThirdTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.Spaceship firstShip, Spaceship.Entities.Spaceship secondShip, Spaceship.Entities.Spaceship thirdship, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip, ValuesForTheEnvironment environmentForThirdShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Spaceship.Entities.ISpaceship thirdship, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip, ValuesForTheEnvironment environmentForThirdShip)
     {
-        IList<Spaceship.Entities.Spaceship> ships = new List<Spaceship.Entities.Spaceship>();
+        IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
         IList<ValuesForTheEnvironment> environments = new List<ValuesForTheEnvironment>();

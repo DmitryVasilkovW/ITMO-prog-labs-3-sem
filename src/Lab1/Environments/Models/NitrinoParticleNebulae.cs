@@ -7,14 +7,14 @@ public class NitrinoParticleNebulae : Entities.Environment
 {
     private Services.Nebulae _nebulae;
     private Services.SpaceWhale _spaceWhale;
-    private Spaceship.Entities.Spaceship _ship;
+    private Spaceship.Entities.ISpaceship _ship;
     private string _requiredEngine;
     private string _requiredMotorOperationType;
     private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
-    public NitrinoParticleNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.Spaceship ship)
+    public NitrinoParticleNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.ISpaceship ship)
         : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
         _requiredEngine = "PulseEngine";

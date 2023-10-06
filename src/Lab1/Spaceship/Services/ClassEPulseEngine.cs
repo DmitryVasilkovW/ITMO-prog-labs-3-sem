@@ -24,7 +24,9 @@ public class ClassEPulseEngine : Entities.IEnginesType
 
         designspeed = Math.Exp(designspeed);
 
-        return speed += Math.Abs((int)designspeed / _weightDimensionsOfTheShip);
+        speed = Math.Abs(speed) + Math.Abs((int)designspeed / _weightDimensionsOfTheShip);
+
+        return speed;
     }
 
     public int FuelConsumption(int fuelreserve)

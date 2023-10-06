@@ -9,9 +9,9 @@ public class TheFactoryOfTheEnvironment
     private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
-    private Spaceship.Entities.Spaceship _ship;
+    private Spaceship.Entities.ISpaceship _ship;
 
-    public TheFactoryOfTheEnvironment(string environment, Spaceship.Entities.Spaceship ship, int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles)
+    public TheFactoryOfTheEnvironment(string environment, Spaceship.Entities.ISpaceship ship, int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles)
     {
         _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
         _countOfSecondTypeObstracles = countOfSecondTypeObstracles;

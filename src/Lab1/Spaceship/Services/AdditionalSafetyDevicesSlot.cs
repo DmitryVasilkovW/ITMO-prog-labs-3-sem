@@ -12,7 +12,6 @@ public class AdditionalSafetyDevicesSlot : Entities.AdditionalSafetyDevices
     {
         _isoperates = false;
         _damageType = damageType;
-        _damageType = "no protection";
     }
 
     public override string DamageType

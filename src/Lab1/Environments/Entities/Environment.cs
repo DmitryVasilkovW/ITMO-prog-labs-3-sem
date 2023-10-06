@@ -6,13 +6,13 @@ public abstract class Environment : IEnvironment
 {
     private IObstacles _firstObstacles;
     private IObstacles _secondObstacles;
-    private Spaceship.Entities.Spaceship _ship;
+    private Spaceship.Entities.ISpaceship _ship;
     private string _requiredEngine;
     private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
-    protected Environment(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.Spaceship ship)
+    protected Environment(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.ISpaceship ship)
     {
         _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
         _countOfSecondTypeObstracles = countOfSecondTypeObstracles;

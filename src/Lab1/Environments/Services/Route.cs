@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 public class Route
 {
     private IList<ValuesForTheEnvironment> _environments;
-    private IList<Spaceship.Entities.Spaceship> _ships;
+    private IList<Spaceship.Entities.ISpaceship> _ships;
     private List<string> _shipStatus = new List<string>();
     private int _routeLength;
     private string _successStatusForTheShip;
@@ -15,7 +15,7 @@ public class Route
     private string _statusShipDestruction;
     private string _statusCrewDeath;
 
-    public Route(int routeLength, IList<ValuesForTheEnvironment> environments, IList<Spaceship.Entities.Spaceship> ships)
+    public Route(int routeLength, IList<ValuesForTheEnvironment> environments, IList<Spaceship.Entities.ISpaceship> ships)
     {
         _environments = environments;
         _ships = ships;
@@ -36,7 +36,7 @@ public class Route
     public IList<string> ShipHandling()
     {
         int indexForShips = 0;
-        foreach (Spaceship.Entities.Spaceship ship in _ships)
+        foreach (Spaceship.Entities.ISpaceship ship in _ships)
         {
             for (int i = indexForShips; i < _environments.Count; i += _ships.Count)
             {

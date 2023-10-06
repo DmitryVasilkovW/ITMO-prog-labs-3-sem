@@ -6,12 +6,12 @@ public class HighDensitySpaceNebulae : Entities.Environment
 {
     private Nebulae _nebulae;
     private AntimatterFlashes _antimatterFlashes;
-    private Spaceship.Entities.Spaceship _ship;
+    private Spaceship.Entities.ISpaceship _ship;
     private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
-    public HighDensitySpaceNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles,  Spaceship.Entities.Spaceship ship)
+    public HighDensitySpaceNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles,  Spaceship.Entities.ISpaceship ship)
         : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
          _nebulae = new Nebulae();
@@ -47,7 +47,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
         _ship.Enginew();
         TakingDamageFromAllObstaclesOfTheFirstType();
 
-        if (!IsShipAlive())
+        if (!_ship.IsShipAlive())
         {
             return false;
         }
@@ -64,7 +64,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
 
     public override bool IsCanEnterTheEnvironment()
     {
-        if (!_ship.IsjumpEngineInstalled())
+        if (_ship.IsjumpEngineInstalled())
         {
             return true;
         }

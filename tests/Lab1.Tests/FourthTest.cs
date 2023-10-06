@@ -11,7 +11,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class FourthTest
 {
-    public static bool ResultsVerification(Spaceship.Entities.Spaceship shipStatus, string expectedValues)
+    public static bool ResultsVerification(Spaceship.Entities.ISpaceship shipStatus, string expectedValues)
     {
         if (shipStatus.ShipName.Equals(expectedValues, StringComparison.Ordinal))
         {
@@ -23,10 +23,10 @@ public class FourthTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.Spaceship firstShip, Spaceship.Entities.Spaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
     {
-        IList<Spaceship.Entities.Spaceship> ships = new List<Spaceship.Entities.Spaceship>();
-        Spaceship.Entities.Spaceship ship;
+        IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
+        Spaceship.Entities.ISpaceship ship;
         string expectedValue;
         IList<Environments.Entities.Environment> environments = new List<Environment>();
 

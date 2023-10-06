@@ -12,11 +12,8 @@ public class FirstTest
     {
         for (int i = 0; i < shipStatus.Count; i++)
         {
-            for (int j = 0; j < expectedValues.Count; j++)
-            {
-                if (shipStatus[i] != expectedValues[j])
-                    return false;
-            }
+            if (shipStatus[i] != expectedValues[i])
+                return false;
         }
 
         return true;
@@ -24,9 +21,9 @@ public class FirstTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.Spaceship firstShip, Spaceship.Entities.Spaceship secondShip, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip)
     {
-        IList<Spaceship.Entities.Spaceship> ships = new List<Spaceship.Entities.Spaceship>();
+        IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
         IList<ValuesForTheEnvironment> environments = new List<ValuesForTheEnvironment>();
@@ -35,7 +32,7 @@ public class FirstTest
         environments.Add(environmentForSecondShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValues.Add("Destruction of the ship");
+        expectedValues.Add("Loss of ship");
         expectedValues.Add("Destruction of the ship");
 
         shipStatus = new Route(239, environments, ships).ShipHandling();

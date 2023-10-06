@@ -3,12 +3,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 public class ValuesForTheEnvironment
 {
     private string _environment;
-    private Spaceship.Entities.Spaceship _ship;
+    private Spaceship.Entities.ISpaceship _ship;
     private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
-    public ValuesForTheEnvironment(string environment, Spaceship.Entities.Spaceship ship, int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles)
+    public ValuesForTheEnvironment(string environment, Spaceship.Entities.ISpaceship ship, int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles)
     {
         _environment = environment;
         _length = length;
@@ -22,7 +22,7 @@ public class ValuesForTheEnvironment
         get { return _environment; }
     }
 
-    public Spaceship.Entities.Spaceship Ship
+    public Spaceship.Entities.ISpaceship Ship
     {
         get { return _ship; }
     }

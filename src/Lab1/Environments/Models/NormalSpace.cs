@@ -7,13 +7,13 @@ public class NormalSpace : Entities.Environment
 {
     private Asteroid _asteroid;
     private Meteorites _meteorites;
-    private Spaceship.Entities.Spaceship _ship;
+    private Spaceship.Entities.ISpaceship _ship;
     private string _requiredEngine;
     private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
-    public NormalSpace(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.Spaceship ship)
+    public NormalSpace(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.ISpaceship ship)
         : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
         _asteroid = new Asteroid();

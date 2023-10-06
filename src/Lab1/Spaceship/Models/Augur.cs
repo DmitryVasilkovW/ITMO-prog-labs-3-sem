@@ -98,6 +98,11 @@ public class Augur : Entities.ISpaceship
         get { return _engineType; }
     }
 
+    public bool IsDeflectorWorking
+    {
+        get { return _deflector.IsDeflectorWorking(); }
+    }
+
     public bool IsjumpEngineInstalled()
     {
         if (_jumpengine.ISSlot())

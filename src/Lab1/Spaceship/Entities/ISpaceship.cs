@@ -20,6 +20,7 @@ public interface ISpaceship
     int WeightDimensionCharacteristics { get; }
 
     string EngineType { get; }
+    bool IsDeflectorWorking { get; }
 
     bool IsjumpEngineInstalled();
 

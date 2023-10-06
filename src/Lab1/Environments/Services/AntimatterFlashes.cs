@@ -1,3 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class AntimatterFlashes : Entities.IObstacles
@@ -14,7 +16,7 @@ public class AntimatterFlashes : Entities.IObstacles
         get { return _damageType; }
     }
 
-    public Spaceship.Entities.Spaceship Damage(Spaceship.Entities.Spaceship ship)
+    public ISpaceship Damage(ISpaceship ship)
     {
         if (ship.IsDeflectorWorking && ship.Deflector.IsaPhotonDeflectorInstalled)
         {
