@@ -30,6 +30,16 @@ public class ThirdClassDeflector : Deflectors
         get { return _isaPhotonDeflectorInstalled; }
     }
 
+    public override bool IsPhotonDeflectorWorking()
+    {
+        if (_isaPhotonDeflectorInstalled && !_photonicDeflector.IsPhotonicDeflectorBroken())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public override bool IsDeflectorWorking()
     {
         if (_deflectorconditionlevel < 0)

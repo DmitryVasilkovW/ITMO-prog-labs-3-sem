@@ -48,7 +48,7 @@ public class Route
                     continue;
                 }
 
-                if (!ship.IsPhotonDeflectorWorking && environment.SecondTypeObstracleType.Equals("Antimatter Flash", StringComparison.Ordinal) && environment.CountOfSecondTypeObstracles > 0)
+                if (!ship.Deflector.IsPhotonDeflectorWorking() && environment.SecondTypeObstracleType.Equals("Antimatter Flash", StringComparison.Ordinal) && environment.CountOfSecondTypeObstracles > 0)
                 {
                     _shipStatus.Add(_statusCrewDeath);
 

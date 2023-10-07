@@ -32,12 +32,7 @@ public interface ISpaceship
 
     void StaffAssault();
 
-    // сделать это в кораблях
-    bool IsTheStaffAlive();
-
     void SafetyEquipmentOperation();
 
     void ObstructionOfFlight();
-
-    void JumpEnginew();
 }

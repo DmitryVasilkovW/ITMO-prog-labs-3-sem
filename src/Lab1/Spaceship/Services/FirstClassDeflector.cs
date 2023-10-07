@@ -68,6 +68,16 @@ public class FirstClassDeflector : Deflectors
         IsDeflectorWorking();
     }
 
+    public override bool IsPhotonDeflectorWorking()
+    {
+        if (_isaPhotonDeflectorInstalled && !_photonicDeflector.IsPhotonicDeflectorBroken())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public override void AntimatterFlashesDamage()
     {
         if (IsaPhotonDeflectorInstalled)

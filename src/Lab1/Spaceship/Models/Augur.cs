@@ -152,16 +152,6 @@ public class Augur : Entities.ISpaceship
         _crew ^= true;
     }
 
-    public bool IsTheStaffAlive()
-    {
-        if (_crew)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;

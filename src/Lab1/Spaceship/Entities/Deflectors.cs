@@ -28,6 +28,8 @@ public abstract class Deflectors
 
     public abstract void AsteroidDamage();
 
+    public abstract bool IsPhotonDeflectorWorking();
+
     public abstract void MeteoriteDamage();
 
     public abstract void SpaceWhaleDamage();

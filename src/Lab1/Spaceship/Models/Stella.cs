@@ -115,16 +115,6 @@ public class Stella : Entities.ISpaceship
         return true;
     }
 
-    public bool IsTheStaffAlive()
-    {
-        if (_crew)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public void SafetyEquipmentOperation()
     {
         if (_deflector.IsDeflectorWorking())

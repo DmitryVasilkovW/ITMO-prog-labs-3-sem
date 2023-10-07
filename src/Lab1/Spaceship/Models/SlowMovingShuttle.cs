@@ -122,16 +122,6 @@ public class SlowMovingShuttle : Entities.ISpaceship
         return true;
     }
 
-    public bool IsTheStaffAlive()
-    {
-        if (_crew)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public bool IsShipAlive()
     {
         if (_armor.IsArmorWorking() && _speed > 0)
@@ -164,11 +154,5 @@ public class SlowMovingShuttle : Entities.ISpaceship
     public void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
-    }
-
-    public void JumpEnginew()
-    {
-        _range = _jumpEngine.Range(_range);
-        _gravitonmatter = _jumpEngine.FuelConsumption(_gravitonmatter);
     }
 }

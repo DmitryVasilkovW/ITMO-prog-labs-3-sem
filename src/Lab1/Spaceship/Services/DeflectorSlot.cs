@@ -19,6 +19,11 @@ public class DeflectorSlot : Entities.Deflectors
         get { return _isaPhotonDeflectorInstalled; }
     }
 
+    public override bool IsPhotonDeflectorWorking()
+    {
+        return false;
+    }
+
     public override bool IsDeflectorWorking()
     {
         return false;

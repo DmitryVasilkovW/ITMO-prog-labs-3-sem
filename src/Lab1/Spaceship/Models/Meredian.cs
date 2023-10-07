@@ -120,16 +120,6 @@ public class Meredian : Entities.ISpaceship
         }
     }
 
-    public bool IsTheStaffAlive()
-    {
-        if (_crew)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public bool IsShipAlive()
     {
         if (_armor.IsArmorWorking() || _deflector.IsDeflectorWorking())
@@ -172,11 +162,5 @@ public class Meredian : Entities.ISpaceship
     public void ObstructionOfFlight()
     {
         _speed -= _nebulaDamage;
-    }
-
-    public void JumpEnginew()
-    {
-        _range = _jumpengine.Range(_speed);
-        _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
     }
 }

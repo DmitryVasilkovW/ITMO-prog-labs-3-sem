@@ -169,10 +169,4 @@ public class Vaklas : Entities.ISpaceship
     {
         _speed /= _nebulaDamage;
     }
-
-    public void JumpEnginew()
-    {
-        _range = _jumpengine.Range(_range);
-        _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
-    }
 }
