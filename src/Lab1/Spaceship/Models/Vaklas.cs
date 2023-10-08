@@ -8,19 +8,15 @@ public class Vaklas : ISpaceship
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private int _nebulaDamage;
 
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
         Equipment = new AdditionalSafetyDevicesSlot("none");
-        ShipName = "Vaklas";
         Speed = 100;
-        _nebulaDamage = 923333333;
         Armor = new SecondClassArmor();
         JumpEngine = new JumpEngineGamma();
         Engine = new ClassEPulseEngine();
-        EngineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
@@ -37,10 +33,9 @@ public class Vaklas : ISpaceship
         get { return Deflector.IsaPhotonDeflectorInstalled; }
     }
 
-    public string ShipName { get; }
     public int Speed { get; private set; }
 
-    public IEnginesType Engine { get; }
+    public IEngine Engine { get; }
 
     public IJumpEngine JumpEngine { get; }
 
@@ -49,8 +44,6 @@ public class Vaklas : ISpaceship
     public IArmor Armor { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public string EngineType { get; }
 
     public AdditionalSafetyDevices Equipment { get; }
 
@@ -112,10 +105,5 @@ public class Vaklas : ISpaceship
         }
 
         return true;
-    }
-
-    public void ObstructionOfFlight()
-    {
-        Speed /= _nebulaDamage;
     }
 }

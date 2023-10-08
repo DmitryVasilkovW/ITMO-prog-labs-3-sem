@@ -55,8 +55,8 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
             {
                 new Vaklas(true),
                 new Vaklas(false),
-                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(true)),
-                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(false)),
+                new HighDensitySpaceNebulae(Length, 2, new Vaklas(true)),
+                new HighDensitySpaceNebulae(Length, 2, new Vaklas(false)),
             },
         };
 

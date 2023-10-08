@@ -4,7 +4,7 @@ public interface ISpaceship
 {
     int Speed { get; }
 
-    IEnginesType Engine { get; }
+    IEngine Engine { get; }
 
     IJumpEngine JumpEngine { get; }
 
@@ -24,6 +24,4 @@ public interface ISpaceship
     void EngineWork();
 
     void SafetyEquipmentOperation();
-
-    void ObstructionOfFlight();
 }

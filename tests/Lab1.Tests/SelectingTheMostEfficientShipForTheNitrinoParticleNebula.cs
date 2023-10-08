@@ -52,8 +52,8 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
             {
                 new SlowMovingShuttle(),
                 new Vaklas(false),
-                new NitrinoParticleNebulae(Length, 0, 0, new SlowMovingShuttle()),
-                new NitrinoParticleNebulae(Length, 0, 0, new Vaklas(false)),
+                new NitrinoParticleNebulae(Length, 0, new SlowMovingShuttle()),
+                new NitrinoParticleNebulae(Length, 0, new Vaklas(false)),
             },
         };
 

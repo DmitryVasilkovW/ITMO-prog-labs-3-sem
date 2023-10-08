@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
@@ -44,7 +43,7 @@ public class Route
                     continue;
                 }
 
-                if (!ship.Deflector.IsPhotonDeflectorWorking() && environment.SecondTypeObstracleType.Equals("Antimatter Flash", StringComparison.Ordinal) && environment.CountOfSecondTypeObstracles > 0)
+                if (!ship.Deflector.IsPhotonDeflectorWorking() && environment.IsObstaclesKillStaff())
                 {
                     _shipStatus.Add(_statusCrewDeath);
 

@@ -1,21 +1,10 @@
 using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class ClassEPulseEngine : Entities.IEnginesType
+public class ClassEPulseEngine : IEngine, IExponentialAcceleration
 {
-    private string _motorOperationType;
-
-    public ClassEPulseEngine()
-    {
-        _motorOperationType = "Exponent";
-    }
-
-    public string MotorOperationType
-    {
-        get { return _motorOperationType; }
-    }
-
     public int Speed(int speed, int weightDimensionsOfTheShip)
     {
         double designspeed = speed;

@@ -96,10 +96,4 @@ public class FirstClassDeflector : Deflectors
             _deflectorconditionlevel += Asteroidamage;
         }
     }
-
-    public override void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
-    {
-        _photonicDeflector = photonicDeflector;
-        _isaPhotonDeflectorInstalled = true;
-    }
 }

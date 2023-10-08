@@ -8,19 +8,16 @@ public class Augur : ISpaceship
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private int _nebulaDamage;
 
     public Augur(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 3;
         Equipment = new AdditionalSafetyDevicesSlot("no protection");
-        _nebulaDamage = 923333333;
         Speed = 100;
         _range = 100;
         Armor = new ThirdClassArmor();
         JumpEngine = new JumpEngineAlpha();
         Engine = new ClassEPulseEngine();
-        EngineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
@@ -32,7 +29,7 @@ public class Augur : ISpaceship
         }
     }
 
-    public IEnginesType Engine { get; private set; }
+    public IEngine Engine { get; private set; }
 
     public bool IsPhotonDeflectorWorking
     {
@@ -59,8 +56,6 @@ public class Augur : ISpaceship
     public AdditionalSafetyDevices Equipment { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public string EngineType { get; }
 
     public bool IsDeflectorWorking
     {
@@ -103,11 +98,6 @@ public class Augur : ISpaceship
     {
         Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
         _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-    }
-
-    public void ObstructionOfFlight()
-    {
-        Speed -= _nebulaDamage;
     }
 
     public void JumpEnginew()

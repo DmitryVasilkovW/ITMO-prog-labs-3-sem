@@ -1,8 +1,9 @@
 using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class ClassCPulseEngine : Entities.IEnginesType
+public class ClassCPulseEngine : IEngine, IConstantAcceleration
 {
     private string _motorOperationType;
 

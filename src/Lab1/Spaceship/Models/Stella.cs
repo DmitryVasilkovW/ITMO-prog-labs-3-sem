@@ -8,20 +8,16 @@ public class Stella : Entities.ISpaceship
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private int _nebulaDamage;
 
     public Stella(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 1;
         Equipment = new AdditionalSafetyDevicesSlot("none");
-        ShipName = "Stella";
-        _nebulaDamage = 1000;
         Speed = 100;
         _range = 100;
         Armor = new FirstClassArmor();
         JumpEngine = new JumpEngineOmega();
         Engine = new ClassCPulseEngine();
-        EngineType = "Jumpengine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
@@ -46,9 +42,7 @@ public class Stella : Entities.ISpaceship
         }
     }
 
-    public string ShipName { get; }
-
-    public IEnginesType Engine { get; }
+    public IEngine Engine { get; }
 
     public IJumpEngine JumpEngine { get; }
 
@@ -59,8 +53,6 @@ public class Stella : Entities.ISpaceship
     public AdditionalSafetyDevices Equipment { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public string EngineType { get; }
 
     public bool IsDeflectorWorking
     {
@@ -103,11 +95,6 @@ public class Stella : Entities.ISpaceship
     {
         Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
         _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-    }
-
-    public void ObstructionOfFlight()
-    {
-        Speed -= _nebulaDamage;
     }
 
     public void JumpEnginew()

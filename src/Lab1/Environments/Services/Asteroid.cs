@@ -1,9 +1,10 @@
 using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
-public class Asteroid : Entities.IObstacle
+public class Asteroid : IObstacle
 {
     private string _damageType;
 

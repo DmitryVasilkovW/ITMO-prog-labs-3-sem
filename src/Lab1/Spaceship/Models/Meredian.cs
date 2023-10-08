@@ -8,14 +8,12 @@ public class Meredian : ISpaceship
     private int _fuelreserve;
     private int _gravitonmatter;
     private int _range;
-    private int _nebulaDamage;
 
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
         _range = 100;
         Speed = 100;
-        _nebulaDamage = 1000;
         JumpEngine = new JumpEngineSlot();
         Equipment = new AntiNitrinoEmitter("SpaceWhale");
         Armor = new SecondClassArmor();
@@ -46,7 +44,7 @@ public class Meredian : ISpaceship
 
     public int Speed { get; private set; }
 
-    public IEnginesType Engine { get; }
+    public IEngine Engine { get; }
 
     public IJumpEngine JumpEngine { get; }
 
@@ -98,10 +96,5 @@ public class Meredian : ISpaceship
         }
 
         return true;
-    }
-
-    public void ObstructionOfFlight()
-    {
-        Speed -= _nebulaDamage;
     }
 }

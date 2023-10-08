@@ -2,8 +2,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 
 public interface IEnvironment
 {
-    string FirstTypeObstracleType { get; }
-
     string SecondTypeObstracleType { get; }
 
     int CountOfFirstTypeObstracles { get; }
@@ -18,7 +16,5 @@ public interface IEnvironment
 
     bool IsShipAlive();
 
-    void TakingDamageFromAllObstaclesOfTheFirstType();
-
-    void TakingDamageFromAllObstaclesOfTheSecondType();
+    bool IsObstaclesKillStaff();
 }

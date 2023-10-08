@@ -58,7 +58,7 @@ public class NormalSpace : Entities.IEnvironment
 
     public bool IsCanEnterTheEnvironment()
     {
-        if (_ship.Engine is IEnginesType)
+        if (_ship.Engine is IEngine)
         {
             return true;
         }
@@ -90,5 +90,10 @@ public class NormalSpace : Entities.IEnvironment
         {
             _ship = _meteorites.Damage(_ship);
         }
+    }
+
+    public bool IsObstaclesKillStaff()
+    {
+        return false;
     }
 }

@@ -54,8 +54,8 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
             {
                 new Augur(false),
                 new Stella(false),
-                new HighDensitySpaceNebulae(Length, 0, 0, new Augur(false)),
-                new HighDensitySpaceNebulae(Length, 0, 0, new Stella(false)),
+                new HighDensitySpaceNebulae(Length, 0, new Augur(false)),
+                new HighDensitySpaceNebulae(Length, 0, new Stella(false)),
             },
         };
 

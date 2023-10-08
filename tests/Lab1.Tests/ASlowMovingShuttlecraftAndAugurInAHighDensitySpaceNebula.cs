@@ -53,8 +53,8 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
             {
                 new SlowMovingShuttle(),
                 new Augur(false),
-                new HighDensitySpaceNebulae(Length, 0, 30, new SlowMovingShuttle()),
-                new HighDensitySpaceNebulae(Length, 0, 30, new Augur(false)),
+                new HighDensitySpaceNebulae(Length, 30, new SlowMovingShuttle()),
+                new HighDensitySpaceNebulae(Length, 30, new Augur(false)),
             },
         };
 

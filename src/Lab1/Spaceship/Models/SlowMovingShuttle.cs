@@ -7,7 +7,6 @@ public class SlowMovingShuttle : ISpaceship
 {
     private int _fuelreserve;
     private int _gravitonmatter;
-    private int _nebulaDamage;
     private int _range;
 
     public SlowMovingShuttle()
@@ -15,7 +14,6 @@ public class SlowMovingShuttle : ISpaceship
         WeightDimensionCharacteristics = 1;
         Equipment = new AdditionalSafetyDevicesSlot("none");
         Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
-        _nebulaDamage = 1000;
         JumpEngine = new JumpEngineSlot();
         Speed = 100;
         _range = 0;
@@ -38,7 +36,7 @@ public class SlowMovingShuttle : ISpaceship
 
     public int Speed { get; private set; }
 
-    public IEnginesType Engine { get; }
+    public IEngine Engine { get; }
 
     public int WeightDimensionCharacteristics { get; }
 
@@ -100,10 +98,5 @@ public class SlowMovingShuttle : ISpaceship
             Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
             _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
         }
-    }
-
-    public void ObstructionOfFlight()
-    {
-        Speed -= _nebulaDamage;
     }
 }

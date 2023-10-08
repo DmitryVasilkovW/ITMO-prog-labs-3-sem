@@ -88,10 +88,4 @@ public class SecondClassDeflector : Deflectors
             _photonicDeflector.IsPhotonicDeflectorBroken();
         }
     }
-
-    public override void PhotonDeflectorInstallation(IPhotonicDeflectors photonicDeflector)
-    {
-        _photonicDeflector = photonicDeflector;
-        _isaPhotonDeflectorInstalled = true;
-    }
 }

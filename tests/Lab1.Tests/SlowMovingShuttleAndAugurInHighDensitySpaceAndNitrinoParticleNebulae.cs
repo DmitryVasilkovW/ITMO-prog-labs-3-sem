@@ -60,10 +60,10 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
             {
                 new SlowMovingShuttle(),
                 new Augur(false),
-                new HighDensitySpaceNebulae(Length, 0, 30, new SlowMovingShuttle()),
-                new HighDensitySpaceNebulae(Length, 0, 50, new Augur(false)),
-                new NitrinoParticleNebulae(Length, 0, 0, new SlowMovingShuttle()),
-                new NitrinoParticleNebulae(Length, 0, 0, new Augur(false)),
+                new HighDensitySpaceNebulae(Length, 30, new SlowMovingShuttle()),
+                new HighDensitySpaceNebulae(Length, 50, new Augur(false)),
+                new NitrinoParticleNebulae(Length, 0, new SlowMovingShuttle()),
+                new NitrinoParticleNebulae(Length, 0, new Augur(false)),
             },
         };
 

@@ -59,9 +59,9 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
                 new Vaklas(false),
                 new Augur(false),
                 new Meredian(false),
-                new NitrinoParticleNebulae(Length, 10, 0, new Vaklas(false)),
-                new NitrinoParticleNebulae(Length, 1, 0, new Augur(false)),
-                new NitrinoParticleNebulae(Length, 1, 0, new Meredian(false)),
+                new NitrinoParticleNebulae(Length, 10, new Vaklas(false)),
+                new NitrinoParticleNebulae(Length, 1, new Augur(false)),
+                new NitrinoParticleNebulae(Length, 1, new Meredian(false)),
             },
         };
 

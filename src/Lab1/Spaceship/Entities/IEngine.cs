@@ -1,8 +1,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
-public interface IEnginesType
+public interface IEngine
 {
-    string MotorOperationType { get; }
-    int Speed(int speed, int weightDimensionsOfTheShip);
     int FuelConsumption(int fuelreserve, int weightDimensionsOfTheShip);
+
+    int Speed(int speed, int weightDimensionsOfTheShip);
 }
