@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.Environment;
+using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
@@ -34,7 +34,7 @@ public class Route
             indexForEnvironments++;
             for (int i = indexForEnvironments; i < _environments.Count; i += _ships.Count)
             {
-                Environment environment = new TheFactoryOfTheEnvironment(
+                IEnvironment environment = new TheFactoryOfTheEnvironment(
                         _environments[i].Environment,
                         _environments[i].Ship,
                         _environments[i].Length,

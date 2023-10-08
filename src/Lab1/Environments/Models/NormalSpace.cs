@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
-public class NormalSpace : Entities.Environment
+public class NormalSpace : Entities.IEnvironment
 {
     private Asteroid _asteroid;
     private Meteorites _meteorites;
@@ -14,7 +14,6 @@ public class NormalSpace : Entities.Environment
     private int _countOfSecondTypeObstracles;
 
     public NormalSpace(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.ISpaceship ship)
-        : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
         _asteroid = new Asteroid();
         _meteorites = new Meteorites();
@@ -25,22 +24,26 @@ public class NormalSpace : Entities.Environment
         _length = length;
     }
 
-    public override int Length
+    public int CountOfSecondTypeObstracles { get; }
+
+    public int Length
     {
         get { return _length; }
     }
 
-    public override string FirstTypeObstracleType
+    public string FirstTypeObstracleType
     {
         get { return _asteroid.DamageType; }
     }
 
-    public override string SecondTypeObstracleType
+    public string SecondTypeObstracleType
     {
         get { return _meteorites.DamageType; }
     }
 
-    public override bool IsTheShipWasAbleToRemainInService()
+    public int CountOfFirstTypeObstracles { get; }
+
+    public bool IsTheShipWasAbleToRemainInService()
     {
         TakingDamageFromAllObstaclesOfTheFirstType();
 
@@ -59,7 +62,7 @@ public class NormalSpace : Entities.Environment
         return true;
     }
 
-    public override bool IsCanEnterTheEnvironment()
+    public bool IsCanEnterTheEnvironment()
     {
         if (_ship.EngineType.Equals(_requiredEngine, StringComparison.Ordinal))
         {
@@ -79,7 +82,7 @@ public class NormalSpace : Entities.Environment
         _meteorites.Damage(_ship);
     }
 
-    protected override bool IsShipAlive()
+    public bool IsShipAlive()
     {
         if (_ship.IsShipAlive())
         {
@@ -89,7 +92,7 @@ public class NormalSpace : Entities.Environment
         return false;
     }
 
-    protected override void TakingDamageFromAllObstaclesOfTheFirstType()
+    public void TakingDamageFromAllObstaclesOfTheFirstType()
     {
         while (_countOfFirstTypeObstracles-- > 0)
         {
@@ -97,7 +100,7 @@ public class NormalSpace : Entities.Environment
         }
     }
 
-    protected override void TakingDamageFromAllObstaclesOfTheSecondType()
+    public void TakingDamageFromAllObstaclesOfTheSecondType()
     {
         while (_countOfSecondTypeObstracles-- > 0)
         {

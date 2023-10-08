@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
-public class Augur : Entities.ISpaceship
+public class Augur : ISpaceship
 {
     private int _speed;
     private int _range;
@@ -15,7 +15,6 @@ public class Augur : Entities.ISpaceship
     private string _shipName;
     private bool _crew;
 
-    private IEnginesType _engine;
     private IJumpEngine _jumpengine;
     private Deflectors _deflector;
     private IArmor _armor;
@@ -32,7 +31,7 @@ public class Augur : Entities.ISpaceship
         _range = 100;
         _armor = new ThirdClassArmor(_weightDimensionCharacteristics);
         _jumpengine = new JumpEngineAlpha(_weightDimensionCharacteristics);
-        _engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
+        Engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
         _engineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
@@ -44,6 +43,9 @@ public class Augur : Entities.ISpaceship
             _deflector = new FirstClassDeflector();
         }
     }
+
+    // сделать везде
+    public IEnginesType Engine { get; private set; }
 
     public bool IsPhotonDeflectorWorking
     {
@@ -58,11 +60,6 @@ public class Augur : Entities.ISpaceship
     public string ShipName
     {
         get { return _shipName; }
-    }
-
-    public IEnginesType Engine
-    {
-        get { return _engine; }
     }
 
     public IJumpEngine JumpEngine
@@ -143,8 +140,8 @@ public class Augur : Entities.ISpaceship
 
     public void EngineWork()
     {
-        _speed = _engine.Speed(_speed);
-        _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+        _speed = Engine.Speed(_speed);
+        _fuelreserve = Engine.FuelConsumption(_fuelreserve);
     }
 
     public void StaffAssault()

@@ -7,12 +7,12 @@ public class ShipSelection
 {
     private IList<Spaceship.Entities.ISpaceship> _shipes = new List<Spaceship.Entities.ISpaceship>();
     private FuelExchange _fuelExchange;
-    private IList<Entities.Environment> _environments;
+    private IList<Entities.IEnvironment> _environments;
     private List<List<int>> _pricesAndIndices = new List<List<int>>();
     private List<int> _canFly = new List<int>();
     private int _length;
 
-    public ShipSelection(IList<Spaceship.Entities.ISpaceship> shipes, FuelExchange fuelExchange, IList<Entities.Environment> environments, int length)
+    public ShipSelection(IList<Spaceship.Entities.ISpaceship> shipes, FuelExchange fuelExchange, IList<Entities.IEnvironment> environments, int length)
     {
         _shipes = shipes;
         _fuelExchange = fuelExchange;

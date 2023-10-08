@@ -124,7 +124,7 @@ public class SlowMovingShuttle : Entities.ISpaceship
 
     public bool IsShipAlive()
     {
-        if (_armor.IsArmorWorking() && _speed > 0)
+        if (_armor.IsArmorWorking())
         {
             return true;
         }

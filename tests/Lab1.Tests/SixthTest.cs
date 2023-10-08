@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
-using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.Environment;
+using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
@@ -28,7 +28,7 @@ public class SixthTest
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         Spaceship.Entities.ISpaceship ship;
         string expectedValue;
-        IList<Environments.Entities.Environment> environments = new List<Environment>();
+        IList<Environments.Entities.IEnvironment> environments = new List<Environment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);

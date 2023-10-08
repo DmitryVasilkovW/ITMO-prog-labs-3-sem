@@ -129,7 +129,7 @@ public class Stella : Entities.ISpaceship
 
     public bool IsShipAlive()
     {
-        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
+        if (_armor.IsArmorWorking() || _deflector.IsDeflectorWorking())
         {
             return true;
         }

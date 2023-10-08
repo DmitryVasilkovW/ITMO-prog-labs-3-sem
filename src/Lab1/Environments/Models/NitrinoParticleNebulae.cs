@@ -3,19 +3,17 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
-public class NitrinoParticleNebulae : Entities.Environment
+public class NitrinoParticleNebulae : Entities.IEnvironment
 {
     private Services.Nebulae _nebulae;
     private Services.SpaceWhale _spaceWhale;
     private Spaceship.Entities.ISpaceship _ship;
     private string _requiredEngine;
     private string _requiredMotorOperationType;
-    private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
     public NitrinoParticleNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.ISpaceship ship)
-        : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
         _requiredEngine = "PulseEngine";
         _requiredMotorOperationType = "Exponent";
@@ -24,25 +22,26 @@ public class NitrinoParticleNebulae : Entities.Environment
         _ship = ship;
         _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
         _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
-        _length = length;
+
+        Length = length;
     }
 
-    public new int Length
-    {
-        get { return _length; }
-    }
+    public int CountOfSecondTypeObstracles { get; }
+    public int Length { get; }
 
-    public override string FirstTypeObstracleType
+    public string FirstTypeObstracleType
     {
         get { return _nebulae.DamageType; }
     }
 
-    public override string SecondTypeObstracleType
+    public string SecondTypeObstracleType
     {
         get { return _spaceWhale.DamageType; }
     }
 
-    public new bool IsTheShipWasAbleToRemainInService()
+    public int CountOfFirstTypeObstracles { get; }
+
+    public bool IsTheShipWasAbleToRemainInService()
     {
         TakingDamageFromAllObstaclesOfTheFirstType();
 
@@ -61,7 +60,7 @@ public class NitrinoParticleNebulae : Entities.Environment
         return true;
     }
 
-    public override bool IsCanEnterTheEnvironment()
+    public bool IsCanEnterTheEnvironment()
     {
         if (_ship.EngineType.Equals(_requiredEngine, StringComparison.Ordinal) && _ship.Engine.MotorOperationType.Equals(_requiredMotorOperationType, StringComparison.Ordinal))
         {
@@ -82,7 +81,7 @@ public class NitrinoParticleNebulae : Entities.Environment
         _spaceWhale.Damage(_ship);
     }
 
-    protected override bool IsShipAlive()
+    public bool IsShipAlive()
     {
         if (_ship.IsShipAlive())
         {
@@ -92,7 +91,7 @@ public class NitrinoParticleNebulae : Entities.Environment
         return false;
     }
 
-    protected override void TakingDamageFromAllObstaclesOfTheFirstType()
+    public void TakingDamageFromAllObstaclesOfTheFirstType()
     {
         while (_countOfFirstTypeObstracles-- > 0)
         {
@@ -103,7 +102,7 @@ public class NitrinoParticleNebulae : Entities.Environment
         }
     }
 
-    protected override void TakingDamageFromAllObstaclesOfTheSecondType()
+    public void TakingDamageFromAllObstaclesOfTheSecondType()
     {
         while (_countOfSecondTypeObstracles-- > 0)
         {

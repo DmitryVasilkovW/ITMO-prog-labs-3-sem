@@ -20,7 +20,7 @@ public class TheFactoryOfTheEnvironment
         _environment = environment;
     }
 
-    public Entities.Environment Create()
+    public Entities.IEnvironment Create()
     {
         switch (_environment)
         {

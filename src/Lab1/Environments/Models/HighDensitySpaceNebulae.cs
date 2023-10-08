@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
-public class HighDensitySpaceNebulae : Entities.Environment
+public class HighDensitySpaceNebulae : Entities.IEnvironment
 {
     private Nebulae _nebulae;
     private AntimatterFlashes _antimatterFlashes;
@@ -12,7 +12,6 @@ public class HighDensitySpaceNebulae : Entities.Environment
     private int _countOfSecondTypeObstracles;
 
     public HighDensitySpaceNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles,  Spaceship.Entities.ISpaceship ship)
-        : base(length, countOfFirstTypeObstracles, countOfSecondTypeObstracles, ship)
     {
          _nebulae = new Nebulae();
          _antimatterFlashes = new AntimatterFlashes();
@@ -22,27 +21,29 @@ public class HighDensitySpaceNebulae : Entities.Environment
          _length = length;
     }
 
-    public override int CountOfSecondTypeObstracles
+    public int CountOfFirstTypeObstracles { get; }
+
+    public int CountOfSecondTypeObstracles
     {
         get { return _countOfSecondTypeObstracles; }
     }
 
-    public override int Length
+    public int Length
     {
         get { return _length; }
     }
 
-    public override string FirstTypeObstracleType
+    public string FirstTypeObstracleType
     {
         get { return _nebulae.DamageType; }
     }
 
-    public override string SecondTypeObstracleType
+    public string SecondTypeObstracleType
     {
         get { return _antimatterFlashes.DamageType; }
     }
 
-    public override bool IsTheShipWasAbleToRemainInService()
+    public bool IsTheShipWasAbleToRemainInService()
     {
         _ship.EngineWork();
         TakingDamageFromAllObstaclesOfTheFirstType();
@@ -62,7 +63,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
         return true;
     }
 
-    public override bool IsCanEnterTheEnvironment()
+    public bool IsCanEnterTheEnvironment()
     {
         if (_ship.IsjumpEngineInstalled())
         {
@@ -77,7 +78,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
         _ship.Deflector.AsteroidDamage();
     }
 
-    protected override bool IsShipAlive()
+    public bool IsShipAlive()
     {
         if (_ship.IsShipAlive())
         {
@@ -87,7 +88,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
         return false;
     }
 
-    protected override void TakingDamageFromAllObstaclesOfTheFirstType()
+    public void TakingDamageFromAllObstaclesOfTheFirstType()
     {
         while (_countOfFirstTypeObstracles-- > 0)
         {
@@ -98,7 +99,7 @@ public class HighDensitySpaceNebulae : Entities.Environment
         }
     }
 
-    protected override void TakingDamageFromAllObstaclesOfTheSecondType()
+    public void TakingDamageFromAllObstaclesOfTheSecondType()
     {
         while (_countOfSecondTypeObstracles-- > 0)
         {
