@@ -6,23 +6,20 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 public class Meredian : ISpaceship
 {
     private int _fuelreserve;
-    private int _weightDimensionCharacteristics;
     private int _gravitonmatter;
     private int _range;
     private int _nebulaDamage;
 
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
-        _weightDimensionCharacteristics = 2;
+        WeightDimensionCharacteristics = 2;
         _range = 100;
-        ShipName = "Meredian";
         Speed = 100;
         _nebulaDamage = 1000;
         JumpEngine = new JumpEngineSlot();
         Equipment = new AntiNitrinoEmitter("SpaceWhale");
-        Armor = new SecondClassArmor(_weightDimensionCharacteristics);
-        Engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
-        EngineType = "PulseEngine";
+        Armor = new SecondClassArmor(WeightDimensionCharacteristics);
+        Engine = new ClassEPulseEngine();
 
         if (whethertoInstallAPhotonicDeflector)
         {
@@ -34,17 +31,7 @@ public class Meredian : ISpaceship
         }
     }
 
-    public bool IsPhotonDeflectorWorking
-    {
-        get { return Deflector.IsaPhotonDeflectorInstalled; }
-    }
-
     public Deflectors Deflector { get; }
-
-    public bool IsDeflectorWorking
-    {
-        get { return Deflector.IsDeflectorWorking(); }
-    }
 
     public int Fuelreserve
     {
@@ -59,8 +46,6 @@ public class Meredian : ISpaceship
 
     public int Speed { get; private set; }
 
-    public string ShipName { get; }
-
     public IEnginesType Engine { get; }
 
     public IJumpEngine JumpEngine { get; }
@@ -68,8 +53,6 @@ public class Meredian : ISpaceship
     public AdditionalSafetyDevices Equipment { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public string EngineType { get; }
 
     public void SafetyEquipmentOperation()
     {
@@ -97,13 +80,13 @@ public class Meredian : ISpaceship
     {
         if (JumpEngine is not JumpEngineSlot)
         {
-            _range = JumpEngine.Range(_range);
-            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
+            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
+            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
         }
         else
         {
-            Speed = Engine.Speed(Speed);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve);
+            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
         }
     }
 

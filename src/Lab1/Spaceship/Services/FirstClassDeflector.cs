@@ -5,10 +5,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class FirstClassDeflector : Deflectors
 {
+    private const int Asteroidamage = 3670;
+    private const int Meteoritedamage = 7340;
+    private const int Spacewhaledamage = 10000;
+
     private int _deflectorconditionlevel;
-    private int _asteroidDamage;
-    private int _meteoriteDamage;
-    private int _spaceWhaleDamage;
     private bool _isaPhotonDeflectorInstalled;
     private bool _isDeflectorWorking;
     private IPhotonicDeflectors _photonicDeflector;
@@ -16,9 +17,6 @@ public class FirstClassDeflector : Deflectors
     public FirstClassDeflector(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
-        _asteroidDamage = 3670;
-        _meteoriteDamage = 7340;
-        _spaceWhaleDamage = 10000;
         _deflectorconditionlevel = 7340;
         _isaPhotonDeflectorInstalled = true;
         _isDeflectorWorking = true;
@@ -27,9 +25,6 @@ public class FirstClassDeflector : Deflectors
     public FirstClassDeflector()
     {
         _photonicDeflector = new PhotonDeflectorSlot();
-        _asteroidDamage = 3670;
-        _meteoriteDamage = 7340;
-        _spaceWhaleDamage = 10000;
         _deflectorconditionlevel = 7340;
         _isaPhotonDeflectorInstalled = false;
         _isDeflectorWorking = true;
@@ -52,19 +47,19 @@ public class FirstClassDeflector : Deflectors
 
     public override void AsteroidDamage()
     {
-        _deflectorconditionlevel -= _asteroidDamage;
+        _deflectorconditionlevel -= Asteroidamage;
         IsDeflectorWorking();
     }
 
     public override void MeteoriteDamage()
     {
-        _deflectorconditionlevel -= _meteoriteDamage;
+        _deflectorconditionlevel -= Meteoritedamage;
         IsDeflectorWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
-        _deflectorconditionlevel -= _spaceWhaleDamage;
+        _deflectorconditionlevel -= Spacewhaledamage;
         IsDeflectorWorking();
     }
 
@@ -90,15 +85,15 @@ public class FirstClassDeflector : Deflectors
     {
         if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += _spaceWhaleDamage;
+            _deflectorconditionlevel += Spacewhaledamage;
         }
         else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += _meteoriteDamage;
+            _deflectorconditionlevel += Meteoritedamage;
         }
         else
         {
-            _deflectorconditionlevel += _asteroidDamage;
+            _deflectorconditionlevel += Asteroidamage;
         }
     }
 

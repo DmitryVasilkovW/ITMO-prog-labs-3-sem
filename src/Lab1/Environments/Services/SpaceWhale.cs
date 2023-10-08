@@ -19,7 +19,7 @@ public class SpaceWhale : Entities.IObstacle
 
     public ISpaceship Damage(ISpaceship ship)
     {
-        if (ship.IsDeflectorWorking)
+        if (ship.Deflector.IsDeflectorWorking())
         {
             if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
             {

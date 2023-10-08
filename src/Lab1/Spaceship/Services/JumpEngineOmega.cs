@@ -5,13 +5,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class JumpEngineOmega : IJumpEngine
 {
-    private int _weightDimensionsOfTheShip;
     private string _motorOperationType;
 
-    public JumpEngineOmega(int weightDimensionsOfTheShip)
+    public JumpEngineOmega()
     {
         _motorOperationType = "Logarithmic";
-        _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
     }
 
     public string MotorOperationType
@@ -24,19 +22,19 @@ public class JumpEngineOmega : IJumpEngine
         return false;
     }
 
-    public int Range(int range)
+    public int Range(int range, int weightDimensionsOfTheShip)
     {
         double designrange = range;
 
         designrange = Math.Log(designrange);
 
-        return range += Math.Abs(range * (int)designrange / _weightDimensionsOfTheShip);
+        return range += Math.Abs(range * (int)designrange / weightDimensionsOfTheShip);
     }
 
-    public int FuelConsumption(int gravitonmatter)
+    public int FuelConsumption(int gravitonmatter, int weightDimensionsOfTheShip)
     {
         double amountoffuel = Math.Log(gravitonmatter);
 
-        return gravitonmatter -= Math.Abs((int)amountoffuel * _weightDimensionsOfTheShip);
+        return gravitonmatter -= Math.Abs((int)amountoffuel * weightDimensionsOfTheShip);
     }
 }

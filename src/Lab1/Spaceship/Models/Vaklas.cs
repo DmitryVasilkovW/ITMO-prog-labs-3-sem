@@ -18,8 +18,8 @@ public class Vaklas : ISpaceship
         Speed = 100;
         _nebulaDamage = 923333333;
         Armor = new SecondClassArmor(WeightDimensionCharacteristics);
-        JumpEngine = new JumpEngineGamma(WeightDimensionCharacteristics);
-        Engine = new ClassEPulseEngine(WeightDimensionCharacteristics);
+        JumpEngine = new JumpEngineGamma();
+        Engine = new ClassEPulseEngine();
         EngineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
@@ -72,13 +72,13 @@ public class Vaklas : ISpaceship
     {
         if (JumpEngine is not JumpEngineSlot)
         {
-            _range = JumpEngine.Range(_range);
-            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
+            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
+            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
         }
         else
         {
-            Speed = Engine.Speed(Speed);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve);
+            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
         }
     }
 

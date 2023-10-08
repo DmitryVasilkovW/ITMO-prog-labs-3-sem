@@ -19,8 +19,8 @@ public class Stella : Entities.ISpaceship
         Speed = 100;
         _range = 100;
         Armor = new FirstClassArmor(WeightDimensionCharacteristics);
-        JumpEngine = new JumpEngineOmega(WeightDimensionCharacteristics);
-        Engine = new ClassCPulseEngine(WeightDimensionCharacteristics);
+        JumpEngine = new JumpEngineOmega();
+        Engine = new ClassCPulseEngine();
         EngineType = "Jumpengine";
 
         if (whethertoInstallAPhotonicDeflector)
@@ -101,8 +101,8 @@ public class Stella : Entities.ISpaceship
 
     public void EngineWork()
     {
-        Speed = Engine.Speed(Speed);
-        _fuelreserve = Engine.FuelConsumption(_fuelreserve);
+        Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+        _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
     }
 
     public void ObstructionOfFlight()
@@ -112,7 +112,7 @@ public class Stella : Entities.ISpaceship
 
     public void JumpEnginew()
     {
-        _range = JumpEngine.Range(_range);
-        _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
+        _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
+        _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
     }
 }

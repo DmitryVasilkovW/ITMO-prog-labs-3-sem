@@ -18,7 +18,7 @@ public class AntimatterFlashes : Entities.IObstacle
 
     public ISpaceship Damage(ISpaceship ship)
     {
-        if (ship.IsDeflectorWorking && ship.Deflector.IsaPhotonDeflectorInstalled)
+        if (ship.Deflector.IsDeflectorWorking() && ship.Deflector.IsaPhotonDeflectorInstalled)
         {
             ship.Deflector.AntimatterFlashesDamage();
         }

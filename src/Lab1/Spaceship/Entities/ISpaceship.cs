@@ -2,10 +2,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 public interface ISpaceship
 {
-    string ShipName { get; }
-
-    // bool IsDeflectorWorking { get; }
-    bool IsPhotonDeflectorWorking { get; }
     int Speed { get; }
 
     IEnginesType Engine { get; }
@@ -16,11 +12,6 @@ public interface ISpaceship
 
     IArmor Armor { get; }
     AdditionalSafetyDevices Equipment { get; }
-
-    int WeightDimensionCharacteristics { get; }
-
-    string EngineType { get; }
-    bool IsDeflectorWorking { get; }
 
     int Fuelreserve { get; }
 

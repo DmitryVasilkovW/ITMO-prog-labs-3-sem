@@ -5,20 +5,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class SecondClassDeflector : Deflectors
 {
+    private const int Asteroidamage = 734;
+    private const int Meteoritedamage = 2447;
+    private const int Spacewhaledamage = 8000;
+
     private int _deflectorconditionlevel;
-    private int _asteroidDamage;
-    private int _meteoriteDamage;
-    private int _spaceWhaleDamage;
     private bool _isaPhotonDeflectorInstalled;
     private bool _isDeflectorWorking;
     private IPhotonicDeflectors _photonicDeflector;
 
     public SecondClassDeflector(IPhotonicDeflectors photonicDeflector)
-        : base(photonicDeflector)
     {
-        _asteroidDamage = 734;
-        _meteoriteDamage = 2447;
-        _spaceWhaleDamage = 8000;
         _photonicDeflector = photonicDeflector;
         _deflectorconditionlevel = 7340;
         _isaPhotonDeflectorInstalled = false;
@@ -52,19 +49,19 @@ public class SecondClassDeflector : Deflectors
 
     public override void AsteroidDamage()
     {
-        _deflectorconditionlevel -= _asteroidDamage;
+        _deflectorconditionlevel -= Asteroidamage;
         IsDeflectorWorking();
     }
 
     public override void MeteoriteDamage()
     {
-        _deflectorconditionlevel -= _meteoriteDamage;
+        _deflectorconditionlevel -= Meteoritedamage;
         IsDeflectorWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
-         _deflectorconditionlevel -= _spaceWhaleDamage;
+         _deflectorconditionlevel -= Spacewhaledamage;
          IsDeflectorWorking();
     }
 
@@ -72,15 +69,15 @@ public class SecondClassDeflector : Deflectors
     {
         if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += _spaceWhaleDamage;
+            _deflectorconditionlevel += Spacewhaledamage;
         }
         else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
         {
-            _deflectorconditionlevel += _meteoriteDamage;
+            _deflectorconditionlevel += Meteoritedamage;
         }
         else
         {
-            _deflectorconditionlevel += _asteroidDamage;
+            _deflectorconditionlevel += Asteroidamage;
         }
     }
 

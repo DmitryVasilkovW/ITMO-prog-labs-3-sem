@@ -7,12 +7,12 @@ public class JumpEngineSlot : Entities.IJumpEngine
         return true;
     }
 
-    public int Range(int range)
+    public int Range(int range, int weightDimensionsOfTheShip)
     {
         return 0;
     }
 
-    public int FuelConsumption(int gravitonmatter)
+    public int FuelConsumption(int gravitonmatter, int weightDimensionsOfTheShip)
     {
         return 0;
     }

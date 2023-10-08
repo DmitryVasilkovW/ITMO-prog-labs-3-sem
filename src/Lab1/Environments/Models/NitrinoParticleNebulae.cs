@@ -1,21 +1,20 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
 public class NitrinoParticleNebulae : Entities.IEnvironment
 {
-    private Services.Nebulae _nebulae;
-    private Services.SpaceWhale _spaceWhale;
+    private Nebulae _nebulae;
+    private SpaceWhale _spaceWhale;
     private Spaceship.Entities.ISpaceship _ship;
-    private string _requiredEngine;
     private string _requiredMotorOperationType;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
     public NitrinoParticleNebulae(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.ISpaceship ship)
     {
-        _requiredEngine = "PulseEngine";
         _requiredMotorOperationType = "Exponent";
         _spaceWhale = new SpaceWhale();
         _nebulae = new Nebulae();
@@ -62,23 +61,12 @@ public class NitrinoParticleNebulae : Entities.IEnvironment
 
     public bool IsCanEnterTheEnvironment()
     {
-        if (_ship.EngineType.Equals(_requiredEngine, StringComparison.Ordinal) && _ship.Engine.MotorOperationType.Equals(_requiredMotorOperationType, StringComparison.Ordinal))
+        if (_ship.Engine is IEnginesType && _ship.Engine.MotorOperationType.Equals(_requiredMotorOperationType, StringComparison.Ordinal))
         {
             return true;
         }
 
         return false;
-    }
-
-    public void NebulaeDamage()
-    {
-        if (_ship.EngineType == "PulseEngine")
-        _nebulae.Damage(_ship);
-    }
-
-    public void SpaceWhaleDamage()
-    {
-        _spaceWhale.Damage(_ship);
     }
 
     public bool IsShipAlive()

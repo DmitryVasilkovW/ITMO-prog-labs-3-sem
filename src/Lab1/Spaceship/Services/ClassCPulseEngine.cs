@@ -4,13 +4,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class ClassCPulseEngine : Entities.IEnginesType
 {
-    private int _weightDimensionsOfTheShip;
     private string _motorOperationType;
 
-    public ClassCPulseEngine(int weightDimensionsOfTheShip)
+    public ClassCPulseEngine()
     {
         _motorOperationType = "Constant";
-        _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
     }
 
     public string MotorOperationType
@@ -18,13 +16,13 @@ public class ClassCPulseEngine : Entities.IEnginesType
         get { return _motorOperationType; }
     }
 
-    public int Speed(int speed)
+    public int Speed(int speed, int weightDimensionsOfTheShip)
     {
-        return speed += Math.Abs(100 / _weightDimensionsOfTheShip);
+        return speed += Math.Abs(100 / weightDimensionsOfTheShip);
     }
 
-    public int FuelConsumption(int fuelreserve)
+    public int FuelConsumption(int fuelreserve, int weightDimensionsOfTheShip)
     {
-        return fuelreserve -= Math.Abs(10 * _weightDimensionsOfTheShip);
+        return fuelreserve -= Math.Abs(10 * weightDimensionsOfTheShip);
     }
 }

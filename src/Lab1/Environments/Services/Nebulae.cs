@@ -19,7 +19,7 @@ public class Nebulae : Entities.IObstacle
 
     public ISpaceship Damage(ISpaceship ship)
     {
-        if (ship.EngineType.Equals("PulseEngine", StringComparison.Ordinal) || !ship.Engine.MotorOperationType.Equals("Exponent", StringComparison.Ordinal))
+        if (ship.Engine is IEnginesType || !ship.Engine.MotorOperationType.Equals("Exponent", StringComparison.Ordinal))
         {
             ship.ObstructionOfFlight();
         }

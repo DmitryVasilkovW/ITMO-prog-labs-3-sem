@@ -1,4 +1,3 @@
-using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
@@ -9,8 +8,6 @@ public class NormalSpace : Entities.IEnvironment
     private Asteroid _asteroid;
     private Meteorites _meteorites;
     private ISpaceship _ship;
-    private string _requiredEngine;
-    private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
@@ -18,19 +15,15 @@ public class NormalSpace : Entities.IEnvironment
     {
         _asteroid = new Asteroid();
         _meteorites = new Meteorites();
-        _requiredEngine = "PulseEngine";
         _ship = ship;
         _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
         _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
-        _length = length;
+        Length = length;
     }
 
     public int CountOfSecondTypeObstracles { get; }
 
-    public int Length
-    {
-        get { return _length; }
-    }
+    public int Length { get; }
 
     public string FirstTypeObstracleType
     {
@@ -65,22 +58,12 @@ public class NormalSpace : Entities.IEnvironment
 
     public bool IsCanEnterTheEnvironment()
     {
-        if (_ship.EngineType.Equals(_requiredEngine, StringComparison.Ordinal))
+        if (_ship.Engine is IEnginesType)
         {
             return true;
         }
 
         return false;
-    }
-
-    public void AsteroidDamage()
-    {
-        _asteroid.Damage(_ship);
-    }
-
-    public void MeteoriteDamage()
-    {
-        _meteorites.Damage(_ship);
     }
 
     public bool IsShipAlive()

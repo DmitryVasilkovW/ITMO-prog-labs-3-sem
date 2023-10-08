@@ -7,7 +7,6 @@ public class HighDensitySpaceNebulae : Entities.IEnvironment
     private Nebulae _nebulae;
     private AntimatterFlashes _antimatterFlashes;
     private Spaceship.Entities.ISpaceship _ship;
-    private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
@@ -18,7 +17,7 @@ public class HighDensitySpaceNebulae : Entities.IEnvironment
          _ship = ship;
          _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
          _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
-         _length = length;
+         Length = length;
     }
 
     public int CountOfFirstTypeObstracles { get; }
@@ -28,10 +27,7 @@ public class HighDensitySpaceNebulae : Entities.IEnvironment
         get { return _countOfSecondTypeObstracles; }
     }
 
-    public int Length
-    {
-        get { return _length; }
-    }
+    public int Length { get; }
 
     public string FirstTypeObstracleType
     {
@@ -71,11 +67,6 @@ public class HighDensitySpaceNebulae : Entities.IEnvironment
         }
 
         return false;
-    }
-
-    public void NebulaDamage()
-    {
-        _ship.Deflector.AsteroidDamage();
     }
 
     public bool IsShipAlive()

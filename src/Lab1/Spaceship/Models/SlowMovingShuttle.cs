@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
-public class SlowMovingShuttle : Entities.ISpaceship
+public class SlowMovingShuttle : ISpaceship
 {
     private int _fuelreserve;
     private int _gravitonmatter;
@@ -15,14 +15,12 @@ public class SlowMovingShuttle : Entities.ISpaceship
         WeightDimensionCharacteristics = 1;
         Equipment = new AdditionalSafetyDevicesSlot("none");
         Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
-        ShipName = "SlowMovingShuttle";
         _nebulaDamage = 1000;
         JumpEngine = new JumpEngineSlot();
         Speed = 100;
         _range = 0;
         Armor = new FirstClassArmor(WeightDimensionCharacteristics);
-        Engine = new ClassCPulseEngine(WeightDimensionCharacteristics);
-        EngineType = "PulseEngine";
+        Engine = new ClassCPulseEngine();
     }
 
     public bool IsPhotonDeflectorWorking
@@ -40,13 +38,9 @@ public class SlowMovingShuttle : Entities.ISpaceship
 
     public int Speed { get; private set; }
 
-    public string ShipName { get; }
-
     public IEnginesType Engine { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public string EngineType { get; }
 
     public bool IsDeflectorWorking
     {
@@ -98,13 +92,13 @@ public class SlowMovingShuttle : Entities.ISpaceship
     {
         if (JumpEngine is not JumpEngineSlot)
         {
-            _range = JumpEngine.Range(_range);
-            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
+            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
+            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
         }
         else
         {
-            Speed = Engine.Speed(Speed);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve);
+            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
         }
     }
 
