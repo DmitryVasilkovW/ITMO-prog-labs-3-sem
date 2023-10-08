@@ -9,47 +9,34 @@ public class Stella : Entities.ISpaceship
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private int _weightDimensionCharacteristics;
     private int _nebulaDamage;
-    private bool _crew;
-    private string _shipName;
-    private string _engineType;
-
-    private IEnginesType _engine;
-    private IJumpEngine _jumpengine;
-    private Deflectors _deflector;
-    private IArmor _armor;
-    private AdditionalSafetyDevices _equipment;
 
     public Stella(bool whethertoInstallAPhotonicDeflector)
     {
-        _weightDimensionCharacteristics = 1;
-        _equipment = new AdditionalSafetyDevicesSlot("none");
-        _shipName = "Stella";
+        WeightDimensionCharacteristics = 1;
+        Equipment = new AdditionalSafetyDevicesSlot("none");
+        ShipName = "Stella";
         _nebulaDamage = 1000;
-        _speed = 100;
+        Speed = 100;
         _range = 100;
-        _armor = new FirstClassArmor(_weightDimensionCharacteristics);
-        _jumpengine = new JumpEngineOmega(_weightDimensionCharacteristics);
-        _engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
-        _engineType = "Jumpengine";
+        Armor = new FirstClassArmor(WeightDimensionCharacteristics);
+        JumpEngine = new JumpEngineOmega(WeightDimensionCharacteristics);
+        Engine = new ClassCPulseEngine(WeightDimensionCharacteristics);
+        EngineType = "Jumpengine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            _deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
+            Deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
         }
         else
         {
-            _deflector = new FirstClassDeflector();
+            Deflector = new FirstClassDeflector();
         }
     }
 
     public bool IsPhotonDeflectorWorking { get; }
 
-    public int Speed
-    {
-        get { return _speed; }
-    }
+    public int Speed { get; }
 
     public int Fuelreserve
     {
@@ -60,54 +47,30 @@ public class Stella : Entities.ISpaceship
         }
     }
 
-    public string ShipName
-    {
-        get { return _shipName; }
-    }
+    public string ShipName { get; }
 
-    public IEnginesType Engine
-    {
-        get { return _engine; }
-    }
+    public IEnginesType Engine { get; }
 
-    public IJumpEngine JumpEngine
-    {
-        get { return _jumpengine; }
-    }
+    public IJumpEngine JumpEngine { get; }
 
-    public Deflectors Deflector
-    {
-        get { return _deflector; }
-    }
+    public Deflectors Deflector { get; }
 
-    public IArmor Armor
-    {
-        get { return _armor; }
-    }
+    public IArmor Armor { get; }
 
-    public AdditionalSafetyDevices Equipment
-    {
-        get { return _equipment; }
-    }
+    public AdditionalSafetyDevices Equipment { get; }
 
-    public int WeightDimensionCharacteristics
-    {
-        get { return _weightDimensionCharacteristics; }
-    }
+    public int WeightDimensionCharacteristics { get; }
 
-    public string EngineType
-    {
-        get { return _engineType; }
-    }
+    public string EngineType { get; }
 
     public bool IsDeflectorWorking
     {
-        get { return _deflector.IsDeflectorWorking(); }
+        get { return Deflector.IsDeflectorWorking(); }
     }
 
     public bool IsjumpEngineInstalled()
     {
-        if (_jumpengine.ISSlot())
+        if (JumpEngine.ISSlot())
         {
             return false;
         }
@@ -117,19 +80,19 @@ public class Stella : Entities.ISpaceship
 
     public void SafetyEquipmentOperation()
     {
-        if (_deflector.IsDeflectorWorking())
+        if (Deflector.IsDeflectorWorking())
         {
-            _equipment.Effect(_deflector);
+            Equipment.Effect(Deflector);
         }
         else
         {
-            _equipment.Effect(_armor);
+            Equipment.Effect(Armor);
         }
     }
 
     public bool IsShipAlive()
     {
-        if (_armor.IsArmorWorking() || _deflector.IsDeflectorWorking())
+        if (Armor.IsArmorWorking() || Deflector.IsDeflectorWorking())
         {
             return true;
         }
@@ -139,13 +102,8 @@ public class Stella : Entities.ISpaceship
 
     public void EngineWork()
     {
-        _speed = _engine.Speed(_speed);
-        _fuelreserve = _engine.FuelConsumption(_fuelreserve);
-    }
-
-    public void StaffAssault()
-    {
-        _crew ^= true;
+        _speed = Engine.Speed(_speed);
+        _fuelreserve = Engine.FuelConsumption(_fuelreserve);
     }
 
     public void ObstructionOfFlight()
@@ -155,7 +113,7 @@ public class Stella : Entities.ISpaceship
 
     public void JumpEnginew()
     {
-        _range = _jumpengine.Range(_range);
-        _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
+        _range = JumpEngine.Range(_range);
+        _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
     }
 }

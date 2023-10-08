@@ -5,67 +5,46 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Augur : ISpaceship
 {
-    private int _speed;
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private int _weightDimensionCharacteristics;
     private int _nebulaDamage;
-    private string _engineType;
-    private string _shipName;
-    private bool _crew;
-
-    private IJumpEngine _jumpengine;
-    private Deflectors _deflector;
-    private IArmor _armor;
-    private AdditionalSafetyDevices _equipment;
 
     public Augur(bool whethertoInstallAPhotonicDeflector)
     {
-        _weightDimensionCharacteristics = 3;
-        _shipName = "Augur";
-        _equipment = new AdditionalSafetyDevicesSlot("no protection");
+        WeightDimensionCharacteristics = 3;
+        ShipName = "Augur";
+        Equipment = new AdditionalSafetyDevicesSlot("no protection");
         _nebulaDamage = 923333333;
-        _crew = true;
-        _speed = 100;
+        Speed = 100;
         _range = 100;
-        _armor = new ThirdClassArmor(_weightDimensionCharacteristics);
-        _jumpengine = new JumpEngineAlpha(_weightDimensionCharacteristics);
-        Engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
-        _engineType = "PulseEngine";
+        Armor = new ThirdClassArmor(WeightDimensionCharacteristics);
+        JumpEngine = new JumpEngineAlpha(WeightDimensionCharacteristics);
+        Engine = new ClassEPulseEngine(WeightDimensionCharacteristics);
+        EngineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            _deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
+            Deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
         }
         else
         {
-            _deflector = new FirstClassDeflector();
+            Deflector = new FirstClassDeflector();
         }
     }
 
-    // сделать везде
     public IEnginesType Engine { get; private set; }
 
     public bool IsPhotonDeflectorWorking
     {
-        get { return _deflector.IsaPhotonDeflectorInstalled; }
+        get { return Deflector.IsaPhotonDeflectorInstalled; }
     }
 
-    public int Speed
-    {
-        get { return _speed; }
-    }
+    public int Speed { get; private set; }
 
-    public string ShipName
-    {
-        get { return _shipName; }
-    }
+    public string ShipName { get; }
 
-    public IJumpEngine JumpEngine
-    {
-        get { return _jumpengine; }
-    }
+    public IJumpEngine JumpEngine { get; }
 
     public int Fuelreserve
     {
@@ -76,39 +55,24 @@ public class Augur : ISpaceship
         }
     }
 
-    public Deflectors Deflector
-    {
-        get { return _deflector; }
-    }
+    public Deflectors Deflector { get; }
 
-    public IArmor Armor
-    {
-        get { return _armor; }
-    }
+    public IArmor Armor { get; }
 
-    public AdditionalSafetyDevices Equipment
-    {
-        get { return _equipment; }
-    }
+    public AdditionalSafetyDevices Equipment { get; }
 
-    public int WeightDimensionCharacteristics
-    {
-        get { return _weightDimensionCharacteristics; }
-    }
+    public int WeightDimensionCharacteristics { get; }
 
-    public string EngineType
-    {
-        get { return _engineType; }
-    }
+    public string EngineType { get; }
 
     public bool IsDeflectorWorking
     {
-        get { return _deflector.IsDeflectorWorking(); }
+        get { return Deflector.IsDeflectorWorking(); }
     }
 
     public bool IsjumpEngineInstalled()
     {
-        if (_jumpengine.ISSlot())
+        if (JumpEngine.ISSlot())
         {
             return false;
         }
@@ -118,19 +82,19 @@ public class Augur : ISpaceship
 
     public void SafetyEquipmentOperation()
     {
-        if (_deflector.IsDeflectorWorking())
+        if (Deflector.IsDeflectorWorking())
         {
-            _equipment.Effect(_deflector);
+            Equipment.Effect(Deflector);
         }
         else
         {
-            _equipment.Effect(_armor);
+            Equipment.Effect(Armor);
         }
     }
 
     public bool IsShipAlive()
     {
-        if ((_armor.IsArmorWorking() || _deflector.IsDeflectorWorking()) && _speed > 0)
+        if ((Armor.IsArmorWorking() || Deflector.IsDeflectorWorking()) && Speed > 0)
         {
             return true;
         }
@@ -140,23 +104,18 @@ public class Augur : ISpaceship
 
     public void EngineWork()
     {
-        _speed = Engine.Speed(_speed);
+        Speed = Engine.Speed(Speed);
         _fuelreserve = Engine.FuelConsumption(_fuelreserve);
-    }
-
-    public void StaffAssault()
-    {
-        _crew ^= true;
     }
 
     public void ObstructionOfFlight()
     {
-        _speed -= _nebulaDamage;
+        Speed -= _nebulaDamage;
     }
 
     public void JumpEnginew()
     {
-        _range = _jumpengine.Range(_speed);
-        _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
+        _range = JumpEngine.Range(Speed);
+        _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
     }
 }

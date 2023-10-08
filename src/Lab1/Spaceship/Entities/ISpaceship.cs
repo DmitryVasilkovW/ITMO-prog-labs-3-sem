@@ -30,8 +30,6 @@ public interface ISpaceship
 
     void EngineWork();
 
-    void StaffAssault();
-
     void SafetyEquipmentOperation();
 
     void ObstructionOfFlight();

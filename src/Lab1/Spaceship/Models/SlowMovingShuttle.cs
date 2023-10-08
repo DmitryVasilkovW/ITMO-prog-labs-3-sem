@@ -8,87 +8,51 @@ public class SlowMovingShuttle : Entities.ISpaceship
     private int _speed;
     private int _fuelreserve;
     private int _gravitonmatter;
-    private int _weightDimensionCharacteristics;
     private int _nebulaDamage;
     private int _range;
     private bool _crew;
-    private string _shipName;
-    private string _engineType;
-
-    private IEnginesType _engine;
-    private IArmor _armor;
-    private Deflectors _deflector;
-    private IJumpEngine _jumpEngine;
-    private AdditionalSafetyDevices _equipment;
 
     public SlowMovingShuttle()
     {
-        _weightDimensionCharacteristics = 1;
-        _equipment = new AdditionalSafetyDevicesSlot("none");
-        _deflector = new DeflectorSlot(new PhotonDeflectorSlot());
-        _shipName = "SlowMovingShuttle";
+        WeightDimensionCharacteristics = 1;
+        Equipment = new AdditionalSafetyDevicesSlot("none");
+        Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
+        ShipName = "SlowMovingShuttle";
         _nebulaDamage = 1000;
-        _jumpEngine = new JumpEngineSlot();
-        _speed = 100;
+        JumpEngine = new JumpEngineSlot();
+        Speed = 100;
         _range = 0;
-        _armor = new FirstClassArmor(_weightDimensionCharacteristics);
-        _engine = new ClassCPulseEngine(_weightDimensionCharacteristics);
-        _engineType = "PulseEngine";
+        Armor = new FirstClassArmor(WeightDimensionCharacteristics);
+        Engine = new ClassCPulseEngine(WeightDimensionCharacteristics);
+        EngineType = "PulseEngine";
     }
 
     public bool IsPhotonDeflectorWorking
     {
-        get { return _deflector.IsaPhotonDeflectorInstalled; }
+        get { return Deflector.IsaPhotonDeflectorInstalled; }
     }
 
-    public IJumpEngine JumpEngine
-    {
-        get { return _jumpEngine; }
-    }
+    public IJumpEngine JumpEngine { get; }
 
-    public AdditionalSafetyDevices Equipment
-    {
-        get { return _equipment; }
-    }
+    public AdditionalSafetyDevices Equipment { get; }
 
-    public Deflectors Deflector
-    {
-        get { return _deflector; }
-    }
+    public Deflectors Deflector { get; }
 
-    public IArmor Armor
-    {
-        get { return _armor; }
-    }
+    public IArmor Armor { get; }
 
-    public int Speed
-    {
-        get { return _speed; }
-    }
+    public int Speed { get; }
 
-    public string ShipName
-    {
-        get { return _shipName; }
-    }
+    public string ShipName { get; }
 
-    public IEnginesType Engine
-    {
-        get { return _engine; }
-    }
+    public IEnginesType Engine { get; }
 
-    public int WeightDimensionCharacteristics
-    {
-        get { return _weightDimensionCharacteristics; }
-    }
+    public int WeightDimensionCharacteristics { get; }
 
-    public string EngineType
-    {
-        get { return _engineType; }
-    }
+    public string EngineType { get; }
 
     public bool IsDeflectorWorking
     {
-        get { return _deflector.IsDeflectorWorking(); }
+        get { return Deflector.IsDeflectorWorking(); }
     }
 
     public int Fuelreserve
@@ -102,19 +66,19 @@ public class SlowMovingShuttle : Entities.ISpaceship
 
     public void SafetyEquipmentOperation()
     {
-        if (_deflector.IsDeflectorWorking())
+        if (Deflector.IsDeflectorWorking())
         {
-            _equipment.Effect(_deflector);
+            Equipment.Effect(Deflector);
         }
         else
         {
-            _equipment.Effect(_armor);
+            Equipment.Effect(Armor);
         }
     }
 
     public bool IsjumpEngineInstalled()
     {
-        if (_jumpEngine.ISSlot())
+        if (JumpEngine.ISSlot())
         {
             return false;
         }
@@ -124,7 +88,7 @@ public class SlowMovingShuttle : Entities.ISpaceship
 
     public bool IsShipAlive()
     {
-        if (_armor.IsArmorWorking())
+        if (Armor.IsArmorWorking())
         {
             return true;
         }
@@ -134,15 +98,15 @@ public class SlowMovingShuttle : Entities.ISpaceship
 
     public void EngineWork()
     {
-        if (_jumpEngine is not JumpEngineSlot)
+        if (JumpEngine is not JumpEngineSlot)
         {
-            _range = _jumpEngine.Range(_range);
-            _gravitonmatter = _jumpEngine.FuelConsumption(_gravitonmatter);
+            _range = JumpEngine.Range(_range);
+            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
         }
         else
         {
-            _speed = _engine.Speed(_speed);
-            _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+            _speed = Engine.Speed(_speed);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve);
         }
     }
 

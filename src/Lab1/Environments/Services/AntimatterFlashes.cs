@@ -22,10 +22,6 @@ public class AntimatterFlashes : Entities.IObstacle
         {
             ship.Deflector.AntimatterFlashesDamage();
         }
-        else
-        {
-            ship.StaffAssault();
-        }
 
         return ship;
     }

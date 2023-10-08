@@ -3,60 +3,47 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
-public class Meredian : Entities.ISpaceship
+public class Meredian : ISpaceship
 {
-    private int _speed;
     private int _fuelreserve;
     private int _weightDimensionCharacteristics;
     private int _gravitonmatter;
     private int _range;
     private int _nebulaDamage;
-    private bool _crew;
-    private string _engineType;
-    private string _shipName;
-
-    private IEnginesType _engine;
-    private IJumpEngine _jumpengine;
-    private Deflectors _deflector;
-    private IArmor _armor;
-    private AdditionalSafetyDevices _equipment;
 
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
         _weightDimensionCharacteristics = 2;
         _range = 100;
-        _shipName = "Meredian";
-        _speed = 100;
+        ShipName = "Meredian";
+        Speed = 100;
         _nebulaDamage = 1000;
-        _jumpengine = new JumpEngineSlot();
-        _equipment = new AntiNitrinoEmitter("SpaceWhale");
-        _armor = new SecondClassArmor(_weightDimensionCharacteristics);
-        _engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
-        _engineType = "PulseEngine";
+        JumpEngine = new JumpEngineSlot();
+        Equipment = new AntiNitrinoEmitter("SpaceWhale");
+        Armor = new SecondClassArmor(_weightDimensionCharacteristics);
+        Engine = new ClassEPulseEngine(_weightDimensionCharacteristics);
+        EngineType = "PulseEngine";
 
         if (whethertoInstallAPhotonicDeflector)
         {
-            _deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
+            Deflector = new FirstClassDeflector(new StandardPhotonicDeflectors());
         }
         else
         {
-            _deflector = new FirstClassDeflector();
+            Deflector = new FirstClassDeflector();
         }
     }
 
     public bool IsPhotonDeflectorWorking
     {
-        get { return _deflector.IsaPhotonDeflectorInstalled; }
+        get { return Deflector.IsaPhotonDeflectorInstalled; }
     }
 
-    public Deflectors Deflector
-    {
-        get { return _deflector; }
-    }
+    public Deflectors Deflector { get; }
 
     public bool IsDeflectorWorking
     {
-        get { return _deflector.IsDeflectorWorking(); }
+        get { return Deflector.IsDeflectorWorking(); }
     }
 
     public int Fuelreserve
@@ -68,61 +55,37 @@ public class Meredian : Entities.ISpaceship
         }
     }
 
-    public IArmor Armor
-    {
-        get { return _armor; }
-    }
+    public IArmor Armor { get; }
 
-    public int Speed
-    {
-        get { return _speed; }
-    }
+    public int Speed { get; private set; }
 
-    public string ShipName
-    {
-        get { return _shipName; }
-    }
+    public string ShipName { get; }
 
-    public IEnginesType Engine
-    {
-        get { return _engine; }
-    }
+    public IEnginesType Engine { get; }
 
-    public IJumpEngine JumpEngine
-    {
-        get { return _jumpengine; }
-    }
+    public IJumpEngine JumpEngine { get; }
 
-    public AdditionalSafetyDevices Equipment
-    {
-        get { return _equipment; }
-    }
+    public AdditionalSafetyDevices Equipment { get; }
 
-    public int WeightDimensionCharacteristics
-    {
-        get { return _weightDimensionCharacteristics; }
-    }
+    public int WeightDimensionCharacteristics { get; }
 
-    public string EngineType
-    {
-        get { return _engineType; }
-    }
+    public string EngineType { get; }
 
     public void SafetyEquipmentOperation()
     {
-        if (_deflector.IsDeflectorWorking())
+        if (Deflector.IsDeflectorWorking())
         {
-            _equipment.Effect(_deflector);
+            Equipment.Effect(Deflector);
         }
         else
         {
-            _equipment.Effect(_armor);
+            Equipment.Effect(Armor);
         }
     }
 
     public bool IsShipAlive()
     {
-        if (_armor.IsArmorWorking() || _deflector.IsDeflectorWorking())
+        if (Armor.IsArmorWorking() || Deflector.IsDeflectorWorking())
         {
             return true;
         }
@@ -132,21 +95,21 @@ public class Meredian : Entities.ISpaceship
 
     public void EngineWork()
     {
-        if (_jumpengine is not JumpEngineSlot)
+        if (JumpEngine is not JumpEngineSlot)
         {
-            _range = _jumpengine.Range(_range);
-            _gravitonmatter = _jumpengine.FuelConsumption(_gravitonmatter);
+            _range = JumpEngine.Range(_range);
+            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter);
         }
         else
         {
-            _speed = _engine.Speed(_speed);
-            _fuelreserve = _engine.FuelConsumption(_fuelreserve);
+            Speed = Engine.Speed(Speed);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve);
         }
     }
 
     public bool IsjumpEngineInstalled()
     {
-        if (_jumpengine.ISSlot())
+        if (JumpEngine.ISSlot())
         {
             return false;
         }
@@ -154,13 +117,8 @@ public class Meredian : Entities.ISpaceship
         return true;
     }
 
-    public void StaffAssault()
-    {
-        _crew ^= true;
-    }
-
     public void ObstructionOfFlight()
     {
-        _speed -= _nebulaDamage;
+        Speed -= _nebulaDamage;
     }
 }
