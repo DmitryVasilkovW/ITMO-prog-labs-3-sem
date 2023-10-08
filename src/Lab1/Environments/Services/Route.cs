@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class Route
 {
-    private IList<ValuesForTheEnvironment> _environments;
-    private IList<Spaceship.Entities.ISpaceship> _ships;
+    private IList<IEnvironment> _environments;
+    private IList<ISpaceship> _ships;
     private List<string> _shipStatus = new List<string>();
     private int _routeLength;
     private string _successStatusForTheShip;
@@ -15,7 +16,7 @@ public class Route
     private string _statusShipDestruction;
     private string _statusCrewDeath;
 
-    public Route(int routeLength, IList<ValuesForTheEnvironment> environments, IList<Spaceship.Entities.ISpaceship> ships)
+    public Route(int routeLength, IList<IEnvironment> environments, IList<ISpaceship> ships)
     {
         _environments = environments;
         _ships = ships;
@@ -29,17 +30,12 @@ public class Route
     public IList<string> ShipHandling()
     {
         int indexForEnvironments = -1;
-        foreach (Spaceship.Entities.ISpaceship ship in _ships)
+        foreach (ISpaceship ship in _ships)
         {
             indexForEnvironments++;
             for (int i = indexForEnvironments; i < _environments.Count; i += _ships.Count)
             {
-                IEnvironment environment = new TheFactoryOfTheEnvironment(
-                        _environments[i].Environment,
-                        _environments[i].Ship,
-                        _environments[i].Length,
-                        _environments[i].CountOfFirstTypeObstracles,
-                        _environments[i].CountOfSecondTypeObstracles).Create();
+                IEnvironment environment = _environments[i];
 
                 if (!environment.IsCanEnterTheEnvironment())
                 {

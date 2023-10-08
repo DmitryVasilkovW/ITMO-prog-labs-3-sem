@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Xunit;
+using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
@@ -24,12 +26,12 @@ public class SecondTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
-        IList<ValuesForTheEnvironment> environments = new List<ValuesForTheEnvironment>();
+        IList<IEnvironment> environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
@@ -53,18 +55,8 @@ public class SecondTest
             {
                 new Vaklas(true),
                 new Vaklas(false),
-                new ValuesForTheEnvironment(
-                    "HighDensitySpaceNebulae",
-                    new Vaklas(true),
-                    Length,
-                    0,
-                    2),
-                new ValuesForTheEnvironment(
-                    "HighDensitySpaceNebulae",
-                    new Vaklas(false),
-                    Length,
-                    0,
-                    239),
+                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(true)),
+                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(false)),
             },
         };
 

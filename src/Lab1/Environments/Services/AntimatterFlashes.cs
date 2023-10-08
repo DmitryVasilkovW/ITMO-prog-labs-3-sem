@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
-public class AntimatterFlashes : Entities.IObstacles
+public class AntimatterFlashes : Entities.IObstacle
 {
     private string _damageType;
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Xunit;
@@ -24,12 +26,12 @@ public class ThirdTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Spaceship.Entities.ISpaceship thirdship, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip, ValuesForTheEnvironment environmentForThirdShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Spaceship.Entities.ISpaceship thirdship, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip, IEnvironment environmentForThirdShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
-        IList<ValuesForTheEnvironment> environments = new List<ValuesForTheEnvironment>();
+        var environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
@@ -57,24 +59,9 @@ public class ThirdTest
                 new Vaklas(false),
                 new Augur(false),
                 new Meredian(false),
-                new ValuesForTheEnvironment(
-                    "NitrinoParticleNebulae",
-                    new Vaklas(false),
-                    Length,
-                    10,
-                    0),
-                new ValuesForTheEnvironment(
-                    "NitrinoParticleNebulae",
-                    new Augur(false),
-                    Length,
-                    1,
-                    0),
-                new ValuesForTheEnvironment(
-                    "NitrinoParticleNebulae",
-                    new Meredian(false),
-                    Length,
-                    1,
-                    0),
+                new NitrinoParticleNebulae(Length, 10, 0, new Vaklas(false)),
+                new NitrinoParticleNebulae(Length, 1, 0, new Augur(false)),
+                new NitrinoParticleNebulae(Length, 1, 0, new Meredian(false)),
             },
         };
 

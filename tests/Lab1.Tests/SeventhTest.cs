@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Xunit;
@@ -27,12 +29,12 @@ public class SeventhTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, ValuesForTheEnvironment environmentForFirstShip, ValuesForTheEnvironment environmentForSecondShip, ValuesForTheEnvironment secondEnvironmentForFirstShip, ValuesForTheEnvironment secondEnvironmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip, IEnvironment secondEnvironmentForFirstShip, IEnvironment secondEnvironmentForSecondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
-        IList<ValuesForTheEnvironment> environments = new List<ValuesForTheEnvironment>();
+        var environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
@@ -58,30 +60,10 @@ public class SeventhTest
             {
                 new SlowMovingShuttle(),
                 new Augur(false),
-                new ValuesForTheEnvironment(
-                    "HighDensitySpaceNebulae",
-                    new SlowMovingShuttle(),
-                    Length,
-                    30,
-                    0),
-                new ValuesForTheEnvironment(
-                    "HighDensitySpaceNebulae",
-                    new Augur(false),
-                    Length,
-                    50,
-                    0),
-                new ValuesForTheEnvironment(
-                    "NitrinoParticleNebulae",
-                    new SlowMovingShuttle(),
-                    Length,
-                    0,
-                    0),
-                new ValuesForTheEnvironment(
-                    "NitrinoParticleNebulae",
-                    new Augur(false),
-                    Length,
-                    0,
-                    0),
+                new HighDensitySpaceNebulae(0, Length, 30, new SlowMovingShuttle()),
+                new HighDensitySpaceNebulae(0, Length, 50, new Augur(false)),
+                new NitrinoParticleNebulae(Length, 0, 0, new SlowMovingShuttle()),
+                new NitrinoParticleNebulae(Length, 0, 0, new Augur(false)),
             },
         };
 
