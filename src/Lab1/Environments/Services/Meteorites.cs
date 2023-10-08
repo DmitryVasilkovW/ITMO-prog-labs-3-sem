@@ -36,11 +36,11 @@ public class Meteorites : Entities.IObstacle
             if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
             {
                 ship.SafetyEquipmentOperation();
-                ship.Armor.MeteoriteDamage();
+                ship.Armor.MeteoriteDamage(ship.WeightDimensionCharacteristics);
             }
             else
             {
-                ship.Armor.MeteoriteDamage();
+                ship.Armor.MeteoriteDamage(ship.WeightDimensionCharacteristics);
             }
         }
 

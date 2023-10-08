@@ -18,7 +18,7 @@ public class Stella : Entities.ISpaceship
         _nebulaDamage = 1000;
         Speed = 100;
         _range = 100;
-        Armor = new FirstClassArmor(WeightDimensionCharacteristics);
+        Armor = new FirstClassArmor();
         JumpEngine = new JumpEngineOmega();
         Engine = new ClassCPulseEngine();
         EngineType = "Jumpengine";
@@ -85,7 +85,7 @@ public class Stella : Entities.ISpaceship
         }
         else
         {
-            Equipment.Effect(Armor);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics);
         }
     }
 

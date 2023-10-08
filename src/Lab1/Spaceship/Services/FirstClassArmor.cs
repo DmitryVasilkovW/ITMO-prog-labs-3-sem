@@ -9,12 +9,10 @@ public class FirstClassArmor : Entities.IArmor
 
     private int _armorconditionlevel;
     private bool _isArmorWorking;
-    private int _weightDimensionsOfTheShip;
 
-    public FirstClassArmor(int weightDimensionsOfTheShip)
+    public FirstClassArmor()
     {
         _armorconditionlevel = 1000;
-        _weightDimensionsOfTheShip = weightDimensionsOfTheShip;
         _isArmorWorking = true;
     }
 
@@ -28,37 +26,37 @@ public class FirstClassArmor : Entities.IArmor
         return _isArmorWorking;
     }
 
-    public void AsteroidDamage()
+    public void AsteroidDamage(int weightDimensionsOfTheShip)
     {
-        _armorconditionlevel -= Asteroiddamage / _weightDimensionsOfTheShip;
+        _armorconditionlevel -= Asteroiddamage / weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
-    public void MeteoriteDamage()
+    public void MeteoriteDamage(int weightDimensionsOfTheShip)
     {
-        _armorconditionlevel -= Meteoritedamage / _weightDimensionsOfTheShip;
+        _armorconditionlevel -= Meteoritedamage / weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
-    public void SpaceWhaleDamage()
+    public void SpaceWhaleDamage(int weightDimensionsOfTheShip)
     {
-        _armorconditionlevel -= Spacewhaledamage / _weightDimensionsOfTheShip;
+        _armorconditionlevel -= Spacewhaledamage / weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
-    public void SavingStatusOfTheArmor(string damagetype)
+    public void SavingStatusOfTheArmor(string damagetype, int weightDimensionsOfTheShip)
     {
         if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
         {
-            _armorconditionlevel += Spacewhaledamage / _weightDimensionsOfTheShip;
+            _armorconditionlevel += Spacewhaledamage / weightDimensionsOfTheShip;
         }
         else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
         {
-            _armorconditionlevel += Meteoritedamage / _weightDimensionsOfTheShip;
+            _armorconditionlevel += Meteoritedamage / weightDimensionsOfTheShip;
         }
         else
         {
-            _armorconditionlevel += Asteroiddamage / _weightDimensionsOfTheShip;
+            _armorconditionlevel += Asteroiddamage / weightDimensionsOfTheShip;
         }
     }
 }

@@ -18,7 +18,7 @@ public class Meredian : ISpaceship
         _nebulaDamage = 1000;
         JumpEngine = new JumpEngineSlot();
         Equipment = new AntiNitrinoEmitter("SpaceWhale");
-        Armor = new SecondClassArmor(WeightDimensionCharacteristics);
+        Armor = new SecondClassArmor();
         Engine = new ClassEPulseEngine();
 
         if (whethertoInstallAPhotonicDeflector)
@@ -62,7 +62,7 @@ public class Meredian : ISpaceship
         }
         else
         {
-            Equipment.Effect(Armor);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics);
         }
     }
 

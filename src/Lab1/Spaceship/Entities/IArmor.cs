@@ -4,11 +4,11 @@ public interface IArmor
 {
     bool IsArmorWorking();
 
-    void AsteroidDamage();
+    void AsteroidDamage(int weightDimensionsOfTheShip);
 
-    void MeteoriteDamage();
+    void MeteoriteDamage(int weightDimensionsOfTheShip);
 
-    void SpaceWhaleDamage();
+    void SpaceWhaleDamage(int weightDimensionsOfTheShip);
 
-    void SavingStatusOfTheArmor(string damagetype);
+    void SavingStatusOfTheArmor(string damagetype, int weightDimensionsOfTheShip);
 }

@@ -17,7 +17,7 @@ public class Vaklas : ISpaceship
         ShipName = "Vaklas";
         Speed = 100;
         _nebulaDamage = 923333333;
-        Armor = new SecondClassArmor(WeightDimensionCharacteristics);
+        Armor = new SecondClassArmor();
         JumpEngine = new JumpEngineGamma();
         Engine = new ClassEPulseEngine();
         EngineType = "PulseEngine";
@@ -90,7 +90,7 @@ public class Vaklas : ISpaceship
         }
         else
         {
-            Equipment.Effect(Armor);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics);
         }
     }
 

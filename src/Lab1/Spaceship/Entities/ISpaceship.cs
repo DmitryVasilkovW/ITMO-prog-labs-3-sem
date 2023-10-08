@@ -13,6 +13,8 @@ public interface ISpaceship
     IArmor Armor { get; }
     AdditionalSafetyDevices Equipment { get; }
 
+    int WeightDimensionCharacteristics { get; }
+
     int Fuelreserve { get; }
 
     bool IsjumpEngineInstalled();

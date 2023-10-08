@@ -28,8 +28,8 @@ public class AntiNitrinoEmitter : Entities.AdditionalSafetyDevices
         deflector.SavingStatusOfTheDeflector(_damageType);
     }
 
-    public override void Effect(Entities.IArmor armor)
+    public override void Effect(Entities.IArmor armor, int weightDimensionsOfTheShip)
     {
-        armor.SavingStatusOfTheArmor(_damageType);
+        armor.SavingStatusOfTheArmor(_damageType, weightDimensionsOfTheShip);
     }
 }

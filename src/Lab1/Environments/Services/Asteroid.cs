@@ -36,11 +36,11 @@ public class Asteroid : Entities.IObstacle
             if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
             {
                 ship.SafetyEquipmentOperation();
-                ship.Armor.AsteroidDamage();
+                ship.Armor.AsteroidDamage(ship.WeightDimensionCharacteristics);
             }
             else
             {
-                ship.Armor.AsteroidDamage();
+                ship.Armor.AsteroidDamage(ship.WeightDimensionCharacteristics);
             }
         }
 

@@ -17,7 +17,7 @@ public class Augur : ISpaceship
         _nebulaDamage = 923333333;
         Speed = 100;
         _range = 100;
-        Armor = new ThirdClassArmor(WeightDimensionCharacteristics);
+        Armor = new ThirdClassArmor();
         JumpEngine = new JumpEngineAlpha();
         Engine = new ClassEPulseEngine();
         EngineType = "PulseEngine";
@@ -85,7 +85,7 @@ public class Augur : ISpaceship
         }
         else
         {
-            Equipment.Effect(Armor);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics);
         }
     }
 

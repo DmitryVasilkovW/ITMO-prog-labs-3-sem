@@ -36,11 +36,11 @@ public class SpaceWhale : Entities.IObstacle
             if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
             {
                 ship.SafetyEquipmentOperation();
-                ship.Armor.SpaceWhaleDamage();
+                ship.Armor.SpaceWhaleDamage(ship.WeightDimensionCharacteristics);
             }
             else
             {
-                ship.Armor.SpaceWhaleDamage();
+                ship.Armor.SpaceWhaleDamage(ship.WeightDimensionCharacteristics);
             }
         }
 

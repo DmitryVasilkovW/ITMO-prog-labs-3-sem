@@ -19,7 +19,7 @@ public class SlowMovingShuttle : ISpaceship
         JumpEngine = new JumpEngineSlot();
         Speed = 100;
         _range = 0;
-        Armor = new FirstClassArmor(WeightDimensionCharacteristics);
+        Armor = new FirstClassArmor();
         Engine = new ClassCPulseEngine();
     }
 
@@ -64,7 +64,7 @@ public class SlowMovingShuttle : ISpaceship
         }
         else
         {
-            Equipment.Effect(Armor);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics);
         }
     }
 
