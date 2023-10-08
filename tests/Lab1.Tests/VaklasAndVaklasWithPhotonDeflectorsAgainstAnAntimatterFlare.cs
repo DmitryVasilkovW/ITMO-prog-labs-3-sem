@@ -1,27 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Xunit;
+using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SeventhTest
+public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
 {
     public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
     {
-        int indexForShip = 0;
-
-        for (int i = 0; i < expectedValues.Count; i += 2)
+        for (int i = 0; i < shipStatus.Count; i++)
         {
-            if (shipStatus[indexForShip] != expectedValues[i])
+            if (!shipStatus[i].Equals(expectedValues[i], StringComparison.Ordinal))
             {
                 return false;
             }
-
-            indexForShip++;
         }
 
         return true;
@@ -29,21 +26,19 @@ public class SeventhTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip, IEnvironment secondEnvironmentForFirstShip, IEnvironment secondEnvironmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
-        var environments = new List<IEnvironment>();
+        IList<IEnvironment> environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
-        environments.Add(secondEnvironmentForFirstShip);
-        environments.Add(secondEnvironmentForSecondShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValues.Add("Loss of ship");
-        expectedValues.Add("Destruction of the ship");
+        expectedValues.Add("Success");
+        expectedValues.Add("Crew deaths");
 
         shipStatus = new Route(239, environments, ships).ShipHandling();
 
@@ -58,12 +53,10 @@ public class SeventhTest
         {
             new object[]
             {
-                new SlowMovingShuttle(),
-                new Augur(false),
-                new HighDensitySpaceNebulae(0, Length, 30, new SlowMovingShuttle()),
-                new HighDensitySpaceNebulae(0, Length, 50, new Augur(false)),
-                new NitrinoParticleNebulae(Length, 0, 0, new SlowMovingShuttle()),
-                new NitrinoParticleNebulae(Length, 0, 0, new Augur(false)),
+                new Vaklas(true),
+                new Vaklas(false),
+                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(true)),
+                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(false)),
             },
         };
 

@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class ThirdTest
+public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
 {
     public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
     {

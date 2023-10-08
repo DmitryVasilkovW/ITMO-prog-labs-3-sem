@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
@@ -8,11 +10,11 @@ using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IE
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SixthTest
+public class SelectingTheMostAffectiveShipForNormalSpace
 {
-    public static bool ResultsVerification(Spaceship.Entities.ISpaceship ship)
+    public static bool ResultsVerification(ISpaceship ship)
     {
-        if (ship is Vaklas)
+        if (ship is SlowMovingShuttle)
         {
             return true;
         }
@@ -22,11 +24,11 @@ public class SixthTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
+    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
     {
-        IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
-        Spaceship.Entities.ISpaceship ship;
-        IList<Environments.Entities.IEnvironment> environments = new List<Environment>();
+        IList<ISpaceship> ships = new List<ISpaceship>();
+        ISpaceship ship;
+        IList<IEnvironment> environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
@@ -52,8 +54,8 @@ public class SixthTest
             {
                 new SlowMovingShuttle(),
                 new Vaklas(false),
-                new NitrinoParticleNebulae(Length, 0, 0, new SlowMovingShuttle()),
-                new NitrinoParticleNebulae(Length, 0, 0, new Vaklas(false)),
+                new NormalSpace(Length, 0, 0, new SlowMovingShuttle()),
+                new NormalSpace(Length, 0, 0, new Vaklas(false)),
             },
         };
 

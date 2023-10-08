@@ -1,24 +1,27 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Xunit;
-using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SecondTest
+public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebulae
 {
     public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
     {
-        for (int i = 0; i < shipStatus.Count; i++)
+        int indexForShip = 0;
+
+        for (int i = 0; i < expectedValues.Count; i += 2)
         {
-            if (!shipStatus[i].Equals(expectedValues[i], StringComparison.Ordinal))
+            if (shipStatus[indexForShip] != expectedValues[i])
             {
                 return false;
             }
+
+            indexForShip++;
         }
 
         return true;
@@ -26,19 +29,21 @@ public class SecondTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip, IEnvironment secondEnvironmentForFirstShip, IEnvironment secondEnvironmentForSecondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
-        IList<IEnvironment> environments = new List<IEnvironment>();
+        var environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
+        environments.Add(secondEnvironmentForFirstShip);
+        environments.Add(secondEnvironmentForSecondShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValues.Add("Success");
-        expectedValues.Add("Crew deaths");
+        expectedValues.Add("Loss of ship");
+        expectedValues.Add("Destruction of the ship");
 
         shipStatus = new Route(239, environments, ships).ShipHandling();
 
@@ -53,10 +58,12 @@ public class SecondTest
         {
             new object[]
             {
-                new Vaklas(true),
-                new Vaklas(false),
-                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(true)),
-                new HighDensitySpaceNebulae(Length, 0, 2, new Vaklas(false)),
+                new SlowMovingShuttle(),
+                new Augur(false),
+                new HighDensitySpaceNebulae(Length, 0, 30, new SlowMovingShuttle()),
+                new HighDensitySpaceNebulae(Length, 0, 50, new Augur(false)),
+                new NitrinoParticleNebulae(Length, 0, 0, new SlowMovingShuttle()),
+                new NitrinoParticleNebulae(Length, 0, 0, new Augur(false)),
             },
         };
 

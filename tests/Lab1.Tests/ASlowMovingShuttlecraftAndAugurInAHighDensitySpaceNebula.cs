@@ -9,7 +9,7 @@ using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.I
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FirstTest
+public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
 {
     public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
     {

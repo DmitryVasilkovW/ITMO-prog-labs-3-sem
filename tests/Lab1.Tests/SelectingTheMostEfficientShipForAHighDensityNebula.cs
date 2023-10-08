@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
-using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
@@ -10,11 +10,11 @@ using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IE
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FourthTest
+public class SelectingTheMostEfficientShipForAHighDensityNebula
 {
-    public static bool ResultsVerification(ISpaceship ship)
+    public static bool ResultsVerification(Spaceship.Entities.ISpaceship ship)
     {
-        if (ship is SlowMovingShuttle)
+        if (ship is Stella)
         {
             return true;
         }
@@ -24,10 +24,10 @@ public class FourthTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
     {
-        IList<ISpaceship> ships = new List<ISpaceship>();
-        ISpaceship ship;
+        IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
+        Spaceship.Entities.ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
@@ -35,7 +35,7 @@ public class FourthTest
         ships.Add(firstShip);
         ships.Add(secondShip);
 
-        ship = new Environments.Services.ShipSelection(
+        ship = new ShipSelection(
             ships,
             new FuelExchange(2, 3, 4, 5, 6, 7, 8, 9),
             environments,
@@ -52,10 +52,10 @@ public class FourthTest
         {
             new object[]
             {
-                new SlowMovingShuttle(),
-                new Vaklas(false),
-                new NormalSpace(Length, 0, 0, new SlowMovingShuttle()),
-                new NormalSpace(Length, 0, 0, new Vaklas(false)),
+                new Augur(false),
+                new Stella(false),
+                new HighDensitySpaceNebulae(Length, 0, 0, new Augur(false)),
+                new HighDensitySpaceNebulae(Length, 0, 0, new Stella(false)),
             },
         };
 
