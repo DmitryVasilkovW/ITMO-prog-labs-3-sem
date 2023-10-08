@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
@@ -13,9 +12,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class FifthTest
 {
-    public static bool ResultsVerification(Spaceship.Entities.ISpaceship shipStatus, string expectedValues)
+    public static bool ResultsVerification(Spaceship.Entities.ISpaceship ship)
     {
-        if (shipStatus.ShipName.Equals(expectedValues, StringComparison.Ordinal))
+        if (ship is Stella)
         {
             return true;
         }
@@ -29,14 +28,12 @@ public class FifthTest
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         Spaceship.Entities.ISpaceship ship;
-        string expectedValue;
-        IList<Environments.Entities.IEnvironment> environments = new List<IEnvironment>();
+        IList<IEnvironment> environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValue = "Stella";
 
         ship = new ShipSelection(
             ships,
@@ -44,7 +41,7 @@ public class FifthTest
             environments,
             100).Select();
 
-        Assert.True(ResultsVerification(ship, expectedValue));
+        Assert.True(ResultsVerification(ship));
     }
 
     private class ParameterizedTests : IEnumerable<object[]>

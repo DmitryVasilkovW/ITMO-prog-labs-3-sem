@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
@@ -12,9 +12,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class FourthTest
 {
-    public static bool ResultsVerification(Spaceship.Entities.ISpaceship shipStatus, string expectedValues)
+    public static bool ResultsVerification(ISpaceship ship)
     {
-        if (shipStatus.ShipName.Equals(expectedValues, StringComparison.Ordinal))
+        if (ship is SlowMovingShuttle)
         {
             return true;
         }
@@ -24,18 +24,16 @@ public class FourthTest
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
+    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
     {
-        IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
-        Spaceship.Entities.ISpaceship ship;
-        string expectedValue;
+        IList<ISpaceship> ships = new List<ISpaceship>();
+        ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
 
         environments.Add(environmentForFirstShip);
         environments.Add(environmentForSecondShip);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValue = "SlowMovingShuttle";
 
         ship = new Environments.Services.ShipSelection(
             ships,
@@ -43,7 +41,7 @@ public class FourthTest
             environments,
             100).Select();
 
-        Assert.True(ResultsVerification(ship, expectedValue));
+        Assert.True(ResultsVerification(ship));
     }
 
     private class ParameterizedTests : IEnumerable<object[]>
