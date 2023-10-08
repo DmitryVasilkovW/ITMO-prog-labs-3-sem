@@ -5,7 +5,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Vaklas : ISpaceship
 {
-    private int _speed;
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
@@ -16,7 +15,7 @@ public class Vaklas : ISpaceship
         WeightDimensionCharacteristics = 2;
         Equipment = new AdditionalSafetyDevicesSlot("none");
         ShipName = "Vaklas";
-        _speed = 100;
+        Speed = 100;
         _nebulaDamage = 923333333;
         Armor = new SecondClassArmor(WeightDimensionCharacteristics);
         JumpEngine = new JumpEngineGamma(WeightDimensionCharacteristics);
@@ -39,7 +38,7 @@ public class Vaklas : ISpaceship
     }
 
     public string ShipName { get; }
-    public int Speed { get; }
+    public int Speed { get; private set; }
 
     public IEnginesType Engine { get; }
 
@@ -78,7 +77,7 @@ public class Vaklas : ISpaceship
         }
         else
         {
-            _speed = Engine.Speed(_speed);
+            Speed = Engine.Speed(Speed);
             _fuelreserve = Engine.FuelConsumption(_fuelreserve);
         }
     }
@@ -117,6 +116,6 @@ public class Vaklas : ISpaceship
 
     public void ObstructionOfFlight()
     {
-        _speed /= _nebulaDamage;
+        Speed /= _nebulaDamage;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
@@ -7,13 +8,13 @@ public class NormalSpace : Entities.IEnvironment
 {
     private Asteroid _asteroid;
     private Meteorites _meteorites;
-    private Spaceship.Entities.ISpaceship _ship;
+    private ISpaceship _ship;
     private string _requiredEngine;
     private int _length;
     private int _countOfFirstTypeObstracles;
     private int _countOfSecondTypeObstracles;
 
-    public NormalSpace(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, Spaceship.Entities.ISpaceship ship)
+    public NormalSpace(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, ISpaceship ship)
     {
         _asteroid = new Asteroid();
         _meteorites = new Meteorites();

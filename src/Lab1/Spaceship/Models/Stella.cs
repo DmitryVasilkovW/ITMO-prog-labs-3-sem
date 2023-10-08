@@ -5,7 +5,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Stella : Entities.ISpaceship
 {
-    private int _speed;
     private int _range;
     private int _fuelreserve;
     private int _gravitonmatter;
@@ -36,7 +35,7 @@ public class Stella : Entities.ISpaceship
 
     public bool IsPhotonDeflectorWorking { get; }
 
-    public int Speed { get; }
+    public int Speed { get; private set; }
 
     public int Fuelreserve
     {
@@ -102,13 +101,13 @@ public class Stella : Entities.ISpaceship
 
     public void EngineWork()
     {
-        _speed = Engine.Speed(_speed);
+        Speed = Engine.Speed(Speed);
         _fuelreserve = Engine.FuelConsumption(_fuelreserve);
     }
 
     public void ObstructionOfFlight()
     {
-        _speed -= _nebulaDamage;
+        Speed -= _nebulaDamage;
     }
 
     public void JumpEnginew()

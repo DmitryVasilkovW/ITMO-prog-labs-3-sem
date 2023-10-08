@@ -5,12 +5,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class SlowMovingShuttle : Entities.ISpaceship
 {
-    private int _speed;
     private int _fuelreserve;
     private int _gravitonmatter;
     private int _nebulaDamage;
     private int _range;
-    private bool _crew;
 
     public SlowMovingShuttle()
     {
@@ -40,7 +38,7 @@ public class SlowMovingShuttle : Entities.ISpaceship
 
     public IArmor Armor { get; }
 
-    public int Speed { get; }
+    public int Speed { get; private set; }
 
     public string ShipName { get; }
 
@@ -105,18 +103,13 @@ public class SlowMovingShuttle : Entities.ISpaceship
         }
         else
         {
-            _speed = Engine.Speed(_speed);
+            Speed = Engine.Speed(Speed);
             _fuelreserve = Engine.FuelConsumption(_fuelreserve);
         }
     }
 
-    public void StaffAssault()
-    {
-        _crew ^= true;
-    }
-
     public void ObstructionOfFlight()
     {
-        _speed -= _nebulaDamage;
+        Speed -= _nebulaDamage;
     }
 }
