@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
@@ -24,15 +25,27 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip)
+    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
         IList<ISpaceship> ships = new List<ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
         var environments = new List<IEnvironment>();
+        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IObstacle> fleshes = new List<IObstacle>();
 
-        environments.Add(environmentForFirstShip);
-        environments.Add(environmentForSecondShip);
+        for (int i = 0; i < 31; i++)
+        {
+            fleshes.Add(new AntimatterFlashes());
+        }
+
+        obstracles.Add(fleshes);
+
+        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, new SlowMovingShuttle());
+        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, new Augur(false));
+
+        environments.Add(firstenvironment);
+        environments.Add(secondenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
         expectedValues.Add("Loss of ship");
@@ -45,16 +58,12 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
 
     private class ParameterizedTests : IEnumerable<object[]>
     {
-        private const int Length = 239;
-
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[]
             {
                 new SlowMovingShuttle(),
                 new Augur(false),
-                new HighDensitySpaceNebulae(Length, 30, new SlowMovingShuttle()),
-                new HighDensitySpaceNebulae(Length, 30, new Augur(false)),
             },
         };
 

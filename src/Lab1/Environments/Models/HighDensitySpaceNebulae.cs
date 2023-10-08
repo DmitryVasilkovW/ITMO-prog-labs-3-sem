@@ -1,47 +1,36 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
-public class HighDensitySpaceNebulae : Entities.IEnvironment
+public class HighDensitySpaceNebulae : IEnvironment
 {
-    private AntimatterFlashes _antimatterFlashes;
-    private Spaceship.Entities.ISpaceship _ship;
-    private int _countOfSecondTypeObstracles;
+    private IList<IList<IObstacle>> _obstracles;
+    private ISpaceship _ship;
 
-    public HighDensitySpaceNebulae(int length, int countOfSecondTypeObstracles,  Spaceship.Entities.ISpaceship ship)
+    public HighDensitySpaceNebulae(int length, IList<IList<IObstacle>> obstracles,  ISpaceship ship)
     {
-        _antimatterFlashes = new AntimatterFlashes();
         _ship = ship;
-        _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
         Length = length;
-    }
-
-    public int CountOfFirstTypeObstracles { get; }
-
-    public int CountOfSecondTypeObstracles
-    {
-        get { return _countOfSecondTypeObstracles; }
+        _obstracles = obstracles;
     }
 
     public int Length { get; }
 
-    public string SecondTypeObstracleType
-    {
-        get { return _antimatterFlashes.DamageType; }
-    }
-
     public bool IsTheShipWasAbleToRemainInService()
     {
-        if (!_ship.IsShipAlive())
+        foreach (IList<IObstacle> listOfObstacles in _obstracles)
         {
-            return false;
-        }
+            foreach (IObstacle obstacle in listOfObstacles)
+            {
+                if (!_ship.IsShipAlive())
+                {
+                    return false;
+                }
 
-        TakingDamageFromAllObstaclesOfTheSecondType();
-
-        if (!IsShipAlive())
-        {
-            return false;
+                _ship = obstacle.Damage(_ship);
+            }
         }
 
         return true;
@@ -69,22 +58,17 @@ public class HighDensitySpaceNebulae : Entities.IEnvironment
 
     public bool IsObstaclesKillStaff()
     {
-        if (_countOfSecondTypeObstracles > 0)
+        foreach (IList<IObstacle> listOfObstacles in _obstracles)
         {
-            return true;
+            foreach (IObstacle obstacle in listOfObstacles)
+            {
+                if (obstacle is IPersonnelDamage)
+                {
+                    return true;
+                }
+            }
         }
 
         return false;
-    }
-
-    public void TakingDamageFromAllObstaclesOfTheSecondType()
-    {
-        while (_countOfSecondTypeObstracles-- > 0)
-        {
-            if (_ship.IsShipAlive())
-            {
-                _ship = _antimatterFlashes.Damage(_ship);
-            }
-        }
     }
 }

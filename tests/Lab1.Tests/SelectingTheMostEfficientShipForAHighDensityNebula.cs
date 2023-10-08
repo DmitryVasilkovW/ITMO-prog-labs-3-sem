@@ -6,7 +6,6 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
-using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
@@ -24,14 +23,21 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         Spaceship.Entities.ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
+        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IObstacle> fleshes = new List<IObstacle>();
 
-        environments.Add(environmentForFirstShip);
-        environments.Add(environmentForSecondShip);
+        obstracles.Add(fleshes);
+
+        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, new Augur(false));
+        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, new Stella(false));
+
+        environments.Add(firstenvironment);
+        environments.Add(secondenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
 
@@ -46,16 +52,12 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
 
     private class ParameterizedTests : IEnumerable<object[]>
     {
-        private const int Length = 100;
-
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[]
             {
                 new Augur(false),
                 new Stella(false),
-                new HighDensitySpaceNebulae(Length, 0, new Augur(false)),
-                new HighDensitySpaceNebulae(Length, 0, new Stella(false)),
             },
         };
 

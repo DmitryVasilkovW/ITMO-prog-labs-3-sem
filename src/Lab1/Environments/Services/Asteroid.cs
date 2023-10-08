@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
-public class Asteroid : IObstacle
+public class Asteroid : IObstacle, IHullDamage
 {
     private string _damageType;
 

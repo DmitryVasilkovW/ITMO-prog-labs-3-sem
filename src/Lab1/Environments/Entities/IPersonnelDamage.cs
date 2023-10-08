@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 
-public interface IObstacle
+public interface IPersonnelDamage
 {
-    ISpaceship Damage(Spaceship.Entities.ISpaceship ship);
+    ISpaceship Damage(ISpaceship ship);
 }

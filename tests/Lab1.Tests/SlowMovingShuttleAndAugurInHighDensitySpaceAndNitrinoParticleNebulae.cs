@@ -29,17 +29,31 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip, IEnvironment secondEnvironmentForFirstShip, IEnvironment secondEnvironmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
         var environments = new List<IEnvironment>();
+        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IObstacle> fleshes = new List<IObstacle>();
 
-        environments.Add(environmentForFirstShip);
-        environments.Add(environmentForSecondShip);
-        environments.Add(secondEnvironmentForFirstShip);
-        environments.Add(secondEnvironmentForSecondShip);
+        for (int i = 0; i < 31; i++)
+        {
+            fleshes.Add(new AntimatterFlashes());
+        }
+
+        obstracles.Add(fleshes);
+
+        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, new SlowMovingShuttle());
+        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, new Augur(false));
+        var thirdenvironment = new NitrinoParticleNebulae(239, 0, new SlowMovingShuttle());
+        var fourthenvironment = new NitrinoParticleNebulae(239, 0, new Augur(false));
+
+        environments.Add(firstenvironment);
+        environments.Add(secondenvironment);
+        environments.Add(thirdenvironment);
+        environments.Add(fourthenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
         expectedValues.Add("Loss of ship");
@@ -52,18 +66,12 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
 
     private class ParameterizedTests : IEnumerable<object[]>
     {
-        private const int Length = 239;
-
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[]
             {
                 new SlowMovingShuttle(),
                 new Augur(false),
-                new HighDensitySpaceNebulae(Length, 30, new SlowMovingShuttle()),
-                new HighDensitySpaceNebulae(Length, 50, new Augur(false)),
-                new NitrinoParticleNebulae(Length, 0, new SlowMovingShuttle()),
-                new NitrinoParticleNebulae(Length, 0, new Augur(false)),
             },
         };
 
