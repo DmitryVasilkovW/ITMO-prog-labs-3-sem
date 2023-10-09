@@ -6,8 +6,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 public class SlowMovingShuttle : ISpaceship
 {
     private int _fuelreserve;
-    private int _gravitonmatter;
-    private int _range;
 
     public SlowMovingShuttle()
     {
@@ -16,14 +14,9 @@ public class SlowMovingShuttle : ISpaceship
         Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
         JumpEngine = new JumpEngineSlot();
         Speed = 10;
-        _range = 0;
+        Range = 0;
         Armor = new FirstClassArmor();
         Engine = new ClassCPulseEngine();
-    }
-
-    public bool IsPhotonDeflectorWorking
-    {
-        get { return Deflector.IsaPhotonDeflectorInstalled; }
     }
 
     public IJumpEngine JumpEngine { get; }
@@ -35,6 +28,8 @@ public class SlowMovingShuttle : ISpaceship
     public IArmor Armor { get; }
 
     public int Speed { get; private set; }
+
+    public int Range { get; private set; }
 
     public IEngine Engine { get; }
 
@@ -66,16 +61,6 @@ public class SlowMovingShuttle : ISpaceship
         }
     }
 
-    public bool IsjumpEngineInstalled()
-    {
-        if (JumpEngine.ISSlot())
-        {
-            return false;
-        }
-
-        return true;
-    }
-
     public bool IsShipAlive()
     {
         if (Armor.IsArmorWorking())
@@ -88,15 +73,13 @@ public class SlowMovingShuttle : ISpaceship
 
     public void EngineWork()
     {
-        if (JumpEngine is not JumpEngineSlot)
-        {
-            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
-            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
-        }
-        else
-        {
-            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-        }
+        Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+        _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+    }
+
+    public void JumpEngineWork()
+    {
+        Range = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
+        _fuelreserve = JumpEngine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
     }
 }

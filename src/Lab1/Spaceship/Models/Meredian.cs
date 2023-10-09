@@ -6,13 +6,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 public class Meredian : ISpaceship
 {
     private int _fuelreserve;
-    private int _gravitonmatter;
-    private int _range;
 
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
-        _range = 10;
+        Range = 10;
         Speed = 100;
         JumpEngine = new JumpEngineSlot();
         Equipment = new AntiNitrinoEmitter("SpaceWhale");
@@ -43,6 +41,8 @@ public class Meredian : ISpaceship
     public IArmor Armor { get; }
 
     public int Speed { get; private set; }
+
+    public int Range { get; private set; }
 
     public IEngine Engine { get; }
 
@@ -76,25 +76,13 @@ public class Meredian : ISpaceship
 
     public void EngineWork()
     {
-        if (JumpEngine is not JumpEngineSlot)
-        {
-            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
-            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
-        }
-        else
-        {
-            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-        }
+        Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+        _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
     }
 
-    public bool IsjumpEngineInstalled()
+    public void JumpEngineWork()
     {
-        if (JumpEngine.ISSlot())
-        {
-            return false;
-        }
-
-        return true;
+        Range = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
+        _fuelreserve = JumpEngine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
@@ -38,8 +39,8 @@ public class HighDensitySpaceNebulae : IEnvironment
 
     public bool IsCanEnterTheEnvironment()
     {
-        _ship.EngineWork();
-        if (!_ship.JumpEngine.ISSlot() && (Length <= _ship.Speed))
+        _ship.JumpEngineWork();
+        if (_ship.JumpEngine is not JumpEngineSlot && (Length <= _ship.Range))
         {
             return true;
         }

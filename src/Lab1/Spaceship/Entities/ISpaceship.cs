@@ -4,6 +4,8 @@ public interface ISpaceship
 {
     int Speed { get; }
 
+    int Range { get; }
+
     IEngine Engine { get; }
 
     IJumpEngine JumpEngine { get; }
@@ -17,11 +19,11 @@ public interface ISpaceship
 
     int Fuelreserve { get; }
 
-    bool IsjumpEngineInstalled();
-
     bool IsShipAlive();
 
     void EngineWork();
+
+    void JumpEngineWork();
 
     void SafetyEquipmentOperation();
 }

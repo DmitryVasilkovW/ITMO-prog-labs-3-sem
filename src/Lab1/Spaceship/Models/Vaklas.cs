@@ -5,15 +5,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Vaklas : ISpaceship
 {
-    private int _range;
-    private int _fuelreserve;
-
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
         Equipment = new AdditionalSafetyDevicesSlot("none");
         Speed = 100;
-        _fuelreserve = 1;
+        Range = 10;
+        Fuelreserve = 1;
         Armor = new SecondClassArmor();
         JumpEngine = new JumpEngineGamma();
         Engine = new ClassEPulseEngine();
@@ -28,12 +26,9 @@ public class Vaklas : ISpaceship
         }
     }
 
-    public bool IsPhotonDeflectorWorking
-    {
-        get { return Deflector.IsaPhotonDeflectorInstalled; }
-    }
-
     public int Speed { get; private set; }
+
+    public int Range { get; private set; }
 
     public IEngine Engine { get; }
 
@@ -47,32 +42,18 @@ public class Vaklas : ISpaceship
 
     public AdditionalSafetyDevices Equipment { get; }
 
-    public int Fuelreserve
-    {
-        get
-        {
-            EngineWork();
-            return _fuelreserve;
-        }
-    }
-
-    public bool IsDeflectorWorking
-    {
-        get { return Deflector.IsDeflectorWorking(); }
-    }
+    public int Fuelreserve { get; private set; }
 
     public void EngineWork()
     {
-        if (JumpEngine is not JumpEngineSlot)
-        {
-            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
-            _fuelreserve = JumpEngine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-        }
-        else
-        {
-            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-        }
+        Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+        Fuelreserve = Engine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
+    }
+
+    public void JumpEngineWork()
+    {
+        Range = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
+        Fuelreserve = JumpEngine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 
     public void SafetyEquipmentOperation()

@@ -5,16 +5,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Augur : ISpaceship
 {
-    private int _range;
-    private int _fuelreserve;
-    private int _gravitonmatter;
-
     public Augur(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 3;
         Equipment = new AdditionalSafetyDevicesSlot("no protection");
         Speed = 10;
-        _range = 100;
+        Range = 100;
+        Fuelreserve = 0;
         Armor = new ThirdClassArmor();
         JumpEngine = new JumpEngineAlpha();
         Engine = new ClassEPulseEngine();
@@ -29,24 +26,15 @@ public class Augur : ISpaceship
         }
     }
 
-    public IEngine Engine { get; private set; }
-
-    public bool IsPhotonDeflectorWorking
-    {
-        get { return Deflector.IsaPhotonDeflectorInstalled; }
-    }
+    public IEngine Engine { get; }
 
     public int Speed { get; private set; }
 
+    public int Range { get; private set; }
+
     public IJumpEngine JumpEngine { get; }
 
-    public int Fuelreserve
-    {
-        get
-        {
-            return _fuelreserve;
-        }
-    }
+    public int Fuelreserve { get; private set; }
 
     public Deflectors Deflector { get; }
 
@@ -55,11 +43,6 @@ public class Augur : ISpaceship
     public AdditionalSafetyDevices Equipment { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public bool IsDeflectorWorking
-    {
-        get { return Deflector.IsDeflectorWorking(); }
-    }
 
     public bool IsjumpEngineInstalled()
     {
@@ -85,7 +68,7 @@ public class Augur : ISpaceship
 
     public bool IsShipAlive()
     {
-        if ((Armor.IsArmorWorking() || Deflector.IsDeflectorWorking()) && Speed > 0)
+        if (Armor.IsArmorWorking() || Deflector.IsDeflectorWorking())
         {
             return true;
         }
@@ -95,21 +78,13 @@ public class Augur : ISpaceship
 
     public void EngineWork()
     {
-        if (JumpEngine is not JumpEngineSlot)
-        {
-            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-        }
-        else
-        {
-            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-        }
+        Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+        Fuelreserve = Engine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 
-    public void JumpEnginew()
+    public void JumpEngineWork()
     {
-        _range = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
-        _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
+        Range = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
+        Fuelreserve = JumpEngine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 }

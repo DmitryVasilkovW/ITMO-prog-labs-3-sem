@@ -3,18 +3,15 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
-public class Stella : Entities.ISpaceship
+public class Stella : ISpaceship
 {
-    private int _range;
-    private int _fuelreserve;
-    private int _gravitonmatter;
-
     public Stella(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 1;
         Equipment = new AdditionalSafetyDevicesSlot("none");
         Speed = 100;
-        _range = 10;
+        Range = 239;
+        Fuelreserve = 10;
         Armor = new FirstClassArmor();
         JumpEngine = new JumpEngineOmega();
         Engine = new ClassCPulseEngine();
@@ -29,19 +26,11 @@ public class Stella : Entities.ISpaceship
         }
     }
 
-    public bool IsPhotonDeflectorWorking { get; }
-
     public int Speed { get; private set; }
 
-    public int Fuelreserve
-    {
-        get
-        {
-            EngineWork();
-            return _fuelreserve;
-        }
-    }
+    public int Range { get; private set; }
 
+    public int Fuelreserve { get; private set; }
     public IEngine Engine { get; }
 
     public IJumpEngine JumpEngine { get; }
@@ -53,11 +42,6 @@ public class Stella : Entities.ISpaceship
     public AdditionalSafetyDevices Equipment { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public bool IsDeflectorWorking
-    {
-        get { return Deflector.IsDeflectorWorking(); }
-    }
 
     public bool IsjumpEngineInstalled()
     {
@@ -93,19 +77,13 @@ public class Stella : Entities.ISpaceship
 
     public void EngineWork()
     {
-        if (JumpEngine is not JumpEngineSlot)
-        {
-            Speed = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
-            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
-        }
-
         Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-        _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        Fuelreserve = Engine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 
-    public void JumpEnginew()
+    public void JumpEngineWork()
     {
-        _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
-        _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
+        Range = JumpEngine.Range(Range, WeightDimensionCharacteristics);
+        Fuelreserve = JumpEngine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 }
