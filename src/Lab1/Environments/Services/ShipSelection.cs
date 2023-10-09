@@ -73,6 +73,7 @@ public class ShipSelection
         for (int i = 0; i < _shipes.Count; i++)
         {
             int price = _shipes[i].Fuelreserve % _length;
+            price *= _fuelExchange.ActivePlasmaPrice;
 
             _pricesAndIndices.Add(new List<int>() { price, indexOfShip });
 
