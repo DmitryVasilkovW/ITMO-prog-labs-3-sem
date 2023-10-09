@@ -13,7 +13,7 @@ public class ClassEPulseEngine : IEngine, IExponentialAcceleration
 
         speed = Math.Abs(speed) + Math.Abs((int)designspeed / weightDimensionsOfTheShip);
 
-        return speed;
+        return Math.Abs(speed);
     }
 
     public int FuelConsumption(int fuelreserve, int weightDimensionsOfTheShip)

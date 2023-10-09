@@ -38,7 +38,8 @@ public class NitrinoParticleNebulae : IEnvironment
 
     public bool IsCanEnterTheEnvironment()
     {
-        if (_ship.Engine is IEngine && _ship.Engine is IExponentialAcceleration)
+        _ship.EngineWork();
+        if (_ship.Engine is IEngine && _ship.Engine is IExponentialAcceleration && (Length <= _ship.Speed))
         {
             return true;
         }

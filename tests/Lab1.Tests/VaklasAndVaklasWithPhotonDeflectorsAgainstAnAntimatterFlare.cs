@@ -30,12 +30,13 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
     [ClassData(typeof(ParameterizedTests))]
     public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
-        IList<Spaceship.Entities.ISpaceship> ships = new List<ISpaceship>();
+        IList<ISpaceship> ships = new List<ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
         IList<IEnvironment> environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
+        int length = 1;
 
         for (int i = 0; i < 2; i++)
         {
@@ -44,8 +45,8 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, secondShip);
+        var firstenvironment = new HighDensitySpaceNebulae(length, obstracles, firstShip);
+        var secondenvironment = new HighDensitySpaceNebulae(length, obstracles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -54,7 +55,7 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
         expectedValues.Add("Success");
         expectedValues.Add("Crew deaths");
 
-        shipStatus = new Route(239, environments, ships).ShipHandling();
+        shipStatus = new Route(environments, ships).ShipHandling();
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
     }

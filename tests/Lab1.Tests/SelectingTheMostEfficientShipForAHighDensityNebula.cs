@@ -30,11 +30,12 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
         IList<IEnvironment> environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
+        int length = 150;
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, secondShip);
+        var firstenvironment = new HighDensitySpaceNebulae(length, obstracles, firstShip);
+        var secondenvironment = new HighDensitySpaceNebulae(length, obstracles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

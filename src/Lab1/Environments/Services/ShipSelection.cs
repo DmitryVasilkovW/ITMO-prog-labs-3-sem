@@ -72,7 +72,7 @@ public class ShipSelection
 
         for (int i = 0; i < _shipes.Count; i++)
         {
-            int price = _length * _shipes[i].Fuelreserve;
+            int price = _shipes[i].Fuelreserve % _length;
 
             _pricesAndIndices.Add(new List<int>() { price, indexOfShip });
 

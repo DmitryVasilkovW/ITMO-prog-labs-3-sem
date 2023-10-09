@@ -30,11 +30,12 @@ public class SelectingTheMostAffectiveShipForNormalSpace
         IList<IEnvironment> environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
+        int length = 50;
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new NormalSpace(100, obstracles, firstShip);
-        var secondenvironment = new NormalSpace(100, obstracles, secondShip);
+        var firstenvironment = new NormalSpace(length, obstracles, firstShip);
+        var secondenvironment = new NormalSpace(length, obstracles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

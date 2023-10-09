@@ -38,7 +38,8 @@ public class HighDensitySpaceNebulae : IEnvironment
 
     public bool IsCanEnterTheEnvironment()
     {
-        if (!_ship.JumpEngine.ISSlot())
+        _ship.EngineWork();
+        if (!_ship.JumpEngine.ISSlot() && (Length <= _ship.Speed))
         {
             return true;
         }

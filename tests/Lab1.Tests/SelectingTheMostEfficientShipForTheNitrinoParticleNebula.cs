@@ -27,14 +27,15 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         Spaceship.Entities.ISpaceship ship;
-        IList<Environments.Entities.IEnvironment> environments = new List<Environment>();
+        IList<IEnvironment> environments = new List<Environment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
+        int length = 1;
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new NitrinoParticleNebulae(100, obstracles, firstShip);
-        var secondenvironment = new NitrinoParticleNebulae(100, obstracles, secondShip);
+        var firstenvironment = new NitrinoParticleNebulae(length, obstracles, firstShip);
+        var secondenvironment = new NitrinoParticleNebulae(length, obstracles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

@@ -38,6 +38,7 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IList<IObstacle>> obstraclesforNitrinoParticleNebulae = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
+        int length = 1;
 
         for (int i = 0; i < 31; i++)
         {
@@ -46,10 +47,10 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, secondShip);
-        var thirdenvironment = new NitrinoParticleNebulae(239, obstraclesforNitrinoParticleNebulae, firstShip);
-        var fourthenvironment = new NitrinoParticleNebulae(239, obstraclesforNitrinoParticleNebulae, secondShip);
+        var firstenvironment = new HighDensitySpaceNebulae(length, obstracles, firstShip);
+        var secondenvironment = new HighDensitySpaceNebulae(length, obstracles, secondShip);
+        var thirdenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, firstShip);
+        var fourthenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -60,7 +61,7 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         expectedValues.Add("Loss of ship");
         expectedValues.Add("Destruction of the ship");
 
-        shipStatus = new Route(239, environments, ships).ShipHandling();
+        shipStatus = new Route(environments, ships).ShipHandling();
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
     }

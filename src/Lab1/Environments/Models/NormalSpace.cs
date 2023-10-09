@@ -38,7 +38,8 @@ public class NormalSpace : IEnvironment
 
     public bool IsCanEnterTheEnvironment()
     {
-        if (_ship.Engine is IEngine)
+        _ship.EngineWork();
+        if (_ship.Engine is IEngine && (Length <= _ship.Speed))
         {
             return true;
         }

@@ -47,9 +47,9 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         obstracles.Add(spacewhiles);
         obstraclesforVaklas.Add(spacewhilesforVaklas);
 
-        var firstenvironment = new NitrinoParticleNebulae(239, obstraclesforVaklas, firstShip);
-        var secondenvironment = new NitrinoParticleNebulae(239, obstracles, secondShip);
-        var thirdenvironment = new NitrinoParticleNebulae(239, obstracles, thirdship);
+        var firstenvironment = new NitrinoParticleNebulae(1, obstraclesforVaklas, firstShip);
+        var secondenvironment = new NitrinoParticleNebulae(1, obstracles, secondShip);
+        var thirdenvironment = new NitrinoParticleNebulae(1, obstracles, thirdship);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -61,7 +61,7 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         expectedValues.Add("Success");
         expectedValues.Add("Success");
 
-        shipStatus = new Route(239, environments, ships).ShipHandling();
+        shipStatus = new Route(environments, ships).ShipHandling();
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
     }

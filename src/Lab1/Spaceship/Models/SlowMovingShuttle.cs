@@ -15,7 +15,7 @@ public class SlowMovingShuttle : ISpaceship
         Equipment = new AdditionalSafetyDevicesSlot("none");
         Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
         JumpEngine = new JumpEngineSlot();
-        Speed = 100;
+        Speed = 10;
         _range = 0;
         Armor = new FirstClassArmor();
         Engine = new ClassCPulseEngine();
