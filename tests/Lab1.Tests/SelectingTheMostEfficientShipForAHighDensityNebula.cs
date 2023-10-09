@@ -30,7 +30,7 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
         IList<IEnvironment> environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
-        int length = 150;
+        int length = 100;
 
         obstracles.Add(fleshes);
 
