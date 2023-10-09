@@ -37,22 +37,16 @@ public class Route
                 if (!ship.Deflector.IsPhotonDeflectorWorking() && environment.IsObstaclesKillStaff())
                 {
                     _shipStatus.Add(StatusOfShips.CrewDeaths);
-
-                    continue;
                 }
                 else
                 {
                     if (environment.IsTheShipWasAbleToRemainInService())
                     {
                         _shipStatus.Add(StatusOfShips.Success);
-
-                        continue;
                     }
                     else
                     {
                         _shipStatus.Add(StatusOfShips.DestructionOfTheShip);
-
-                        continue;
                     }
                 }
             }

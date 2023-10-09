@@ -77,14 +77,4 @@ public class Vaklas : ISpaceship
 
         return true;
     }
-
-    public bool IsjumpEngineInstalled()
-    {
-        if (JumpEngine.ISSlot())
-        {
-            return false;
-        }
-
-        return true;
-    }
 }

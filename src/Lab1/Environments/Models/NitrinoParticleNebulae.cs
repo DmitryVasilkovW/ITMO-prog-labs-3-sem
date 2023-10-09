@@ -59,16 +59,6 @@ public class NitrinoParticleNebulae : IEnvironment
         return false;
     }
 
-    public bool IsShipAlive()
-    {
-        if (_ship.IsShipAlive())
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public bool IsObstaclesKillStaff()
     {
         foreach (IList<IObstacle> listOfObstacles in _obstracles)

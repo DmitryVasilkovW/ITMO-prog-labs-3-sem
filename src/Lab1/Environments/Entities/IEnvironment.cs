@@ -6,7 +6,5 @@ public interface IEnvironment
 
     bool IsCanEnterTheEnvironment();
 
-    bool IsShipAlive();
-
     bool IsObstaclesKillStaff();
 }

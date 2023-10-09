@@ -1,6 +1,8 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class StandardPhotonicDeflectors : Entities.IPhotonicDeflectors
+public class StandardPhotonicDeflectors : IPhotonicDeflectors
 {
     private int _antimatterFlareResidueBeforeDamage;
 

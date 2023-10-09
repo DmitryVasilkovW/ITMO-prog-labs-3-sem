@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class FirstClassArmor : Entities.IArmor
+public class FirstClassArmor : IArmor
 {
     private const int Meteoritedamage = 2000;
     private const int Asteroiddamage = 1000;

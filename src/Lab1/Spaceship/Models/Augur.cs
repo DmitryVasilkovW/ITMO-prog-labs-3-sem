@@ -44,16 +44,6 @@ public class Augur : ISpaceship
 
     public int WeightDimensionCharacteristics { get; }
 
-    public bool IsjumpEngineInstalled()
-    {
-        if (JumpEngine.ISSlot())
-        {
-            return false;
-        }
-
-        return true;
-    }
-
     public void SafetyEquipmentOperation()
     {
         if (Deflector.IsDeflectorWorking())

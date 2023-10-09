@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class DeflectorSlot : Entities.Deflectors
+public class DeflectorSlot : Deflectors
 {
     private IPhotonicDeflectors _photonicDeflector;
     private bool _isaPhotonDeflectorInstalled;
