@@ -28,14 +28,22 @@ public class SelectingTheMostAffectiveShipForNormalSpace
         IList<ISpaceship> ships = new List<ISpaceship>();
         ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         int length = 50;
+        int otherTaxes = 1;
+        int excises = 2;
+        int processingAndDelivery = 3;
+        int oilCompanyIncome = 4;
+        int gasStationRevenues = 5;
+        int mineralExtractionTax = 6;
+        int costOfGravitonMatterProduction = 7;
+        int costOfProductionOfActivePlasma = 8;
 
-        obstracles.Add(fleshes);
+        obstacles.Add(fleshes);
 
-        var firstenvironment = new NormalSpace(length, obstracles, firstShip);
-        var secondenvironment = new NormalSpace(length, obstracles, secondShip);
+        var firstenvironment = new NormalSpace(length, obstacles, firstShip);
+        var secondenvironment = new NormalSpace(length, obstacles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -44,9 +52,9 @@ public class SelectingTheMostAffectiveShipForNormalSpace
 
         ship = new Environments.Services.ShipSelection(
             ships,
-            new FuelExchange(2, 3, 4, 5, 6, 7, 8, 9),
+            new FuelExchange(otherTaxes, excises, processingAndDelivery, oilCompanyIncome, gasStationRevenues, mineralExtractionTax, costOfGravitonMatterProduction, costOfProductionOfActivePlasma),
             environments,
-            100).Select();
+            length).Select();
 
         Assert.True(ResultsVerification(ship));
     }

@@ -31,24 +31,25 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
-        IList<IList<IObstacle>> obstraclesforVaklas = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstaclesforVaklas = new List<IList<IObstacle>>();
         IList<IObstacle> spacewhiles = new List<IObstacle>();
         IList<IObstacle> spacewhilesforVaklas = new List<IObstacle>();
+        int countofobstacles = 3;
 
-        for (int i = 0; i < 31; i++)
+        for (int i = 0; i < countofobstacles; i++)
         {
             spacewhilesforVaklas.Add(new SpaceWhale());
         }
 
         spacewhiles.Add(new SpaceWhale());
 
-        obstracles.Add(spacewhiles);
-        obstraclesforVaklas.Add(spacewhilesforVaklas);
+        obstacles.Add(spacewhiles);
+        obstaclesforVaklas.Add(spacewhilesforVaklas);
 
-        var firstenvironment = new NitrinoParticleNebulae(1, obstraclesforVaklas, firstShip);
-        var secondenvironment = new NitrinoParticleNebulae(1, obstracles, secondShip);
-        var thirdenvironment = new NitrinoParticleNebulae(1, obstracles, thirdship);
+        var firstenvironment = new NitrinoParticleNebulae(1, obstaclesforVaklas, firstShip);
+        var secondenvironment = new NitrinoParticleNebulae(1, obstacles, secondShip);
+        var thirdenvironment = new NitrinoParticleNebulae(1, obstacles, thirdship);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

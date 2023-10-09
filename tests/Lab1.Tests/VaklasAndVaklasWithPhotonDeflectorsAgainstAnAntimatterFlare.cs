@@ -33,19 +33,20 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         IList<IEnvironment> environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         int length = 1;
+        int countofobstacles = 2;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < countofobstacles; i++)
         {
             fleshes.Add(new AntimatterFlashes());
         }
 
-        obstracles.Add(fleshes);
+        obstacles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(length, obstracles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(length, obstracles, secondShip);
+        var firstenvironment = new HighDensitySpaceNebulae(length, obstacles, firstShip);
+        var secondenvironment = new HighDensitySpaceNebulae(length, obstacles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

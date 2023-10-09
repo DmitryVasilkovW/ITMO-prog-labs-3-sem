@@ -50,22 +50,23 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
-        IList<IList<IObstacle>> obstraclesforNitrinoParticleNebulae = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstaclesforHighDensitySpaceNebulae = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstaclesforNitrinoParticleNebulae = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         int length = 1;
+        int countofobstacles = 31;
 
-        for (int i = 0; i < 31; i++)
+        for (int i = 0; i < countofobstacles; i++)
         {
             fleshes.Add(new AntimatterFlashes());
         }
 
-        obstracles.Add(fleshes);
+        obstaclesforHighDensitySpaceNebulae.Add(fleshes);
 
-        var firstenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, firstShip);
-        var secondenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, secondShip);
-        var thirdenvironment = new HighDensitySpaceNebulae(length, obstracles, firstShip);
-        var fourthenvironment = new HighDensitySpaceNebulae(length, obstracles, secondShip);
+        var firstenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae, firstShip);
+        var secondenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae, secondShip);
+        var thirdenvironment = new HighDensitySpaceNebulae(length, obstaclesforHighDensitySpaceNebulae, firstShip);
+        var fourthenvironment = new HighDensitySpaceNebulae(length, obstaclesforHighDensitySpaceNebulae, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
