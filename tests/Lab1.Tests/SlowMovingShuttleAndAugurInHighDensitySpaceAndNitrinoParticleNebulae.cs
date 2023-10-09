@@ -10,7 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebulae
 {
-    public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
+    public static bool ResultsVerification(IList<StatusOfShips> shipStatus, IList<StatusOfShips> expectedValues)
     {
         int indexForShip = 0;
 
@@ -32,8 +32,8 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
     public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
-        IList<string> shipStatus;
-        IList<string> expectedValues = new List<string>();
+        IList<StatusOfShips> shipStatus;
+        IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IList<IObstacle>> obstraclesforNitrinoParticleNebulae = new List<IList<IObstacle>>();
@@ -58,8 +58,8 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         environments.Add(fourthenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValues.Add("Loss of ship");
-        expectedValues.Add("Destruction of the ship");
+        expectedValues.Add(StatusOfShips.LossOfShip);
+        expectedValues.Add(StatusOfShips.DestructionOfTheShip);
 
         shipStatus = new Route(environments, ships).ShipHandling();
 

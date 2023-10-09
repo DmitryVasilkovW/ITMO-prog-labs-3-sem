@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
@@ -11,11 +10,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
 {
-    public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
+    public static bool ResultsVerification(IList<StatusOfShips> shipStatus, IList<StatusOfShips> expectedValues)
     {
         for (int i = 0; i < shipStatus.Count; i++)
         {
-            if (!shipStatus[i].Equals(expectedValues[i], StringComparison.Ordinal))
+            if (shipStatus[i] != expectedValues[i])
             {
                 return false;
             }
@@ -29,8 +28,8 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
     public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Spaceship.Entities.ISpaceship thirdship)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
-        IList<string> shipStatus;
-        IList<string> expectedValues = new List<string>();
+        IList<StatusOfShips> shipStatus;
+        IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IList<IObstacle>> obstraclesforVaklas = new List<IList<IObstacle>>();
@@ -57,9 +56,9 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         ships.Add(firstShip);
         ships.Add(secondShip);
         ships.Add(thirdship);
-        expectedValues.Add("Destruction of the ship");
-        expectedValues.Add("Success");
-        expectedValues.Add("Success");
+        expectedValues.Add(StatusOfShips.DestructionOfTheShip);
+        expectedValues.Add(StatusOfShips.Success);
+        expectedValues.Add(StatusOfShips.Success);
 
         shipStatus = new Route(environments, ships).ShipHandling();
 

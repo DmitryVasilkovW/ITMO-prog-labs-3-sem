@@ -12,7 +12,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
 {
-    public static bool ResultsVerification(IList<string> shipStatus, IList<string> expectedValues)
+    public static bool ResultsVerification(IList<StatusOfShips> shipStatus, IList<StatusOfShips> expectedValues)
     {
         for (int i = 0; i < shipStatus.Count; i++)
         {
@@ -28,8 +28,8 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
     public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
         IList<ISpaceship> ships = new List<ISpaceship>();
-        IList<string> shipStatus;
-        IList<string> expectedValues = new List<string>();
+        IList<StatusOfShips> shipStatus;
+        IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
@@ -49,8 +49,8 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
         environments.Add(secondenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
-        expectedValues.Add("Loss of ship");
-        expectedValues.Add("Loss of ship");
+        expectedValues.Add(StatusOfShips.LossOfShip);
+        expectedValues.Add(StatusOfShips.LossOfShip);
 
         shipStatus = new Route(environments, ships).ShipHandling();
 
