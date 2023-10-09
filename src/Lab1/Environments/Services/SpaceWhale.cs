@@ -1,4 +1,3 @@
-using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
@@ -18,11 +17,11 @@ public class SpaceWhale : IObstacle, IHullDamage
         get { return _damageType; }
     }
 
-    public ISpaceship Damage(ISpaceship ship)
+    public ISpaceship Damage(ISpaceship ship, AdditionalSafetyDevices device)
     {
         if (ship.Deflector.IsDeflectorWorking())
         {
-            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
+            if (device is ISpaceWhaleDefense)
             {
                 ship.SafetyEquipmentOperation();
                 ship.Deflector.SpaceWhaleDamage();
@@ -34,7 +33,7 @@ public class SpaceWhale : IObstacle, IHullDamage
         }
         else
         {
-            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
+            if (device is ISpaceWhaleDefense)
             {
                 ship.SafetyEquipmentOperation();
                 ship.Armor.SpaceWhaleDamage(ship.WeightDimensionCharacteristics);

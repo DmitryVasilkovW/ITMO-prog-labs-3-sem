@@ -5,12 +5,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class SlowMovingShuttle : ISpaceship
 {
-    private int _fuelreserve;
-
     public SlowMovingShuttle()
     {
         WeightDimensionCharacteristics = 1;
-        Equipment = new AdditionalSafetyDevicesSlot("none");
+        Equipment = new AdditionalSafetyDevicesSlot();
         Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
         JumpEngine = new JumpEngineSlot();
         Speed = 10;
@@ -40,24 +38,17 @@ public class SlowMovingShuttle : ISpaceship
         get { return Deflector.IsDeflectorWorking(); }
     }
 
-    public int Fuelreserve
-    {
-        get
-        {
-            EngineWork();
-            return _fuelreserve;
-        }
-    }
+    public int Fuelreserve { get; private set; }
 
     public void SafetyEquipmentOperation()
     {
         if (Deflector.IsDeflectorWorking())
         {
-            Equipment.Effect(Deflector);
+            Equipment.Effect(Deflector, Equipment);
         }
         else
         {
-            Equipment.Effect(Armor, WeightDimensionCharacteristics);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics, Equipment);
         }
     }
 
@@ -74,12 +65,12 @@ public class SlowMovingShuttle : ISpaceship
     public void EngineWork()
     {
         Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-        _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        Fuelreserve = Engine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 
     public void JumpEngineWork()
     {
         Range = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
-        _fuelreserve = JumpEngine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        Fuelreserve = JumpEngine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 }

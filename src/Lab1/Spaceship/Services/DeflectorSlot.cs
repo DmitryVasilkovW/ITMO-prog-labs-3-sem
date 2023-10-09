@@ -41,7 +41,7 @@ public class DeflectorSlot : Entities.Deflectors
     {
     }
 
-    public override void SavingStatusOfTheDeflector(string damagetype)
+    public override void SavingStatusOfTheDeflector(AdditionalSafetyDevices device)
     {
     }
 }

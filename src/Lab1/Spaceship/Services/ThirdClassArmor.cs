@@ -1,4 +1,5 @@
-using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class ThirdClassArmor : Entities.IArmor
@@ -44,19 +45,11 @@ public class ThirdClassArmor : Entities.IArmor
         IsArmorWorking();
     }
 
-    public void SavingStatusOfTheArmor(string damagetype, int weightDimensionsOfTheShip)
+    public void SavingStatusOfTheArmor(int weightDimensionsOfTheShip, AdditionalSafetyDevices device)
     {
-        if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
+        if (device is ISpaceWhaleDefense)
         {
             _armorconditionlevel += Spacewhaledamage / weightDimensionsOfTheShip;
-        }
-        else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
-        {
-            _armorconditionlevel += Meteoritedamage / weightDimensionsOfTheShip;
-        }
-        else
-        {
-            _armorconditionlevel += Asteroiddamage / weightDimensionsOfTheShip;
         }
     }
 }

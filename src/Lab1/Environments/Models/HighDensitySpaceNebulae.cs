@@ -30,7 +30,7 @@ public class HighDensitySpaceNebulae : IEnvironment
                     return false;
                 }
 
-                _ship = obstacle.Damage(_ship);
+                _ship = obstacle.Damage(_ship, _ship.Equipment);
             }
         }
 

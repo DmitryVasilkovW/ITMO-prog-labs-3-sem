@@ -8,7 +8,7 @@ public class Vaklas : ISpaceship
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
-        Equipment = new AdditionalSafetyDevicesSlot("none");
+        Equipment = new AdditionalSafetyDevicesSlot();
         Speed = 100;
         Range = 10;
         Fuelreserve = 1;
@@ -60,11 +60,11 @@ public class Vaklas : ISpaceship
     {
         if (Deflector.IsDeflectorWorking())
         {
-            Equipment.Effect(Deflector);
+            Equipment.Effect(Deflector, Equipment);
         }
         else
         {
-            Equipment.Effect(Armor, WeightDimensionCharacteristics);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics, Equipment);
         }
     }
 

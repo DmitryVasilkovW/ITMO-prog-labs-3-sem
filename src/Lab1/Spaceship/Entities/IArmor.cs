@@ -10,5 +10,5 @@ public interface IArmor
 
     void SpaceWhaleDamage(int weightDimensionsOfTheShip);
 
-    void SavingStatusOfTheArmor(string damagetype, int weightDimensionsOfTheShip);
+    void SavingStatusOfTheArmor(int weightDimensionsOfTheShip, AdditionalSafetyDevices device);
 }

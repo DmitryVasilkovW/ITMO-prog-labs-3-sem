@@ -8,7 +8,7 @@ public class Stella : ISpaceship
     public Stella(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 1;
-        Equipment = new AdditionalSafetyDevicesSlot("none");
+        Equipment = new AdditionalSafetyDevicesSlot();
         Speed = 100;
         Range = 239;
         Fuelreserve = 10;
@@ -57,11 +57,11 @@ public class Stella : ISpaceship
     {
         if (Deflector.IsDeflectorWorking())
         {
-            Equipment.Effect(Deflector);
+            Equipment.Effect(Deflector, Equipment);
         }
         else
         {
-            Equipment.Effect(Armor, WeightDimensionCharacteristics);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics, Equipment);
         }
     }
 

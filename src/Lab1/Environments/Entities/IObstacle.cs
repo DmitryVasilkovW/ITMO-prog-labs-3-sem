@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 
 public interface IObstacle
 {
-    ISpaceship Damage(Spaceship.Entities.ISpaceship ship);
+    ISpaceship Damage(ISpaceship ship, AdditionalSafetyDevices device);
 }

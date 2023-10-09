@@ -2,21 +2,13 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class AdditionalSafetyDevicesSlot : Entities.AdditionalSafetyDevices
+public class AdditionalSafetyDevicesSlot : AdditionalSafetyDevices
 {
     private bool _isoperates;
-    private string _damageType;
 
-    public AdditionalSafetyDevicesSlot(string damageType)
-        : base(damageType)
+    public AdditionalSafetyDevicesSlot()
     {
         _isoperates = false;
-        _damageType = damageType;
-    }
-
-    public override string DamageType
-    {
-        get { return _damageType; }
     }
 
     public override bool Isoperates
@@ -25,11 +17,11 @@ public class AdditionalSafetyDevicesSlot : Entities.AdditionalSafetyDevices
         protected set { _isoperates = value; }
     }
 
-    public override void Effect(Deflectors deflector)
+    public override void Effect(Deflectors deflector, AdditionalSafetyDevices device)
     {
     }
 
-    public override void Effect(IArmor armor, int weightDimensionsOfTheShip)
+    public override void Effect(IArmor armor, int weightDimensionsOfTheShip, AdditionalSafetyDevices device)
     {
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
@@ -81,19 +80,11 @@ public class FirstClassDeflector : Deflectors
         }
     }
 
-    public override void SavingStatusOfTheDeflector(string damagetype)
+    public override void SavingStatusOfTheDeflector(AdditionalSafetyDevices device)
     {
-        if (damagetype.Equals("SpaceWhale", StringComparison.Ordinal))
+        if (device is ISpaceWhaleDefense)
         {
             _deflectorconditionlevel += Spacewhaledamage;
-        }
-        else if (damagetype.Equals("Meteorit", StringComparison.Ordinal))
-        {
-            _deflectorconditionlevel += Meteoritedamage;
-        }
-        else
-        {
-            _deflectorconditionlevel += Asteroidamage;
         }
     }
 }

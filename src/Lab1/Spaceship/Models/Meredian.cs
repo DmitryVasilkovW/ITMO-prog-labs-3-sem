@@ -5,15 +5,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Meredian : ISpaceship
 {
-    private int _fuelreserve;
-
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
         Range = 10;
         Speed = 100;
         JumpEngine = new JumpEngineSlot();
-        Equipment = new AntiNitrinoEmitter("SpaceWhale");
+        Equipment = new AntiNitrinoEmitter();
         Armor = new SecondClassArmor();
         Engine = new ClassEPulseEngine();
 
@@ -29,15 +27,7 @@ public class Meredian : ISpaceship
 
     public Deflectors Deflector { get; }
 
-    public int Fuelreserve
-    {
-        get
-        {
-            EngineWork();
-            return _fuelreserve;
-        }
-    }
-
+    public int Fuelreserve { get; private set; }
     public IArmor Armor { get; }
 
     public int Speed { get; private set; }
@@ -56,11 +46,11 @@ public class Meredian : ISpaceship
     {
         if (Deflector.IsDeflectorWorking())
         {
-            Equipment.Effect(Deflector);
+            Equipment.Effect(Deflector, Equipment);
         }
         else
         {
-            Equipment.Effect(Armor, WeightDimensionCharacteristics);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics, Equipment);
         }
     }
 
@@ -77,12 +67,12 @@ public class Meredian : ISpaceship
     public void EngineWork()
     {
         Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-        _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        Fuelreserve = Engine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 
     public void JumpEngineWork()
     {
         Range = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
-        _fuelreserve = JumpEngine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        Fuelreserve = JumpEngine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
@@ -18,31 +17,15 @@ public class Meteorites : IObstacle, IHullDamage
         get { return _damageType; }
     }
 
-    public ISpaceship Damage(ISpaceship ship)
+    public ISpaceship Damage(ISpaceship ship, AdditionalSafetyDevices device)
     {
         if (ship.Deflector.IsDeflectorWorking())
         {
-            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
-            {
-                ship.SafetyEquipmentOperation();
-                ship.Deflector.MeteoriteDamage();
-            }
-            else
-            {
-                ship.Deflector.MeteoriteDamage();
-            }
+            ship.Deflector.MeteoriteDamage();
         }
         else
         {
-            if (_damageType.Equals(ship.Equipment.DamageType, StringComparison.OrdinalIgnoreCase))
-            {
-                ship.SafetyEquipmentOperation();
-                ship.Armor.MeteoriteDamage(ship.WeightDimensionCharacteristics);
-            }
-            else
-            {
-                ship.Armor.MeteoriteDamage(ship.WeightDimensionCharacteristics);
-            }
+            ship.Armor.MeteoriteDamage(ship.WeightDimensionCharacteristics);
         }
 
         return ship;

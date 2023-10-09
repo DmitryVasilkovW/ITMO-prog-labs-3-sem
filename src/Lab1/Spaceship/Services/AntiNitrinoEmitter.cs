@@ -1,20 +1,14 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
-public class AntiNitrinoEmitter : Entities.AdditionalSafetyDevices
+public class AntiNitrinoEmitter : AdditionalSafetyDevices, ISpaceWhaleDefense
 {
     private bool _isoperates;
-    private string _damageType;
 
-    public AntiNitrinoEmitter(string damageType)
-        : base(damageType)
+    public AntiNitrinoEmitter()
     {
         _isoperates = true;
-        _damageType = damageType;
-    }
-
-    public override string DamageType
-    {
-        get { return _damageType; }
     }
 
     public override bool Isoperates
@@ -23,13 +17,13 @@ public class AntiNitrinoEmitter : Entities.AdditionalSafetyDevices
         protected set { _isoperates = value; }
     }
 
-    public override void Effect(Entities.Deflectors deflector)
+    public override void Effect(Deflectors deflector, AdditionalSafetyDevices device)
     {
-        deflector.SavingStatusOfTheDeflector(_damageType);
+        deflector.SavingStatusOfTheDeflector(device);
     }
 
-    public override void Effect(Entities.IArmor armor, int weightDimensionsOfTheShip)
+    public override void Effect(IArmor armor, int weightDimensionsOfTheShip, AdditionalSafetyDevices device)
     {
-        armor.SavingStatusOfTheArmor(_damageType, weightDimensionsOfTheShip);
+        armor.SavingStatusOfTheArmor(weightDimensionsOfTheShip, device);
     }
 }

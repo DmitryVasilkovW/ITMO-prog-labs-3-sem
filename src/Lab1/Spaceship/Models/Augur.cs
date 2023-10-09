@@ -8,7 +8,7 @@ public class Augur : ISpaceship
     public Augur(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 3;
-        Equipment = new AdditionalSafetyDevicesSlot("no protection");
+        Equipment = new AdditionalSafetyDevicesSlot();
         Speed = 10;
         Range = 100;
         Fuelreserve = 0;
@@ -58,11 +58,11 @@ public class Augur : ISpaceship
     {
         if (Deflector.IsDeflectorWorking())
         {
-            Equipment.Effect(Deflector);
+            Equipment.Effect(Deflector, Equipment);
         }
         else
         {
-            Equipment.Effect(Armor, WeightDimensionCharacteristics);
+            Equipment.Effect(Armor, WeightDimensionCharacteristics, Equipment);
         }
     }
 

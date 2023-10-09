@@ -42,5 +42,5 @@ public abstract class Deflectors
         }
     }
 
-    public abstract void SavingStatusOfTheDeflector(string damagetype);
+    public abstract void SavingStatusOfTheDeflector(AdditionalSafetyDevices device);
 }
