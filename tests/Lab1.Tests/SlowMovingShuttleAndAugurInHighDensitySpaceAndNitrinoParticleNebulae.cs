@@ -36,6 +36,7 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         IList<string> expectedValues = new List<string>();
         var environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstraclesforNitrinoParticleNebulae = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
 
         for (int i = 0; i < 31; i++)
@@ -45,10 +46,10 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, new SlowMovingShuttle());
-        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, new Augur(false));
-        var thirdenvironment = new NitrinoParticleNebulae(239, 0, new SlowMovingShuttle());
-        var fourthenvironment = new NitrinoParticleNebulae(239, 0, new Augur(false));
+        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, firstShip);
+        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, secondShip);
+        var thirdenvironment = new NitrinoParticleNebulae(239, obstraclesforNitrinoParticleNebulae, firstShip);
+        var fourthenvironment = new NitrinoParticleNebulae(239, obstraclesforNitrinoParticleNebulae, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

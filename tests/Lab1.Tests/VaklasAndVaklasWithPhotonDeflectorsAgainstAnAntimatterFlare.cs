@@ -44,8 +44,8 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, new Vaklas(true));
-        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, new Vaklas(false));
+        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, firstShip);
+        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

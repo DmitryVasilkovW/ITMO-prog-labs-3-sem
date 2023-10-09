@@ -33,8 +33,8 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, new Augur(false));
-        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, new Stella(false));
+        var firstenvironment = new HighDensitySpaceNebulae(239, obstracles, firstShip);
+        var secondenvironment = new HighDensitySpaceNebulae(239, obstracles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

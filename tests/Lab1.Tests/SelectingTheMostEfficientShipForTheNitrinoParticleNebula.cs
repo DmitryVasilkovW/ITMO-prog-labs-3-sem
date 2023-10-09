@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
@@ -22,14 +23,21 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         Spaceship.Entities.ISpaceship ship;
         IList<Environments.Entities.IEnvironment> environments = new List<Environment>();
+        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IObstacle> fleshes = new List<IObstacle>();
 
-        environments.Add(environmentForFirstShip);
-        environments.Add(environmentForSecondShip);
+        obstracles.Add(fleshes);
+
+        var firstenvironment = new NitrinoParticleNebulae(100, obstracles, firstShip);
+        var secondenvironment = new NitrinoParticleNebulae(100, obstracles, secondShip);
+
+        environments.Add(firstenvironment);
+        environments.Add(secondenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
 
@@ -44,16 +52,12 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
 
     private class ParameterizedTests : IEnumerable<object[]>
     {
-        private const int Length = 100;
-
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[]
             {
                 new SlowMovingShuttle(),
                 new Vaklas(false),
-                new NitrinoParticleNebulae(Length, 0, new SlowMovingShuttle()),
-                new NitrinoParticleNebulae(Length, 0, new Vaklas(false)),
             },
         };
 

@@ -26,16 +26,34 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Spaceship.Entities.ISpaceship thirdship, IEnvironment environmentForFirstShip, IEnvironment environmentForSecondShip, IEnvironment environmentForThirdShip)
+    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip, Spaceship.Entities.ISpaceship thirdship)
     {
         IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
         IList<string> shipStatus;
         IList<string> expectedValues = new List<string>();
         var environments = new List<IEnvironment>();
+        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IList<IObstacle>> obstraclesforVaklas = new List<IList<IObstacle>>();
+        IList<IObstacle> spacewhiles = new List<IObstacle>();
+        IList<IObstacle> spacewhilesforVaklas = new List<IObstacle>();
 
-        environments.Add(environmentForFirstShip);
-        environments.Add(environmentForSecondShip);
-        environments.Add(environmentForThirdShip);
+        for (int i = 0; i < 31; i++)
+        {
+            spacewhilesforVaklas.Add(new SpaceWhale());
+        }
+
+        spacewhiles.Add(new SpaceWhale());
+
+        obstracles.Add(spacewhiles);
+        obstraclesforVaklas.Add(spacewhilesforVaklas);
+
+        var firstenvironment = new NitrinoParticleNebulae(239, obstraclesforVaklas, firstShip);
+        var secondenvironment = new NitrinoParticleNebulae(239, obstracles, secondShip);
+        var thirdenvironment = new NitrinoParticleNebulae(239, obstracles, thirdship);
+
+        environments.Add(firstenvironment);
+        environments.Add(secondenvironment);
+        environments.Add(thirdenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
         ships.Add(thirdship);
@@ -50,8 +68,6 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
 
     private class ParameterizedTests : IEnumerable<object[]>
     {
-        private const int Length = 239;
-
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[]
@@ -59,9 +75,6 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
                 new Vaklas(false),
                 new Augur(false),
                 new Meredian(false),
-                new NitrinoParticleNebulae(Length, 10, new Vaklas(false)),
-                new NitrinoParticleNebulae(Length, 1, new Augur(false)),
-                new NitrinoParticleNebulae(Length, 1, new Meredian(false)),
             },
         };
 

@@ -6,7 +6,6 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
-using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
@@ -24,14 +23,21 @@ public class SelectingTheMostAffectiveShipForNormalSpace
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip, Environment environmentForFirstShip, Environment environmentForSecondShip)
+    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
         IList<ISpaceship> ships = new List<ISpaceship>();
         ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
+        IList<IList<IObstacle>> obstracles = new List<IList<IObstacle>>();
+        IList<IObstacle> fleshes = new List<IObstacle>();
 
-        environments.Add(environmentForFirstShip);
-        environments.Add(environmentForSecondShip);
+        obstracles.Add(fleshes);
+
+        var firstenvironment = new NormalSpace(100, obstracles, firstShip);
+        var secondenvironment = new NormalSpace(100, obstracles, secondShip);
+
+        environments.Add(firstenvironment);
+        environments.Add(secondenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
 
@@ -46,16 +52,12 @@ public class SelectingTheMostAffectiveShipForNormalSpace
 
     private class ParameterizedTests : IEnumerable<object[]>
     {
-        private const int Length = 100;
-
         private readonly List<object[]> _data = new List<object[]>
         {
             new object[]
             {
                 new SlowMovingShuttle(),
                 new Vaklas(false),
-                new NormalSpace(Length, 0, 0, new SlowMovingShuttle()),
-                new NormalSpace(Length, 0, 0, new Vaklas(false)),
             },
         };
 
