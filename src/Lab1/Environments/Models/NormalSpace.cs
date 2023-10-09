@@ -1,56 +1,36 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
-public class NormalSpace : Entities.IEnvironment
+public class NormalSpace : IEnvironment
 {
-    private Asteroid _asteroid;
-    private Meteorites _meteorites;
+    private IList<IList<IObstacle>> _obstracles;
     private ISpaceship _ship;
-    private int _countOfFirstTypeObstracles;
-    private int _countOfSecondTypeObstracles;
 
-    public NormalSpace(int length, int countOfFirstTypeObstracles, int countOfSecondTypeObstracles, ISpaceship ship)
+    public NormalSpace(int length, IList<IList<IObstacle>> obstracles,  ISpaceship ship)
     {
-        _asteroid = new Asteroid();
-        _meteorites = new Meteorites();
         _ship = ship;
-        _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
-        _countOfSecondTypeObstracles = countOfSecondTypeObstracles;
+        _obstracles = obstracles;
         Length = length;
     }
 
-    public int CountOfSecondTypeObstracles { get; }
-
     public int Length { get; }
-
-    public string FirstTypeObstracleType
-    {
-        get { return _asteroid.DamageType; }
-    }
-
-    public string SecondTypeObstracleType
-    {
-        get { return _meteorites.DamageType; }
-    }
-
-    public int CountOfFirstTypeObstracles { get; }
 
     public bool IsTheShipWasAbleToRemainInService()
     {
-        TakingDamageFromAllObstaclesOfTheFirstType();
-
-        if (!IsShipAlive())
+        foreach (IList<IObstacle> listOfObstacles in _obstracles)
         {
-            return false;
-        }
+            foreach (IObstacle obstacle in listOfObstacles)
+            {
+                if (!_ship.IsShipAlive())
+                {
+                    return false;
+                }
 
-        TakingDamageFromAllObstaclesOfTheSecondType();
-
-        if (!IsShipAlive())
-        {
-            return false;
+                _ship = obstacle.Damage(_ship);
+            }
         }
 
         return true;
@@ -76,24 +56,19 @@ public class NormalSpace : Entities.IEnvironment
         return false;
     }
 
-    public void TakingDamageFromAllObstaclesOfTheFirstType()
-    {
-        while (_countOfFirstTypeObstracles-- > 0)
-        {
-            _ship = _asteroid.Damage(_ship);
-        }
-    }
-
-    public void TakingDamageFromAllObstaclesOfTheSecondType()
-    {
-        while (_countOfSecondTypeObstracles-- > 0)
-        {
-            _ship = _meteorites.Damage(_ship);
-        }
-    }
-
     public bool IsObstaclesKillStaff()
     {
+        foreach (IList<IObstacle> listOfObstacles in _obstracles)
+        {
+            foreach (IObstacle obstacle in listOfObstacles)
+            {
+                if (obstacle is IPersonnelDamage)
+                {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 }

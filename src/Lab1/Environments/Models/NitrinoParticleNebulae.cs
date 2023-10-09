@@ -1,40 +1,36 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
-public class NitrinoParticleNebulae : Entities.IEnvironment
+public class NitrinoParticleNebulae : IEnvironment
 {
-    private SpaceWhale _spaceWhale;
+    private IList<IList<IObstacle>> _obstracles;
     private ISpaceship _ship;
-    private int _countOfFirstTypeObstracles;
 
-    public NitrinoParticleNebulae(int length, int countOfFirstTypeObstracles, ISpaceship ship)
+    public NitrinoParticleNebulae(int length, IList<IList<IObstacle>> obstracles,  ISpaceship ship)
     {
-        _spaceWhale = new SpaceWhale();
         _ship = ship;
-        _countOfFirstTypeObstracles = countOfFirstTypeObstracles;
-
+        _obstracles = obstracles;
         Length = length;
     }
 
-    public int CountOfSecondTypeObstracles { get; }
     public int Length { get; }
-
-    public string SecondTypeObstracleType
-    {
-        get { return _spaceWhale.DamageType; }
-    }
-
-    public int CountOfFirstTypeObstracles { get; }
 
     public bool IsTheShipWasAbleToRemainInService()
     {
-        TakingDamageFromAllObstaclesOfTheFirstType();
-
-        if (!IsShipAlive())
+        foreach (IList<IObstacle> listOfObstacles in _obstracles)
         {
-            return false;
+            foreach (IObstacle obstacle in listOfObstacles)
+            {
+                if (!_ship.IsShipAlive())
+                {
+                    return false;
+                }
+
+                _ship = obstacle.Damage(_ship);
+            }
         }
 
         return true;
@@ -62,17 +58,17 @@ public class NitrinoParticleNebulae : Entities.IEnvironment
 
     public bool IsObstaclesKillStaff()
     {
-        return false;
-    }
-
-    private void TakingDamageFromAllObstaclesOfTheFirstType()
-    {
-        while (_countOfFirstTypeObstracles-- > 0)
+        foreach (IList<IObstacle> listOfObstacles in _obstracles)
         {
-            if (_ship.IsShipAlive())
+            foreach (IObstacle obstacle in listOfObstacles)
             {
-                _ship = _spaceWhale.Damage(_ship);
+                if (obstacle is IPersonnelDamage)
+                {
+                    return true;
+                }
             }
         }
+
+        return false;
     }
 }
