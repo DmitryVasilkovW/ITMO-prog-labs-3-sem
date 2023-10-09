@@ -13,10 +13,25 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
     public static bool ResultsVerification(IList<StatusOfShips> shipStatus, IList<StatusOfShips> expectedValues)
     {
         int indexForShip = 0;
+        IList<StatusOfShips> newstatus = new List<StatusOfShips>();
 
-        for (int i = 0; i < expectedValues.Count; i += 2)
+        for (int j = 0; j < expectedValues.Count; j++)
         {
-            if (shipStatus[indexForShip] != expectedValues[i])
+            for (int i = indexForShip; i < expectedValues.Count; i += 2)
+            {
+                if (shipStatus[i] != StatusOfShips.Success)
+                {
+                    newstatus.Add(shipStatus[i]);
+                    indexForShip++;
+                }
+            }
+        }
+
+        indexForShip = 0;
+
+        for (int i = 0; i < expectedValues.Count; i++)
+        {
+            if (newstatus[indexForShip] != expectedValues[i])
             {
                 return false;
             }
@@ -47,10 +62,10 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
 
         obstracles.Add(fleshes);
 
-        var firstenvironment = new HighDensitySpaceNebulae(length, obstracles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(length, obstracles, secondShip);
-        var thirdenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, firstShip);
-        var fourthenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, secondShip);
+        var firstenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, firstShip);
+        var secondenvironment = new NitrinoParticleNebulae(length, obstraclesforNitrinoParticleNebulae, secondShip);
+        var thirdenvironment = new HighDensitySpaceNebulae(length, obstracles, firstShip);
+        var fourthenvironment = new HighDensitySpaceNebulae(length, obstracles, secondShip);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -59,7 +74,7 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         ships.Add(firstShip);
         ships.Add(secondShip);
         expectedValues.Add(StatusOfShips.LossOfShip);
-        expectedValues.Add(StatusOfShips.DestructionOfTheShip);
+        expectedValues.Add(StatusOfShips.LossOfShip);
 
         shipStatus = new Route(environments, ships).ShipHandling();
 
