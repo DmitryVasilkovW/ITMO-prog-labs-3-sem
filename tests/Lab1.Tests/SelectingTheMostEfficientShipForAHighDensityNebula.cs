@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
@@ -11,7 +12,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class SelectingTheMostEfficientShipForAHighDensityNebula
 {
-    public static bool ResultsVerification(Spaceship.Entities.ISpaceship ship)
+    public static bool ResultsVerification(ISpaceship ship)
     {
         if (ship is Stella)
         {
@@ -23,10 +24,10 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
-    public void ShipsAndEnvironments(Spaceship.Entities.ISpaceship firstShip, Spaceship.Entities.ISpaceship secondShip)
+    public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
-        IList<Spaceship.Entities.ISpaceship> ships = new List<Spaceship.Entities.ISpaceship>();
-        Spaceship.Entities.ISpaceship ship;
+        IList<ISpaceship> ships = new List<ISpaceship>();
+        ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
