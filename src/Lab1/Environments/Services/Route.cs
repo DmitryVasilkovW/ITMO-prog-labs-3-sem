@@ -9,17 +9,15 @@ public class Route
     private IList<IEnvironment> _environments;
     private IList<ISpaceship> _ships;
     private List<string> _shipStatus = new List<string>();
-    private int _routeLength;
     private string _successStatusForTheShip;
     private string _statusLosingAShip;
     private string _statusShipDestruction;
     private string _statusCrewDeath;
 
-    public Route(int routeLength, IList<IEnvironment> environments, IList<ISpaceship> ships)
+    public Route(IList<IEnvironment> environments, IList<ISpaceship> ships)
     {
         _environments = environments;
         _ships = ships;
-        _routeLength = routeLength;
         _successStatusForTheShip = "Success";
         _statusLosingAShip = "Loss of ship";
         _statusShipDestruction = "Destruction of the ship";

@@ -12,7 +12,7 @@ public class Meredian : ISpaceship
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
-        _range = 100;
+        _range = 10;
         Speed = 100;
         JumpEngine = new JumpEngineSlot();
         Equipment = new AntiNitrinoEmitter("SpaceWhale");

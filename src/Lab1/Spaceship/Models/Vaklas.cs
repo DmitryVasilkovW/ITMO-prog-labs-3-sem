@@ -7,13 +7,13 @@ public class Vaklas : ISpaceship
 {
     private int _range;
     private int _fuelreserve;
-    private int _gravitonmatter;
 
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = 2;
         Equipment = new AdditionalSafetyDevicesSlot("none");
         Speed = 100;
+        _fuelreserve = 1;
         Armor = new SecondClassArmor();
         JumpEngine = new JumpEngineGamma();
         Engine = new ClassEPulseEngine();
@@ -66,7 +66,7 @@ public class Vaklas : ISpaceship
         if (JumpEngine is not JumpEngineSlot)
         {
             _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
-            _gravitonmatter = JumpEngine.FuelConsumption(_gravitonmatter, WeightDimensionCharacteristics);
+            _fuelreserve = JumpEngine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
         }
         else
         {

@@ -14,7 +14,7 @@ public class Stella : Entities.ISpaceship
         WeightDimensionCharacteristics = 1;
         Equipment = new AdditionalSafetyDevicesSlot("none");
         Speed = 100;
-        _range = 100;
+        _range = 10;
         Armor = new FirstClassArmor();
         JumpEngine = new JumpEngineOmega();
         Engine = new ClassCPulseEngine();
@@ -93,6 +93,12 @@ public class Stella : Entities.ISpaceship
 
     public void EngineWork()
     {
+        if (JumpEngine is not JumpEngineSlot)
+        {
+            Speed = JumpEngine.Range(Speed, WeightDimensionCharacteristics);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        }
+
         Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
         _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
     }

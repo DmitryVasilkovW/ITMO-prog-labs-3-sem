@@ -13,7 +13,7 @@ public class Augur : ISpaceship
     {
         WeightDimensionCharacteristics = 3;
         Equipment = new AdditionalSafetyDevicesSlot("no protection");
-        Speed = 100;
+        Speed = 10;
         _range = 100;
         Armor = new ThirdClassArmor();
         JumpEngine = new JumpEngineAlpha();
@@ -44,7 +44,6 @@ public class Augur : ISpaceship
     {
         get
         {
-            EngineWork();
             return _fuelreserve;
         }
     }
@@ -96,8 +95,16 @@ public class Augur : ISpaceship
 
     public void EngineWork()
     {
-        Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
-        _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        if (JumpEngine is not JumpEngineSlot)
+        {
+            _range = JumpEngine.Range(_range, WeightDimensionCharacteristics);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        }
+        else
+        {
+            Speed = Engine.Speed(Speed, WeightDimensionCharacteristics);
+            _fuelreserve = Engine.FuelConsumption(_fuelreserve, WeightDimensionCharacteristics);
+        }
     }
 
     public void JumpEnginew()
