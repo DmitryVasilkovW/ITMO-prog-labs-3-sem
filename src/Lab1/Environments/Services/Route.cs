@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using IEnvironment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
@@ -8,23 +9,15 @@ public class Route
 {
     private IList<IEnvironment> _environments;
     private IList<ISpaceship> _ships;
-    private List<string> _shipStatus = new List<string>();
-    private string _successStatusForTheShip;
-    private string _statusLosingAShip;
-    private string _statusShipDestruction;
-    private string _statusCrewDeath;
+    private List<StatusOfShips> _shipStatus = new List<StatusOfShips>();
 
     public Route(IList<IEnvironment> environments, IList<ISpaceship> ships)
     {
         _environments = environments;
         _ships = ships;
-        _successStatusForTheShip = "Success";
-        _statusLosingAShip = "Loss of ship";
-        _statusShipDestruction = "Destruction of the ship";
-        _statusCrewDeath = "Crew deaths";
     }
 
-    public IList<string> ShipHandling()
+    public IList<StatusOfShips> ShipHandling()
     {
         int indexForEnvironments = -1;
         foreach (ISpaceship ship in _ships)
@@ -36,14 +29,14 @@ public class Route
 
                 if (!environment.IsCanEnterTheEnvironment())
                 {
-                    _shipStatus.Add(_statusLosingAShip);
+                    _shipStatus.Add(StatusOfShips.LossOfShip);
 
                     continue;
                 }
 
                 if (!ship.Deflector.IsPhotonDeflectorWorking() && environment.IsObstaclesKillStaff())
                 {
-                    _shipStatus.Add(_statusCrewDeath);
+                    _shipStatus.Add(StatusOfShips.CrewDeaths);
 
                     continue;
                 }
@@ -51,13 +44,13 @@ public class Route
                 {
                     if (environment.IsTheShipWasAbleToRemainInService())
                     {
-                        _shipStatus.Add(_successStatusForTheShip);
+                        _shipStatus.Add(StatusOfShips.Success);
 
                         continue;
                     }
                     else
                     {
-                        _shipStatus.Add(_statusShipDestruction);
+                        _shipStatus.Add(StatusOfShips.DestructionOfTheShip);
 
                         continue;
                     }

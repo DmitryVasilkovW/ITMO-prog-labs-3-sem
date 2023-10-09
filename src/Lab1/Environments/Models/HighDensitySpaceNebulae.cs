@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
@@ -15,6 +16,17 @@ public class HighDensitySpaceNebulae : IEnvironment
         _ship = ship;
         Length = length;
         _obstracles = obstracles;
+
+        foreach (IList<IObstacle> listofobstracles in obstracles)
+        {
+            foreach (IObstacle obstacle in listofobstracles)
+            {
+                if (obstacle is not IHighDensitySpaceNebulae)
+                {
+                    throw new IncorrectObstacleForThisEnvironmentException();
+                }
+            }
+        }
     }
 
     public int Length { get; }

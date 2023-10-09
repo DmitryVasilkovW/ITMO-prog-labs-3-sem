@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
@@ -14,6 +15,17 @@ public class NormalSpace : IEnvironment
         _ship = ship;
         _obstracles = obstracles;
         Length = length;
+
+        foreach (IList<IObstacle> listofobstracles in obstracles)
+        {
+            foreach (IObstacle obstacle in listofobstracles)
+            {
+                if (obstacle is not INormalSpace)
+                {
+                    throw new IncorrectObstacleForThisEnvironmentException();
+                }
+            }
+        }
     }
 
     public int Length { get; }
