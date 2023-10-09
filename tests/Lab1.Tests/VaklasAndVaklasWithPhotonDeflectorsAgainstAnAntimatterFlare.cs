@@ -35,8 +35,8 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
         IList<IEnvironment> environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
-        int length = 1;
-        int countofobstacles = 2;
+        const int length = 1;
+        const int countofobstacles = 2;
 
         for (int i = 0; i < countofobstacles; i++)
         {

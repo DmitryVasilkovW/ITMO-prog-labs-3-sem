@@ -35,7 +35,7 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         IList<IList<IObstacle>> obstaclesforVaklas = new List<IList<IObstacle>>();
         IList<IObstacle> spacewhiles = new List<IObstacle>();
         IList<IObstacle> spacewhilesforVaklas = new List<IObstacle>();
-        int countofobstacles = 3;
+        const int countofobstacles = 3;
 
         for (int i = 0; i < countofobstacles; i++)
         {

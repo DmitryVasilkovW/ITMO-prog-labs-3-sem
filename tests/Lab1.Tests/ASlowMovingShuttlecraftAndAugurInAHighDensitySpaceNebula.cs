@@ -33,8 +33,8 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
         var environments = new List<IEnvironment>();
         IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
-        int length = 50;
-        int countofobstacles = 31;
+        const int length = 50;
+        const int countofobstacles = 31;
 
         for (int i = 0; i < countofobstacles; i++)
         {

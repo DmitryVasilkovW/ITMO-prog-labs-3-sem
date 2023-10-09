@@ -53,8 +53,8 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         IList<IList<IObstacle>> obstaclesforHighDensitySpaceNebulae = new List<IList<IObstacle>>();
         IList<IList<IObstacle>> obstaclesforNitrinoParticleNebulae = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
-        int length = 1;
-        int countofobstacles = 31;
+        const int length = 1;
+        const int countofobstacles = 31;
 
         for (int i = 0; i < countofobstacles; i++)
         {

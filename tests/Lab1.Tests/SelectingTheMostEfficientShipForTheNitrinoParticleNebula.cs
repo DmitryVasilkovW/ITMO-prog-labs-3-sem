@@ -30,15 +30,15 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
         IList<IEnvironment> environments = new List<Environment>();
         IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
-        int length = 1;
-        int otherTaxes = 1;
-        int excises = 2;
-        int processingAndDelivery = 3;
-        int oilCompanyIncome = 4;
-        int gasStationRevenues = 5;
-        int mineralExtractionTax = 6;
-        int costOfGravitonMatterProduction = 7;
-        int costOfProductionOfActivePlasma = 8;
+        const int length = 1;
+        const int otherTaxes = 1;
+        const int excises = 2;
+        const int processingAndDelivery = 3;
+        const int oilCompanyIncome = 4;
+        const int gasStationRevenues = 5;
+        const int mineralExtractionTax = 6;
+        const int costOfGravitonMatterProduction = 7;
+        const int costOfProductionOfActivePlasma = 8;
 
         obstacles.Add(fleshes);
 
