@@ -5,13 +5,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Stella : ISpaceship
 {
+    private const int InitialSpeed = 100;
+    private const int InitialRange = 10;
+    private const int InitialFuelreserve = 1;
+    private const int InitialWeightDimensionCharacteristics = 1;
     public Stella(bool whethertoInstallAPhotonicDeflector)
     {
-        WeightDimensionCharacteristics = 1;
+        WeightDimensionCharacteristics = InitialWeightDimensionCharacteristics;
         Equipment = new AdditionalSafetyDevicesSlot();
-        Speed = 100;
-        Range = 239;
-        Fuelreserve = 10;
+        Speed = InitialSpeed;
+        Range = InitialRange;
+        Fuelreserve = InitialFuelreserve;
         Armor = new FirstClassArmor();
         JumpEngine = new JumpEngineOmega();
         Engine = new ClassCPulseEngine();

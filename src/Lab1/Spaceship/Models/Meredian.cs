@@ -5,11 +5,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Meredian : ISpaceship
 {
+    private const int InitialSpeed = 100;
+    private const int InitialRange = 10;
+    private const int InitialFuelreserve = 1;
+    private const int InitialWeightDimensionCharacteristics = 2;
     public Meredian(bool whethertoInstallAPhotonicDeflector)
     {
-        WeightDimensionCharacteristics = 2;
-        Range = 10;
-        Speed = 100;
+        WeightDimensionCharacteristics = InitialWeightDimensionCharacteristics;
+        Range = InitialRange;
+        Speed = InitialSpeed;
+        Fuelreserve = InitialFuelreserve;
         JumpEngine = new JumpEngineSlot();
         Equipment = new AntiNitrinoEmitter();
         Armor = new SecondClassArmor();

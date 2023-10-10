@@ -7,13 +7,14 @@ public class SecondClassArmor : IArmor
     private const int Meteoritedamage = 500;
     private const int Asteroiddamage = 200;
     private const int Spacewhaledamage = 3000;
+    private const int InitialArmorconditionlevel = 1000;
 
     private int _armorconditionlevel;
     private bool _isArmorWorking;
 
     public SecondClassArmor()
     {
-        _armorconditionlevel = 1000;
+        _armorconditionlevel = InitialArmorconditionlevel;
         _isArmorWorking = true;
     }
 

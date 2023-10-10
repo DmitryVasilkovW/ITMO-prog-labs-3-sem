@@ -4,11 +4,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class StandardPhotonicDeflectors : IPhotonicDeflectors
 {
+    private const int InitialAntimatterFlareResidueBeforeDamage = 3;
     private int _antimatterFlareResidueBeforeDamage;
 
     public StandardPhotonicDeflectors()
     {
-        _antimatterFlareResidueBeforeDamage = 3;
+        _antimatterFlareResidueBeforeDamage = InitialAntimatterFlareResidueBeforeDamage;
     }
 
     public bool IsPhotonicDeflectorBroken()

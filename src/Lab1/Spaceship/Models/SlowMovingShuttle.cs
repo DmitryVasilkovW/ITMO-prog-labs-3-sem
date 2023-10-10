@@ -5,14 +5,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class SlowMovingShuttle : ISpaceship
 {
+    private const int InitialSpeed = 100;
+    private const int InitialRange = 0;
+    private const int InitialFuelreserve = 1;
+    private const int InitialWeightDimensionCharacteristics = 1;
     public SlowMovingShuttle()
     {
-        WeightDimensionCharacteristics = 1;
+        WeightDimensionCharacteristics = InitialWeightDimensionCharacteristics;
         Equipment = new AdditionalSafetyDevicesSlot();
         Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
         JumpEngine = new JumpEngineSlot();
-        Speed = 10;
-        Range = 0;
+        Speed = InitialSpeed;
+        Range = InitialRange;
+        Fuelreserve = InitialFuelreserve;
         Armor = new FirstClassArmor();
         Engine = new ClassCPulseEngine();
     }
@@ -32,11 +37,6 @@ public class SlowMovingShuttle : ISpaceship
     public IEngine Engine { get; }
 
     public int WeightDimensionCharacteristics { get; }
-
-    public bool IsDeflectorWorking
-    {
-        get { return Deflector.IsDeflectorWorking(); }
-    }
 
     public int Fuelreserve { get; private set; }
 

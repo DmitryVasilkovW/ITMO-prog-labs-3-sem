@@ -7,6 +7,7 @@ public class FirstClassDeflector : Deflectors
     private const int Asteroidamage = 3670;
     private const int Meteoritedamage = 7340;
     private const int Spacewhaledamage = 10000;
+    private const int InitialDeflectorconditionlevel = 7340;
 
     private int _deflectorconditionlevel;
     private bool _isaPhotonDeflectorInstalled;
@@ -16,7 +17,7 @@ public class FirstClassDeflector : Deflectors
     public FirstClassDeflector(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
-        _deflectorconditionlevel = 7340;
+        _deflectorconditionlevel = InitialDeflectorconditionlevel;
         _isaPhotonDeflectorInstalled = true;
         _isDeflectorWorking = true;
     }
@@ -24,7 +25,7 @@ public class FirstClassDeflector : Deflectors
     public FirstClassDeflector()
     {
         _photonicDeflector = new PhotonDeflectorSlot();
-        _deflectorconditionlevel = 7340;
+        _deflectorconditionlevel = InitialDeflectorconditionlevel;
         _isaPhotonDeflectorInstalled = false;
         _isDeflectorWorking = true;
     }

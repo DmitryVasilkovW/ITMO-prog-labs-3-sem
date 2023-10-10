@@ -5,13 +5,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Vaklas : ISpaceship
 {
+    private const int InitialSpeed = 100;
+    private const int InitialRange = 10;
+    private const int InitialFuelreserve = 1;
+    private const int InitialWeightDimensionCharacteristics = 2;
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
-        WeightDimensionCharacteristics = 2;
+        WeightDimensionCharacteristics = InitialWeightDimensionCharacteristics;
         Equipment = new AdditionalSafetyDevicesSlot();
-        Speed = 100;
-        Range = 10;
-        Fuelreserve = 1;
+        Speed = InitialSpeed;
+        Range = InitialRange;
+        Fuelreserve = InitialFuelreserve;
         Armor = new SecondClassArmor();
         JumpEngine = new JumpEngineGamma();
         Engine = new ClassEPulseEngine();

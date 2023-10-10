@@ -7,13 +7,14 @@ public class FirstClassArmor : IArmor
     private const int Meteoritedamage = 2000;
     private const int Asteroiddamage = 1000;
     private const int Spacewhaledamage = 6000;
+    private const int InitialArmorconditionlevel = 1000;
 
     private int _armorconditionlevel;
     private bool _isArmorWorking;
 
     public FirstClassArmor()
     {
-        _armorconditionlevel = 1000;
+        _armorconditionlevel = InitialArmorconditionlevel;
         _isArmorWorking = true;
     }
 

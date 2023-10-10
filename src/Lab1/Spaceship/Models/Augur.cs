@@ -5,13 +5,18 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 
 public class Augur : ISpaceship
 {
+    private const int InitialSpeed = 10;
+    private const int InitialRange = 100;
+    private const int InitialFuelreserve = 1;
+    private const int InitialWeightDimensionCharacteristics = 3;
+
     public Augur(bool whethertoInstallAPhotonicDeflector)
     {
-        WeightDimensionCharacteristics = 3;
+        WeightDimensionCharacteristics = InitialWeightDimensionCharacteristics;
         Equipment = new AdditionalSafetyDevicesSlot();
-        Speed = 10;
-        Range = 100;
-        Fuelreserve = 0;
+        Speed = InitialSpeed;
+        Range = InitialRange;
+        Fuelreserve = InitialFuelreserve;
         Armor = new ThirdClassArmor();
         JumpEngine = new JumpEngineAlpha();
         Engine = new ClassEPulseEngine();
