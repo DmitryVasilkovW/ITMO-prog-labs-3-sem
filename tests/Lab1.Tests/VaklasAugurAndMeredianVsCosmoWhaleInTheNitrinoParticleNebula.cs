@@ -33,24 +33,19 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
         IList<IObstacle> spacewhiles = new List<IObstacle>();
-        IList<IObstacle> spacewhilesforVaklas = new List<IObstacle>();
         const int countofobstacles = 3;
         const int length = 1;
 
         for (int i = 0; i < countofobstacles; i++)
         {
-            spacewhilesforVaklas.Add(new SpaceWhale());
+            spacewhiles.Add(new SpaceWhale());
         }
 
-        spacewhiles.Add(new SpaceWhale());
-
-        var firstenvironment = new NitrinoParticleNebulae(length, spacewhilesforVaklas);
+        var firstenvironment = new NitrinoParticleNebulae(length, spacewhiles);
         var secondenvironment = new NitrinoParticleNebulae(length, spacewhiles);
-        var thirdenvironment = new NitrinoParticleNebulae(length, spacewhiles);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
-        environments.Add(thirdenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
         ships.Add(thirdship);
