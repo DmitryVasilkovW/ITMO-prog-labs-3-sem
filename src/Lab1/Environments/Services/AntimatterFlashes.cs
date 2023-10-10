@@ -5,13 +5,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class AntimatterFlashes : IObstacle, IPersonnelDamage, IHighDensitySpaceNebulae
 {
-    public ISpaceship Damage(ISpaceship ship, AdditionalSafetyDevices device)
+    public void Damage(ISpaceship ship, AdditionalSafetyDevices device)
     {
         if (ship.Deflector.IsDeflectorWorking() && ship.Deflector.IsaPhotonDeflectorInstalled)
         {
             ship.Deflector.AntimatterFlashesDamage();
         }
-
-        return ship;
     }
 }

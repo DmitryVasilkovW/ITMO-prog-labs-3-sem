@@ -7,27 +7,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class Route
 {
-    private IList<IEnvironment> _environments;
-    private IList<ISpaceship> _ships;
     private List<StatusOfShips> _shipStatus = new List<StatusOfShips>();
 
-    public Route(IList<IEnvironment> environments, IList<ISpaceship> ships)
-    {
-        _environments = environments;
-        _ships = ships;
-    }
-
-    public IList<StatusOfShips> ShipHandling()
+    public IList<StatusOfShips> ShipHandling(IList<ISpaceship> ships, IList<IEnvironment> environments)
     {
         int indexForEnvironments = -1;
-        foreach (ISpaceship ship in _ships)
+        foreach (ISpaceship ship in ships)
         {
             indexForEnvironments++;
-            for (int i = indexForEnvironments; i < _environments.Count; i += _ships.Count)
+            for (int i = indexForEnvironments; i < environments.Count; i += ships.Count)
             {
-                IEnvironment environment = _environments[i];
+                IEnvironment environment = environments[i];
 
-                if (!environment.IsCanEnterTheEnvironment())
+                if (!environment.IsCanEnterTheEnvironment(ship))
                 {
                     _shipStatus.Add(StatusOfShips.LossOfShip);
 
@@ -40,7 +32,7 @@ public class Route
                 }
                 else
                 {
-                    if (environment.IsTheShipWasAbleToRemainInService())
+                    if (environment.IsTheShipWasAbleToRemainInService(ship))
                     {
                         _shipStatus.Add(StatusOfShips.Success);
                     }

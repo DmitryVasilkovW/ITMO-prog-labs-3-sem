@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class Meteorites : IObstacle, IHullDamage, INormalSpace
 {
-    public ISpaceship Damage(ISpaceship ship, AdditionalSafetyDevices device)
+    public void Damage(ISpaceship ship, AdditionalSafetyDevices device)
     {
         if (ship.Deflector.IsDeflectorWorking())
         {
@@ -15,7 +15,5 @@ public class Meteorites : IObstacle, IHullDamage, INormalSpace
         {
             ship.Armor.MeteoriteDamage(ship.WeightDimensionCharacteristics);
         }
-
-        return ship;
     }
 }

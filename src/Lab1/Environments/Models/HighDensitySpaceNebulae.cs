@@ -8,51 +8,43 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
 public class HighDensitySpaceNebulae : IEnvironment
 {
-    private IList<IList<IObstacle>> _obstracles;
-    private ISpaceship _ship;
+    private IList<IObstacle> _obstacles;
 
-    public HighDensitySpaceNebulae(int length, IList<IList<IObstacle>> obstracles,  ISpaceship ship)
+    public HighDensitySpaceNebulae(int length, IList<IObstacle> obstacles)
     {
-        _ship = ship;
         Length = length;
-        _obstracles = obstracles;
+        _obstacles = obstacles;
 
-        foreach (IList<IObstacle> listofobstracles in obstracles)
+        foreach (IObstacle obstacle in obstacles)
         {
-            foreach (IObstacle obstacle in listofobstracles)
+            if (obstacle is not IHighDensitySpaceNebulae)
             {
-                if (obstacle is not IHighDensitySpaceNebulae)
-                {
-                    throw new IncorrectObstacleForThisEnvironmentException();
-                }
+                throw new IncorrectObstacleForThisEnvironmentException();
             }
         }
     }
 
     public int Length { get; }
 
-    public bool IsTheShipWasAbleToRemainInService()
+    public bool IsTheShipWasAbleToRemainInService(ISpaceship ship)
     {
-        foreach (IList<IObstacle> listOfObstacles in _obstracles)
+        foreach (IObstacle obstacle in _obstacles)
         {
-            foreach (IObstacle obstacle in listOfObstacles)
+            if (!ship.IsShipAlive())
             {
-                if (!_ship.IsShipAlive())
-                {
-                    return false;
-                }
-
-                _ship = obstacle.Damage(_ship, _ship.Equipment);
+                return false;
             }
+
+            obstacle.Damage(ship, ship.Equipment);
         }
 
         return true;
     }
 
-    public bool IsCanEnterTheEnvironment()
+    public bool IsCanEnterTheEnvironment(ISpaceship ship)
     {
-        _ship.JumpEngineWork();
-        if (_ship.JumpEngine is not JumpEngineSlot && (Length <= _ship.Range))
+        ship.JumpEngineWork();
+        if (ship.JumpEngine is not JumpEngineSlot && (Length <= ship.Range))
         {
             return true;
         }
@@ -62,14 +54,11 @@ public class HighDensitySpaceNebulae : IEnvironment
 
     public bool IsObstaclesKillStaff()
     {
-        foreach (IList<IObstacle> listOfObstacles in _obstracles)
+        foreach (IObstacle obstacle in _obstacles)
         {
-            foreach (IObstacle obstacle in listOfObstacles)
+            if (obstacle is IPersonnelDamage)
             {
-                if (obstacle is IPersonnelDamage)
-                {
-                    return true;
-                }
+                return true;
             }
         }
 

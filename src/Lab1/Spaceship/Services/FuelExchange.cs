@@ -11,9 +11,6 @@ public class FuelExchange : IFuelExchange
     private int _costOfGravitonMatterProduction;
     private int _costOfProductionOfActivePlasma;
 
-    private int _activePlasmaPrice;
-    private int _gravitonMatterPrice;
-
     public FuelExchange(int otherTaxes, int excises, int processingAndDelivery, int oilCompanyIncome, int gasStationRevenues, int mineralExtractionTax, int costOfGravitonMatterProduction, int costOfProductionOfActivePlasma)
     {
         _otherTaxes = otherTaxes;
@@ -29,23 +26,16 @@ public class FuelExchange : IFuelExchange
         GravitonMatterValueCalculations();
     }
 
-    public int ActivePlasmaPrice
-    {
-        get { return _activePlasmaPrice; }
-    }
-
-    public int GravitonMatterPrice
-    {
-        get { return _gravitonMatterPrice; }
-    }
+    public int ActivePlasmaPrice { get; private set; }
+    public int GravitonMatterPrice { get; private set; }
 
     public void ActivePlasmaCosting()
     {
-        _activePlasmaPrice = _otherTaxes + _excises + _processingAndDelivery + _oilCompanyIncome + _gasStationRevenues + _mineralExtractionTax + _costOfProductionOfActivePlasma;
+        ActivePlasmaPrice = _otherTaxes + _excises + _processingAndDelivery + _oilCompanyIncome + _gasStationRevenues + _mineralExtractionTax + _costOfProductionOfActivePlasma;
     }
 
     public void GravitonMatterValueCalculations()
     {
-        _gravitonMatterPrice = _otherTaxes + _excises + _processingAndDelivery + _oilCompanyIncome + _gasStationRevenues + _mineralExtractionTax + _costOfGravitonMatterProduction;
+        GravitonMatterPrice = _otherTaxes + _excises + _processingAndDelivery + _oilCompanyIncome + _gasStationRevenues + _mineralExtractionTax + _costOfGravitonMatterProduction;
     }
 }
