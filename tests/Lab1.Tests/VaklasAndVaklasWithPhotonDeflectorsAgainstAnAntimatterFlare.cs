@@ -43,10 +43,8 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
         }
 
         var firstenvironment = new HighDensitySpaceNebulae(length, fleshes);
-        var secondenvironment = new HighDensitySpaceNebulae(length, fleshes);
 
         environments.Add(firstenvironment);
-        environments.Add(secondenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
         expectedValues.Add(StatusOfShips.Success);

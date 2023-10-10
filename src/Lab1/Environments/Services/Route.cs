@@ -11,11 +11,9 @@ public class Route
 
     public IList<StatusOfShips> ShipHandling(IList<ISpaceship> ships, IList<IEnvironment> environments)
     {
-        int indexForEnvironments = -1;
         foreach (ISpaceship ship in ships)
         {
-            indexForEnvironments++;
-            for (int i = indexForEnvironments; i < environments.Count; i += ships.Count)
+            for (int i = 0; i < environments.Count; i += ships.Count)
             {
                 IEnvironment environment = environments[i];
 

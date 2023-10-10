@@ -14,25 +14,10 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
     public static bool ResultsVerification(IList<StatusOfShips> shipStatus, IList<StatusOfShips> expectedValues)
     {
         int indexForShip = 0;
-        IList<StatusOfShips> newstatus = new List<StatusOfShips>();
-
-        for (int j = 0; j < expectedValues.Count; j++)
-        {
-            for (int i = indexForShip; i < expectedValues.Count; i += 2)
-            {
-                if (shipStatus[i] != StatusOfShips.Success)
-                {
-                    newstatus.Add(shipStatus[i]);
-                    indexForShip++;
-                }
-            }
-        }
-
-        indexForShip = 0;
 
         for (int i = 0; i < expectedValues.Count; i++)
         {
-            if (newstatus[indexForShip] != expectedValues[i])
+            if (shipStatus[indexForShip] != expectedValues[i])
             {
                 return false;
             }
@@ -62,18 +47,14 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         }
 
         var firstenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae);
-        var secondenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae);
-        var thirdenvironment = new HighDensitySpaceNebulae(length, fleshes);
-        var fourthenvironment = new HighDensitySpaceNebulae(length, fleshes);
+        var secondenvironment = new HighDensitySpaceNebulae(length, fleshes);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
-        environments.Add(thirdenvironment);
-        environments.Add(fourthenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
         expectedValues.Add(StatusOfShips.LossOfShip);
-        expectedValues.Add(StatusOfShips.LossOfShip);
+        expectedValues.Add(StatusOfShips.Success);
 
         shipStatus = new Route().ShipHandling(ships, environments);
 
@@ -87,7 +68,7 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
             new object[]
             {
                 new SlowMovingShuttle(),
-                new Augur(false),
+                new Augur(true),
             },
         };
 
