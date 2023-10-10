@@ -1,18 +1,20 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class ShipSelection
 {
-    private IList<Spaceship.Entities.ISpaceship> _shipes = new List<Spaceship.Entities.ISpaceship>();
+    private IList<ISpaceship> _shipes = new List<ISpaceship>();
     private FuelExchange _fuelExchange;
-    private IList<Entities.IEnvironment> _environments;
+    private IList<IEnvironment> _environments;
     private List<List<int>> _pricesAndIndices = new List<List<int>>();
     private List<int> _canFly = new List<int>();
     private int _length;
 
-    public ShipSelection(IList<Spaceship.Entities.ISpaceship> shipes, FuelExchange fuelExchange, IList<Entities.IEnvironment> environments, int length)
+    public ShipSelection(IList<ISpaceship> shipes, FuelExchange fuelExchange, IList<IEnvironment> environments, int length)
     {
         _shipes = shipes;
         _fuelExchange = fuelExchange;
@@ -27,7 +29,7 @@ public class ShipSelection
         }
     }
 
-    public Spaceship.Entities.ISpaceship Select()
+    public ISpaceship Select()
     {
         SelectionOfShipsThatCanEnterTheEnvironment();
         FuelPriceCalculation();
