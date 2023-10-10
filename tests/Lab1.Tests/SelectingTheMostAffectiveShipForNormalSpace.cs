@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
-
-public class SelectingTheMostAffectiveShipForNormalSpace
+public class SelectingTheMostAffectiveShipForNormalSpace : IEnumerable<object[]>
 {
+    public static IEnumerable<object[]> GetShips
+    {
+        get { yield return new object[] { new SlowMovingShuttle(), new Vaklas(false), }; }
+    }
+
     public static bool ResultsVerification(ISpaceship ship)
     {
         if (ship is SlowMovingShuttle)
@@ -22,14 +27,24 @@ public class SelectingTheMostAffectiveShipForNormalSpace
         return false;
     }
 
+    IEnumerator<object[]> IEnumerable<object[]>.GetEnumerator()
+    {
+        throw new IncorrectNumberOfArgumentsException();
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
     [Theory]
-    [ClassData(typeof(ParameterizedTests))]
+    [MemberData(nameof(GetShips), MemberType = typeof(SelectingTheMostAffectiveShipForNormalSpace))]
     public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
         IList<ISpaceship> ships = new List<ISpaceship>();
         ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
-        IList<IObstacle> fleshes = new List<IObstacle>();
+        IList<INormalSpace> asteroids = new List<INormalSpace>();
         const int length = 50;
         const int otherTaxes = 1;
         const int excises = 2;
@@ -40,8 +55,8 @@ public class SelectingTheMostAffectiveShipForNormalSpace
         const int costOfGravitonMatterProduction = 7;
         const int costOfProductionOfActivePlasma = 8;
 
-        var firstenvironment = new NormalSpace(length, fleshes);
-        var secondenvironment = new NormalSpace(length, fleshes);
+        var firstenvironment = new NormalSpace(length, asteroids);
+        var secondenvironment = new NormalSpace(length, asteroids);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -55,21 +70,5 @@ public class SelectingTheMostAffectiveShipForNormalSpace
             length).Select();
 
         Assert.True(ResultsVerification(ship));
-    }
-
-    private class ParameterizedTests : IEnumerable<object[]>
-    {
-        private readonly List<object[]> _data = new List<object[]>
-        {
-            new object[]
-            {
-                new SlowMovingShuttle(),
-                new Vaklas(false),
-            },
-        };
-
-        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

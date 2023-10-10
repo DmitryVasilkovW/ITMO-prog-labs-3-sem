@@ -7,21 +7,21 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class ShipSelection
 {
-    private IList<ISpaceship> _shipes = new List<ISpaceship>();
+    private IList<ISpaceship> _ships = new List<ISpaceship>();
     private FuelExchange _fuelExchange;
     private IList<IEnvironment> _environments;
     private List<List<int>> _pricesAndIndices = new List<List<int>>();
     private List<int> _canFly = new List<int>();
     private int _length;
 
-    public ShipSelection(IList<ISpaceship> shipes, FuelExchange fuelExchange, IList<IEnvironment> environments, int length)
+    public ShipSelection(IList<ISpaceship> ships, FuelExchange fuelExchange, IList<IEnvironment> environments, int length)
     {
-        _shipes = shipes;
+        _ships = ships;
         _fuelExchange = fuelExchange;
         _environments = environments;
         _length = length;
 
-        int countOfShips = shipes.Count;
+        int countOfShips = ships.Count;
 
         while (countOfShips-- != 0)
         {
@@ -35,7 +35,7 @@ public class ShipSelection
         FuelPriceCalculation();
         Sort();
 
-        return _shipes[SelectIndex()];
+        return _ships[SelectIndex()];
     }
 
     private int SelectIndex()
@@ -55,12 +55,12 @@ public class ShipSelection
     {
         int shipindex = -1;
 
-        for (int i = 0; i < _shipes.Count; i++)
+        for (int i = 0; i < _ships.Count; i++)
         {
             shipindex++;
-            for (int j = shipindex; j < _environments.Count; j += _shipes.Count)
+            for (int j = shipindex; j < _environments.Count; j += _ships.Count)
             {
-                if (!_environments[j].IsCanEnterTheEnvironment(_shipes[i]))
+                if (!_environments[j].IsCanEnterTheEnvironment(_ships[i]))
                 {
                     _canFly[i] = 0;
                 }
@@ -72,9 +72,9 @@ public class ShipSelection
     {
         int indexOfShip = 0;
 
-        for (int i = 0; i < _shipes.Count; i++)
+        for (int i = 0; i < _ships.Count; i++)
         {
-            int price = _shipes[i].Fuelreserve % _length;
+            int price = _ships[i].Fuelreserve % _length;
             price *= _fuelExchange.ActivePlasmaPrice;
 
             _pricesAndIndices.Add(new List<int>() { price, indexOfShip });

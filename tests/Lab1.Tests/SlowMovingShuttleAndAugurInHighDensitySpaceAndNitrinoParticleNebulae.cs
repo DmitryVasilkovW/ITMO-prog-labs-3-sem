@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebulae
+public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebulae : IEnumerable<object[]>
 {
+    public static IEnumerable<object[]> GetShips
+    {
+        get { yield return new object[] { new SlowMovingShuttle(), new Augur(true) }; }
+    }
+
     public static bool ResultsVerification(IList<StatusOfShips> shipStatus, IList<StatusOfShips> expectedValues)
     {
         int indexForShip = 0;
@@ -28,16 +34,26 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         return true;
     }
 
+    IEnumerator<object[]> IEnumerable<object[]>.GetEnumerator()
+    {
+        throw new IncorrectNumberOfArgumentsException();
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
     [Theory]
-    [ClassData(typeof(ParameterizedTests))]
+    [MemberData(nameof(GetShips), MemberType = typeof(SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebulae))]
     public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
         IList<ISpaceship> ships = new List<ISpaceship>();
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
-        IList<IObstacle> obstaclesforNitrinoParticleNebulae = new List<IObstacle>();
-        IList<IObstacle> fleshes = new List<IObstacle>();
+        IList<INitrinoParticleNebulae> obstaclesforNitrinoParticleNebulae = new List<INitrinoParticleNebulae>();
+        IList<IHighDensitySpaceNebulae> fleshes = new List<IHighDensitySpaceNebulae>();
         const int length = 1;
         const int countofobstacles = 31;
 
@@ -59,21 +75,5 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         shipStatus = new Route().ShipHandling(ships, environments);
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
-    }
-
-    private class ParameterizedTests : IEnumerable<object[]>
-    {
-        private readonly List<object[]> _data = new List<object[]>
-        {
-            new object[]
-            {
-                new SlowMovingShuttle(),
-                new Augur(true),
-            },
-        };
-
-        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

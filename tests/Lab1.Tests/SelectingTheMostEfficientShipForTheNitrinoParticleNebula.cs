@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
@@ -10,9 +11,13 @@ using Xunit;
 using Environment = Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities.IEnvironment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
-
-public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
+public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula : IEnumerable<object[]>
 {
+    public static IEnumerable<object[]> GetShips
+    {
+        get { yield return new object[] { new SlowMovingShuttle(), new Vaklas(false) }; }
+    }
+
     public static bool ResultsVerification(ISpaceship ship)
     {
         if (ship is Vaklas)
@@ -23,14 +28,24 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
         return false;
     }
 
+    IEnumerator<object[]> IEnumerable<object[]>.GetEnumerator()
+    {
+        throw new IncorrectNumberOfArgumentsException();
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
     [Theory]
-    [ClassData(typeof(ParameterizedTests))]
+    [MemberData(nameof(GetShips), MemberType = typeof(SelectingTheMostEfficientShipForTheNitrinoParticleNebula))]
     public void ShipsAndEnvironments(ISpaceship firstShip, ISpaceship secondShip)
     {
         IList<ISpaceship> ships = new List<ISpaceship>();
         ISpaceship ship;
         IList<IEnvironment> environments = new List<Environment>();
-        IList<IObstacle> fleshes = new List<IObstacle>();
+        IList<INitrinoParticleNebulae> spacewhales = new List<INitrinoParticleNebulae>();
         const int length = 1;
         const int otherTaxes = 1;
         const int excises = 2;
@@ -41,11 +56,9 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
         const int costOfGravitonMatterProduction = 7;
         const int costOfProductionOfActivePlasma = 8;
 
-        var firstenvironment = new NitrinoParticleNebulae(length, fleshes);
-        var secondenvironment = new NitrinoParticleNebulae(length, fleshes);
+        var firstenvironment = new NitrinoParticleNebulae(length, spacewhales);
 
         environments.Add(firstenvironment);
-        environments.Add(secondenvironment);
         ships.Add(firstShip);
         ships.Add(secondShip);
 
@@ -56,21 +69,5 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
             length).Select();
 
         Assert.True(ResultsVerification(ship));
-    }
-
-    private class ParameterizedTests : IEnumerable<object[]>
-    {
-        private readonly List<object[]> _data = new List<object[]>
-        {
-            new object[]
-            {
-                new SlowMovingShuttle(),
-                new Vaklas(false),
-            },
-        };
-
-        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
