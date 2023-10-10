@@ -1,26 +1,17 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
-using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Models;
 
 public class NitrinoParticleNebulae : IEnvironment
 {
-    private IList<IObstacle> _obstacles;
+    private IList<INitrinoParticleNebulae> _obstacles;
 
-    public NitrinoParticleNebulae(int length, IList<IObstacle> obstacles)
+    public NitrinoParticleNebulae(int length, IList<INitrinoParticleNebulae> obstacles)
     {
         _obstacles = obstacles;
         Length = length;
-
-        foreach (IObstacle obstacle in obstacles)
-        {
-            if (obstacle is not INitrinoParticleNebulae)
-            {
-                throw new IncorrectObstacleForThisEnvironmentException();
-            }
-        }
     }
 
     public int Length { get; }
