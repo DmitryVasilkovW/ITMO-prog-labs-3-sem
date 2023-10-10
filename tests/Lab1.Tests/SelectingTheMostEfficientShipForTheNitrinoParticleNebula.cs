@@ -29,7 +29,6 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
         IList<ISpaceship> ships = new List<ISpaceship>();
         ISpaceship ship;
         IList<IEnvironment> environments = new List<Environment>();
-        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         const int length = 1;
         const int otherTaxes = 1;
@@ -41,10 +40,8 @@ public class SelectingTheMostEfficientShipForTheNitrinoParticleNebula
         const int costOfGravitonMatterProduction = 7;
         const int costOfProductionOfActivePlasma = 8;
 
-        obstacles.Add(fleshes);
-
-        var firstenvironment = new NitrinoParticleNebulae(length, obstacles, firstShip);
-        var secondenvironment = new NitrinoParticleNebulae(length, obstacles, secondShip);
+        var firstenvironment = new NitrinoParticleNebulae(length, fleshes);
+        var secondenvironment = new NitrinoParticleNebulae(length, fleshes);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

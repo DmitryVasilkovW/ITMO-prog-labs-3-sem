@@ -29,7 +29,6 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
         IList<ISpaceship> ships = new List<ISpaceship>();
         ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         const int length = 100;
         const int otherTaxes = 1;
@@ -41,10 +40,8 @@ public class SelectingTheMostEfficientShipForAHighDensityNebula
         const int costOfGravitonMatterProduction = 7;
         const int costOfProductionOfActivePlasma = 8;
 
-        obstacles.Add(fleshes);
-
-        var firstenvironment = new HighDensitySpaceNebulae(length, obstacles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(length, obstacles, secondShip);
+        var firstenvironment = new HighDensitySpaceNebulae(length, fleshes);
+        var secondenvironment = new HighDensitySpaceNebulae(length, fleshes);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

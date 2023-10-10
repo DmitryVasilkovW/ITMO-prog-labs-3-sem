@@ -32,11 +32,10 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
-        IList<IList<IObstacle>> obstaclesforVaklas = new List<IList<IObstacle>>();
         IList<IObstacle> spacewhiles = new List<IObstacle>();
         IList<IObstacle> spacewhilesforVaklas = new List<IObstacle>();
         const int countofobstacles = 3;
+        const int length = 1;
 
         for (int i = 0; i < countofobstacles; i++)
         {
@@ -45,12 +44,9 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
 
         spacewhiles.Add(new SpaceWhale());
 
-        obstacles.Add(spacewhiles);
-        obstaclesforVaklas.Add(spacewhilesforVaklas);
-
-        var firstenvironment = new NitrinoParticleNebulae(1, obstaclesforVaklas, firstShip);
-        var secondenvironment = new NitrinoParticleNebulae(1, obstacles, secondShip);
-        var thirdenvironment = new NitrinoParticleNebulae(1, obstacles, thirdship);
+        var firstenvironment = new NitrinoParticleNebulae(length, spacewhilesforVaklas);
+        var secondenvironment = new NitrinoParticleNebulae(length, spacewhiles);
+        var thirdenvironment = new NitrinoParticleNebulae(length, spacewhiles);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -62,7 +58,7 @@ public class VaklasAugurAndMeredianVsCosmoWhaleInTheNitrinoParticleNebula
         expectedValues.Add(StatusOfShips.Success);
         expectedValues.Add(StatusOfShips.Success);
 
-        shipStatus = new Route(environments, ships).ShipHandling();
+        shipStatus = new Route().ShipHandling(ships, environments);
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
     }

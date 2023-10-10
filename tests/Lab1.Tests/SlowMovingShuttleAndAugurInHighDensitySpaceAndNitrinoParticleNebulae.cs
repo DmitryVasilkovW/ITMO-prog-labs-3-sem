@@ -51,8 +51,7 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstaclesforHighDensitySpaceNebulae = new List<IList<IObstacle>>();
-        IList<IList<IObstacle>> obstaclesforNitrinoParticleNebulae = new List<IList<IObstacle>>();
+        IList<IObstacle> obstaclesforNitrinoParticleNebulae = new List<IObstacle>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         const int length = 1;
         const int countofobstacles = 31;
@@ -62,12 +61,10 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
             fleshes.Add(new AntimatterFlashes());
         }
 
-        obstaclesforHighDensitySpaceNebulae.Add(fleshes);
-
-        var firstenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae, firstShip);
-        var secondenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae, secondShip);
-        var thirdenvironment = new HighDensitySpaceNebulae(length, obstaclesforHighDensitySpaceNebulae, firstShip);
-        var fourthenvironment = new HighDensitySpaceNebulae(length, obstaclesforHighDensitySpaceNebulae, secondShip);
+        var firstenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae);
+        var secondenvironment = new NitrinoParticleNebulae(length, obstaclesforNitrinoParticleNebulae);
+        var thirdenvironment = new HighDensitySpaceNebulae(length, fleshes);
+        var fourthenvironment = new HighDensitySpaceNebulae(length, fleshes);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -78,7 +75,7 @@ public class SlowMovingShuttleAndAugurInHighDensitySpaceAndNitrinoParticleNebula
         expectedValues.Add(StatusOfShips.LossOfShip);
         expectedValues.Add(StatusOfShips.LossOfShip);
 
-        shipStatus = new Route(environments, ships).ShipHandling();
+        shipStatus = new Route().ShipHandling(ships, environments);
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
     }

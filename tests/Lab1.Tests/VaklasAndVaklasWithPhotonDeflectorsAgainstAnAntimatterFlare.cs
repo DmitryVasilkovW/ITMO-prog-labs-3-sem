@@ -33,7 +33,6 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         IList<IEnvironment> environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         const int length = 1;
         const int countofobstacles = 2;
@@ -43,10 +42,8 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
             fleshes.Add(new AntimatterFlashes());
         }
 
-        obstacles.Add(fleshes);
-
-        var firstenvironment = new HighDensitySpaceNebulae(length, obstacles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(length, obstacles, secondShip);
+        var firstenvironment = new HighDensitySpaceNebulae(length, fleshes);
+        var secondenvironment = new HighDensitySpaceNebulae(length, fleshes);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -55,7 +52,7 @@ public class VaklasAndVaklasWithPhotonDeflectorsAgainstAnAntimatterFlare
         expectedValues.Add(StatusOfShips.Success);
         expectedValues.Add(StatusOfShips.CrewDeaths);
 
-        shipStatus = new Route(environments, ships).ShipHandling();
+        shipStatus = new Route().ShipHandling(ships, environments);
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
     }

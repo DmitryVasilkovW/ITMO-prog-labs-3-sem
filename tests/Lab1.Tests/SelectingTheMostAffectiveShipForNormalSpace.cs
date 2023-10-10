@@ -28,7 +28,6 @@ public class SelectingTheMostAffectiveShipForNormalSpace
         IList<ISpaceship> ships = new List<ISpaceship>();
         ISpaceship ship;
         IList<IEnvironment> environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         const int length = 50;
         const int otherTaxes = 1;
@@ -40,10 +39,8 @@ public class SelectingTheMostAffectiveShipForNormalSpace
         const int costOfGravitonMatterProduction = 7;
         const int costOfProductionOfActivePlasma = 8;
 
-        obstacles.Add(fleshes);
-
-        var firstenvironment = new NormalSpace(length, obstacles, firstShip);
-        var secondenvironment = new NormalSpace(length, obstacles, secondShip);
+        var firstenvironment = new NormalSpace(length, fleshes);
+        var secondenvironment = new NormalSpace(length, fleshes);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);

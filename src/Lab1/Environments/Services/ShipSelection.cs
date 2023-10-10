@@ -58,7 +58,7 @@ public class ShipSelection
             shipindex++;
             for (int j = shipindex; j < _environments.Count; j += _shipes.Count)
             {
-                if (!_environments[j].IsCanEnterTheEnvironment())
+                if (!_environments[j].IsCanEnterTheEnvironment(_shipes[i]))
                 {
                     _canFly[i] = 0;
                 }

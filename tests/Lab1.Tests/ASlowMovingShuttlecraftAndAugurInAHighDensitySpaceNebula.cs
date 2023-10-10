@@ -31,7 +31,6 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
         IList<StatusOfShips> shipStatus;
         IList<StatusOfShips> expectedValues = new List<StatusOfShips>();
         var environments = new List<IEnvironment>();
-        IList<IList<IObstacle>> obstacles = new List<IList<IObstacle>>();
         IList<IObstacle> fleshes = new List<IObstacle>();
         const int length = 50;
         const int countofobstacles = 31;
@@ -41,10 +40,8 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
             fleshes.Add(new AntimatterFlashes());
         }
 
-        obstacles.Add(fleshes);
-
-        var firstenvironment = new HighDensitySpaceNebulae(length, obstacles, firstShip);
-        var secondenvironment = new HighDensitySpaceNebulae(length, obstacles, secondShip);
+        var firstenvironment = new HighDensitySpaceNebulae(length, fleshes);
+        var secondenvironment = new HighDensitySpaceNebulae(length, fleshes);
 
         environments.Add(firstenvironment);
         environments.Add(secondenvironment);
@@ -53,7 +50,7 @@ public class ASlowMovingShuttlecraftAndAugurInAHighDensitySpaceNebula
         expectedValues.Add(StatusOfShips.LossOfShip);
         expectedValues.Add(StatusOfShips.LossOfShip);
 
-        shipStatus = new Route(environments, ships).ShipHandling();
+        shipStatus = new Route().ShipHandling(ships, environments);
 
         Assert.True(ResultsVerification(shipStatus, expectedValues));
     }

@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
 public class SpaceWhale : IObstacle, IHullDamage, INitrinoParticleNebulae
 {
-    public ISpaceship Damage(ISpaceship ship, AdditionalSafetyDevices device)
+    public void Damage(ISpaceship ship, AdditionalSafetyDevices device)
     {
         if (ship.Deflector.IsDeflectorWorking())
         {
@@ -31,7 +31,5 @@ public class SpaceWhale : IObstacle, IHullDamage, INitrinoParticleNebulae
                 ship.Armor.SpaceWhaleDamage(ship.WeightDimensionCharacteristics);
             }
         }
-
-        return ship;
     }
 }
