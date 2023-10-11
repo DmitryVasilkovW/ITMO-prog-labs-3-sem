@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
-public abstract class Deflectors
+public abstract class Deflectors : IShipDefense
 {
     private IPhotonicDeflectors _photonicDeflector;
 
@@ -20,7 +20,7 @@ public abstract class Deflectors
 
     public virtual bool IsaPhotonDeflectorInstalled { get; }
 
-    public abstract bool IsDeflectorWorking();
+    public abstract bool IsWorking();
 
     public abstract void AsteroidDamage();
 

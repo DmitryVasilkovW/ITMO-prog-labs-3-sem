@@ -25,7 +25,7 @@ public class NitrinoParticleNebulae : IEnvironment
                 return false;
             }
 
-            obstacle.Damage(ship, ship.Equipment);
+            obstacle.Damage(ship);
         }
 
         return true;

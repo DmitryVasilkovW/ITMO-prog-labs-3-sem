@@ -31,7 +31,7 @@ public class FirstClassDeflector : Deflectors
 
     public override bool IsaPhotonDeflectorInstalled { get; }
 
-    public override bool IsDeflectorWorking()
+    public override bool IsWorking()
     {
         if (_deflectorconditionlevel < 0)
         {
@@ -44,19 +44,19 @@ public class FirstClassDeflector : Deflectors
     public override void AsteroidDamage()
     {
         _deflectorconditionlevel -= TakingAsteroidamage;
-        IsDeflectorWorking();
+        IsWorking();
     }
 
     public override void MeteoriteDamage()
     {
         _deflectorconditionlevel -= TakingMeteoritedamage;
-        IsDeflectorWorking();
+        IsWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
         _deflectorconditionlevel -= TakingSpacewhaledamage;
-        IsDeflectorWorking();
+        IsWorking();
     }
 
     public override bool IsPhotonDeflectorWorking()

@@ -41,7 +41,7 @@ public class ThirdClassDeflector : Deflectors
         return false;
     }
 
-    public override bool IsDeflectorWorking()
+    public override bool IsWorking()
     {
         if (_deflectorconditionlevel < 0)
         {
@@ -54,19 +54,19 @@ public class ThirdClassDeflector : Deflectors
     public override void AsteroidDamage()
     {
         _deflectorconditionlevel -= TakingAsteroidamage;
-        IsDeflectorWorking();
+        IsWorking();
     }
 
     public override void MeteoriteDamage()
     {
         _deflectorconditionlevel -= TakingMeteoritedamage;
-        IsDeflectorWorking();
+        IsWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
         _deflectorconditionlevel -= TakingSpacewhaledamage;
-        IsDeflectorWorking();
+        IsWorking();
     }
 
     public override void SavingStatusOfTheDeflector(AdditionalSafetyDevices device)

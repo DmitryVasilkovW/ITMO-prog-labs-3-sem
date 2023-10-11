@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
 
-public class SpaceWhale : IObstacle, IHullDamage, INitrinoParticleNebulae
+public class Meteorite : IObstacle, IHullDamage, INormalSpace
 {
     public void Damage(ISpaceship ship)
     {

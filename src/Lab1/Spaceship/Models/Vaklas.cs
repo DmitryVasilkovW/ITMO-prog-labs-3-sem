@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
@@ -9,6 +13,7 @@ public class Vaklas : ISpaceship
     private const int InitialRange = 10;
     private const int InitialFuelreserve = 1;
     private const int InitialWeightDimensionCharacteristics = 2;
+    private IList<IShipDefense> _shipDefenses = new List<IShipDefense>();
     public Vaklas(bool whethertoInstallAPhotonicDeflector)
     {
         WeightDimensionCharacteristics = InitialWeightDimensionCharacteristics;
@@ -60,9 +65,61 @@ public class Vaklas : ISpaceship
         Fuelreserve = JumpEngine.FuelConsumption(Fuelreserve, WeightDimensionCharacteristics);
     }
 
+    public void ProtectionFromObstacles(IObstacle obstacle)
+    {
+        bool isTheDefenseSucceeded = false;
+
+        foreach (IShipDefense defense in _shipDefenses)
+        {
+            if (defense.IsWorking())
+            {
+                switch (obstacle)
+                {
+                    case Asteroid:
+                        defense.AsteroidDamage();
+                        isTheDefenseSucceeded = true;
+                        break;
+                    case Meteorite:
+                        defense.MeteoriteDamage();
+                        isTheDefenseSucceeded = true;
+                        break;
+                    case SpaceWhale:
+                        defense.SpaceWhaleDamage();
+                        if (Equipment is ISpaceWhaleDefense)
+                        {
+                            SafetyEquipmentOperation();
+                        }
+
+                        isTheDefenseSucceeded = true;
+                        break;
+                    default:
+                        throw new IncorrectObstacleTypeException();
+                }
+            }
+        }
+
+        if (!isTheDefenseSucceeded)
+        {
+            switch (obstacle)
+            {
+                case Asteroid:
+                    Armor.AsteroidDamage(WeightDimensionCharacteristics);
+                    break;
+                case Meteorite:
+                    Armor.MeteoriteDamage(WeightDimensionCharacteristics);
+                    break;
+                case SpaceWhale:
+                    Armor.SpaceWhaleDamage(WeightDimensionCharacteristics);
+                    break;
+                default:
+                    throw new IncorrectObstacleTypeException();
+            }
+        }
+    }
+
     public void SafetyEquipmentOperation()
     {
-        if (Deflector.IsDeflectorWorking())
+        if (Deflector.IsWorking())
         {
             Equipment.Effect(Deflector, Equipment);
         }

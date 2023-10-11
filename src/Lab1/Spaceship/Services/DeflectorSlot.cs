@@ -16,7 +16,7 @@ public class DeflectorSlot : Deflectors
         return false;
     }
 
-    public override bool IsDeflectorWorking()
+    public override bool IsWorking()
     {
         return false;
     }

@@ -1,3 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Environments.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 
 public interface ISpaceship
@@ -18,6 +20,8 @@ public interface ISpaceship
     int WeightDimensionCharacteristics { get; }
 
     int Fuelreserve { get; }
+
+    void ProtectionFromObstacles(IObstacle obstacle);
 
     bool IsShipAlive();
 
