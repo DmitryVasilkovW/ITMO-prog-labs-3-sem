@@ -4,13 +4,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class FirstClassDeflector : Deflectors
 {
-    private const int Asteroidamage = 3670;
-    private const int Meteoritedamage = 7340;
-    private const int Spacewhaledamage = 10000;
+    private const int TakingAsteroidamage = 3670;
+    private const int TakingMeteoritedamage = 7340;
+    private const int TakingSpacewhaledamage = 10000;
     private const int InitialDeflectorconditionlevel = 7340;
 
     private int _deflectorconditionlevel;
-    private bool _isaPhotonDeflectorInstalled;
     private bool _isDeflectorWorking;
     private IPhotonicDeflectors _photonicDeflector;
 
@@ -18,7 +17,7 @@ public class FirstClassDeflector : Deflectors
     {
         _photonicDeflector = photonicDeflector;
         _deflectorconditionlevel = InitialDeflectorconditionlevel;
-        _isaPhotonDeflectorInstalled = true;
+        IsaPhotonDeflectorInstalled = true;
         _isDeflectorWorking = true;
     }
 
@@ -26,14 +25,11 @@ public class FirstClassDeflector : Deflectors
     {
         _photonicDeflector = new PhotonDeflectorSlot();
         _deflectorconditionlevel = InitialDeflectorconditionlevel;
-        _isaPhotonDeflectorInstalled = false;
+        IsaPhotonDeflectorInstalled = false;
         _isDeflectorWorking = true;
     }
 
-    public override bool IsaPhotonDeflectorInstalled
-    {
-        get { return _isaPhotonDeflectorInstalled; }
-    }
+    public override bool IsaPhotonDeflectorInstalled { get; }
 
     public override bool IsDeflectorWorking()
     {
@@ -47,25 +43,25 @@ public class FirstClassDeflector : Deflectors
 
     public override void AsteroidDamage()
     {
-        _deflectorconditionlevel -= Asteroidamage;
+        _deflectorconditionlevel -= TakingAsteroidamage;
         IsDeflectorWorking();
     }
 
     public override void MeteoriteDamage()
     {
-        _deflectorconditionlevel -= Meteoritedamage;
+        _deflectorconditionlevel -= TakingMeteoritedamage;
         IsDeflectorWorking();
     }
 
     public override void SpaceWhaleDamage()
     {
-        _deflectorconditionlevel -= Spacewhaledamage;
+        _deflectorconditionlevel -= TakingSpacewhaledamage;
         IsDeflectorWorking();
     }
 
     public override bool IsPhotonDeflectorWorking()
     {
-        if (_isaPhotonDeflectorInstalled && !_photonicDeflector.IsPhotonicDeflectorBroken())
+        if (IsaPhotonDeflectorInstalled && !_photonicDeflector.IsPhotonicDeflectorBroken())
         {
             return true;
         }
@@ -85,7 +81,7 @@ public class FirstClassDeflector : Deflectors
     {
         if (device is ISpaceWhaleDefense)
         {
-            _deflectorconditionlevel += Spacewhaledamage;
+            _deflectorconditionlevel += TakingSpacewhaledamage;
         }
     }
 }

@@ -4,9 +4,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class FirstClassArmor : IArmor
 {
-    private const int Meteoritedamage = 2000;
-    private const int Asteroiddamage = 1000;
-    private const int Spacewhaledamage = 6000;
+    private const int TakingMeteoritedamage = 2000;
+    private const int TakingAsteroiddamage = 1000;
+    private const int TakingSpacewhaledamage = 6000;
     private const int InitialArmorconditionlevel = 1000;
 
     private int _armorconditionlevel;
@@ -30,19 +30,19 @@ public class FirstClassArmor : IArmor
 
     public void AsteroidDamage(int weightDimensionsOfTheShip)
     {
-        _armorconditionlevel -= Asteroiddamage / weightDimensionsOfTheShip;
+        _armorconditionlevel -= TakingAsteroiddamage / weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
     public void MeteoriteDamage(int weightDimensionsOfTheShip)
     {
-        _armorconditionlevel -= Meteoritedamage / weightDimensionsOfTheShip;
+        _armorconditionlevel -= TakingMeteoritedamage / weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
     public void SpaceWhaleDamage(int weightDimensionsOfTheShip)
     {
-        _armorconditionlevel -= Spacewhaledamage / weightDimensionsOfTheShip;
+        _armorconditionlevel -= TakingSpacewhaledamage / weightDimensionsOfTheShip;
         IsArmorWorking();
     }
 
@@ -50,7 +50,7 @@ public class FirstClassArmor : IArmor
     {
         if (device is ISpaceWhaleDefense)
         {
-            _armorconditionlevel += Spacewhaledamage / weightDimensionsOfTheShip;
+            _armorconditionlevel += TakingSpacewhaledamage / weightDimensionsOfTheShip;
         }
     }
 }

@@ -5,24 +5,20 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Entities;
 public abstract class Deflectors
 {
     private IPhotonicDeflectors _photonicDeflector;
-    private bool _isaPhotonDeflectorInstalled;
 
     protected Deflectors(IPhotonicDeflectors photonicDeflector)
     {
         _photonicDeflector = photonicDeflector;
-        _isaPhotonDeflectorInstalled = true;
+        IsaPhotonDeflectorInstalled = true;
     }
 
     protected Deflectors()
     {
         _photonicDeflector = new PhotonDeflectorSlot();
-        _isaPhotonDeflectorInstalled = false;
+        IsaPhotonDeflectorInstalled = false;
     }
 
-    public virtual bool IsaPhotonDeflectorInstalled
-    {
-        get { return _isaPhotonDeflectorInstalled; }
-    }
+    public virtual bool IsaPhotonDeflectorInstalled { get; }
 
     public abstract bool IsDeflectorWorking();
 
@@ -36,10 +32,7 @@ public abstract class Deflectors
 
     public virtual void AntimatterFlashesDamage()
     {
-        if (IsaPhotonDeflectorInstalled)
-        {
-            _photonicDeflector.IsPhotonicDeflectorBroken();
-        }
+        if (IsaPhotonDeflectorInstalled) _photonicDeflector.IsPhotonicDeflectorBroken();
     }
 
     public abstract void SavingStatusOfTheDeflector(AdditionalSafetyDevices device);

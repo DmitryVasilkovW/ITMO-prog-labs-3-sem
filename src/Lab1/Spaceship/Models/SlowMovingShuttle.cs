@@ -13,7 +13,7 @@ public class SlowMovingShuttle : ISpaceship
     {
         WeightDimensionCharacteristics = InitialWeightDimensionCharacteristics;
         Equipment = new AdditionalSafetyDevicesSlot();
-        Deflector = new DeflectorSlot(new PhotonDeflectorSlot());
+        Deflector = new DeflectorSlot();
         JumpEngine = new JumpEngineSlot();
         Speed = InitialSpeed;
         Range = InitialRange;

@@ -4,8 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Spaceship.Services;
 
 public class PhotonDeflectorSlot : IPhotonicDeflectors
 {
-    public bool IsPhotonicDeflectorBroken()
-    {
-        return true;
-    }
+    public bool IsPhotonicDeflectorBroken() => true;
 }
