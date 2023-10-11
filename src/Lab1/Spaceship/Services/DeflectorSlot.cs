@@ -11,15 +11,9 @@ public class DeflectorSlot : Deflectors
 
     public override bool IsaPhotonDeflectorInstalled { get; }
 
-    public override bool IsPhotonDeflectorWorking()
-    {
-        return false;
-    }
+    public override bool IsPhotonDeflectorWorking() => false;
 
-    public override bool IsWorking()
-    {
-        return false;
-    }
+    public override bool IsWorking() => false;
 
     public override void AsteroidDamage()
     {
