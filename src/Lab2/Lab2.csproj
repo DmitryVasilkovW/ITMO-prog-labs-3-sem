@@ -4,4 +4,19 @@
         <RootNamespace>Itmo.ObjectOrientedProgramming.Lab2</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Computer\Entities" />
+      <Folder Include="Computer\Models\BIOS" />
+      <Folder Include="Computer\Models\Case" />
+      <Folder Include="Computer\Models\CPU cooling system" />
+      <Folder Include="Computer\Models\Hard drive" />
+      <Folder Include="Computer\Models\Motherboard" />
+      <Folder Include="Computer\Models\Power supply unit" />
+      <Folder Include="Computer\Models\RAM" />
+      <Folder Include="Computer\Models\SSD drive" />
+      <Folder Include="Computer\Models\Wi-Fi adapter" />
+      <Folder Include="Computer\Models\XMP Profile" />
+      <Folder Include="Computer\Services" />
+    </ItemGroup>
+
 </Project>
