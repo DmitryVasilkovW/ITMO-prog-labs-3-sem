@@ -7,8 +7,16 @@ public class CPURepository : ICPURepository
 {
     private IList<ICPU> _listOfCPU = new List<ICPU>();
 
-    public void Addcpu(ICPU cpu)
+    public void Addcpu(ICPU cpu, string name)
     {
+        foreach (ICPU availablecpu in _listOfCPU)
+        {
+            if (availablecpu.Name is not null && availablecpu.Name.Equals(name, StringComparison.Ordinal))
+            {
+                throw new AggregateException();
+            }
+        }
+
         _listOfCPU.Add(cpu);
     }
 
