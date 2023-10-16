@@ -16,7 +16,6 @@
       <Folder Include="Computer\Models\SSD drive" />
       <Folder Include="Computer\Models\Wi-Fi adapter" />
       <Folder Include="Computer\Models\XMP Profile" />
-      <Folder Include="Computer\Services" />
     </ItemGroup>
 
 </Project>
