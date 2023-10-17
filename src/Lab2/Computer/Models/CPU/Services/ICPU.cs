@@ -2,11 +2,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Services;
 
 public interface ICPU
 {
-    public string? Name { get; init; }
-    public bool AvailabilityOfABuiltInVideoCore { get; }
-    public int SupportedMemoryFrequencies { get; }
-    public int HeatEmission { get; }
-    public int ConsumptionPower { get; }
-    public int CoreFrequency { get; }
-    public int NumberOfCores { get; }
+    string? Name { get; }
+    bool AvailabilityOfABuiltInVideoCore { get; }
+    int SupportedMemoryFrequencies { get; }
+    int HeatEmission { get; }
+    int ConsumptionPower { get; }
+    int CoreFrequency { get; }
+    int NumberOfCores { get; }
 }

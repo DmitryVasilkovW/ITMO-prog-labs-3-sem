@@ -14,8 +14,6 @@
       <Folder Include="Computer\Models\Power supply unit" />
       <Folder Include="Computer\Models\RAM" />
       <Folder Include="Computer\Models\SSD drive" />
-      <Folder Include="Computer\Models\Wi-Fi adapter" />
-      <Folder Include="Computer\Models\XMP Profile" />
     </ItemGroup>
 
 </Project>
