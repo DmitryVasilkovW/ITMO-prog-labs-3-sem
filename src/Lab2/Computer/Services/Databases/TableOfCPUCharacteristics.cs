@@ -1,8 +1,9 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Services;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Socket;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Databases;
 
-public class AM4 : ICPU
+public class TableOfCPUCharacteristics : IPartCharacteristics, ICPU
 {
     public string? Name { get; init; }
     public bool AvailabilityOfABuiltInVideoCore { get; init; }
@@ -11,4 +12,5 @@ public class AM4 : ICPU
     public int ConsumptionPower { get; init; }
     public int CoreFrequency { get; init; }
     public int NumberOfCores { get; init; }
+    public ISocket? Socket { get; init; }
 }
