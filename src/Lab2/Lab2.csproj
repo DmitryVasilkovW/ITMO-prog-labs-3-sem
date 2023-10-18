@@ -6,14 +6,6 @@
 
     <ItemGroup>
       <Folder Include="Computer\Entities" />
-      <Folder Include="Computer\Models\BIOS" />
-      <Folder Include="Computer\Models\Case" />
-      <Folder Include="Computer\Models\Hard drive" />
-      <Folder Include="Computer\Models\Motherboard" />
-      <Folder Include="Computer\Models\Power supply unit" />
-      <Folder Include="Computer\Models\RAM" />
-      <Folder Include="Computer\Models\SSD drive" />
-      <Folder Include="Computer\Models\Videocard" />
     </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Databases;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Factory;
 
-public class CPUFactory : ICPUPartFactory<Processor, TableOfCPUCharacteristics>
+public class CPUFactory : IPartFactory<Processor, TableOfCPUCharacteristics>
 {
     public Processor CreatePart(TableOfCPUCharacteristics characteristics)
     {

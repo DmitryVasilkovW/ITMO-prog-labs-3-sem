@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Factory;
 
-public interface ICPUPartFactory<T, TG>
+public interface IPartFactory<T, TG>
 {
     T CreatePart(TG characteristics);
 }

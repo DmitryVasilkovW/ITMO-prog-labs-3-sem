@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPUcoolingsystem.E
 
 public class CPUCoolingSystem : ICPUCoolingSystem, IPart
 {
-    public CPUCoolingSystem(string name, int dimensions, IList<ISocket> supportedSockets, int maximumHeatDissipation)
+    public CPUCoolingSystem(string? name, int dimensions, IList<ISocket>? supportedSockets, int maximumHeatDissipation)
     {
         Name = name;
         Dimensions = dimensions;
