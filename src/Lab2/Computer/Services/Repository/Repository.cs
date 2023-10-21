@@ -14,7 +14,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Factory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Repository;
 
-public class Repository
+public class Repository : IRepository
 {
     private Database _database = new Database();
 
