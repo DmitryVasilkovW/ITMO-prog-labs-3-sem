@@ -1,18 +1,18 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Corpus.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Corpus.Entities;
 
-public class Corpus : ICorpus, IPart, IPrototype<Corpus>
+public class Corpus : ICorpus, IPart, ICloneable
 {
     public Corpus(
         string? name,
         int maximumLengthOfTheVideoCard,
         int maximumWidthOfTheVideoCard,
         int supportedMotherboardFormFactors,
-        int dimensions,
+        Dimensions dimensions,
         int maximumCPUCoolerHeigh)
     {
         Name = name;
@@ -27,14 +27,14 @@ public class Corpus : ICorpus, IPart, IPrototype<Corpus>
     public int MaximumLengthOfTheVideoCard { get; private set; }
     public int MaximumWidthOfTheVideoCard { get; private set; }
     public int SupportedMotherboardFormFactors { get; private set; }
-    public int Dimensions { get; private set; }
+    public Dimensions Dimensions { get; private set; }
     public int MaximumCPUCoolerHeight { get; private set; }
 
-    public Corpus Clone()
+    public object Clone()
     {
         if (Name is not null)
         {
-            return new Corpus(
+            return (Corpus)new Corpus(
                 (string)Name.Clone(),
                 MaximumLengthOfTheVideoCard,
                 MaximumWidthOfTheVideoCard,
@@ -48,7 +48,7 @@ public class Corpus : ICorpus, IPart, IPrototype<Corpus>
 
     public Corpus SetName(string? newName)
     {
-        Corpus clone = Clone();
+        var clone = (Corpus)Clone();
 
         clone.Name = newName;
 
@@ -57,7 +57,7 @@ public class Corpus : ICorpus, IPart, IPrototype<Corpus>
 
     public Corpus SetMaximumCPUCoolerHeight(int newMaximumCPUCoolerHeight)
     {
-        Corpus clone = Clone();
+        var clone = (Corpus)Clone();
 
         clone.MaximumCPUCoolerHeight = newMaximumCPUCoolerHeight;
 
@@ -66,7 +66,7 @@ public class Corpus : ICorpus, IPart, IPrototype<Corpus>
 
     public Corpus SetMaximumLengthOfTheVideoCard(int newMaximumLengthOfTheVideoCard)
     {
-        Corpus clone = Clone();
+        var clone = (Corpus)Clone();
 
         clone.MaximumLengthOfTheVideoCard = newMaximumLengthOfTheVideoCard;
 
@@ -75,7 +75,7 @@ public class Corpus : ICorpus, IPart, IPrototype<Corpus>
 
     public Corpus SetMaximumWidthOfTheVideoCard(int newMaximumWidthOfTheVideoCard)
     {
-        Corpus clone = Clone();
+        var clone = (Corpus)Clone();
 
         clone.MaximumWidthOfTheVideoCard = newMaximumWidthOfTheVideoCard;
 
@@ -84,16 +84,16 @@ public class Corpus : ICorpus, IPart, IPrototype<Corpus>
 
     public Corpus SetSupportedMotherboardFormFactors(int newSupportedMotherboardFormFactors)
     {
-        Corpus clone = Clone();
+        var clone = (Corpus)Clone();
 
         clone.SupportedMotherboardFormFactors = newSupportedMotherboardFormFactors;
 
         return clone;
     }
 
-    public Corpus SetDimensions(int newDimensions)
+    public Corpus SetDimensions(Dimensions newDimensions)
     {
-        Corpus clone = Clone();
+        var clone = (Corpus)Clone();
 
         clone.Dimensions = newDimensions;
 

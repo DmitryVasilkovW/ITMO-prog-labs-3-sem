@@ -1,12 +1,12 @@
+using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.BIOS.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.BIOS;
 
-public class Bios : IBios, IPrototype<Bios>
+public class Bios : IBios, ICloneable
 {
     public Bios(int version, IList<ICPU> processors)
     {
@@ -16,7 +16,7 @@ public class Bios : IBios, IPrototype<Bios>
 
     public int Version { get; private set; }
     public IList<ICPU>? ListOfSupportedCPUs { get; private set; }
-    public Bios Clone()
+    public object Clone()
     {
         if (ListOfSupportedCPUs is not null)
         {
@@ -30,7 +30,7 @@ public class Bios : IBios, IPrototype<Bios>
 
     public Bios SetVersion(int newVersion)
     {
-        Bios clone = Clone();
+        var clone = (Bios)Clone();
 
         clone.Version = newVersion;
 
@@ -39,7 +39,7 @@ public class Bios : IBios, IPrototype<Bios>
 
     public Bios SetListOfSupportedCPUs(IList<ICPU> newListOfSupportedCPUs)
     {
-        Bios clone = Clone();
+        var clone = (Bios)Clone();
 
         clone.ListOfSupportedCPUs = newListOfSupportedCPUs;
 

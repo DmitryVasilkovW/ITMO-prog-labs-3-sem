@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Services;
 
 public interface IWithPowerSupply
 {
-    IComputerBilder WithPowerSupply(PowerSupply powerSupply);
+    IComputerBuilder WithPowerSupply(PowerSupply powerSupply);
 }

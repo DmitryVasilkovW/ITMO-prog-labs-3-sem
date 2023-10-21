@@ -1,14 +1,14 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Formfactor;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Memorystandard;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.RAM.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.XMPS;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.RAM.Entities;
 
-public class Ram : IRAM, IPart, IPrototype<Ram>
+public class Ram : IRAM, IPart, ICloneable
 {
     public Ram(
         int numberOfAvailableMemorySize,
@@ -35,7 +35,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
     public IMemoryStandard? ConnectionOption { get; private set; }
     public int PowerConsumption { get; private set; }
     public string? Name { get; private set; }
-    public Ram Clone()
+    public object Clone()
     {
         if (Name is not null && Xmp is not null)
         {
@@ -54,7 +54,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
 
     public Ram SetName(string? newName)
     {
-        Ram clone = Clone();
+        var clone = (Ram)Clone();
 
         clone.Name = newName;
 
@@ -63,7 +63,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
 
     public Ram SetNumberOfAvailableMemorySize(int newNumberOfAvailableMemorySize)
     {
-        Ram clone = Clone();
+        var clone = (Ram)Clone();
 
         clone.NumberOfAvailableMemorySize = newNumberOfAvailableMemorySize;
 
@@ -72,7 +72,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
 
     public Ram SetSupportedFrequencies(int newSupportedFrequencies)
     {
-        Ram clone = Clone();
+        var clone = (Ram)Clone();
 
         clone.SupportedFrequencies = newSupportedFrequencies;
 
@@ -81,7 +81,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
 
     public Ram SetXmp(XMP newXmp)
     {
-        Ram clone = Clone();
+        var clone = (Ram)Clone();
 
         clone.Xmp = newXmp;
 
@@ -90,7 +90,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
 
     public Ram SetFormFactor(IFormFactor newFormFactor)
     {
-        Ram clone = Clone();
+        var clone = (Ram)Clone();
 
         clone.FormFactor = newFormFactor;
 
@@ -99,7 +99,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
 
     public Ram SetFormFactor(IMemoryStandard newConnectionOption)
     {
-        Ram clone = Clone();
+        var clone = (Ram)Clone();
 
         clone.ConnectionOption = newConnectionOption;
 
@@ -108,7 +108,7 @@ public class Ram : IRAM, IPart, IPrototype<Ram>
 
     public Ram SetPowerConsumption(int newPowerConsumption)
     {
-        Ram clone = Clone();
+        var clone = (Ram)Clone();
 
         clone.PowerConsumption = newPowerConsumption;
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.BIOS;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Formfactor;
@@ -5,12 +6,11 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Memorystandard;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Motherboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Socket;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Motherboard.Entities;
 
-public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
+public class Motherboard : IMotherboard, IPart, ICloneable
 {
     public Motherboard(
         ISocket? socket,
@@ -43,7 +43,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
     public IFormFactor? FormFactor { get; private set; }
     public Bios? Bios { get; private set; }
     public string? Name { get; private set; }
-    public Motherboard Clone()
+    public object Clone()
     {
         if (Name is not null && Bios is not null)
         {
@@ -55,7 +55,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
                 MemoryStandard,
                 NumberOfTablesUnderRAM,
                 FormFactor,
-                Bios.Clone(),
+                (Bios?)Bios.Clone(),
                 (string)Name.Clone());
         }
 
@@ -64,7 +64,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetName(string? newName)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.Name = newName;
 
@@ -73,7 +73,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetNumberOfPCIELanesSolderedOnTheBoard(int newNumberOfPCIELanesSolderedOnTheBoard)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.NumberOfPCIELanesSolderedOnTheBoard = newNumberOfPCIELanesSolderedOnTheBoard;
 
@@ -82,7 +82,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetCPUSocket(ISocket newCPUSocket)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.CPUSocket = newCPUSocket;
 
@@ -91,7 +91,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetNumberOfSATAPortsSolderedOnTheBoard(int newNumberOfSATAPortsSolderedOnTheBoard)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.NumberOfSATAPortsSolderedOnTheBoard = newNumberOfSATAPortsSolderedOnTheBoard;
 
@@ -100,7 +100,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetChipset(IList<int>? newChipset)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.Chipset = newChipset;
 
@@ -109,7 +109,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetMemoryStandard(IMemoryStandard newMemoryStandard)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.MemoryStandard = newMemoryStandard;
 
@@ -118,7 +118,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetNumberOfTablesUnderRAM(int newNumberOfTablesUnderRAM)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.NumberOfTablesUnderRAM = newNumberOfTablesUnderRAM;
 
@@ -127,7 +127,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetFormFactor(IFormFactor newFormFactor)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.FormFactor = newFormFactor;
 
@@ -136,7 +136,7 @@ public class Motherboard : IMotherboard, IPart, IPrototype<Motherboard>
 
     public Motherboard SetBios(Bios newBios)
     {
-        Motherboard clone = Clone();
+        var clone = (Motherboard)Clone();
 
         clone.Bios = newBios;
 

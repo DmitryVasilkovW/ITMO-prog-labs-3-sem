@@ -1,15 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Services;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Socket;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPUcoolingsystem.Entities;
 
-public class CPUCoolingSystem : ICPUCoolingSystem, IPart, IPrototype<CPUCoolingSystem>
+public class CPUCoolingSystem : ICPUCoolingSystem, IPart, ICloneable
 {
-    public CPUCoolingSystem(string? name, int dimensions, IList<ISocket>? supportedSockets, int maximumHeatDissipation)
+    public CPUCoolingSystem(string? name, Dimensions dimensions, IList<ISocket>? supportedSockets, int maximumHeatDissipation)
     {
         Name = name;
         Dimensions = dimensions;
@@ -18,12 +18,12 @@ public class CPUCoolingSystem : ICPUCoolingSystem, IPart, IPrototype<CPUCoolingS
     }
 
     public string? Name { get; private set; }
-    public int Dimensions { get; private set; }
+    public Dimensions Dimensions { get; private set; }
     public IList<ISocket>? SupportedSockets { get; private set; }
     public int MaximumHeatDissipation { get; private set; }
-    public CPUCoolingSystem Clone()
+    public object Clone()
     {
-        if (Name is not null)
+        if (Name is not null && Dimensions is not null)
         {
             return new CPUCoolingSystem(
                 (string)Name.Clone(),
@@ -37,16 +37,16 @@ public class CPUCoolingSystem : ICPUCoolingSystem, IPart, IPrototype<CPUCoolingS
 
     public CPUCoolingSystem SetName(string? newName)
     {
-        CPUCoolingSystem clone = Clone();
+        var clone = (CPUCoolingSystem)Clone();
 
         clone.Name = newName;
 
         return clone;
     }
 
-    public CPUCoolingSystem SetDimensions(int newDimensions)
+    public CPUCoolingSystem SetDimensions(Dimensions newDimensions)
     {
-        CPUCoolingSystem clone = Clone();
+        var clone = (CPUCoolingSystem)Clone();
 
         clone.Dimensions = newDimensions;
 
@@ -55,7 +55,7 @@ public class CPUCoolingSystem : ICPUCoolingSystem, IPart, IPrototype<CPUCoolingS
 
     public CPUCoolingSystem SetSupportedSockets(IList<ISocket> newSupportedSockets)
     {
-        CPUCoolingSystem clone = Clone();
+        var clone = (CPUCoolingSystem)Clone();
 
         clone.SupportedSockets = newSupportedSockets;
 
@@ -64,7 +64,7 @@ public class CPUCoolingSystem : ICPUCoolingSystem, IPart, IPrototype<CPUCoolingS
 
     public CPUCoolingSystem SetMaximumHeatDissipation(int newMaximumHeatDissipation)
     {
-        CPUCoolingSystem clone = Clone();
+        var clone = (CPUCoolingSystem)Clone();
 
         clone.MaximumHeatDissipation = newMaximumHeatDissipation;
 

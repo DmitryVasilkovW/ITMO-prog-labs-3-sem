@@ -1,8 +1,8 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
+using System;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.WiFiadapter;
 
-public class WiFiAdapter : IPrototype<WiFiAdapter>
+public class WiFiAdapter : ICloneable
 {
     public WiFiAdapter(
         int wiFistandardversion,
@@ -21,7 +21,7 @@ public class WiFiAdapter : IPrototype<WiFiAdapter>
     public int PCIeversion { get; private set; }
     public int Powerconsumption { get; private set; }
 
-    public WiFiAdapter Clone()
+    public object Clone()
     {
         return new WiFiAdapter(
             WiFistandardversion,
@@ -32,7 +32,7 @@ public class WiFiAdapter : IPrototype<WiFiAdapter>
 
     public WiFiAdapter SetMaximumCPUCoolerHeight(int newWiFistandardversion)
     {
-        WiFiAdapter clone = Clone();
+        var clone = (WiFiAdapter)Clone();
 
         clone.WiFistandardversion = newWiFistandardversion;
 
@@ -41,7 +41,7 @@ public class WiFiAdapter : IPrototype<WiFiAdapter>
 
     public WiFiAdapter SetMaximumCPUCoolerHeight(bool newAvailabilityofbuiltBluetoothmodule)
     {
-        WiFiAdapter clone = Clone();
+        var clone = (WiFiAdapter)Clone();
 
         clone.AvailabilityofbuiltBluetoothmodule = newAvailabilityofbuiltBluetoothmodule;
 
@@ -50,7 +50,7 @@ public class WiFiAdapter : IPrototype<WiFiAdapter>
 
     public WiFiAdapter SetPCIeversion(int newPCIeversion)
     {
-        WiFiAdapter clone = Clone();
+        var clone = (WiFiAdapter)Clone();
 
         clone.PCIeversion = newPCIeversion;
 
@@ -59,7 +59,7 @@ public class WiFiAdapter : IPrototype<WiFiAdapter>
 
     public WiFiAdapter SetPowerconsumption(int newPowerconsumption)
     {
-        WiFiAdapter clone = Clone();
+        var clone = (WiFiAdapter)Clone();
 
         clone.Powerconsumption = newPowerconsumption;
 

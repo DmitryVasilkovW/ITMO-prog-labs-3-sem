@@ -1,11 +1,11 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Videocard.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Videocard.Entities;
 
-public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
+public class VideoCard : IVideoCard, IPart, ICloneable
 {
     public VideoCard(
         int videoCardHeight,
@@ -32,7 +32,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
     public int ChipFrequency { get; private set; }
     public int PowerConsumption { get; private set; }
     public string? Name { get; private set; }
-    public VideoCard Clone()
+    public object Clone()
     {
         if (Name is not null)
         {
@@ -51,7 +51,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
 
     public VideoCard SetName(string? newName)
     {
-        VideoCard clone = Clone();
+        var clone = (VideoCard)Clone();
 
         clone.Name = newName;
 
@@ -60,7 +60,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
 
     public VideoCard SetVideoCardHeight(int newVideoCardHeight)
     {
-        VideoCard clone = Clone();
+        var clone = (VideoCard)Clone();
 
         clone.VideoCardHeight = newVideoCardHeight;
 
@@ -69,7 +69,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
 
     public VideoCard SetVideoCardWidth(int newVideoCardWidth)
     {
-        VideoCard clone = Clone();
+        var clone = (VideoCard)Clone();
 
         clone.VideoCardWidth = newVideoCardWidth;
 
@@ -78,7 +78,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
 
     public VideoCard SetAmountOfVideoMemory(int newAmountOfVideoMemory)
     {
-        VideoCard clone = Clone();
+        var clone = (VideoCard)Clone();
 
         clone.AmountOfVideoMemory = newAmountOfVideoMemory;
 
@@ -87,7 +87,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
 
     public VideoCard SetPCIEVersion(int newPCIEVersion)
     {
-        VideoCard clone = Clone();
+        var clone = (VideoCard)Clone();
 
         clone.PCIEVersion = newPCIEVersion;
 
@@ -96,7 +96,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
 
     public VideoCard SetChipFrequency(int newChipFrequency)
     {
-        VideoCard clone = Clone();
+        var clone = (VideoCard)Clone();
 
         clone.ChipFrequency = newChipFrequency;
 
@@ -105,7 +105,7 @@ public class VideoCard : IVideoCard, IPart, IPrototype<VideoCard>
 
     public VideoCard SetPowerConsumption(int newPowerConsumption)
     {
-        VideoCard clone = Clone();
+        var clone = (VideoCard)Clone();
 
         clone.PowerConsumption = newPowerConsumption;
 

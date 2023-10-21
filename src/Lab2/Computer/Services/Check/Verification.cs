@@ -37,7 +37,7 @@ public class Verification
         if (computer.CPUCoolingSystem is not null
             && computer.Corpus is not null
             && computer.Corpus.MaximumCPUCoolerHeight
-            < computer.CPUCoolingSystem.Dimensions)
+            < computer.CPUCoolingSystem.Dimensions.Height)
         {
             return CheckStatus.FailedToAssembleTheComputer;
         }

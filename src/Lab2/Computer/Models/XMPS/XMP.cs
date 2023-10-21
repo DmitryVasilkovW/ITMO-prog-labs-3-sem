@@ -1,8 +1,8 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
+using System;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.XMPS;
 
-public class XMP : IXMP, IPrototype<XMP>
+public class XMP : IXMP, ICloneable
 {
     public XMP(int timings, int voltage, int frequency)
     {
@@ -15,7 +15,7 @@ public class XMP : IXMP, IPrototype<XMP>
     public int Voltage { get; }
     public int Frequency { get; }
 
-    public XMP Clone()
+    public object Clone()
     {
         return new XMP(
             Timings,

@@ -89,7 +89,7 @@ public class Attemptedtobuildwithacompatiblecoolerbutwithinsufficientheatdissipa
             ram,
         };
 
-        PersonalComputer compute = new ComputerBilder().
+        PersonalComputer compute = new ComputerBuilder().
             WithCase(corpus).
             WithMotherboard(motherboard).
             WithCPU(cpu).
@@ -97,7 +97,7 @@ public class Attemptedtobuildwithacompatiblecoolerbutwithinsufficientheatdissipa
             WithRAM(listofram).
             WithHardDrive(hdd).WithSSDDrive(ssd).
             WithVideoCard(videocard).
-            WithPowerSupply(powerSupply).Bild();
+            WithPowerSupply(powerSupply).Build();
 
         CheckStatus status = new Verification().CheckingThatTheComponentsHaveBeenInstalledCorrectly(compute);
         CheckStatus expectedValue = CheckStatus.Denialofwarrantyduetothefactthatthecoolingsystemisnotcapableofcoolingthisprocessor;

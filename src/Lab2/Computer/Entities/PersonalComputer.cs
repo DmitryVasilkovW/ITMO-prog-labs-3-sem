@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Corpus.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Entities;
@@ -8,15 +9,14 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Powersupplyunit.Entiti
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.RAM.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.SSDdrive.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Videocard.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities;
 
-public class PersonalComputer : IPrototype<PersonalComputer>
+public class PersonalComputer : ICloneable
 {
     public PersonalComputer(
-        Corpus? corpus,
+        object corpus,
         Processor? processor,
         CPUCoolingSystem? cpuCoolingSystem,
         HardDrive? hardDrive,
@@ -26,7 +26,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
         SSDDrive? ssdDrive,
         VideoCard? videoCard)
     {
-        Corpus = corpus;
+        Corpus = (Corpus?)corpus;
         Processor = processor;
         CPUCoolingSystem = cpuCoolingSystem;
         HardDrive = hardDrive;
@@ -46,7 +46,8 @@ public class PersonalComputer : IPrototype<PersonalComputer>
     public IList<Ram>? Ram { get; private set; }
     public SSDDrive? SsdDrive { get; private set; }
     public VideoCard? VideoCard { get; private set; }
-    public PersonalComputer Clone()
+
+    public object Clone()
     {
         if (Corpus is not null)
         {
@@ -55,7 +56,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
             {
                 foreach (Ram ram in Ram)
                 {
-                    newlistofram.Add(ram.Clone());
+                    newlistofram.Add((Ram)ram.Clone());
                 }
             }
 
@@ -69,14 +70,14 @@ public class PersonalComputer : IPrototype<PersonalComputer>
             {
                 return new PersonalComputer(
                     Corpus.Clone(),
-                    Processor.Clone(),
-                    CPUCoolingSystem.Clone(),
-                    HardDrive.Clone(),
-                    Motherboard.Clone(),
-                    PowerSupply.Clone(),
+                    (Processor?)Processor.Clone(),
+                    (CPUCoolingSystem?)CPUCoolingSystem.Clone(),
+                    (HardDrive?)HardDrive.Clone(),
+                    (Motherboard?)Motherboard.Clone(),
+                    (PowerSupply?)PowerSupply.Clone(),
                     newlistofram,
-                    SsdDrive.Clone(),
-                    VideoCard.Clone());
+                    (SSDDrive?)SsdDrive.Clone(),
+                    (VideoCard?)VideoCard.Clone());
             }
         }
 
@@ -85,7 +86,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetCorpus(Corpus? newCorpus)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.Corpus = newCorpus;
 
@@ -94,16 +95,16 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetProcessor(Processor? newProcessor)
     {
-        PersonalComputer clone = Clone();
+         var clone = (PersonalComputer)Clone();
 
-        clone.Processor = newProcessor;
+         clone.Processor = newProcessor;
 
-        return clone;
+         return clone;
     }
 
     public PersonalComputer SetCPUCoolingSystem(CPUCoolingSystem? newCPUCoolingSystem)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.CPUCoolingSystem = newCPUCoolingSystem;
 
@@ -112,7 +113,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetHardDrive(HardDrive? newHardDrive)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.HardDrive = newHardDrive;
 
@@ -121,7 +122,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetHardDrive(Motherboard? newMotherboard)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.Motherboard = newMotherboard;
 
@@ -130,7 +131,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetHardDrive(PowerSupply? newPowerSupply)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.PowerSupply = newPowerSupply;
 
@@ -139,7 +140,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetHardDrive(IList<Ram>? newlistofram)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.Ram = newlistofram;
 
@@ -148,7 +149,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetSsdDrive(SSDDrive? newSsdDrive)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.SsdDrive = newSsdDrive;
 
@@ -157,7 +158,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
 
     public PersonalComputer SetSsdDrive(VideoCard? newVideoCard)
     {
-        PersonalComputer clone = Clone();
+        var clone = (PersonalComputer)Clone();
 
         clone.VideoCard = newVideoCard;
 

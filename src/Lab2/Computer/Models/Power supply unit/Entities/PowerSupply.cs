@@ -1,11 +1,11 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Powersupplyunit.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Powersupplyunit.Entities;
 
-public class PowerSupply : IPowerSupply, IPart, IPrototype<PowerSupply>
+public class PowerSupply : IPowerSupply, IPart, ICloneable
 {
     public PowerSupply(string? name, int peakLoad)
     {
@@ -15,7 +15,7 @@ public class PowerSupply : IPowerSupply, IPart, IPrototype<PowerSupply>
 
     public int PeakLoad { get; private set; }
     public string? Name { get; private set; }
-    public PowerSupply Clone()
+    public object Clone()
     {
         if (Name is not null)
         {
@@ -29,7 +29,7 @@ public class PowerSupply : IPowerSupply, IPart, IPrototype<PowerSupply>
 
     public PowerSupply SetPeakLoad(int newPeakLoad)
     {
-        PowerSupply clone = Clone();
+        var clone = (PowerSupply)Clone();
 
         clone.PeakLoad = newPeakLoad;
 
@@ -38,7 +38,7 @@ public class PowerSupply : IPowerSupply, IPart, IPrototype<PowerSupply>
 
     public PowerSupply SetName(string? newName)
     {
-        PowerSupply clone = Clone();
+        var clone = (PowerSupply)Clone();
 
         clone.Name = newName;
 

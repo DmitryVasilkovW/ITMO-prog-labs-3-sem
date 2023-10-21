@@ -5,6 +5,6 @@ public interface ICorpus
     int MaximumLengthOfTheVideoCard { get; }
     int MaximumWidthOfTheVideoCard { get; }
     int SupportedMotherboardFormFactors { get; }
-    int Dimensions { get; }
+    Dimensions Dimensions { get; }
     int MaximumCPUCoolerHeight { get; }
 }

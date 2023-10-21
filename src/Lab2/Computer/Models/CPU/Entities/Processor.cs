@@ -1,12 +1,12 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Socket;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Entities;
 
-public class Processor : ICPU, IPart, IPrototype<Processor>
+public class Processor : ICPU, IPart, ICloneable
 {
     public Processor(
         string? name,
@@ -37,7 +37,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
     public int NumberOfCores { get; private set; }
     public ISocket? Socket { get; private set; }
 
-    public Processor Clone()
+    public object Clone()
     {
         if (Name is not null)
         {
@@ -57,7 +57,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetName(string? newName)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.Name = newName;
 
@@ -66,7 +66,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetavailabilityOfABuiltInVideoCore(bool newavailabilityOfABuiltInVideoCore)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.AvailabilityOfABuiltInVideoCore = newavailabilityOfABuiltInVideoCore;
 
@@ -75,7 +75,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetSupportedMemoryFrequencies(int newSupportedMemoryFrequencies)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.SupportedMemoryFrequencies = newSupportedMemoryFrequencies;
 
@@ -84,7 +84,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetHeatEmission(int newHeatEmission)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.HeatEmission = newHeatEmission;
 
@@ -93,7 +93,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetConsumptionPower(int newConsumptionPower)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.ConsumptionPower = newConsumptionPower;
 
@@ -102,7 +102,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetCoreFrequency(int newCoreFrequency)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.CoreFrequency = newCoreFrequency;
 
@@ -111,7 +111,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetNumberOfCores(int newNumberOfCores)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.NumberOfCores = newNumberOfCores;
 
@@ -120,7 +120,7 @@ public class Processor : ICPU, IPart, IPrototype<Processor>
 
     public Processor SetSocket(ISocket newSocket)
     {
-        Processor clone = Clone();
+        var clone = (Processor)Clone();
 
         clone.Socket = newSocket;
 

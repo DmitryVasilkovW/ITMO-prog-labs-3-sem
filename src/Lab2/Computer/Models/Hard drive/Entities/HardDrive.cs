@@ -1,11 +1,11 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Harddrive.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Harddrive.Entities;
 
-public class HardDrive : IHardDrive, IPart, IPrototype<HardDrive>
+public class HardDrive : IHardDrive, IPart, ICloneable
 {
     public HardDrive(string? name, int capacity, int spindleRotationSpeed, int powerConsumption)
     {
@@ -19,7 +19,7 @@ public class HardDrive : IHardDrive, IPart, IPrototype<HardDrive>
     public int Capacity { get; private set; }
     public int SpindleRotationSpeed { get; private set; }
     public int PowerConsumption { get; private set; }
-    public HardDrive Clone()
+    public object Clone()
     {
         if (Name is not null)
         {
@@ -35,7 +35,7 @@ public class HardDrive : IHardDrive, IPart, IPrototype<HardDrive>
 
     public HardDrive SetName(string? newName)
     {
-        HardDrive clone = Clone();
+        var clone = (HardDrive)Clone();
 
         clone.Name = newName;
 
@@ -44,7 +44,7 @@ public class HardDrive : IHardDrive, IPart, IPrototype<HardDrive>
 
     public HardDrive SetCapacity(int newCapacity)
     {
-        HardDrive clone = Clone();
+        var clone = (HardDrive)Clone();
 
         clone.Capacity = newCapacity;
 
@@ -53,7 +53,7 @@ public class HardDrive : IHardDrive, IPart, IPrototype<HardDrive>
 
     public HardDrive SetSpindleRotationSpeed(int newSpindleRotationSpeed)
     {
-        HardDrive clone = Clone();
+        var clone = (HardDrive)Clone();
 
         clone.SpindleRotationSpeed = newSpindleRotationSpeed;
 
@@ -62,7 +62,7 @@ public class HardDrive : IHardDrive, IPart, IPrototype<HardDrive>
 
     public HardDrive SetPowerConsumption(int newPowerConsumption)
     {
-        HardDrive clone = Clone();
+        var clone = (HardDrive)Clone();
 
         clone.PowerConsumption = newPowerConsumption;
 

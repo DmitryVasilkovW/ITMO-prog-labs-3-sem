@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Corpus.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Databases;
@@ -9,7 +10,7 @@ public class TableOfCaseCharacteristics : ICorpus, IPartCharacteristics
         int maximumLengthOfTheVideoCard,
         int maximumWidthOfTheVideoCard,
         int supportedMotherboardFormFactors,
-        int dimensions,
+        Dimensions dimensions,
         int maximumCpuCoolerHeight)
     {
         Name = name;
@@ -24,6 +25,6 @@ public class TableOfCaseCharacteristics : ICorpus, IPartCharacteristics
     public int MaximumLengthOfTheVideoCard { get; }
     public int MaximumWidthOfTheVideoCard { get; }
     public int SupportedMotherboardFormFactors { get; }
-    public int Dimensions { get; }
+    public Dimensions Dimensions { get; }
     public int MaximumCPUCoolerHeight { get; }
 }

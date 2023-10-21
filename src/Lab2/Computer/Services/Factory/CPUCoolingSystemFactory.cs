@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPUcoolingsystem.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Socket;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Databases;
@@ -10,7 +11,7 @@ public class CPUCoolingSystemFactory : IPartFactory<CPUCoolingSystem, TableOfCPU
     public CPUCoolingSystem CreatePart(TableOfCPUCoolingSystemCharacteristics characteristics)
     {
         string? name = characteristics.Name;
-        int dimensions = characteristics.Dimensions;
+        Dimensions dimensions = characteristics.Dimensions;
         IList<ISocket>? supportedSockets = characteristics.SupportedSockets;
         int maximumHeatDissipation = characteristics.MaximumHeatDissipation;
 

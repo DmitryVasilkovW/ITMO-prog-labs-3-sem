@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.BIOS;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Connectionoption;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Entities;
@@ -48,8 +49,10 @@ public static class DatabaseWithComponents
     private const int SupportedMotherboardFormFactorsforfirstcase = 1177;
     private const int SupportedMotherboardFormFactorsforsecondcase = 1177;
 
-    private const int Dimensionsforfirstcase = 1177;
-    private const int Dimensionsforsecondcase = 1177;
+    private const int Heightforcase = 1177;
+    private const int Widthforcase = 1177;
+    private const int Heightforcooling = 10;
+    private const int Widthforcooling = 10;
 
     private const string NameforfirstCPU = "Intel Core i5-12400F OEM";
     private const string NameforsecondCPU = "AMD Ryzen 5 5600X OEM";
@@ -71,9 +74,6 @@ public static class DatabaseWithComponents
 
     private const int NumberOfCoresforfirstCPU = 6;
     private const int NumberOfCoresforsecondCPU = 8;
-
-    private const int DimensionsforfirstCPUcooling = 120;
-    private const int DimensionsforsecondCPUcooling = 135;
 
     private const int MaximumHeatDissipationforfirstcooling = 180;
     private const int MaximumHeatDissipationforsecondcooling = 50;
@@ -226,6 +226,9 @@ public static class DatabaseWithComponents
         new AM4(),
     };
 
+    private static Dimensions dimensionsforfirstcase = new Dimensions(Heightforcase, Widthforcase);
+    private static Dimensions dimensionsforsecondcooling = new Dimensions(Heightforcooling, Widthforcooling);
+
     private static TableOfVideoCardCharacteristics _firstcard = new TableOfVideoCardCharacteristics(
         VideoCardHeightforfirstcard,
         VideoCardWidthforfirstcard,
@@ -319,13 +322,13 @@ public static class DatabaseWithComponents
         PowerConsumptionforsecondhdd);
 
     private static TableOfCPUCoolingSystemCharacteristics _firstcooling = new TableOfCPUCoolingSystemCharacteristics(
-        DimensionsforfirstCPUcooling,
+        dimensionsforsecondcooling,
         SocketsforfirstCooling,
         MaximumHeatDissipationforfirstcooling,
         Nameforfirstcooling);
 
     private static TableOfCPUCoolingSystemCharacteristics _secondcooling = new TableOfCPUCoolingSystemCharacteristics(
-        DimensionsforsecondCPUcooling,
+        dimensionsforsecondcooling,
         SocketsforsecondCooling,
         MaximumHeatDissipationforsecondcooling,
         Nameforsecondcooling);
@@ -355,7 +358,7 @@ public static class DatabaseWithComponents
         MaximumLengthOfTheVideoCardforfirstcase,
         MaximumWidthOfTheVideoCardforfirstcase,
         SupportedMotherboardFormFactorsforfirstcase,
-        Dimensionsforfirstcase,
+        dimensionsforfirstcase,
         MaximumCPUCoolerHeightforfirstcase);
 
     private static TableOfCaseCharacteristics _secondcase = new TableOfCaseCharacteristics(
@@ -363,7 +366,7 @@ public static class DatabaseWithComponents
         MaximumLengthOfTheVideoCardforsecondcase,
         MaximumWidthOfTheVideoCardforsecondcase,
         SupportedMotherboardFormFactorsforsecondcase,
-        Dimensionsforsecondcase,
+        dimensionsforsecondcooling,
         MaximumCPUCoolerHeightforsecondcase);
 
     public static void GetData(Database database)

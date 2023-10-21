@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Corpus.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Entities;
@@ -12,8 +13,8 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Videocard.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Services;
 
-public class ComputerBilder :
-    IComputerBilder,
+public class ComputerBuilder :
+    IComputerBuilder,
     IWithCase,
     IWithMotherboard,
     IWithCPU,
@@ -34,8 +35,9 @@ public class ComputerBilder :
     private SSDDrive? _ssdDrive;
     private VideoCard? _videoCard;
 
-    public PersonalComputer Bild()
+    public PersonalComputer Build()
     {
+        Debug.Assert(_corpus is not null, nameof(_corpus) + " != null");
         return new PersonalComputer(
             _corpus,
             _processor,
@@ -104,7 +106,7 @@ public class ComputerBilder :
         return this;
     }
 
-    public IComputerBilder WithPowerSupply(PowerSupply powerSupply)
+    public IComputerBuilder WithPowerSupply(PowerSupply powerSupply)
     {
         _powerSupply = powerSupply;
 

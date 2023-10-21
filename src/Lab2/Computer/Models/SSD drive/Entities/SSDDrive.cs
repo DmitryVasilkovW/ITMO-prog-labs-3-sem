@@ -1,12 +1,12 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Connectionoption;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.SSDdrive.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
 using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.SSDdrive.Entities;
 
-public class SSDDrive : ISSDDrive, IPart, IPrototype<SSDDrive>
+public class SSDDrive : ISSDDrive, IPart, ICloneable
 {
     public SSDDrive(string? name, IConnectionOption? connectionOption, int capacity, int maximumOperatingSpeed, int powerConsumption)
     {
@@ -22,7 +22,7 @@ public class SSDDrive : ISSDDrive, IPart, IPrototype<SSDDrive>
     public int Capacity { get; private set; }
     public int MaximumOperatingSpeed { get; private set; }
     public int PowerConsumption { get; private set; }
-    public SSDDrive Clone()
+    public object Clone()
     {
         if (Name is not null)
         {
@@ -39,7 +39,7 @@ public class SSDDrive : ISSDDrive, IPart, IPrototype<SSDDrive>
 
     public SSDDrive SetName(string? newName)
     {
-        SSDDrive clone = Clone();
+        var clone = (SSDDrive)Clone();
 
         clone.Name = newName;
 
@@ -48,7 +48,7 @@ public class SSDDrive : ISSDDrive, IPart, IPrototype<SSDDrive>
 
     public SSDDrive SetConnectionOption(IConnectionOption newConnectionOption)
     {
-        SSDDrive clone = Clone();
+        var clone = (SSDDrive)Clone();
 
         clone.ConnectionOption = newConnectionOption;
 
@@ -57,7 +57,7 @@ public class SSDDrive : ISSDDrive, IPart, IPrototype<SSDDrive>
 
     public SSDDrive SetCapacity(int newCapacity)
     {
-        SSDDrive clone = Clone();
+        var clone = (SSDDrive)Clone();
 
         clone.Capacity = newCapacity;
 
@@ -66,7 +66,7 @@ public class SSDDrive : ISSDDrive, IPart, IPrototype<SSDDrive>
 
     public SSDDrive SetMaximumOperatingSpeed(int newMaximumOperatingSpeed)
     {
-        SSDDrive clone = Clone();
+        var clone = (SSDDrive)Clone();
 
         clone.MaximumOperatingSpeed = newMaximumOperatingSpeed;
 
@@ -75,7 +75,7 @@ public class SSDDrive : ISSDDrive, IPart, IPrototype<SSDDrive>
 
     public SSDDrive SetPowerConsumption(int newPowerConsumption)
     {
-        SSDDrive clone = Clone();
+        var clone = (SSDDrive)Clone();
 
         clone.PowerConsumption = newPowerConsumption;
 
