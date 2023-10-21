@@ -1,15 +1,15 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Connectionoption;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Formfactor;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.XMP;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Memorystandard;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.XMPS;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.RAM.Models;
 
 public interface IRAM
 {
-    int NumberOfAvailableMemorySize { get; init; }
-    int SupportedFrequencies { get; init; }
-    IXMP? Xmp { get; init; }
-    IFormFactor? FormFactor { get; init; }
-    IConnectionOption? ConnectionOption { get; init; }
-    int PowerConsumption { get; init; }
+    int NumberOfAvailableMemorySize { get; }
+    int SupportedFrequencies { get; }
+    XMP? Xmp { get; }
+    IFormFactor? FormFactor { get; }
+    IMemoryStandard? ConnectionOption { get; }
+    int PowerConsumption { get; }
 }

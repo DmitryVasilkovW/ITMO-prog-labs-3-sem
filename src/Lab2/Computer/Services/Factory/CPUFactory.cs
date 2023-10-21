@@ -7,6 +7,14 @@ public class CPUFactory : IPartFactory<Processor, TableOfCPUCharacteristics>
 {
     public Processor CreatePart(TableOfCPUCharacteristics characteristics)
     {
-        return new Processor(characteristics);
+        return new Processor(
+            characteristics.Name,
+            characteristics.AvailabilityOfABuiltInVideoCore,
+            characteristics.SupportedMemoryFrequencies,
+            characteristics.HeatEmission,
+            characteristics.ConsumptionPower,
+            characteristics.CoreFrequency,
+            characteristics.NumberOfCores,
+            characteristics.Socket);
     }
 }

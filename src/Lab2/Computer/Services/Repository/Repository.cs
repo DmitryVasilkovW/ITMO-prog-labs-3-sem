@@ -1,5 +1,5 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Case.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Corpus.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPU.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.CPUcoolingsystem.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Harddrive.Entities;
@@ -21,6 +21,11 @@ public class Repository
     public void AddNewPart(int id, IPartCharacteristics newtable)
     {
         _database.Addtable(id, newtable);
+    }
+
+    public void InitDatabase()
+    {
+        DatabaseWithComponents.GetData(_database);
     }
 
     public IPart GetPart(string name)

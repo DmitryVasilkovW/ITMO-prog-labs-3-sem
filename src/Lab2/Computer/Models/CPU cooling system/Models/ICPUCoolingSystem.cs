@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Services;
 
 public interface ICPUCoolingSystem
 {
-    int Dimensions { get; init; }
-    IList<ISocket>? SupportedSockets { get; init; }
-    int MaximumHeatDissipation { get; init; }
+    int Dimensions { get; }
+    IList<ISocket>? SupportedSockets { get; }
+    int MaximumHeatDissipation { get; }
 }

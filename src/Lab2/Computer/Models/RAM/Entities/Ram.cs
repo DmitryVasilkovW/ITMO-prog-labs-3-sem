@@ -1,19 +1,21 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Connectionoption;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Formfactor;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Memorystandard;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Part;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.RAM.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.XMP;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.XMPS;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Services.Prototype;
+using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.RAM.Entities;
 
-public class Ram : IRAM, IPart
+public class Ram : IRAM, IPart, IPrototype<Ram>
 {
     public Ram(
         int numberOfAvailableMemorySize,
         int supportedFrequencies,
-        IXMP? xmp,
+        XMP? xmp,
         IFormFactor? formFactor,
-        IConnectionOption? connectionOption,
+        IMemoryStandard? connectionOption,
         int powerConsumption,
         string? name)
     {
@@ -26,11 +28,90 @@ public class Ram : IRAM, IPart
         Name = name;
     }
 
-    public int NumberOfAvailableMemorySize { get; init; }
-    public int SupportedFrequencies { get; init; }
-    public IXMP? Xmp { get; init; }
-    public IFormFactor? FormFactor { get; init; }
-    public IConnectionOption? ConnectionOption { get; init; }
-    public int PowerConsumption { get; init; }
-    public string? Name { get; init; }
+    public int NumberOfAvailableMemorySize { get; private set; }
+    public int SupportedFrequencies { get; private set; }
+    public XMP? Xmp { get; private set; }
+    public IFormFactor? FormFactor { get; private set; }
+    public IMemoryStandard? ConnectionOption { get; private set; }
+    public int PowerConsumption { get; private set; }
+    public string? Name { get; private set; }
+    public Ram Clone()
+    {
+        if (Name is not null && Xmp is not null)
+        {
+            return new Ram(
+                NumberOfAvailableMemorySize,
+                SupportedFrequencies,
+                Xmp,
+                FormFactor,
+                ConnectionOption,
+                PowerConsumption,
+                (string)Name.Clone());
+        }
+
+        throw new ThePassedArgumentIsNullException();
+    }
+
+    public Ram SetName(string? newName)
+    {
+        Ram clone = Clone();
+
+        clone.Name = newName;
+
+        return clone;
+    }
+
+    public Ram SetNumberOfAvailableMemorySize(int newNumberOfAvailableMemorySize)
+    {
+        Ram clone = Clone();
+
+        clone.NumberOfAvailableMemorySize = newNumberOfAvailableMemorySize;
+
+        return clone;
+    }
+
+    public Ram SetSupportedFrequencies(int newSupportedFrequencies)
+    {
+        Ram clone = Clone();
+
+        clone.SupportedFrequencies = newSupportedFrequencies;
+
+        return clone;
+    }
+
+    public Ram SetXmp(XMP newXmp)
+    {
+        Ram clone = Clone();
+
+        clone.Xmp = newXmp;
+
+        return clone;
+    }
+
+    public Ram SetFormFactor(IFormFactor newFormFactor)
+    {
+        Ram clone = Clone();
+
+        clone.FormFactor = newFormFactor;
+
+        return clone;
+    }
+
+    public Ram SetFormFactor(IMemoryStandard newConnectionOption)
+    {
+        Ram clone = Clone();
+
+        clone.ConnectionOption = newConnectionOption;
+
+        return clone;
+    }
+
+    public Ram SetPowerConsumption(int newPowerConsumption)
+    {
+        Ram clone = Clone();
+
+        clone.PowerConsumption = newPowerConsumption;
+
+        return clone;
+    }
 }

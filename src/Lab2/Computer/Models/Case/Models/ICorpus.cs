@@ -1,9 +1,10 @@
-namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Case.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Corpus.Models;
 
 public interface ICorpus
 {
-    int MaximumLengthOfTheVideoCard { get; init; }
-    int MaximumWidthOfTheVideoCard { get; init; }
-    int SupportedMotherboardFormFactors { get; init; }
-    int Dimensions { get; init; }
+    int MaximumLengthOfTheVideoCard { get; }
+    int MaximumWidthOfTheVideoCard { get; }
+    int SupportedMotherboardFormFactors { get; }
+    int Dimensions { get; }
+    int MaximumCPUCoolerHeight { get; }
 }

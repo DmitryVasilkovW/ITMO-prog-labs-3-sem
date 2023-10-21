@@ -2,5 +2,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Models.Powersupplyunit.Mo
 
 public interface IPowerSupply
 {
-    int PeakLoad { get; init; }
+    int PeakLoad { get; }
 }
