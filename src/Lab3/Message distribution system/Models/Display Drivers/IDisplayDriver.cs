@@ -1,3 +1,4 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.DisplayDrivers;
@@ -5,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.D
 public interface IDisplayDriver
 {
     void ClearOutput();
-    void AddColourModifier();
+    void AddColourModifier(ConsoleColor color);
     void Writetext(Message message, LevelsOfImportance filter);
 
     void Draw();

@@ -1,3 +1,4 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Displays;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
@@ -17,8 +18,9 @@ public class DisplayDriver : IDisplayDriver
         _display.Deletemessage();
     }
 
-    public void AddColourModifier()
+    public void AddColourModifier(ConsoleColor color)
     {
+        _display.SetColor(color);
     }
 
     public void Writetext(Message message, LevelsOfImportance filter)
