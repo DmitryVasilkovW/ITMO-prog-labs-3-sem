@@ -17,21 +17,21 @@ public abstract class MessageBuilder : IMessageBuilder
             _importanceLevel ?? throw new ArgumentNullException());
     }
 
-    public IMessageBuilder WithHeadline(IRenderable headline)
+    public MessageBuilder WithHeadline(IRenderable headline)
     {
         _headline = headline;
 
         return this;
     }
 
-    public IMessageBuilder WithBody(IRenderable body)
+    public MessageBuilder WithBody(IRenderable body)
     {
         _body = body;
 
         return this;
     }
 
-    public IMessageBuilder WithLevelsOfImportance(LevelsOfImportance levelsOfImportance)
+    public MessageBuilder WithLevelsOfImportance(LevelsOfImportance levelsOfImportance)
     {
         _importanceLevel = levelsOfImportance;
 
