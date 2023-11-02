@@ -26,4 +26,19 @@ public class Message : IMessage
 
         return builder.ToString();
     }
+
+    public bool Equals(Message obj)
+    {
+        if (Headline is not null
+            && obj.Headline is not null
+            && Headline.Equals(obj.Headline)
+            && Body.Equals(obj.Body)
+            && ImportanceLevels
+            == obj.ImportanceLevels)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
