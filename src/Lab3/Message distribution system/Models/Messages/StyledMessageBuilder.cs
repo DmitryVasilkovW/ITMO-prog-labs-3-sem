@@ -1,24 +1,25 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Extensions;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Modifiers;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
-public class StyledParagraphBuilder : MessageBuilder
+public class StyledMessageBuilder : MessageBuilder
 {
     private readonly ConsoleColor _titleColor;
 
-    public StyledParagraphBuilder(ConsoleColor titleColor)
+    public StyledMessageBuilder(ConsoleColor titleColor)
     {
         _titleColor = titleColor;
     }
 
-    public override Message Create(Message message)
+    public override Message Create(IRenderable? headline, IRenderable body, LevelsOfImportance levelsOfImportance)
     {
         return new Message(
-            message.Headline,
-            message.Body.WithModifier(
+            headline,
+            body.WithModifier(
                     new ColorModifier(_titleColor)),
-            message.ImportanceLevels);
+            levelsOfImportance);
     }
 }

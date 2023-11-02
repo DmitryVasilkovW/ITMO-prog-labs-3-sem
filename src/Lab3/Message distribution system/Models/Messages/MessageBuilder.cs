@@ -38,5 +38,5 @@ public abstract class MessageBuilder : IMessageBuilder
         return this;
     }
 
-    public abstract Message Create(Message message);
+    public abstract Message Create(IRenderable? headline, IRenderable body, LevelsOfImportance levelsOfImportance);
 }

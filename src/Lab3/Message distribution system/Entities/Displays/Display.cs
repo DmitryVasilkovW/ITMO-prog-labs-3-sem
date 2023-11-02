@@ -1,10 +1,11 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IDraw;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Displays;
 
-public class Display : IAddressee
+public class Display : IAddressee, ICanDraw
 {
     private Message? _message;
 
@@ -24,7 +25,12 @@ public class Display : IAddressee
     public void SetColor(ConsoleColor color)
     {
         if (_message is not null)
-            _message = new StyledParagraphBuilder(color).Create(_message);
+        {
+            _message = new StyledMessageBuilder(color).Create(
+                _message.Headline,
+                _message.Body,
+                _message.ImportanceLevels);
+        }
     }
 
     public void Deletemessage()
@@ -34,6 +40,7 @@ public class Display : IAddressee
 
     public void Draw()
     {
-        Console.WriteLine(_message);
+        if (_message is not null)
+            Console.WriteLine(_message.Render());
     }
 }
