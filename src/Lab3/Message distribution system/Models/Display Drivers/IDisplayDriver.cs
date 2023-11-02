@@ -1,0 +1,12 @@
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
+
+namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.DisplayDrivers;
+
+public interface IDisplayDriver
+{
+    void ClearOutput();
+    void AddColourModifier();
+    void Writetext(Message message, LevelsOfImportance filter);
+
+    void Draw();
+}
