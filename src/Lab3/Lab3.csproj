@@ -5,7 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Entities" />
+      <Folder Include="Message distribution system\Entities" />
+      <Folder Include="Message distribution system\Models" />
     </ItemGroup>
 
 </Project>
