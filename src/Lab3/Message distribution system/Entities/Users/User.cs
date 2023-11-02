@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 
-public class User : IUser, IAddressee
+public class User : IUser, IAddressee, IName
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
 

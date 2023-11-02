@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IDraw;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Messengers;
 
-public class Messenger : IAddressee, ICanDraw
+public class Messenger : IAddressee, ICanDraw, IName
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
 

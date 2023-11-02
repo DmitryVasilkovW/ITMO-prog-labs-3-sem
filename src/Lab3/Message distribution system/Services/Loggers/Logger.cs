@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
@@ -26,7 +27,7 @@ public class Logger : IMYLogger
     {
         for (int i = 0; i < _messages.Count; i++)
         {
-            Console.WriteLine(_addressees[i].Name + " " + _messages[i].Render());
+            Console.WriteLine(((IName)_addressees[i]).Name + " " + _messages[i].Render());
         }
     }
 }

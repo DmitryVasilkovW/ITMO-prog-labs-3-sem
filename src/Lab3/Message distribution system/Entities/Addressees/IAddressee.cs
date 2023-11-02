@@ -4,6 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 
 public interface IAddressee
 {
-    string Name { get; }
     void GetMessage(Message message, LevelsOfImportance filter);
 }
