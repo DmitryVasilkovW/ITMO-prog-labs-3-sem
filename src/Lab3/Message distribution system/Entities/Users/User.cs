@@ -26,7 +26,7 @@ public class User : IUser, IAddressee, IName
 
     public void GetMessage(Message message, LevelsOfImportance filter)
     {
-        if (filter != message.ImportanceLevels)
+        if (filter <= message.ImportanceLevels)
         {
             _messages.Enqueue(message, message.ImportanceLevels);
             Messagestatuses[(int)MessageStatus.Unread].Add(message);

@@ -4,11 +4,11 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
-public class UserAdapter : IAddressee
+public class Userdecorator : IAddressee
 {
     private IMYLogger _logger;
 
-    public UserAdapter(string name)
+    public Userdecorator(string name)
     {
         User = new User(name);
         _logger = new Logger();
