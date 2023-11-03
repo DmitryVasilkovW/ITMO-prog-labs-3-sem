@@ -1,24 +1,23 @@
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Displays;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
-public class UserAdapter : IAddressee
+public class DisplayAdapter : IAddressee
 {
+    private IAddressee _user;
     private IMYLogger _logger;
 
-    public UserAdapter(string name)
+    public DisplayAdapter(string name)
     {
-        User = new User(name);
+        _user = new Display(name);
         _logger = new Logger();
     }
 
-    public User User { get; }
-
     public void GetMessage(Message message, LevelsOfImportance filter)
     {
-        _logger.Log(message, User);
-        User.GetMessage(message, filter);
+        _logger.Log(message, _user);
+        _user.GetMessage(message, filter);
     }
 }
