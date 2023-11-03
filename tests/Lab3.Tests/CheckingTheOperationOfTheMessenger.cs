@@ -11,7 +11,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
 
 public class CheckingTheOperationOfTheMessenger : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> GetShips
+    public static IEnumerable<object[]> GetMessage
     {
         get
         {
@@ -35,7 +35,7 @@ public class CheckingTheOperationOfTheMessenger : IEnumerable<object[]>
     }
 
     [Theory]
-    [MemberData(nameof(GetShips), MemberType = typeof(Checkingthestatusofamessagewhenitisreceived))]
+    [MemberData(nameof(GetMessage), MemberType = typeof(CheckingTheOperationOfTheMessenger))]
     public void ComputerAssembly(
         string headline,
         string body,
@@ -46,7 +46,7 @@ public class CheckingTheOperationOfTheMessenger : IEnumerable<object[]>
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
         var messenger = new MessengerMock("Rafic");
-        var topic = new Topic("LC");
+        var topic = new Topic("239");
         topic.Send(messenger, message, LevelsOfImportance.Low);
         string result = messenger.CheckDraw();
         string expectedValue = "239by @EMINBEGIN Messenger";

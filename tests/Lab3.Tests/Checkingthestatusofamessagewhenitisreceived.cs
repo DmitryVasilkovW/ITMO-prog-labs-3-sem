@@ -12,14 +12,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
 
 public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> GetShips
+    public static IEnumerable<object[]> GetMessage
     {
         get
         {
             yield return new object[]
         {
             "239",
-            "by @EMINBEGIN",
+            "by @bloom_guy",
             LevelsOfImportance.High,
         };
         }
@@ -49,7 +49,7 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
     }
 
     [Theory]
-    [MemberData(nameof(GetShips), MemberType = typeof(Checkingthestatusofamessagewhenitisreceived))]
+    [MemberData(nameof(GetMessage), MemberType = typeof(Checkingthestatusofamessagewhenitisreceived))]
     public void ComputerAssembly(
         string headline,
         string body,
@@ -60,7 +60,7 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
             .WithHeadline(new Text(headline)).WithBody(new Text(body))
             .WithLevelsOfImportance(importanceLevel).Build();
         var user = new Userdecorator("Rafic");
-        var topic = new Topic("LC");
+        var topic = new Topic("239");
         topic.Send(user, message, LevelsOfImportance.Low);
 
         Assert.True(ResultsVerification(user.User, message));

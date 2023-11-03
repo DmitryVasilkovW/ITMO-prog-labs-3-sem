@@ -11,14 +11,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
 
 public class LoggingCheck : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> GetShips
+    public static IEnumerable<object[]> GetMessage
     {
         get
         {
             yield return new object[]
             {
-                "239",
-                "by @EMINBEGIN",
+                "241",
+                "by @cyberronin",
                 LevelsOfImportance.High,
             };
         }
@@ -35,7 +35,7 @@ public class LoggingCheck : IEnumerable<object[]>
     }
 
     [Theory]
-    [MemberData(nameof(GetShips), MemberType = typeof(Checkingthestatusofamessagewhenitisreceived))]
+    [MemberData(nameof(GetMessage), MemberType = typeof(LoggingCheck))]
     public void ComputerAssembly(
         string headline,
         string body,
@@ -46,9 +46,9 @@ public class LoggingCheck : IEnumerable<object[]>
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
         var user = new UserAdapterMock("Rafic");
-        var topic = new Topic("LC");
+        var topic = new Topic("239");
         topic.Send(user, message, LevelsOfImportance.Low);
 
-        Assert.True(user.Checker("Rafic 239by @EMINBEGIN"));
+        Assert.True(user.Checker("Rafic 241by @cyberronin"));
     }
 }

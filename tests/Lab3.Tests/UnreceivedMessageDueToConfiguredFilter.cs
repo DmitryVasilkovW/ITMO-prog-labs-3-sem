@@ -12,14 +12,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
 
 public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> GetShips
+    public static IEnumerable<object[]> GetMessage
     {
         get
         {
             yield return new object[]
             {
-                "239",
-                "by @EMINBEGIN",
+                "241",
+                "BY \n @GAYSHAMANIN \n @GAYSHAMANIN241 \n @MISHAGANIN \n @ITMO_MISHA \n @GISHAMANIN \n @MISHAGANIN241 \n @mishaganinchannel \n @GAYSHAMANIN239 \n And new: \n @itmo_giant_cock\n And not created @mishelganina",
                 LevelsOfImportance.High,
             };
         }
@@ -46,7 +46,7 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
     }
 
     [Theory]
-    [MemberData(nameof(GetShips), MemberType = typeof(UnreceivedMessageDueToConfiguredFilter))]
+    [MemberData(nameof(GetMessage), MemberType = typeof(UnreceivedMessageDueToConfiguredFilter))]
     public void ComputerAssembly(
         string headline,
         string body,
@@ -57,7 +57,7 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
         var user = new UserMock();
-        var topic = new Topic("LC");
+        var topic = new Topic("239");
         topic.Send(user, message, LevelsOfImportance.High);
         MessageSendingResult expectedValue = MessageSendingResult.Messagedidntgetthrough;
         MessageSendingResult messagesuatus = user.Checkresultofsending();

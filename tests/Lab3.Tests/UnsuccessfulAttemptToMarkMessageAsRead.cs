@@ -12,14 +12,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
 
 public class UnsuccessfulAttemptToMarkMessageAsRead : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> GetShips
+    public static IEnumerable<object[]> GetMessage
     {
         get
         {
             yield return new object[]
             {
                 "239",
-                "by @EMINBEGIN",
+                "by @mishaganin",
                 LevelsOfImportance.High,
             };
         }
@@ -46,7 +46,7 @@ public class UnsuccessfulAttemptToMarkMessageAsRead : IEnumerable<object[]>
     }
 
     [Theory]
-    [MemberData(nameof(GetShips), MemberType = typeof(SuccessfulAttemptToMarkMessageAsRead))]
+    [MemberData(nameof(GetMessage), MemberType = typeof(SuccessfulAttemptToMarkMessageAsRead))]
     public void ComputerAssembly(
         string headline,
         string body,
@@ -58,7 +58,7 @@ public class UnsuccessfulAttemptToMarkMessageAsRead : IEnumerable<object[]>
                 .WithLevelsOfImportance(importanceLevel).Build();
 
         var user = new User("Rafic");
-        var topic = new Topic("LC");
+        var topic = new Topic("239");
 
         topic.Send(user, message, LevelsOfImportance.Low);
         MessageStatusChangeResults messagestatus;
