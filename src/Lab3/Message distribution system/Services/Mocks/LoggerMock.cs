@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
@@ -8,16 +7,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services
 
 public class LoggerMock : IMYLogger
 {
-    private IList<Message> _messages;
-    private IList<IAddressee> _addressees;
+    private IList<IMessage> _messages;
+    private IList<IName> _addressees;
 
     public LoggerMock()
     {
-        _messages = new List<Message>();
-        _addressees = new List<IAddressee>();
+        _messages = new List<IMessage>();
+        _addressees = new List<IName>();
     }
 
-    public void Log(Message message, IAddressee addressee)
+    public void Log(Message message, IName addressee)
     {
         _messages.Add(message);
         _addressees.Add(addressee);
@@ -27,12 +26,12 @@ public class LoggerMock : IMYLogger
     {
         for (int i = 0; i < _messages.Count; i++)
         {
-            Console.WriteLine(((IName)_addressees[i]).Name + " " + _messages[i].Render());
+            Console.WriteLine(_addressees[i].Name + " " + _messages[i].Render());
         }
     }
 
     public string CheckLogs(int indexforchecker)
     {
-        return ((IName)_addressees[indexforchecker]).Name + " " + _messages[indexforchecker].Render();
+        return _addressees[indexforchecker].Name + " " + _messages[indexforchecker].Render();
     }
 }
