@@ -1,4 +1,4 @@
-using System;
+using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
@@ -13,8 +13,8 @@ public abstract class MessageBuilder : IMessageBuilder
     {
         return new Message(
             _headline,
-            _body ?? throw new ArgumentNullException(),
-            _importanceLevel ?? throw new ArgumentNullException());
+            _body ?? throw new ThePassedArgumentIsNullException(),
+            _importanceLevel ?? throw new ThePassedArgumentIsNullException());
     }
 
     public MessageBuilder WithHeadline(IRenderable headline)

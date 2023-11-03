@@ -45,11 +45,11 @@ public class CheckingTheOperationOfTheMessenger : IEnumerable<object[]>
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
-        var messenger = new MessengerMock("Rafic");
+        var messenger = new MessengerMock("Telecaster525");
         var topic = new Topic("239");
         topic.Send(messenger, message, LevelsOfImportance.Low);
         string result = messenger.CheckDraw();
-        string expectedValue = "239by @EMINBEGIN Messenger";
+        string expectedValue = "239 by @EMINBEGIN Messenger";
 
         Assert.Equal(result, expectedValue);
     }

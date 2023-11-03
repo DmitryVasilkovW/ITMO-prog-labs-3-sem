@@ -57,7 +57,7 @@ public class UnsuccessfulAttemptToMarkMessageAsRead : IEnumerable<object[]>
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
 
-        var user = new User("Rafic");
+        var user = new User("Telecaster525");
         var topic = new Topic("239");
 
         topic.Send(user, message, LevelsOfImportance.Low);

@@ -45,10 +45,10 @@ public class LoggingCheck : IEnumerable<object[]>
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
-        var user = new UserAdapterMock("Rafic");
+        var user = new UserAdapterMock("Telecaster525");
         var topic = new Topic("239");
         topic.Send(user, message, LevelsOfImportance.Low);
 
-        Assert.True(user.Checker("Rafic 241by @cyberronin"));
+        Assert.True(user.Checker("Telecaster525 241 by @cyberronin"));
     }
 }
