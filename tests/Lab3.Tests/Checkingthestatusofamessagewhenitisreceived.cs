@@ -59,7 +59,7 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
             = new BaseMessageBuilder()
             .WithHeadline(new Text(headline)).WithBody(new Text(body))
             .WithLevelsOfImportance(importanceLevel).Build();
-        var user = new UserAdapter("Rafic");
+        var user = new Userdecorator("Rafic");
         var topic = new Topic("LC");
         topic.Send(user, message, LevelsOfImportance.Low);
 
