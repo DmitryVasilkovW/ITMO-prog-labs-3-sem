@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using InvalidOperationException = System.InvalidOperationException;
+using Itmo.ObjectOrientedProgramming.Lab3.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
 
@@ -19,7 +19,8 @@ public class Text : IText<Text>
     public string Render()
     {
         return _modifiers.Aggregate(
-            Content, (content, modifire) => modifire.Modify(content) ?? throw new InvalidOperationException());
+            Content,
+            (content, modifire) => modifire.Modify(content) ?? throw new IncorrectOperationException());
     }
 
     public Text AddModifier(IRenderableModifier modifier)

@@ -20,7 +20,7 @@ public class Message : IMessage
         var builder = new StringBuilder();
 
         if (Headline is not null)
-            builder.Append(Headline.Render());
+            builder.Append(Headline.Render() + " ");
 
         builder.Append(Body.Render());
 
