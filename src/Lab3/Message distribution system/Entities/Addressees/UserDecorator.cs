@@ -1,24 +1,24 @@
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Messengers;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
-public class MessengerAdapter : IAddressee
+public class UserDecorator : IAddressee
 {
     private IConsoleLogger _logger;
 
-    public MessengerAdapter(string name, IConsoleLogger logger, LevelsOfImportance filter)
+    public UserDecorator(string name, LevelsOfImportance filter, IConsoleLogger logger)
     {
-        Messenger = new Messenger(name, filter);
+        User = new User(name, filter);
         _logger = logger;
     }
 
-    public Messenger Messenger { get; }
+    public User User { get; }
 
     public void GetMessage(Message message)
     {
-        _logger.Log(message, Messenger);
-        Messenger.GetMessage(message);
+        _logger.Log(message, User);
+        User.GetMessage(message);
     }
 }

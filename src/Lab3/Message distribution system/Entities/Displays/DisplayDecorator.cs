@@ -4,11 +4,11 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
-public class DisplayAdapter : IAddressee
+public class DisplayDecorator : IAddressee
 {
     private IConsoleLogger _logger;
 
-    public DisplayAdapter(string name, IConsoleLogger logger, LevelsOfImportance filter)
+    public DisplayDecorator(string name, IConsoleLogger logger, LevelsOfImportance filter)
     {
         Display = new Display(name, filter);
         _logger = logger;
