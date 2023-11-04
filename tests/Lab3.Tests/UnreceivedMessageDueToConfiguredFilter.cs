@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Proxy;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
+using Itmo.ObjectOrientedProgramming.Lab3.MyException;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
@@ -54,8 +54,8 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
         LevelsOfImportance importanceLevel)
     {
         LevelsOfImportance filter = LevelsOfImportance.High;
-        var user = new UserMock(filter);
-        var proxy = new FilterProxy(user);
+        var user = new UserMock();
+        var proxy = new FilterProxy(user, filter);
         Message message
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))

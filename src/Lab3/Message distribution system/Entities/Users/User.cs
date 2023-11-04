@@ -6,11 +6,11 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 
-public class User : IUser, IAddressee, IName, IHavefilter
+public class User : IUser, IAddressee, IName
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
 
-    public User(string name, LevelsOfImportance filter)
+    public User(string name)
     {
         Name = name;
         _messages = new PriorityQueue<Message, LevelsOfImportance>();
@@ -18,11 +18,9 @@ public class User : IUser, IAddressee, IName, IHavefilter
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
-        Filter = filter;
     }
 
     public IList<IList<Message>> Messagestatuses { get; }
-    public LevelsOfImportance Filter { get; }
 
     public string Name { get; }
 

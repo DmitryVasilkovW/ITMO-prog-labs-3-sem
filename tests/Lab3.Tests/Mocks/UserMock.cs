@@ -5,19 +5,18 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 
-public class UserMock : IAddressee, IHavefilter
+public class UserMock : IAddressee
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
     private Message? _testmessage;
 
-    public UserMock(LevelsOfImportance filter)
+    public UserMock()
     {
         _messages = new PriorityQueue<Message, LevelsOfImportance>();
         Messagestatuses = new List<IList<Message>>();
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
-        Filter = filter;
     }
 
     public IList<IList<Message>> Messagestatuses { get; }

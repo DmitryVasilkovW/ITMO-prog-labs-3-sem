@@ -4,12 +4,12 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
-public class AddresseeGroupDecorator : IAddressee
+public class AddresseeGroupLogDecorator : IAddressee
 {
     private IList<IAddressee> _addressees = new List<IAddressee>();
-    private IConsoleLogger _logger;
+    private ILogger _logger;
 
-    public AddresseeGroupDecorator(IConsoleLogger logger)
+    public AddresseeGroupLogDecorator(ILogger logger)
     {
         _logger = logger;
     }

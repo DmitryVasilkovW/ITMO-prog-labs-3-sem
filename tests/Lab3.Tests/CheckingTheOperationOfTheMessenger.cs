@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
+using Itmo.ObjectOrientedProgramming.Lab3.MyException;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;

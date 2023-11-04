@@ -8,9 +8,9 @@ public class DisplayDriver : IDisplayDriver
 {
     private Display _display;
 
-    public DisplayDriver(string name, LevelsOfImportance filter)
+    public DisplayDriver(string name)
     {
-        _display = new Display(name, filter);
+        _display = new Display(name);
     }
 
     public void ClearOutput()

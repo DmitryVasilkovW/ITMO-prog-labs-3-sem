@@ -9,9 +9,9 @@ public class UserAdapterMock : IAddressee
 {
     private ConsoleLoggerMock _logger;
 
-    public UserAdapterMock(string name, ConsoleLoggerMock logger, LevelsOfImportance filter)
+    public UserAdapterMock(string name, ConsoleLoggerMock logger)
     {
-        User = new User(name, filter);
+        User = new User(name);
         _logger = logger;
     }
 

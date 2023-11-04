@@ -1,12 +1,12 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
+using Itmo.ObjectOrientedProgramming.Lab3.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 
-public class ConsoleLoggerMock : IConsoleLogger
+public class ConsoleLoggerMock : ILogger
 {
     private Message? _message;
     private IAddressee? _addressee;

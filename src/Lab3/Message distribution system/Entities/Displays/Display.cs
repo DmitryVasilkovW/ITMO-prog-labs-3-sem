@@ -6,18 +6,16 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Displays;
 
-public class Display : ICanDraw, IName, IAddressee, IHavefilter
+public class Display : ICanDraw, IName, IAddressee
 {
     private Message? _message;
 
-    public Display(string name, LevelsOfImportance filter)
+    public Display(string name)
     {
         Name = name;
-        Filter = filter;
     }
 
     public string Name { get; }
-    public LevelsOfImportance Filter { get; }
 
     public void GetMessage(Message message)
     {

@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
-public class ConsoleLogger : IConsoleLogger
+public class ConsoleLogger : ILogger
 {
     public void Log(Message message, IAddressee addressee)
     {

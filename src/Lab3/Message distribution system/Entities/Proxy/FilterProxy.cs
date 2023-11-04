@@ -6,15 +6,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 public class FilterProxy : IAddressee
 {
     private IAddressee _addressee;
+    private LevelsOfImportance _filter;
 
-    public FilterProxy(IAddressee addressee)
+    public FilterProxy(IAddressee addressee, LevelsOfImportance filter)
     {
         _addressee = addressee;
+        _filter = filter;
     }
 
     public void GetMessage(Message message)
     {
-        if (((IHavefilter)_addressee).Filter <= message.ImportanceLevels)
+        if (_filter <= message.ImportanceLevels)
             _addressee.GetMessage(message);
     }
 }

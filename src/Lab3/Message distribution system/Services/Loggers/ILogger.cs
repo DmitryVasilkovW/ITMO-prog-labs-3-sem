@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
-public interface IConsoleLogger
+public interface ILogger
 {
     void Log(Message message, IAddressee addressee);
 }

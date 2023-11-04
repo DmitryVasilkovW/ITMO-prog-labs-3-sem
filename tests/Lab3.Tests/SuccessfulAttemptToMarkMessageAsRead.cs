@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
+using Itmo.ObjectOrientedProgramming.Lab3.MyException;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
@@ -52,13 +52,12 @@ public class SuccessfulAttemptToMarkMessageAsRead : IEnumerable<object[]>
         string body,
         LevelsOfImportance importanceLevel)
     {
-        LevelsOfImportance filter = LevelsOfImportance.Low;
         Message message
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
 
-        var user = new User("Telecaster525", filter);
+        var user = new User("Telecaster525");
         var topic = new Topic("239");
 
         topic.Send(user, message);
