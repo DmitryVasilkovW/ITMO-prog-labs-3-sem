@@ -41,7 +41,7 @@ public class LoggingCheck : IEnumerable<object[]>
         string body,
         LevelsOfImportance importanceLevel)
     {
-        var logger = new LoggerMock();
+        var logger = new ConsoleLoggerMock();
         LevelsOfImportance filter = LevelsOfImportance.Low;
         Message message
             = new BaseMessageBuilder()

@@ -7,9 +7,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services
 
 public class UserAdapterMock : IAddressee
 {
-    private LoggerMock _logger;
+    private ConsoleLoggerMock _logger;
 
-    public UserAdapterMock(string name, LoggerMock logger, LevelsOfImportance filter)
+    public UserAdapterMock(string name, ConsoleLoggerMock logger, LevelsOfImportance filter)
     {
         User = new User(name, filter);
         _logger = logger;

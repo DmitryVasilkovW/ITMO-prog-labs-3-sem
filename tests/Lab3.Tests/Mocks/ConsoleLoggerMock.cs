@@ -6,7 +6,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 
-public class LoggerMock : IConsoleLogger
+public class ConsoleLoggerMock : IConsoleLogger
 {
     private Message? _message;
     private IAddressee? _addressee;
