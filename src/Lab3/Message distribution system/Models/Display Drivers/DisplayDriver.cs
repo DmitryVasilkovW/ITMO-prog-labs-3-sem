@@ -8,14 +8,14 @@ public class DisplayDriver : IDisplayDriver
 {
     private Display _display;
 
-    public DisplayDriver(string name)
+    public DisplayDriver(string name, LevelsOfImportance filter)
     {
-        _display = new Display(name);
+        _display = new Display(name, filter);
     }
 
     public void ClearOutput()
     {
-        _display.Deletemessage();
+        _display.DeleteMessage();
     }
 
     public void AddColourModifier(ConsoleColor color)
@@ -23,10 +23,10 @@ public class DisplayDriver : IDisplayDriver
         _display.SetColor(color);
     }
 
-    public void Writetext(Message message, LevelsOfImportance filter)
+    public void Writetext(Message message)
     {
         ClearOutput();
-        _display.GetMessage(message, filter);
+        _display.GetMessage(message);
     }
 
     public void Draw()

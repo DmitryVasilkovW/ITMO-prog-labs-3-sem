@@ -7,7 +7,7 @@ public interface IDisplayDriver
 {
     void ClearOutput();
     void AddColourModifier(ConsoleColor color);
-    void Writetext(Message message, LevelsOfImportance filter);
+    void Writetext(Message message);
 
     void Draw();
 }

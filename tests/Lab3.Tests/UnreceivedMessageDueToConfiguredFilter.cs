@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Mocks;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
 using Xunit;
 
@@ -20,7 +20,7 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
             {
                 "241",
                 "BY \n @GAYSHAMANIN \n @GAYSHAMANIN241 \n @MISHAGANIN \n @ITMO_MISHA \n @GISHAMANIN \n @MISHAGANIN241 \n @mishaganinchannel \n @GAYSHAMANIN239 \n And new: \n @itmo_giant_cock\n And not created @mishelganina",
-                LevelsOfImportance.High,
+                LevelsOfImportance.Low,
             };
         }
     }
@@ -52,13 +52,14 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
         string body,
         LevelsOfImportance importanceLevel)
     {
+        LevelsOfImportance filter = LevelsOfImportance.High;
         Message message
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
-        var user = new UserMock();
+        var user = new UserMock(filter);
         var topic = new Topic("239");
-        topic.Send(user, message, LevelsOfImportance.High);
+        topic.Send(user, message);
         MessageSendingResult expectedValue = MessageSendingResult.Messagedidntgetthrough;
         MessageSendingResult messagesuatus = user.Checkresultofsending();
 

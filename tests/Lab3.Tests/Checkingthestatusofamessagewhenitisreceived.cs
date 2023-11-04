@@ -5,6 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Add
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
 using Xunit;
 
@@ -55,13 +56,15 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
         string body,
         LevelsOfImportance importanceLevel)
     {
+        LevelsOfImportance filter = LevelsOfImportance.Low;
+        var logger = new ConsoleLogger();
         Message message
             = new BaseMessageBuilder()
             .WithHeadline(new Text(headline)).WithBody(new Text(body))
             .WithLevelsOfImportance(importanceLevel).Build();
-        var user = new Userdecorator("Telecaster525");
+        var user = new Userdecorator("Telecaster525", filter, logger);
         var topic = new Topic("239");
-        topic.Send(user, message, LevelsOfImportance.Low);
+        topic.Send(user, message);
 
         Assert.True(ResultsVerification(user.User, message));
     }

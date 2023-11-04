@@ -6,19 +6,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 
 public class MessengerAdapter : IAddressee
 {
-    private IMYLogger _logger;
+    private IConsoleLogger _logger;
 
-    public MessengerAdapter(string name)
+    public MessengerAdapter(string name, IConsoleLogger logger, LevelsOfImportance filter)
     {
-        Messenger = new Messenger(name);
-        _logger = new Logger();
+        Messenger = new Messenger(name, filter);
+        _logger = logger;
     }
 
     public Messenger Messenger { get; }
 
-    public void GetMessage(Message message, LevelsOfImportance filter)
+    public void GetMessage(Message message)
     {
         _logger.Log(message, Messenger);
-        Messenger.GetMessage(message, filter);
+        Messenger.GetMessage(message);
     }
 }

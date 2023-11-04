@@ -6,19 +6,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 
 public class Userdecorator : IAddressee
 {
-    private IMYLogger _logger;
+    private IConsoleLogger _logger;
 
-    public Userdecorator(string name)
+    public Userdecorator(string name, LevelsOfImportance filter, IConsoleLogger logger)
     {
-        User = new User(name);
-        _logger = new Logger();
+        User = new User(name, filter);
+        _logger = logger;
     }
 
     public User User { get; }
 
-    public void GetMessage(Message message, LevelsOfImportance filter)
+    public void GetMessage(Message message)
     {
         _logger.Log(message, User);
-        User.GetMessage(message, filter);
+        User.GetMessage(message);
     }
 }

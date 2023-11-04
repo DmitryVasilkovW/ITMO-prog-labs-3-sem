@@ -1,8 +1,7 @@
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Messengers;
 
-public interface IMessenger
+public interface IMessenger : IAddressee
 {
-    void GetMessage(Message message);
 }

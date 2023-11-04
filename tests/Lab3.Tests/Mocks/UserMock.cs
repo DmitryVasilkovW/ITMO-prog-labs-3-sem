@@ -3,26 +3,28 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Add
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Mocks;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 
 public class UserMock : IAddressee
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
     private Message? _testmessage;
+    private LevelsOfImportance _filter;
 
-    public UserMock()
+    public UserMock(LevelsOfImportance filter)
     {
         _messages = new PriorityQueue<Message, LevelsOfImportance>();
         Messagestatuses = new List<IList<Message>>();
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
+        _filter = filter;
     }
 
     public IList<IList<Message>> Messagestatuses { get; }
-    public void GetMessage(Message message, LevelsOfImportance filter)
+    public void GetMessage(Message message)
     {
-        if (filter != message.ImportanceLevels)
+        if (_filter <= message.ImportanceLevels)
         {
             _messages.Enqueue(message, message.ImportanceLevels);
             _testmessage = message;

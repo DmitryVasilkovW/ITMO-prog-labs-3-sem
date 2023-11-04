@@ -1,24 +1,27 @@
 using System;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IDraw;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Displays;
 
-public class Display : ICanDraw, IName
+public class Display : ICanDraw, IName, IAddressee
 {
     private Message? _message;
+    private LevelsOfImportance _filter;
 
-    public Display(string name)
+    public Display(string name, LevelsOfImportance filter)
     {
         Name = name;
+        _filter = filter;
     }
 
     public string Name { get; }
 
-    public void GetMessage(Message message, LevelsOfImportance filter)
+    public void GetMessage(Message message)
     {
-        if (_message is not null && filter <= _message.ImportanceLevels)
+        if (_message is not null && _filter <= _message.ImportanceLevels)
             _message = message;
     }
 
@@ -33,7 +36,7 @@ public class Display : ICanDraw, IName
         }
     }
 
-    public void Deletemessage()
+    public void DeleteMessage()
     {
         _message = null;
     }

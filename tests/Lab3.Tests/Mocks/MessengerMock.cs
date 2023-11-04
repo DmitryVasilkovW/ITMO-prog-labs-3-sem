@@ -5,22 +5,24 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IDr
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Mocks;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 
 public class MessengerMock : IAddressee, ICanDraw, IName
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
+    private LevelsOfImportance _filter;
 
-    public MessengerMock(string name)
+    public MessengerMock(string name, LevelsOfImportance filter)
     {
         Name = name;
         _messages = new PriorityQueue<Message, LevelsOfImportance>();
+        _filter = filter;
     }
 
     public string Name { get; }
-    public void GetMessage(Message message, LevelsOfImportance filter)
+    public void GetMessage(Message message)
     {
-        if (filter != message.ImportanceLevels)
+        if (_filter != message.ImportanceLevels)
             _messages.Enqueue(message, message.ImportanceLevels);
     }
 

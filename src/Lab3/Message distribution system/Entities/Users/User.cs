@@ -9,8 +9,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 public class User : IUser, IAddressee, IName
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
+    private LevelsOfImportance _filter;
 
-    public User(string name)
+    public User(string name, LevelsOfImportance filter)
     {
         Name = name;
         _messages = new PriorityQueue<Message, LevelsOfImportance>();
@@ -18,15 +19,16 @@ public class User : IUser, IAddressee, IName
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
+        _filter = filter;
     }
 
     public IList<IList<Message>> Messagestatuses { get; }
 
     public string Name { get; }
 
-    public void GetMessage(Message message, LevelsOfImportance filter)
+    public void GetMessage(Message message)
     {
-        if (filter <= message.ImportanceLevels)
+        if (_filter <= message.ImportanceLevels)
         {
             _messages.Enqueue(message, message.ImportanceLevels);
             Messagestatuses[(int)MessageStatus.Unread].Add(message);
@@ -48,8 +50,8 @@ public class User : IUser, IAddressee, IName
         return MessageStatusChangeResults.CannotChangeMessageStatus;
     }
 
-    public void SendMessage(IUser user, Message message, LevelsOfImportance filter)
+    public void SendMessage(IUser user, Message message)
     {
-        user.GetMessage(message, filter);
+        ((IAddressee)user).GetMessage(message);
     }
 }

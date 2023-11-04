@@ -6,19 +6,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 
 public class DisplayAdapter : IAddressee
 {
-    private IMYLogger _logger;
+    private IConsoleLogger _logger;
 
-    public DisplayAdapter(string name)
+    public DisplayAdapter(string name, IConsoleLogger logger, LevelsOfImportance filter)
     {
-        Display = new Display(name);
-        _logger = new Logger();
+        Display = new Display(name, filter);
+        _logger = logger;
     }
 
     public Display Display { get; }
 
-    public void GetMessage(Message message, LevelsOfImportance filter)
+    public void GetMessage(Message message)
     {
         _logger.Log(message, Display);
-        Display.GetMessage(message, filter);
+        Display.GetMessage(message);
     }
 }

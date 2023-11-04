@@ -15,12 +15,9 @@ public class Topic : ITopic
         _messages = new List<Message>();
     }
 
-    public void Send(IAddressee addressee, Message message, LevelsOfImportance filter)
+    public void Send(IAddressee addressee, Message message)
     {
-        if (filter != message.ImportanceLevels)
-        {
-            _messages.Add(message);
-            addressee.GetMessage(message, filter);
-        }
+        _messages.Add(message);
+        addressee.GetMessage(message);
     }
 }

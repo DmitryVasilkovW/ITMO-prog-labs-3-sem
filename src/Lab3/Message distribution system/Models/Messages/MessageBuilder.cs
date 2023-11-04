@@ -1,5 +1,5 @@
-using Itmo.ObjectOrientedProgramming.Lab2.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
+using Itmo.ObjectOrientedProgramming.Lab3.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 

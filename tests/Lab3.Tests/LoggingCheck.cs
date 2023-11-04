@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Mocks;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Renderable;
 using Xunit;
 
@@ -41,13 +41,15 @@ public class LoggingCheck : IEnumerable<object[]>
         string body,
         LevelsOfImportance importanceLevel)
     {
+        var logger = new LoggerMock();
+        LevelsOfImportance filter = LevelsOfImportance.Low;
         Message message
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
-        var user = new UserAdapterMock("Telecaster525");
+        var user = new UserAdapterMock("Telecaster525", logger, filter);
         var topic = new Topic("239");
-        topic.Send(user, message, LevelsOfImportance.Low);
+        topic.Send(user, message);
 
         Assert.True(user.Checker("Telecaster525 241 by @cyberronin"));
     }

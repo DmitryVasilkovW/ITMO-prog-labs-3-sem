@@ -52,15 +52,16 @@ public class SuccessfulAttemptToMarkMessageAsRead : IEnumerable<object[]>
         string body,
         LevelsOfImportance importanceLevel)
     {
+        LevelsOfImportance filter = LevelsOfImportance.Low;
         Message message
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
 
-        var user = new User("Telecaster525");
+        var user = new User("Telecaster525", filter);
         var topic = new Topic("239");
 
-        topic.Send(user, message, LevelsOfImportance.Low);
+        topic.Send(user, message);
         MessageStatusChangeResults messagestatus = user.MarkMessageAsRead(message);
         MessageStatusChangeResults expectedValue = MessageStatusChangeResults.ChangeOfStatusWasSuccessful;
 

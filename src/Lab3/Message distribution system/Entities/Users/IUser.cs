@@ -4,6 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 
 public interface IUser
 {
-    void GetMessage(Message message, LevelsOfImportance filter);
-    void SendMessage(IUser user, Message message, LevelsOfImportance filter);
+    void SendMessage(IUser user, Message message);
 }
