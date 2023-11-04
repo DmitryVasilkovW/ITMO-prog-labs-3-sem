@@ -6,23 +6,22 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Displays;
 
-public class Display : ICanDraw, IName, IAddressee
+public class Display : ICanDraw, IName, IAddressee, IHavefilter
 {
     private Message? _message;
-    private LevelsOfImportance _filter;
 
     public Display(string name, LevelsOfImportance filter)
     {
         Name = name;
-        _filter = filter;
+        Filter = filter;
     }
 
     public string Name { get; }
+    public LevelsOfImportance Filter { get; }
 
     public void GetMessage(Message message)
     {
-        if (_message is not null && _filter <= _message.ImportanceLevels)
-            _message = message;
+        _message = message;
     }
 
     public void SetColor(ConsoleColor color)

@@ -1,24 +1,22 @@
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Displays;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
-public class DisplayDecorator : IAddressee
+public class AddresseeDecorator : IAddressee
 {
     private IConsoleLogger _logger;
+    private IAddressee _addressee;
 
-    public DisplayDecorator(string name, IConsoleLogger logger, LevelsOfImportance filter)
+    public AddresseeDecorator(IConsoleLogger logger, IAddressee addressee)
     {
-        Display = new Display(name, filter);
         _logger = logger;
+        _addressee = addressee;
     }
-
-    public Display Display { get; }
 
     public void GetMessage(Message message)
     {
-        _logger.Log(message, Display);
-        Display.GetMessage(message);
+        _logger.Log(message, _addressee);
+        _addressee.GetMessage(message);
     }
 }

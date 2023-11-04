@@ -58,14 +58,15 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
     {
         LevelsOfImportance filter = LevelsOfImportance.Low;
         var logger = new ConsoleLogger();
+        var user = new User("Name", filter);
         Message message
             = new BaseMessageBuilder()
             .WithHeadline(new Text(headline)).WithBody(new Text(body))
             .WithLevelsOfImportance(importanceLevel).Build();
-        var user = new UserDecorator("Telecaster525", filter, logger);
+        var userdecorator = new AddresseeDecorator(logger, user);
         var topic = new Topic("239");
-        topic.Send(user, message);
+        topic.Send(userdecorator, message);
 
-        Assert.True(ResultsVerification(user.User, message));
+        Assert.True(ResultsVerification(user, message));
     }
 }

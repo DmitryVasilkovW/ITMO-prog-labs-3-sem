@@ -6,10 +6,9 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 
-public class User : IUser, IAddressee, IName
+public class User : IUser, IAddressee, IName, IHavefilter
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
-    private LevelsOfImportance _filter;
 
     public User(string name, LevelsOfImportance filter)
     {
@@ -19,20 +18,18 @@ public class User : IUser, IAddressee, IName
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
         Messagestatuses.Add(new List<Message>());
-        _filter = filter;
+        Filter = filter;
     }
 
     public IList<IList<Message>> Messagestatuses { get; }
+    public LevelsOfImportance Filter { get; }
 
     public string Name { get; }
 
     public void GetMessage(Message message)
     {
-        if (_filter <= message.ImportanceLevels)
-        {
-            _messages.Enqueue(message, message.ImportanceLevels);
-            Messagestatuses[(int)MessageStatus.Unread].Add(message);
-        }
+        _messages.Enqueue(message, message.ImportanceLevels);
+        Messagestatuses[(int)MessageStatus.Unread].Add(message);
     }
 
     public MessageStatusChangeResults MarkMessageAsRead(Message messageForSetStatus)

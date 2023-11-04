@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Proxy;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
@@ -53,13 +54,14 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
         LevelsOfImportance importanceLevel)
     {
         LevelsOfImportance filter = LevelsOfImportance.High;
+        var user = new UserMock(filter);
+        var proxy = new FilterProxy(user);
         Message message
             = new BaseMessageBuilder()
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
-        var user = new UserMock(filter);
         var topic = new Topic("239");
-        topic.Send(user, message);
+        topic.Send(proxy, message);
         MessageSendingResult expectedValue = MessageSendingResult.Messagedidntgetthrough;
         MessageSendingResult messagesuatus = user.Checkresultofsending();
 

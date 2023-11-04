@@ -1,24 +1,25 @@
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
+using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 
-public class UserDecorator : IAddressee
+public class AddresseeGroupDecorator : IAddressee
 {
+    private IList<IAddressee> _addressees = new List<IAddressee>();
     private IConsoleLogger _logger;
 
-    public UserDecorator(string name, LevelsOfImportance filter, IConsoleLogger logger)
+    public AddresseeGroupDecorator(IConsoleLogger logger)
     {
-        User = new User(name, filter);
         _logger = logger;
     }
 
-    public User User { get; }
-
     public void GetMessage(Message message)
     {
-        _logger.Log(message, User);
-        User.GetMessage(message);
+        foreach (IAddressee addressee in _addressees)
+        {
+            addressee.GetMessage(message);
+            _logger.Log(message, addressee);
+        }
     }
 }

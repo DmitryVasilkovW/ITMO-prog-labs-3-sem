@@ -7,23 +7,22 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Messengers;
 
-public class Messenger : ICanDraw, IName, IAddressee
+public class Messenger : ICanDraw, IName, IAddressee, IHavefilter
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
-    private LevelsOfImportance _filter;
 
     public Messenger(string name, LevelsOfImportance filter)
     {
         Name = name;
         _messages = new PriorityQueue<Message, LevelsOfImportance>();
-        _filter = filter;
+        Filter = filter;
     }
 
     public string Name { get; }
+    public LevelsOfImportance Filter { get; }
     public void GetMessage(Message message)
     {
-        if (_filter <= message.ImportanceLevels)
-            _messages.Enqueue(message, message.ImportanceLevels);
+        _messages.Enqueue(message, message.ImportanceLevels);
     }
 
     public void Draw()
