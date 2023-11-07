@@ -5,11 +5,11 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 
-public class UserAdapterMock : IAddressee
+public class UserDecoratorMock : IAddressee
 {
     private ConsoleLoggerMock _logger;
 
-    public UserAdapterMock(string name, ConsoleLoggerMock logger)
+    public UserDecoratorMock(string name, ConsoleLoggerMock logger)
     {
         User = new User(name);
         _logger = logger;
@@ -19,7 +19,7 @@ public class UserAdapterMock : IAddressee
 
     public void GetMessage(Message message)
     {
-        _logger.Log(message, User);
+        _logger.Log(message);
         User.GetMessage(message);
     }
 

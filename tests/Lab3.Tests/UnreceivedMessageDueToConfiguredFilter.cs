@@ -54,7 +54,7 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
         LevelsOfImportance importanceLevel)
     {
         LevelsOfImportance filter = LevelsOfImportance.High;
-        var user = new UserMock();
+        var user = new UserAddresseeMock();
         var proxy = new FilterProxy(user, filter);
         Message message
             = new BaseMessageBuilder()
@@ -63,7 +63,7 @@ public class UnreceivedMessageDueToConfiguredFilter : IEnumerable<object[]>
         var topic = new Topic("239");
         topic.Send(proxy, message);
         MessageSendingResult expectedValue = MessageSendingResult.Messagedidntgetthrough;
-        MessageSendingResult messagesuatus = user.Checkresultofsending();
+        MessageSendingResult messagesuatus = user.User.Checkresultofsending();
 
         Assert.True(ResultsVerification(expectedValue, messagesuatus));
     }

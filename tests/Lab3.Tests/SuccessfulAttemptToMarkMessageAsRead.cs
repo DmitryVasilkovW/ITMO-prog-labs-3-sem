@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
+using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Topics;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
@@ -57,11 +57,11 @@ public class SuccessfulAttemptToMarkMessageAsRead : IEnumerable<object[]>
                 .WithHeadline(new Text(headline)).WithBody(new Text(body))
                 .WithLevelsOfImportance(importanceLevel).Build();
 
-        var user = new User("Telecaster525");
+        var user = new UserAddresee("Telecaster525");
         var topic = new Topic("239");
 
         topic.Send(user, message);
-        MessageStatusChangeResults messagestatus = user.MarkMessageAsRead(message);
+        MessageStatusChangeResults messagestatus = user.User.MarkMessageAsRead(message);
         MessageStatusChangeResults expectedValue = MessageStatusChangeResults.ChangeOfStatusWasSuccessful;
 
         Assert.True(ResultsVerification(messagestatus, expectedValue));

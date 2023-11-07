@@ -1,6 +1,4 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.MyException;
 
@@ -9,18 +7,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services
 public class ConsoleLoggerMock : ILogger
 {
     private Message? _message;
-    private IAddressee? _addressee;
-    public void Log(Message message, IAddressee addressee)
+    public void Log(Message message)
     {
         _message = message;
-        _addressee = addressee;
-        Console.WriteLine(((IName)addressee).Name + " " + message.Render());
+        Console.WriteLine(message.Render());
     }
 
-    public string CheckLogs()
+    public string? CheckLogs()
     {
-        if (_addressee is not null && _message is not null)
-            return ((IName)_addressee).Name + " " + _message.Render();
+        if (_message is not null)
+            return _message.Render();
         throw new ThePassedArgumentIsNullException();
     }
 }

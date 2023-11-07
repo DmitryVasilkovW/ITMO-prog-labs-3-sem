@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messa
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services.Lab3.Tests.Mocks;
 
-public class UserMock : IAddressee
+public class UserMock : IUser
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
     private Message? _testmessage;
@@ -45,5 +45,10 @@ public class UserMock : IAddressee
         }
 
         return MessageSendingResult.Messagedidntgetthrough;
+    }
+
+    public void SendMessage(IAddressee user, Message message)
+    {
+        user.GetMessage(message);
     }
 }

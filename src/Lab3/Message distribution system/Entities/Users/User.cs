@@ -6,7 +6,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Users;
 
-public class User : IUser, IAddressee, IName
+public class User : IUser, IName
 {
     private PriorityQueue<Message, LevelsOfImportance> _messages;
 
@@ -45,7 +45,7 @@ public class User : IUser, IAddressee, IName
         return MessageStatusChangeResults.CannotChangeMessageStatus;
     }
 
-    public void SendMessage(IUser user, Message message)
+    public void SendMessage(IAddressee user, Message message)
     {
         ((IAddressee)user).GetMessage(message);
     }

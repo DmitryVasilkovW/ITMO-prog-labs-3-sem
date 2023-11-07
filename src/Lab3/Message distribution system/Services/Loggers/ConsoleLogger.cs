@@ -1,14 +1,12 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.Addressees;
-using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities.IHaveName;
 using Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Models.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Services;
 
 public class ConsoleLogger : ILogger
 {
-    public void Log(Message message, IAddressee addressee)
+    public void Log(Message message)
     {
-        Console.WriteLine(((IName)addressee).Name + " " + message.Render());
+        Console.WriteLine(message.Render());
     }
 }

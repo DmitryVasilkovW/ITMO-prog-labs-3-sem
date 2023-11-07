@@ -26,7 +26,7 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
         }
     }
 
-    public static bool ResultsVerification(IAddressee user, Message sentmessage)
+    public static bool ResultsVerification(User user, Message sentmessage)
     {
         foreach (Message message in ((User)user).Messagestatuses[(int)MessageStatus.Unread])
         {
@@ -57,7 +57,7 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
         LevelsOfImportance importanceLevel)
     {
         var logger = new ConsoleLogger();
-        var user = new User("Name");
+        var user = new UserAddresee("Name");
         Message message
             = new BaseMessageBuilder()
             .WithHeadline(new Text(headline)).WithBody(new Text(body))
@@ -66,6 +66,6 @@ public class Checkingthestatusofamessagewhenitisreceived : IEnumerable<object[]>
         var topic = new Topic("239");
         topic.Send(userdecorator, message);
 
-        Assert.True(ResultsVerification(user, message));
+        Assert.True(ResultsVerification(user.User, message));
     }
 }
