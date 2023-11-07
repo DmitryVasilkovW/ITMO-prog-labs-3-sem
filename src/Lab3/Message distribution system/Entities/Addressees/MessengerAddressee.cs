@@ -5,15 +5,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 
 public class MessengerAddressee : IAddressee
 {
-    private Messenger _messenger;
-
     public MessengerAddressee(string name)
     {
-        _messenger = new Messenger(name);
+        Messenger = new Messenger(name);
     }
+
+    public Messenger Messenger { get; }
 
     public void GetMessage(Message message)
     {
-        _messenger.GetMessage(message);
+        Messenger.GetMessage(message);
     }
 }

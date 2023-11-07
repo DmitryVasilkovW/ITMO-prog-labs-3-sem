@@ -5,15 +5,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messagedistributionsystem.Entities
 
 public class DisplayAddressee : IAddressee
 {
-    private Display _display;
-
     public DisplayAddressee(string name)
     {
-        _display = new Display(name);
+        Display = new Display(name);
     }
+
+    public Display Display { get; }
 
     public void GetMessage(Message message)
     {
-        _display.GetMessage(message);
+        Display.GetMessage(message);
     }
 }
