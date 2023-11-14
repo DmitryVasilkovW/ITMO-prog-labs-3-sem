@@ -1,6 +1,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 
-public interface ICommand
+public class ConnectCommand : ICommand
 {
-    void Execute();
+    public void Execute()
+    {
+    }
 }
