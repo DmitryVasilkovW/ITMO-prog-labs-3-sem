@@ -6,13 +6,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class MoveFileHandle : ConcreteCommandChainLinkBase
 {
-    private ICommand _command = new FileMoveCommand();
+    private ICommand? _command;
     private string _action = "move";
 
     public override void Handle(ConcreteCommandRequest request)
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
+            string filepath = request.Parameters.TrimStart().Split(' ')[0];
+            string directorypath = request.Parameters.TrimStart().Split(' ')[1];
+
+            _command = new FileMoveCommand(filepath, directorypath);
             _command.Execute();
         }
         else

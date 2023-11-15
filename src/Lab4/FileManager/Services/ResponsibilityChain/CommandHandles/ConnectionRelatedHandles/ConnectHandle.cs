@@ -1,7 +1,7 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain.CommandHandles.ConnectionRelatedHandles;
+namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain.CommandHandles.ConnectionRelated;
 
 public class ConnectHandle : ConcreteCommandChainLinkBase
 {

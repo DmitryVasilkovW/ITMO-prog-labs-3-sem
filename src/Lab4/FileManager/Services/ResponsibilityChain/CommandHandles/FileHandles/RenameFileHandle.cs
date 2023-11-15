@@ -6,13 +6,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class RenameFileHandle : ConcreteCommandChainLinkBase
 {
-    private ICommand _command = new FileRenameCommand();
+    private ICommand? _command;
     private string _action = "remane";
 
     public override void Handle(ConcreteCommandRequest request)
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
+            string filepath = request.Parameters.TrimStart().Split(' ')[0];
+            string newname = request.Parameters.TrimStart().Split(' ')[1];
+
+            _command = new FileRenameCommand(filepath, newname);
             _command.Execute();
         }
         else

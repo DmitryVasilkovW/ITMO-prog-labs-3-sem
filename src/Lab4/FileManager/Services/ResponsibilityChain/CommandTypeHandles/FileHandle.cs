@@ -1,6 +1,6 @@
 using System;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain.Handles;
+namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
 
 public class FileHandle : CommandChainLinkBase
 {
