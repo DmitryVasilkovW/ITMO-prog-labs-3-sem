@@ -1,0 +1,23 @@
+using System;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCommands;
+
+namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain.CommandHandles.TreeHandles;
+
+public class GotoTreeHandle : ConcreteCommandChainLinkBase
+{
+    private ICommand _command = new TreeGotoCommand();
+    private string _action = "goto";
+
+    public override void Handle(ConcreteCommandRequest request)
+    {
+        if (_action.Equals(request.Action, StringComparison.Ordinal))
+        {
+            _command.Execute();
+        }
+        else
+        {
+            Next?.Handle(request);
+        }
+    }
+}
