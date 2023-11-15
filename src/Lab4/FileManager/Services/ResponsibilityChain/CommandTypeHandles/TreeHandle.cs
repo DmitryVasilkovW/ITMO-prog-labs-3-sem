@@ -1,9 +1,34 @@
+using System;
+
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain.Handles;
 
 public class TreeHandle : CommandChainLinkBase
 {
+    private string _type = "tree";
+    private IConcreteCommandChainLink _chain;
+
+    public TreeHandle(IConcreteCommandChainLink chain)
+    {
+        _chain = chain;
+    }
+
     public override void Handle(CommandRequest request)
     {
-        throw new System.NotImplementedException();
+        if (request.Type().Equals(_type, StringComparison.Ordinal))
+        {
+            string action = request.Command.TrimStart().Split(' ')[1];
+            string parameters = string.Empty;
+
+            for (int i = 2; i < request.Command.TrimStart().Split(' ').Length; i++)
+            {
+                parameters += request.Command.TrimStart().Split(' ')[i] + " ";
+            }
+
+            _chain.Handle(new ConcreteCommandRequest(action, parameters));
+        }
+        else
+        {
+            Next?.Handle(request);
+        }
     }
 }
