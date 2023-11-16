@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services;
@@ -20,5 +21,5 @@ public abstract class ConcreteCommandChainLinkBase : IConcreteCommandChainLink
         return Next;
     }
 
-    public abstract void Handle(ConcreteCommandRequest request);
+    public abstract ICommand? Handle(ConcreteCommandRequest request);
 }
