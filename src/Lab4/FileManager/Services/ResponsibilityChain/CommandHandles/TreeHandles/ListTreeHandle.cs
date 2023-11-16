@@ -6,18 +6,25 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class ListTreeHandle : ConcreteCommandChainLinkBase
 {
-    private ICommand _command = new TreeListCommand();
+    private ICommand? _command;
     private string _action = "list";
 
-    public override void Handle(ConcreteCommandRequest request)
+    public override ICommand? Handle(ConcreteCommandRequest request)
     {
-        if (_action.Equals(request.Action, StringComparison.Ordinal))
+        string modetype = request.Parameters.TrimStart().Split(' ')[0];
+
+        // int mode = int.Parse(request.Parameters.TrimStart().Split(' ')[1], NumberStyles.Integer);
+        if (_action.Equals(request.Action, StringComparison.Ordinal)
+            && modetype.Equals("-d", StringComparison.Ordinal))
         {
-            _command.Execute();
+            _command = new TreeListCommand();
+            return _command;
         }
         else
         {
             Next?.Handle(request);
         }
+
+        return _command;
     }
 }

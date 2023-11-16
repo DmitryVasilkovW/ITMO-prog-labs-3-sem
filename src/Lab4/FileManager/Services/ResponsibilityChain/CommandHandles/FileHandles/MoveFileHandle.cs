@@ -9,7 +9,7 @@ public class MoveFileHandle : ConcreteCommandChainLinkBase
     private ICommand? _command;
     private string _action = "move";
 
-    public override void Handle(ConcreteCommandRequest request)
+    public override ICommand? Handle(ConcreteCommandRequest request)
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
@@ -17,11 +17,13 @@ public class MoveFileHandle : ConcreteCommandChainLinkBase
             string directorypath = request.Parameters.TrimStart().Split(' ')[1];
 
             _command = new FileMoveCommand(filepath, directorypath);
-            _command.Execute();
+            return _command;
         }
         else
         {
             Next?.Handle(request);
         }
+
+        return _command;
     }
 }

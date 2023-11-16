@@ -9,15 +9,17 @@ public class GotoTreeHandle : ConcreteCommandChainLinkBase
     private ICommand _command = new TreeGotoCommand();
     private string _action = "goto";
 
-    public override void Handle(ConcreteCommandRequest request)
+    public override ICommand? Handle(ConcreteCommandRequest request)
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
-            _command.Execute();
+            return _command;
         }
         else
         {
             Next?.Handle(request);
         }
+
+        return _command;
     }
 }

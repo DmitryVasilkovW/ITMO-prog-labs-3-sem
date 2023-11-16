@@ -9,17 +9,19 @@ public class DeleteFileHandle : ConcreteCommandChainLinkBase
     private ICommand? _command;
     private string _action = "delete";
 
-    public override void Handle(ConcreteCommandRequest request)
+    public override ICommand? Handle(ConcreteCommandRequest request)
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
             string filepath = request.Parameters;
             _command = new FileDeleteCommand(filepath);
-            _command.Execute();
+            return _command;
         }
         else
         {
             Next?.Handle(request);
         }
+
+        return _command;
     }
 }
