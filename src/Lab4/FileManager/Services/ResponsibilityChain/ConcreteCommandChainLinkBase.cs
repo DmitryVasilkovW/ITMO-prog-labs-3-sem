@@ -18,7 +18,7 @@ public abstract class ConcreteCommandChainLinkBase : IConcreteCommandChainLink
             Next.AddNext(link);
         }
 
-        return Next;
+        return this;
     }
 
     public abstract ICommand? Handle(ConcreteCommandRequest request);

@@ -1,10 +1,12 @@
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
+
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
 
 public abstract class CommandChainLinkBase : ICommandChainLink
 {
     protected ICommandChainLink? Next { get; private set; }
 
-    public void AddNext(ICommandChainLink link)
+    public ICommandChainLink AddNext(ICommandChainLink link)
     {
         if (Next is null)
         {
@@ -14,7 +16,9 @@ public abstract class CommandChainLinkBase : ICommandChainLink
         {
             Next.AddNext(link);
         }
+
+        return this;
     }
 
-    public abstract void Handle(CommandRequest request);
+    public abstract ICommand? Handle(CommandRequest request);
 }
