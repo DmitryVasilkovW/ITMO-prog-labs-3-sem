@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.FileCommands;
 
@@ -12,12 +13,10 @@ public class ShowFileHandle : ConcreteCommandChainLinkBase
     public override ICommand? Handle(ConcreteCommandRequest request)
     {
         string filepath = request.Parameters.TrimStart().Split(' ')[0];
-        string modetype = request.Parameters.TrimStart().Split(' ')[1];
-        string mode = request.Parameters.TrimStart().Split(' ')[2];
 
         if (_action.Equals(request.Action, StringComparison.Ordinal)
-            && modetype.Equals("-m", StringComparison.Ordinal)
-            && mode.Equals("console", StringComparison.Ordinal))
+            && ((IList)request.Parameters.TrimStart().Split(' ')).Contains("-m")
+            && ((IList)request.Parameters.TrimStart().Split(' ')).Contains("console"))
         {
             _command = new FileConsoleShowCommand(filepath);
             return _command;

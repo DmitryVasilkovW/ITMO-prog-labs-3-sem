@@ -17,16 +17,19 @@ public class ConsoleCommandProcessor
 
     public void Processing()
     {
-        Console.WriteLine("Enter the command:");
-        string? request = Console.ReadLine();
-
-        ICommand? command;
-
-        if (request is not null)
+        while (!string.IsNullOrEmpty(Console.ReadLine()))
         {
-            command = new Parser(_chain).Parse(request);
+            Console.WriteLine("Enter the command:");
+            string? request = Console.ReadLine();
 
-            command?.Execute(ref _fullpath);
+            ICommand? command;
+
+            if (request is not null)
+            {
+                command = new Parser(_chain).Parse(request);
+
+                command?.Execute(ref _fullpath);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCommands;
 
@@ -11,12 +12,17 @@ public class ListTreeHandle : ConcreteCommandChainLinkBase
 
     public override ICommand? Handle(ConcreteCommandRequest request)
     {
-        string modetype = request.Parameters.TrimStart().Split(' ')[0];
-
-        // int mode = int.Parse(request.Parameters.TrimStart().Split(' ')[1], NumberStyles.Integer);
-        if (_action.Equals(request.Action, StringComparison.Ordinal)
-            && modetype.Equals("-d", StringComparison.Ordinal))
+        if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
+            if (((IList)request.Parameters.TrimStart().Split(' ')).Contains("-d"))
+            {
+                int indexofdepth = Array.IndexOf(request.Parameters.TrimStart().Split(' '), "-d") + 1;
+
+                _command = new TreeListCommand();
+                ((TreeListCommand)_command).UpdateDepth(indexofdepth);
+                return _command;
+            }
+
             _command = new TreeListCommand();
             return _command;
         }
