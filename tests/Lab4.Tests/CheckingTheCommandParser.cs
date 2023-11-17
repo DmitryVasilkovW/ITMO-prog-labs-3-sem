@@ -50,9 +50,11 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
                 AddNext(new DisconnectHandle());
 
         IConcreteCommandChainLink filechain =
-            new CopyFileHandle().AddNext(
-                new DeleteFileHandle().AddNext(
-                    new MoveFileHandle().AddNext(new RenameFileHandle().AddNext(new ShowFileHandle()))));
+            new CopyFileHandle().
+                AddNext(new DeleteFileHandle().
+                    AddNext(new MoveFileHandle().
+                        AddNext(new RenameFileHandle().
+                            AddNext(new ShowFileHandle()))));
 
         IConcreteCommandChainLink treechain =
             new GotoTreeHandle().

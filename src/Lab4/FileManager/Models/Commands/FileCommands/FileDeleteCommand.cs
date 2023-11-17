@@ -2,24 +2,18 @@ using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.FileCommands;
 
-public class FileDeleteCommand : ICommand, IDependsOnFullPath
+public class FileDeleteCommand : ICommand
 {
     private string _pathforFile;
-    private string? _fullpath;
 
     public FileDeleteCommand(string pathforFile)
     {
         _pathforFile = pathforFile;
     }
 
-    public void UpdateFullpath(string fullpath)
+    public void Execute(ref string? path)
     {
-        _fullpath = fullpath;
-    }
-
-    public void Execute()
-    {
-        if (_fullpath is not null) _pathforFile = Path.Combine(_fullpath, _pathforFile);
+        if (path is not null) _pathforFile = Path.Combine(path, _pathforFile);
         File.Delete(_pathforFile);
     }
 }

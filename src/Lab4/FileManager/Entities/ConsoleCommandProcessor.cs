@@ -26,16 +26,7 @@ public class ConsoleCommandProcessor
         {
             command = new Parser(_chain).Parse(request);
 
-            if (command is ICommandRelatedToChangingFullPath)
-            {
-                _fullpath = ((ICommandRelatedToChangingFullPath)command).Fullpath;
-            }
-            else if (command is IDependsOnFullPath)
-            {
-                if (_fullpath is not null) ((IDependsOnFullPath)command).UpdateFullpath(_fullpath);
-            }
-
-            command?.Execute();
+            command?.Execute(ref _fullpath);
         }
     }
 }

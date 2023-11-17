@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 
-public class ConnectCommand : ICommand, ICommandRelatedToChangingFullPath
+public class ConnectCommand : ICommand
 {
     public ConnectCommand(string fullpath)
     {
@@ -9,7 +9,8 @@ public class ConnectCommand : ICommand, ICommandRelatedToChangingFullPath
 
     public string Fullpath { get; }
 
-    public void Execute()
+    public void Execute(ref string? path)
     {
+        path = Fullpath;
     }
 }

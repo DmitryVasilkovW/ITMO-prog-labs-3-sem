@@ -3,11 +3,10 @@ using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.FileCommands;
 
-public class FileRenameCommand : ICommand, IDependsOnFullPath
+public class FileRenameCommand : ICommand
 {
     private string _pathforFile;
     private string _newname;
-    private string? _fullpath;
 
     public FileRenameCommand(string pathforFile, string newname)
     {
@@ -15,14 +14,9 @@ public class FileRenameCommand : ICommand, IDependsOnFullPath
         _newname = newname;
     }
 
-    public void UpdateFullpath(string fullpath)
+    public void Execute(ref string? path)
     {
-        _fullpath = fullpath;
-    }
-
-    public void Execute()
-    {
-        if (_fullpath is not null) _pathforFile = Path.Combine(_fullpath, _pathforFile);
+        if (path is not null) _pathforFile = Path.Combine(path, _pathforFile);
         string newder = _pathforFile.Replace(Path.GetFileNameWithoutExtension(_pathforFile), _newname, StringComparison.Ordinal);
 
         int num = 1;

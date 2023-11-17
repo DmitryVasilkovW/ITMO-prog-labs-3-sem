@@ -3,24 +3,18 @@ using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCommands;
 
-public class TreeListCommand : ICommand, IDependsOnFullPath
+public class TreeListCommand : ICommand
 {
     private int _depth = 1;
-    private string? _fullpath;
 
     public void UpdateDepth(int depth)
     {
         _depth = depth;
     }
 
-    public void UpdateFullpath(string fullpath)
+    public void Execute(ref string? path)
     {
-        _fullpath = fullpath;
-    }
-
-    public void Execute()
-    {
-        if (_fullpath is not null) TreeList(_fullpath, _depth);
+        if (path is not null) TreeList(path, _depth);
     }
 
     private void TreeList(string path, int depth)

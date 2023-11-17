@@ -3,24 +3,18 @@ using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.FileCommands;
 
-public class FileConsoleShowCommand : ICommand, IDependsOnFullPath
+public class FileConsoleShowCommand : ICommand
 {
     private string _pathforFile;
-    private string? _fullpath;
     public FileConsoleShowCommand(string pathforFile)
     {
         _pathforFile = pathforFile;
     }
 
-    public void UpdateFullpath(string fullpath)
-    {
-        _fullpath = fullpath;
-    }
-
-    public void Execute()
+    public void Execute(ref string? path)
     {
         string content = File.ReadAllText(_pathforFile);
-        if (_fullpath is not null) _pathforFile = Path.Combine(_fullpath, _pathforFile);
+        if (path is not null) _pathforFile = Path.Combine(path, _pathforFile);
 
         string newContent = string.Empty;
         foreach (char chackerchar in content)

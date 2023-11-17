@@ -3,11 +3,10 @@ using System.Text;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.FileCommands;
 
-public class FileCopyCommand : ICommand, IDependsOnFullPath
+public class FileCopyCommand : ICommand
 {
     private string _pathforFile;
     private string _pathforDirectory;
-    private string? _fullpath;
 
     public FileCopyCommand(string pathforFile, string pathforDirectory)
     {
@@ -15,14 +14,9 @@ public class FileCopyCommand : ICommand, IDependsOnFullPath
         _pathforDirectory = pathforDirectory;
     }
 
-    public void UpdateFullpath(string fullpath)
+    public void Execute(ref string? path)
     {
-        _fullpath = fullpath;
-    }
-
-    public void Execute()
-    {
-        if (_fullpath is not null) _pathforFile = Path.Combine(_fullpath, _pathforFile);
+        if (path is not null) _pathforFile = Path.Combine(path, _pathforFile);
         string fileName = Path.GetFileNameWithoutExtension(_pathforFile);
         string extension = Path.GetExtension(_pathforFile);
 
