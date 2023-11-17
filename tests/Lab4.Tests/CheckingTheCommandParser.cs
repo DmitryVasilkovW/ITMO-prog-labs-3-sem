@@ -28,6 +28,16 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
         }
     }
 
+    public static bool ResultsVerification(ICommand expectedvalue, ICommand? result)
+    {
+        if (expectedvalue.Equals(result))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     IEnumerator<object[]> IEnumerable<object[]>.GetEnumerator()
     {
         throw new IncorrectNumberOfArgumentsException();
@@ -66,8 +76,16 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
                     AddNext(new TreeHandle(treechain)));
 
         var parser = new Parser(chain);
-        Assert.True(parser.Parse(firstcommand) is ConnectCommand);
-        Assert.True(parser.Parse(secondcommand) is FileConsoleShowCommand);
-        Assert.True(parser.Parse(thirdcommand) is TreeListCommand);
+        var firstexpectedcommand = new ConnectCommand("/Users/dmitryvasilkov/Desktop/qwe");
+        ICommand? firstcommandresult = parser.Parse(firstcommand);
+        var secondexpectedcommand = new FileConsoleShowCommand("/Users/dmitryvasilkov/Desktop/qwe");
+        ICommand? secondcommandresult = parser.Parse(secondcommand);
+        var thirdexpectedcommand = new TreeListCommand();
+        ICommand? thirdcommandresult = parser.Parse(thirdcommand);
+        thirdexpectedcommand.UpdateDepth(2);
+
+        Assert.True(ResultsVerification(firstexpectedcommand, firstcommandresult));
+        Assert.True(ResultsVerification(secondexpectedcommand, secondcommandresult));
+        Assert.True(ResultsVerification(thirdexpectedcommand, thirdcommandresult));
     }
 }

@@ -16,10 +16,10 @@ public class ListTreeHandle : ConcreteCommandChainLinkBase
         {
             if (((IList)request.Parameters.TrimStart().Split(' ')).Contains("-d"))
             {
-                int indexofdepth = Array.IndexOf(request.Parameters.TrimStart().Split(' '), "-d") + 1;
+                string depth = request.Parameters.Replace("-d", string.Empty, StringComparison.Ordinal);
 
                 _command = new TreeListCommand();
-                ((TreeListCommand)_command).UpdateDepth(indexofdepth);
+                ((TreeListCommand)_command).UpdateDepth(int.Parse(depth, System.Globalization.CultureInfo.InvariantCulture));
                 return _command;
             }
 

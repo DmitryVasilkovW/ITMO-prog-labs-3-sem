@@ -18,6 +18,20 @@ public class TreeListCommand : ICommand
         if (path is not null) TreeList(path, _depth);
     }
 
+    public override bool Equals(object? obj)
+    {
+        if (obj is null || GetType() != obj.GetType())
+            return false;
+
+        var command = (TreeListCommand)obj;
+        return _depth == command._depth;
+    }
+
+    public override int GetHashCode()
+    {
+        return StringComparer.Ordinal.GetHashCode(_depth);
+    }
+
     private void TreeList(string path, int depth)
     {
         if (_depth < 0)
