@@ -1,8 +1,10 @@
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
+
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
 
 public interface ICommandChainLink
 {
-    void AddNext(ICommandChainLink link);
+    ICommandChainLink AddNext(ICommandChainLink link);
 
-    void Handle(CommandRequest request);
+    ICommand? Handle(CommandRequest request);
 }

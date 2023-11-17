@@ -21,9 +21,7 @@ public class CopyFileHandle : ConcreteCommandChainLinkBase
         }
         else
         {
-            Next?.Handle(request);
+            return Next?.Handle(request);
         }
-
-        return _command;
     }
 }

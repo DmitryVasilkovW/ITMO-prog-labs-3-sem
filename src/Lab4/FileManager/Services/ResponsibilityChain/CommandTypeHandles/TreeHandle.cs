@@ -1,4 +1,5 @@
 using System;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
 
@@ -12,7 +13,7 @@ public class TreeHandle : CommandChainLinkBase
         _chain = chain;
     }
 
-    public override void Handle(CommandRequest request)
+    public override ICommand? Handle(CommandRequest request)
     {
         if (request.Type().Equals(_type, StringComparison.Ordinal))
         {
@@ -24,11 +25,11 @@ public class TreeHandle : CommandChainLinkBase
                 parameters += request.Command.TrimStart().Split(' ')[i] + " ";
             }
 
-            _chain.Handle(new ConcreteCommandRequest(action, parameters));
+            return _chain.Handle(new ConcreteCommandRequest(action, parameters));
         }
         else
         {
-            Next?.Handle(request);
+            return Next?.Handle(request);
         }
     }
 }

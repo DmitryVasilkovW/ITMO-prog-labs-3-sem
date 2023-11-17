@@ -16,9 +16,7 @@ public class DisconnectHandle : ConcreteCommandChainLinkBase
         }
         else
         {
-            Next?.Handle(request);
+            return Next?.Handle(request);
         }
-
-        return null;
     }
 }

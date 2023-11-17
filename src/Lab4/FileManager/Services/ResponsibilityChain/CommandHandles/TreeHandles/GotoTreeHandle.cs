@@ -6,20 +6,20 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class GotoTreeHandle : ConcreteCommandChainLinkBase
 {
-    private ICommand _command = new TreeGotoCommand();
+    private ICommand? _command;
     private string _action = "goto";
 
     public override ICommand? Handle(ConcreteCommandRequest request)
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
-            return _command;
+            string fullpath = request.Parameters.TrimStart().Split(' ')[0];
+
+            return _command = new TreeGotoCommand(fullpath);
         }
         else
         {
-            Next?.Handle(request);
+            return Next?.Handle(request);
         }
-
-        return _command;
     }
 }

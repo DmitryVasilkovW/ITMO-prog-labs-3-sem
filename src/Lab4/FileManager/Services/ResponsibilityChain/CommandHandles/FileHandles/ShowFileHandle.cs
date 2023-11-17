@@ -13,7 +13,7 @@ public class ShowFileHandle : ConcreteCommandChainLinkBase
     {
         string filepath = request.Parameters.TrimStart().Split(' ')[0];
         string modetype = request.Parameters.TrimStart().Split(' ')[1];
-        string mode = request.Parameters.TrimStart().Split(' ')[3];
+        string mode = request.Parameters.TrimStart().Split(' ')[2];
 
         if (_action.Equals(request.Action, StringComparison.Ordinal)
             && modetype.Equals("-m", StringComparison.Ordinal)
@@ -24,9 +24,7 @@ public class ShowFileHandle : ConcreteCommandChainLinkBase
         }
         else
         {
-            Next?.Handle(request);
+            return Next?.Handle(request);
         }
-
-        return _command;
     }
 }
