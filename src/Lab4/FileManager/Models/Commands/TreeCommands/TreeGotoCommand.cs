@@ -2,15 +2,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCo
 
 public class TreeGotoCommand : ICommand
 {
+    private string? _fullpath;
+
     public TreeGotoCommand(string fullpath)
     {
-        Fullpath = fullpath;
+        _fullpath = fullpath;
     }
-
-    public string Fullpath { get; }
 
     public void Execute(ref string? path)
     {
-        path = Fullpath;
+        path = _fullpath;
     }
 }
