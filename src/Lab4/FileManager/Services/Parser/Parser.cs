@@ -1,17 +1,18 @@
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Parser;
 
 public class Parser
 {
-    private CommandChainLinkBase _chain;
+    private ICommandChainLink _chain;
 
-    public Parser(CommandChainLinkBase chain)
+    public Parser(ICommandChainLink chain)
     {
         _chain = chain;
     }
 
-    public void Parse(string command)
+    public ICommand? Parse(string command)
     {
-         _chain.Handle(new CommandRequest(command));
+         return _chain.Handle(new CommandRequest(command));
     }
 }
