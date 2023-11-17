@@ -6,12 +6,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class ConnectHandle : ConcreteCommandChainLinkBase
 {
+    private const int Pathposition = 0;
     private ICommand? _command;
     private string _action = "connect";
 
     public override ICommand? Handle(ConcreteCommandRequest request)
     {
-        string fullpath = request.Parameters.TrimStart().Split(' ')[0];
+        string fullpath = request.Parameters.TrimStart().Split(' ')[Pathposition];
 
         if (_action.Equals(request.Action, StringComparison.Ordinal)
             && request.Parameters.TrimStart().Split(' ').Contains("-m")

@@ -6,6 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class RenameFileHandle : ConcreteCommandChainLinkBase
 {
+    private const int FilePathposition = 0;
+    private const int Nameposition = 1;
     private ICommand? _command;
     private string _action = "remane";
 
@@ -13,8 +15,8 @@ public class RenameFileHandle : ConcreteCommandChainLinkBase
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
-            string filepath = request.Parameters.TrimStart().Split(' ')[0];
-            string newname = request.Parameters.TrimStart().Split(' ')[1];
+            string filepath = request.Parameters.TrimStart().Split(' ')[FilePathposition];
+            string newname = request.Parameters.TrimStart().Split(' ')[Nameposition];
 
             _command = new FileRenameCommand(filepath, newname);
             return _command;

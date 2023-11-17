@@ -66,7 +66,6 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
                     AddNext(new TreeHandle(treechain)));
 
         var parser = new Parser(chain);
-
         Assert.True(parser.Parse(firstcommand) is ConnectCommand);
         Assert.True(parser.Parse(secondcommand) is FileConsoleShowCommand);
         Assert.True(parser.Parse(thirdcommand) is TreeListCommand);

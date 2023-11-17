@@ -5,7 +5,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCo
 
 public class TreeListCommand : ICommand
 {
-    private int _depth = 1;
+    private const int Initialdepth = 1;
+    private int _depth = Initialdepth;
 
     public void UpdateDepth(int depth)
     {

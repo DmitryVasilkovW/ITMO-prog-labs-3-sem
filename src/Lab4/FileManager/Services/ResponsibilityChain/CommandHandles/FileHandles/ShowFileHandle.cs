@@ -7,12 +7,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class ShowFileHandle : ConcreteCommandChainLinkBase
 {
+    private const int FilePathposition = 0;
     private ICommand? _command;
     private string _action = "show";
 
     public override ICommand? Handle(ConcreteCommandRequest request)
     {
-        string filepath = request.Parameters.TrimStart().Split(' ')[0];
+        string filepath = request.Parameters.TrimStart().Split(' ')[FilePathposition];
 
         if (_action.Equals(request.Action, StringComparison.Ordinal)
             && ((IList)request.Parameters.TrimStart().Split(' ')).Contains("-m")

@@ -6,6 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Responsibilit
 
 public class GotoTreeHandle : ConcreteCommandChainLinkBase
 {
+    private const int FullPathposition = 0;
     private ICommand? _command;
     private string _action = "goto";
 
@@ -13,7 +14,7 @@ public class GotoTreeHandle : ConcreteCommandChainLinkBase
     {
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
-            string fullpath = request.Parameters.TrimStart().Split(' ')[0];
+            string fullpath = request.Parameters.TrimStart().Split(' ')[FullPathposition];
 
             return _command = new TreeGotoCommand(fullpath);
         }
