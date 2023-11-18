@@ -1,5 +1,3 @@
-using System;
-
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCommands;
 
 public class TreeListCommand : ICommand
@@ -23,19 +21,5 @@ public class TreeListCommand : ICommand
     public void Execute(ref string? path)
     {
         _strategy.TreeListCommand(_depth, _printer, ref path);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is null || GetType() != obj.GetType())
-            return false;
-
-        var command = (TreeListCommand)obj;
-        return _depth == command._depth;
-    }
-
-    public override int GetHashCode()
-    {
-        return StringComparer.Ordinal.GetHashCode(_depth);
     }
 }
