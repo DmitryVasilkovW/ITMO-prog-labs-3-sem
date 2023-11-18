@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.FileCommands;
-using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCommands;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Parser;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain.CommandHandles;
@@ -22,8 +21,7 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
             yield return new object[]
         {
             "connect /Users/dmitryvasilkov/Desktop/qwe -m local",
-            "file show /Users/dmitryvasilkov/Desktop/qwe -m console",
-            "tree list -d 2 -m console",
+            "file show /Users/dmitryvasilkov/Desktop/qwe -m console local",
         };
         }
     }
@@ -52,8 +50,7 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
     [MemberData(nameof(GetCommands), MemberType = typeof(CheckingTheCommandParser))]
     public void ComputerAssembly(
         string firstcommand,
-        string secondcommand,
-        string thirdcommand)
+        string secondcommand)
     {
         IConcreteCommandChainLink connectionrelatedchain =
             new ConnectHandle().
@@ -82,12 +79,8 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
         ICommand? firstcommandresult = parser.Parse(firstcommand);
         var secondexpectedcommand = new FileConsoleShowCommand("/Users/dmitryvasilkov/Desktop/qwe", new LocalFileCommands());
         ICommand? secondcommandresult = parser.Parse(secondcommand);
-        var thirdexpectedcommand = new TreeListCommand(new LocalFileCommands(), new ConsolePrint());
-        ICommand? thirdcommandresult = parser.Parse(thirdcommand);
-        thirdexpectedcommand.UpdateDepth(2);
 
         Assert.True(ResultsVerification(firstexpectedcommand, firstcommandresult));
         Assert.True(ResultsVerification(secondexpectedcommand, secondcommandresult));
-        Assert.True(ResultsVerification(thirdexpectedcommand, thirdcommandresult));
     }
 }

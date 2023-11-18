@@ -15,7 +15,7 @@ public class ConnectionTypeHandle : ConcreteConnectionTypeChain
 
     public override ICommand? Handle(CommandRequest request)
     {
-        if (_type.TrimStart().Split(' ').Contains(_type))
+        if (request.Command.TrimStart().Split(' ').Contains(_type))
         {
             request.Updatetrategy(new LocalFileCommands());
             return _chain.Handle(request);
