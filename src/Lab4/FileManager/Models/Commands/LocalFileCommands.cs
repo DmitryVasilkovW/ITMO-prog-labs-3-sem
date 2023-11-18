@@ -22,16 +22,7 @@ public class LocalFileCommands : ICommandStrategy
         if (path is not null) fullpath = Path.Combine(path, pathforFile);
         string content = File.ReadAllText(fullpath);
 
-        string newContent = string.Empty;
-        foreach (char chackerchar in content)
-        {
-            if (char.IsLetterOrDigit(chackerchar) || char.IsWhiteSpace(chackerchar))
-            {
-                newContent += chackerchar;
-            }
-        }
-
-        Console.WriteLine(newContent);
+        Console.WriteLine(content);
     }
 
     public void FileCopyCommand(string pathforFile, string pathforDirectory, ref string? path)

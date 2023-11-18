@@ -18,10 +18,9 @@ public class ConsoleCommandProcessor : ICommandProcessor
     public void Processing()
     {
         string? request;
+        Console.WriteLine("use the connection command:");
         while (!string.IsNullOrEmpty(request = Console.ReadLine()))
         {
-            Console.WriteLine("Enter the command:");
-
             ICommand? command = null;
 
             if (request is not null)
@@ -35,6 +34,8 @@ public class ConsoleCommandProcessor : ICommandProcessor
             {
                 Console.WriteLine("incorrect command:");
             }
+
+            Console.WriteLine("Enter the command:");
         }
     }
 }
