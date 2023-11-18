@@ -28,6 +28,7 @@ public class ConnectionTypeHandle : ConcreteConnectionTypeChain
 
         if (Mode is not null && Mode.Equals(_type, StringComparison.Ordinal))
         {
+            if (((IList)request.Command.TrimStart().Split(' ')).Contains("disconnect")) Mode = null;
             request.Updatetrategy(new LocalFileCommands());
             return _chain.Handle(request);
         }
