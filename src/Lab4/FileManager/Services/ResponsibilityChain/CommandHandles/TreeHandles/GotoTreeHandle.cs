@@ -16,7 +16,8 @@ public class GotoTreeHandle : ConcreteCommandChainLinkBase
         {
             string fullpath = request.Parameters.TrimStart().Split(' ')[FullPathposition];
 
-            return _command = new TreeGotoCommand(fullpath);
+            if (request.Strategy is not null) return _command = new TreeGotoCommand(fullpath, request.Strategy);
+            return _command;
         }
         else
         {

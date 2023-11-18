@@ -4,9 +4,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Parser;
 
 public class Parser
 {
-    private ICommandChainLink _chain;
+    private IConcreteConnectionTypeChain _chain;
 
-    public Parser(ICommandChainLink chain)
+    public Parser(IConcreteConnectionTypeChain chain)
     {
         _chain = chain;
     }

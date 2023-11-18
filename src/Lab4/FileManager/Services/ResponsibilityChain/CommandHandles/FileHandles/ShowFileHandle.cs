@@ -19,7 +19,7 @@ public class ShowFileHandle : ConcreteCommandChainLinkBase
             && ((IList)request.Parameters.TrimStart().Split(' ')).Contains("-m")
             && ((IList)request.Parameters.TrimStart().Split(' ')).Contains("console"))
         {
-            _command = new FileConsoleShowCommand(filepath);
+            if (request.Strategy is not null) _command = new FileConsoleShowCommand(filepath, request.Strategy);
             return _command;
         }
         else

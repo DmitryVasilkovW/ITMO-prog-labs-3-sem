@@ -23,7 +23,7 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
         {
             "connect /Users/dmitryvasilkov/Desktop/qwe -m local",
             "file show /Users/dmitryvasilkov/Desktop/qwe -m console",
-            "tree list -d 2",
+            "tree list -d 2 -m console",
         };
         }
     }
@@ -70,17 +70,19 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
             new GotoTreeHandle().
                 AddNext(new ListTreeHandle());
 
-        ICommandChainLink chain =
+        ICommandChainLink commandchain =
             new ConnectionRelatedHandle(connectionrelatedchain).
                 AddNext(new FileHandle(filechain).
                     AddNext(new TreeHandle(treechain)));
 
+        IConcreteConnectionTypeChain chain = new ConnectionTypeHandle(commandchain);
+
         var parser = new Parser(chain);
-        var firstexpectedcommand = new ConnectCommand("/Users/dmitryvasilkov/Desktop/qwe");
+        var firstexpectedcommand = new ConnectCommand("/Users/dmitryvasilkov/Desktop/qwe", new LocalFileCommands());
         ICommand? firstcommandresult = parser.Parse(firstcommand);
-        var secondexpectedcommand = new FileConsoleShowCommand("/Users/dmitryvasilkov/Desktop/qwe");
+        var secondexpectedcommand = new FileConsoleShowCommand("/Users/dmitryvasilkov/Desktop/qwe", new LocalFileCommands());
         ICommand? secondcommandresult = parser.Parse(secondcommand);
-        var thirdexpectedcommand = new TreeListCommand();
+        var thirdexpectedcommand = new TreeListCommand(new LocalFileCommands(), new ConsolePrint());
         ICommand? thirdcommandresult = parser.Parse(thirdcommand);
         thirdexpectedcommand.UpdateDepth(2);
 

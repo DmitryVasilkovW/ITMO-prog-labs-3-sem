@@ -18,7 +18,7 @@ public class MoveFileHandle : ConcreteCommandChainLinkBase
             string filepath = request.Parameters.TrimStart().Split(' ')[FilePathposition];
             string directorypath = request.Parameters.TrimStart().Split(' ')[Directorypathposition];
 
-            _command = new FileMoveCommand(filepath, directorypath);
+            if (request.Strategy is not null) _command = new FileMoveCommand(filepath, directorypath, request.Strategy);
             return _command;
         }
         else

@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCommands;
 
@@ -7,6 +6,14 @@ public class TreeListCommand : ICommand
 {
     private const int Initialdepth = 1;
     private int _depth = Initialdepth;
+    private ICommandStrategy _strategy;
+    private ICanPrint _printer;
+
+    public TreeListCommand(ICommandStrategy strategy, ICanPrint printer)
+    {
+        _strategy = strategy;
+        _printer = printer;
+    }
 
     public void UpdateDepth(int depth)
     {
@@ -15,7 +22,7 @@ public class TreeListCommand : ICommand
 
     public void Execute(ref string? path)
     {
-        if (path is not null) TreeList(path, _depth);
+        _strategy.TreeListCommand(_depth, _printer, ref path);
     }
 
     public override bool Equals(object? obj)
@@ -30,30 +37,5 @@ public class TreeListCommand : ICommand
     public override int GetHashCode()
     {
         return StringComparer.Ordinal.GetHashCode(_depth);
-    }
-
-    private void TreeList(string path, int depth)
-    {
-        if (_depth < 0)
-        {
-            return;
-        }
-
-        string[] files = Directory.GetFiles(path);
-
-        Console.WriteLine("Files:");
-        foreach (string file in files)
-        {
-            Console.WriteLine(file);
-        }
-
-        string[] subDirs = Directory.GetDirectories(path);
-
-        Console.WriteLine("\nSubcategories:");
-        foreach (string dir in subDirs)
-        {
-            Console.WriteLine(dir);
-            TreeList(dir, depth - 1);
-        }
     }
 }

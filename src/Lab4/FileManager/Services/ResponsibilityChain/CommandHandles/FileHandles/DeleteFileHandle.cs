@@ -14,7 +14,7 @@ public class DeleteFileHandle : ConcreteCommandChainLinkBase
         if (_action.Equals(request.Action, StringComparison.Ordinal))
         {
             string filepath = request.Parameters;
-            _command = new FileDeleteCommand(filepath);
+            if (request.Strategy is not null) _command = new FileDeleteCommand(filepath, request.Strategy);
             return _command;
         }
         else

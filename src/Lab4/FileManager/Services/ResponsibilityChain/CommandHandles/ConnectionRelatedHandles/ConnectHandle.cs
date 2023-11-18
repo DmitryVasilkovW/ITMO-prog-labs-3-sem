@@ -18,7 +18,7 @@ public class ConnectHandle : ConcreteCommandChainLinkBase
             && request.Parameters.TrimStart().Split(' ').Contains("-m")
             && request.Parameters.TrimStart().Split(' ').Contains("local"))
         {
-            _command = new ConnectCommand(fullpath);
+            if (request.Strategy is not null) _command = new ConnectCommand(fullpath, request.Strategy);
             return _command;
         }
         else

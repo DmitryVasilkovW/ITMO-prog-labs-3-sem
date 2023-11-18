@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.TreeCommands;
 
@@ -12,18 +13,18 @@ public class ListTreeHandle : ConcreteCommandChainLinkBase
 
     public override ICommand? Handle(ConcreteCommandRequest request)
     {
-        if (_action.Equals(request.Action, StringComparison.Ordinal))
+        if (_action.Equals(request.Action, StringComparison.Ordinal) && request.Parameters.TrimStart().Split(' ').Contains("console"))
         {
             if (((IList)request.Parameters.TrimStart().Split(' ')).Contains("-d"))
             {
                 string depth = request.Parameters.Replace("-d", string.Empty, StringComparison.Ordinal);
 
-                _command = new TreeListCommand();
-                ((TreeListCommand)_command).UpdateDepth(int.Parse(depth, System.Globalization.CultureInfo.InvariantCulture));
+                if (request.Strategy is not null) _command = new TreeListCommand(request.Strategy, new ConsolePrint());
+                if (_command is not null) ((TreeListCommand)_command).UpdateDepth(int.Parse(depth, System.Globalization.CultureInfo.InvariantCulture));
                 return _command;
             }
 
-            _command = new TreeListCommand();
+            if (request.Strategy is not null) _command = new TreeListCommand(request.Strategy, new ConsolePrint());
             return _command;
         }
         else

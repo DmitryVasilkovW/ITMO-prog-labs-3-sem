@@ -25,7 +25,7 @@ public class FileHandle : CommandChainLinkBase
                 parameters += request.Command.TrimStart().Split(' ')[i] + " ";
             }
 
-            return _chain.Handle(new ConcreteCommandRequest(action, parameters));
+            return _chain.Handle(new ConcreteCommandRequest(action, parameters, request.Strategy));
         }
         else
         {

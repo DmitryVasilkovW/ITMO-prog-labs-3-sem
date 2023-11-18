@@ -18,7 +18,7 @@ public class CopyFileHandle : ConcreteCommandChainLinkBase
             string filepath = request.Parameters.TrimStart().Split(' ')[FilePathposition];
             string directorypath = request.Parameters.TrimStart().Split(' ')[Directorypathposition];
 
-            _command = new FileCopyCommand(filepath, directorypath);
+            if (request.Strategy is not null) _command = new FileCopyCommand(filepath, directorypath, request.Strategy);
             return _command;
         }
         else

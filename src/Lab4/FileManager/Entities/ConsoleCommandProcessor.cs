@@ -5,12 +5,12 @@ using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityCha
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Entities;
 
-public class ConsoleCommandProcessor
+public class ConsoleCommandProcessor : ICommandProcessor
 {
-    private ICommandChainLink _chain;
+    private IConcreteConnectionTypeChain _chain;
     private string? _fullpath;
 
-    public ConsoleCommandProcessor(ICommandChainLink chain)
+    public ConsoleCommandProcessor(IConcreteConnectionTypeChain chain)
     {
         _chain = chain;
     }

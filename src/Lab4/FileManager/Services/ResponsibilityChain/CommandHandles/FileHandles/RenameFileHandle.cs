@@ -18,7 +18,7 @@ public class RenameFileHandle : ConcreteCommandChainLinkBase
             string filepath = request.Parameters.TrimStart().Split(' ')[FilePathposition];
             string newname = request.Parameters.TrimStart().Split(' ')[Nameposition];
 
-            _command = new FileRenameCommand(filepath, newname);
+            if (request.Strategy is not null) _command = new FileRenameCommand(filepath, newname, request.Strategy);
             return _command;
         }
         else

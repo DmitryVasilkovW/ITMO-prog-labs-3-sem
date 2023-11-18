@@ -5,9 +5,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 public class ConnectCommand : ICommand
 {
     private string? _fullpath;
-    public ConnectCommand(string fullpath)
+    private ICommandStrategy _strategy;
+    public ConnectCommand(string fullpath, ICommandStrategy strategy)
     {
         _fullpath = fullpath;
+        _strategy = strategy;
     }
 
     public override bool Equals(object? obj)
@@ -26,6 +28,6 @@ public class ConnectCommand : ICommand
 
     public void Execute(ref string? path)
     {
-        path = _fullpath;
+        _strategy.ConnectCommand(_fullpath, ref path);
     }
 }

@@ -1,14 +1,15 @@
 using System;
-using System.IO;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands.FileCommands;
 
 public class FileConsoleShowCommand : ICommand
 {
     private string _pathforFile;
-    public FileConsoleShowCommand(string pathforFile)
+    private ICommandStrategy _strategy;
+    public FileConsoleShowCommand(string pathforFile, ICommandStrategy strategy)
     {
         _pathforFile = pathforFile;
+        _strategy = strategy;
     }
 
     public override bool Equals(object? obj)
@@ -27,18 +28,6 @@ public class FileConsoleShowCommand : ICommand
 
     public void Execute(ref string? path)
     {
-        string content = File.ReadAllText(_pathforFile);
-        if (path is not null) _pathforFile = Path.Combine(path, _pathforFile);
-
-        string newContent = string.Empty;
-        foreach (char chackerchar in content)
-        {
-            if (char.IsLetterOrDigit(chackerchar) || char.IsWhiteSpace(chackerchar))
-            {
-                newContent += chackerchar;
-            }
-        }
-
-        Console.WriteLine(newContent);
+        _strategy.FileConsoleShowCommand(_pathforFile, ref path);
     }
 }
