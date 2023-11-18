@@ -1,4 +1,4 @@
-using System.Linq;
+using System;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Models.Commands;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ResponsibilityChain;
@@ -15,7 +15,7 @@ public class ConnectionTypeHandle : ConcreteConnectionTypeChain
 
     public override ICommand? Handle(CommandRequest request)
     {
-        if (request.Command.TrimStart().Split(' ').Contains(_type))
+        if (CommandRequest.ConnectionMode is not null && CommandRequest.ConnectionMode.Equals(_type, StringComparison.Ordinal))
         {
             request.Updatetrategy(new LocalFileCommands());
             return _chain.Handle(request);

@@ -21,7 +21,7 @@ public class CheckingTheCommandParser : IEnumerable<object[]>
             yield return new object[]
         {
             "connect /Users/dmitryvasilkov/Desktop/qwe -m local",
-            "file show /Users/dmitryvasilkov/Desktop/qwe -m console local",
+            "file show /Users/dmitryvasilkov/Desktop/qwe -m console",
         };
         }
     }
