@@ -9,7 +9,7 @@ public class RenameFileHandle : ConcreteCommandChainLinkBase
     private const int FilePathposition = 0;
     private const int Nameposition = 1;
     private ICommand? _command;
-    private string _action = "remane";
+    private string _action = "rename";
 
     public override ICommand? Handle(ConcreteCommandRequest request)
     {

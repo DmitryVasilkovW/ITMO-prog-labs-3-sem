@@ -17,7 +17,7 @@ public class ListTreeHandle : ConcreteCommandChainLinkBase
         {
             if (((IList)request.Parameters.TrimStart().Split(' ')).Contains("-d"))
             {
-                string depth = request.Parameters.Replace("-d", string.Empty, StringComparison.Ordinal);
+                string depth = request.Parameters.Replace("-m console -d", string.Empty, StringComparison.Ordinal);
 
                 if (request.Strategy is not null) _command = new TreeListCommand(request.Strategy, new ConsolePrint());
                 if (_command is not null) ((TreeListCommand)_command).UpdateDepth(int.Parse(depth, System.Globalization.CultureInfo.InvariantCulture));

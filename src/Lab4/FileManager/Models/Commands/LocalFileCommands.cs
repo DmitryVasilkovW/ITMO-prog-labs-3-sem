@@ -103,10 +103,10 @@ public class LocalFileCommands : ICommandStrategy
 
     public void TreeListCommand(int depth, ICanPrint print, ref string? path)
     {
-        if (path is not null) TreeList(path, depth, print);
+        if (path is not null) TreeList(path, depth, print, " ");
     }
 
-    private void TreeList(string path, int depth, ICanPrint print)
+    private void TreeList(string path, int depth, ICanPrint print, string indent)
     {
         if (depth < 0)
         {
@@ -115,19 +115,17 @@ public class LocalFileCommands : ICommandStrategy
 
         string[] files = Directory.GetFiles(path);
 
-        Console.WriteLine("Files:");
         foreach (string file in files)
         {
-            print.Print(file);
+            print.Print($"{indent}- {Path.GetFileName(file)}");
         }
 
         string[] subDirs = Directory.GetDirectories(path);
 
-        Console.WriteLine("\nSubcategories:");
         foreach (string dir in subDirs)
         {
-            Console.WriteLine(dir);
-            TreeList(dir, depth - 1, print);
+            print.Print($"{indent}+ {Path.GetFileName(dir)}");
+            TreeList(dir, depth - 1, print, indent + "   ");
         }
     }
 }

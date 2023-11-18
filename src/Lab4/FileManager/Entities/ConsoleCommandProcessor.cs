@@ -17,12 +17,12 @@ public class ConsoleCommandProcessor : ICommandProcessor
 
     public void Processing()
     {
-        while (!string.IsNullOrEmpty(Console.ReadLine()))
+        string? request;
+        while (!string.IsNullOrEmpty(request = Console.ReadLine()))
         {
             Console.WriteLine("Enter the command:");
-            string? request = Console.ReadLine();
 
-            ICommand? command;
+            ICommand? command = null;
 
             if (request is not null)
             {
@@ -30,7 +30,8 @@ public class ConsoleCommandProcessor : ICommandProcessor
 
                 command?.Execute(ref _fullpath);
             }
-            else
+
+            if (command is null)
             {
                 Console.WriteLine("incorrect command:");
             }
