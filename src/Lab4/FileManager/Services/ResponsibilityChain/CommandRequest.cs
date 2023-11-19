@@ -9,16 +9,9 @@ public class CommandRequest
         Command = command;
     }
 
-    public static string? ConnectionMode { get; private set; }
-
     public string Command { get; }
 
     public ICommandStrategy? Strategy { get; private set; }
-
-    public static void UpdateMode(string? mode)
-    {
-        ConnectionMode = mode;
-    }
 
     public string Type()
     {
