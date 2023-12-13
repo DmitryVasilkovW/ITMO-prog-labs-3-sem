@@ -8,16 +8,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Extensions" />
-      <Folder Include="Repositories" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="FluentMigrator.Abstractions" />
       <PackageReference Include="Itmo.Dev.Platform.Postgres" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
       <PackageReference Include="Npgsql" />
       <PackageReference Include="Spectre.Console" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LabWork5.Application.Abstractions\LabWork5.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\LabWork5.Application.Models\LabWork5.Application.Models.csproj" />
     </ItemGroup>
 
 </Project>
