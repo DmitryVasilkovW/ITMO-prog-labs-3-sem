@@ -1,8 +1,8 @@
 using Itmo.Dev.Platform.Postgres.Connection;
 using Itmo.Dev.Platform.Postgres.Extensions;
+using LabWork5.Application.Abstractions;
 using LabWork5.Application.Models.Users;
 using Npgsql;
-using Workshop5.Application.Abstractions;
 
 namespace LabWork5.Infrastructure.DataAccess.Repositories;
 
@@ -41,7 +41,6 @@ public class UserRepository : IUserRepository
 
         return new User(
             Id: reader.GetInt64(0),
-            Username: reader.GetString(1),
-            Role: reader.GetFieldValue<UserRole>(2));
+            Username: reader.GetString(1));
     }
 }
