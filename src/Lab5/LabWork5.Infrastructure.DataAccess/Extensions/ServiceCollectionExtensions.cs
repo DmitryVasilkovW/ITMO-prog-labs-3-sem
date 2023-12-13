@@ -1,8 +1,8 @@
 using Itmo.Dev.Platform.Postgres.Extensions;
 using Itmo.Dev.Platform.Postgres.Models;
+using LabWork5.Application.Abstractions;
 using LabWork5.Infrastructure.DataAccess.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using Workshop5.Application.Abstractions;
 
 namespace LabWork5.Infrastructure.DataAccess.Extensions;
 
