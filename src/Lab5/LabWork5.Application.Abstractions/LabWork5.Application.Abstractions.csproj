@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LabWork5.Application.Contracts\LabWork5.Application.Contracts.csproj" />
       <ProjectReference Include="..\LabWork5.Application.Models\LabWork5.Application.Models.csproj" />
     </ItemGroup>
 

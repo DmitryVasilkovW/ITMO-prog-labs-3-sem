@@ -12,8 +12,7 @@ public class Initial : SqlMigration
     (
         user_id bigint primary key generated always as identity,
         user_name text not null,
-        user_balance bigint not null,
-        user_passwords bigint not null,
+        password text not null,
     );
 
     create table atm
@@ -24,15 +23,15 @@ public class Initial : SqlMigration
 
     create table history
     (
-        user_id bigint not null references products(user_id),
+        user_id bigint not null,
         operation text not null,
     );
 
-    create table admin
+    create table bill
     (
-        abmin_id bigint primary key generated always as identity,
-        admin_name text not null,
-        admin_passwords bigint not null,
+        bill_id bigint primary key generated always as identity,
+        user_id bigint not null,
+        balance bigint not null,
     );
     """;
 
@@ -40,7 +39,7 @@ public class Initial : SqlMigration
         """
     drop table users;
     drop table history;
-    drop table admin;
+    drop table bill;
     drop table atm;
     """;
 }
