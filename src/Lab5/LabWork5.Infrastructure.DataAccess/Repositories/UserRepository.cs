@@ -24,24 +24,25 @@ public class UserRepository : IUserRepository
         where bill_id = @billid;
         """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider
-                    .GetConnectionAsync(default)
-                    .ConfigureAwait(false))
-            .GetAwaiter()
-            .GetResult();
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
 
         using var command = new NpgsqlCommand(sqlforusrid, connection);
         command.AddParameter("billid", billid);
 
         using NpgsqlDataReader reader = command.ExecuteReader();
 
-        long userid = reader.GetInt64(0);
-        const long balance = 0;
-
         if (reader.Read() is false)
             return null;
+
+        long userid = reader.GetInt64(0);
 
         const string sql = """
                            select user_name
@@ -66,13 +67,15 @@ public class UserRepository : IUserRepository
         where bill_id = @billid;
         """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider
-                    .GetConnectionAsync(default)
-                    .ConfigureAwait(false))
-            .GetAwaiter()
-            .GetResult();
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
 
         using var command = new NpgsqlCommand(sqlforusrid, connection);
         command.AddParameter("billid", billid);
@@ -90,6 +93,7 @@ public class UserRepository : IUserRepository
 
         newcommand.AddParameter("userid", userid);
         newcommand.AddParameter("balance", balance);
+        newcommand.ExecuteNonQuery();
     }
 
     public long ViewBalance(long billid)
@@ -100,13 +104,15 @@ public class UserRepository : IUserRepository
         where bill_id = @billid;
         """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider
-                    .GetConnectionAsync(default)
-                    .ConfigureAwait(false))
-            .GetAwaiter()
-            .GetResult();
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
 
         using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("billid", billid);
@@ -123,13 +129,15 @@ public class UserRepository : IUserRepository
         from bill
         where bill_id = @billid;
         """;
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider
-                    .GetConnectionAsync(default)
-                    .ConfigureAwait(false))
-            .GetAwaiter()
-            .GetResult();
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
 
         using var command = new NpgsqlCommand(sqlchecker, connection);
         command.AddParameter("billid", billid);
@@ -152,6 +160,7 @@ public class UserRepository : IUserRepository
         using var newcommand = new NpgsqlCommand(sql, connection);
         newcommand.AddParameter("billid", billid);
         newcommand.AddParameter("withdrawals", withdrawals);
+        newcommand.ExecuteNonQuery();
 
         return TransactionResults.Success;
     }
@@ -164,13 +173,15 @@ public class UserRepository : IUserRepository
                            WHERE bill_id = @billid;
                            """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider
-                    .GetConnectionAsync(default)
-                    .ConfigureAwait(false))
-            .GetAwaiter()
-            .GetResult();
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
 
         using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("billid", billid);
@@ -185,13 +196,15 @@ public class UserRepository : IUserRepository
                            WHERE bill_id = @billid;
                            """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider
-                    .GetConnectionAsync(default)
-                    .ConfigureAwait(false))
-            .GetAwaiter()
-            .GetResult();
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
 
         using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("billid", billid);
