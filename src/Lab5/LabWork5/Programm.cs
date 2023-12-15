@@ -25,11 +25,11 @@ using IServiceScope scope = provider.CreateScope();
 
 scope.UseInfrastructureDataAccess();
 
-ScenarioRunner scenarioRunner = scope.ServiceProvider
-    .GetRequiredService<ScenarioRunner>();
+LoginScenarioRunner loginscenarioRunner = scope.ServiceProvider
+    .GetRequiredService<LoginScenarioRunner>();
 
 while (true)
 {
-    scenarioRunner.Run();
+    loginscenarioRunner.Run();
     AnsiConsole.Clear();
 }

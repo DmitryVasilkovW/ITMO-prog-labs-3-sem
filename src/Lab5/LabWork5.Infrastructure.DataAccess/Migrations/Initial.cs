@@ -28,16 +28,17 @@ public class Initial : SqlMigration
     );
 
     create table bill
-        l
     (
         bill_id bigint primary key generated always as identity,
         user_id bigint not null,
-        balance bigint not null,
-        tmp text
+        balance bigint not null
     );
 
-    insert into bill (user_id, balance, tmp)
-    values (1, 1000, 'bimbim');
+    insert into bill (user_id, balance)
+    values (1, 1000);
+
+    insert into users (user_name, password)
+    values ('pablo', 239);
     """;
 
     protected override string GetDownSql(IServiceProvider serviceProvider) =>

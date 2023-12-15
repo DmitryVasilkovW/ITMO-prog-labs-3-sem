@@ -3,13 +3,15 @@ using Spectre.Console;
 
 namespace LabWork5.Presentation.Console.Scenarios.Login;
 
-public class LoginScenario : IScenario
+public class LoginScenario : ILoginOptionScenario
 {
     private readonly IUserService _userService;
+    private readonly ScenarioRunner _scenarioRunner;
 
-    public LoginScenario(IUserService userService)
+    public LoginScenario(IUserService userService, ScenarioRunner scenarioRunner)
     {
         _userService = userService;
+        _scenarioRunner = scenarioRunner;
     }
 
     public string Name => "Login";
@@ -26,8 +28,11 @@ public class LoginScenario : IScenario
             LoginResult.NotFound => "User not found",
             _ => throw new ArgumentOutOfRangeException(nameof(result)),
         };
-
         AnsiConsole.WriteLine(message);
-        AnsiConsole.Ask<string>("Ok");
+
+        while (true)
+        {
+            _scenarioRunner.Run();
+        }
     }
 }
