@@ -1,27 +1,10 @@
-using System.Collections.Generic;
-using LabWork5.Application.Abstractions;
 using LabWork5.Application.Contracts.Users;
-using LabWork5.Application.Models.Users;
 
 namespace LabWork5.Infrastructure.DataAccess.Repositories;
 
-public class MockUserRepository : IUserRepository
+public class MockUserRepository
 {
     private MockDatabase _database = new MockDatabase();
-    public User? FindUserByBillid(long billid)
-    {
-        return null;
-    }
-
-    public void BillCreation(string password, User? user)
-    {
-    }
-
-    public long ViewBalance(long billid)
-    {
-        return 0;
-    }
-
     public TransactionResults Withdrawal(long billid, long withdrawals)
     {
         var billtable = new MockBillTable();
@@ -45,7 +28,7 @@ public class MockUserRepository : IUserRepository
         return TransactionResults.Success;
     }
 
-    public void AccountFunding(long billid, long depositmoney)
+    public void AccountFunding(long depositmoney)
     {
         var billtable = new MockBillTable();
         _database.AddTable(billtable);
@@ -58,16 +41,6 @@ public class MockUserRepository : IUserRepository
                 ((MockBillTable)billTable).IncreaseBalance(depositmoney);
             }
         }
-    }
-
-    public IList<string>? TransactionHistory(User? user)
-    {
-        return null;
-    }
-
-    public bool PasswordVerification(long billid, string inputpassword)
-    {
-        return false;
     }
 
     public long? MockViewBalance(long billid)

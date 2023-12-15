@@ -62,7 +62,7 @@ public class CheckThatWithdrawalsCorrectWhenBalanceIsSufficient : IEnumerable<ob
 
         Assert.Equal(result, transactionexpectedresult);
 
-        user.AccountFunding(239, creditamount);
+        user.AccountFunding(creditamount);
         Assert.Equal(1010, user.MockViewBalance(239));
     }
 }
