@@ -6,7 +6,7 @@ namespace LabWork5.Application.Users;
 
 internal class UserService : IUserService
 {
-    private static CurrentUserManager? _currentUserManager;
+    private readonly CurrentUserManager _currentUserManager;
     private readonly IUserRepository _repository;
 
     public UserService(IUserRepository repository, CurrentUserManager currentUserManager)
@@ -29,13 +29,13 @@ internal class UserService : IUserService
             return LoginResult.IncorrectPassword;
         }
 
-        if (_currentUserManager is not null) _currentUserManager.User = user;
+        _currentUserManager.User = user;
         return LoginResult.Success;
     }
 
-    public void BillCreation(long billid)
+    public void BillCreation(string password)
     {
-        _repository.BillCreation(billid);
+        _repository.BillCreation(password, _currentUserManager.User);
     }
 
     public long ViewBalance(long billid)
@@ -53,8 +53,9 @@ internal class UserService : IUserService
         _repository.AccountFunding(billid, depositmoney);
     }
 
-    public IList<string> TransactionHistory(long billid)
+    public IList<string>? TransactionHistory()
     {
-        return _repository.TransactionHistory(billid);
+        if (_currentUserManager is not null) return _repository.TransactionHistory(_currentUserManager.User);
+        return null;
     }
 }

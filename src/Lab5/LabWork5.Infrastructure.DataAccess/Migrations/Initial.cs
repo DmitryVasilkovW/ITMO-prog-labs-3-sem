@@ -31,18 +31,20 @@ public class Initial : SqlMigration
         operation text not null
     );
 
-    create table bill
+    CREATE SEQUENCE bill_id_seq START 1000000000000000;
+
+    CREATE TABLE bill
     (
-        bill_id bigint primary key generated always as identity,
-        user_id bigint not null,
-        balance bigint not null
+        bill_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('bill_id_seq'),
+        user_id BIGINT NOT NULL,
+        balance BIGINT NOT NULL
     );
 
     insert into bill (user_id, balance)
     values (1, 1000);
 
     insert into password (bill_id, billpassword)
-    values (1, 239);
+    values (1000000000000000, 239);
 
     insert into admin (adminpassword)
     values (239241);
@@ -57,5 +59,6 @@ public class Initial : SqlMigration
     drop table history;
     drop table bill;
     drop table password;
+    drop table admin;
     """;
 }

@@ -1,4 +1,5 @@
 using LabWork5.Presentation.Console.Admin;
+using LabWork5.Presentation.Console.Admin.Scenarios.TransactionHistory;
 using LabWork5.Presentation.Console.Scenarios.AccountFunding;
 using LabWork5.Presentation.Console.Scenarios.BillCreation;
 using LabWork5.Presentation.Console.Scenarios.Login;
@@ -23,6 +24,7 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IScenarioProvider, TransactionHistoryScenarioProvider>();
         collection.AddScoped<IScenarioProvider, ViewBalanceScenarioProvider>();
         collection.AddScoped<IScenarioProvider, WithdrawalScenarioProvider>();
+        collection.AddScoped<IScenarioProvider, TransactionHistoryScenarioProviderForAdmons>();
 
         return collection;
     }

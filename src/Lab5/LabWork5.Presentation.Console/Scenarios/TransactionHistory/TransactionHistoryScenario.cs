@@ -16,13 +16,14 @@ public class TransactionHistoryScenario : IScenario
 
     public void Run()
     {
-        long bill = AnsiConsole.Ask<long>("Enter your bill");
+        IList<string>? result = _userService.TransactionHistory();
 
-        IList<string> result = _userService.TransactionHistory(bill);
-
-        foreach (string operation in result)
+        if (result is not null)
         {
-            AnsiConsole.WriteLine(operation);
+            foreach (string operation in result)
+            {
+                AnsiConsole.WriteLine(operation);
+            }
         }
 
         AnsiConsole.WriteLine("Ok");

@@ -1,4 +1,3 @@
-using Itmo.Dev.Platform.Postgres.Connection;
 using Itmo.Dev.Platform.Postgres.Extensions;
 using LabWork5.Application.Abstractions;
 using LabWork5.Application.Contracts.Users;
@@ -9,13 +8,6 @@ namespace LabWork5.Infrastructure.DataAccess.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly IPostgresConnectionProvider _connectionProvider;
-
-    public UserRepository(IPostgresConnectionProvider connectionProvider)
-    {
-        _connectionProvider = connectionProvider;
-    }
-
     public User? FindUserByBillid(long billid)
     {
         const string sqlforusrid = """
@@ -64,14 +56,8 @@ public class UserRepository : IUserRepository
             Username: newreader.GetString(0));
     }
 
-    public void BillCreation(long billid)
+    public void BillCreation(string password, User? user)
     {
-        const string sqlforusrid = """
-    select user_id
-    from bill
-    where bill_id = @billid;
-    """;
-
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
         {
             Host = "localhost",
@@ -82,29 +68,28 @@ public class UserRepository : IUserRepository
         }.ConnectionString);
         connection.Open();
 
-        long userid;
-        using (var command = new NpgsqlCommand(sqlforusrid, connection))
+        if (user is not null)
         {
-            command.Parameters.AddWithValue("billid", billid);
+            long userid = user.Id;
 
-            using (NpgsqlDataReader reader = command.ExecuteReader())
-            {
-                reader.Read();
-                userid = reader.GetInt64(0);
-            }
-        }
+            const long balance = 0;
 
-        const long balance = 0;
-
-        const string sql = """
+            const string sql = """
                        INSERT INTO bill (user_id, balance)
-                       VALUES (@userid, @balance);
+                        VALUES (@userid, @balance)
+                        RETURNING bill_id;
                        """;
-        using (var newcommand = new NpgsqlCommand(sql, connection))
-        {
-            newcommand.Parameters.AddWithValue("userid", userid);
-            newcommand.Parameters.AddWithValue("balance", balance);
-            newcommand.ExecuteNonQuery();
+
+            long newbillid;
+            using (var newcommand = new NpgsqlCommand(sql, connection))
+            {
+                newcommand.Parameters.AddWithValue("userid", userid);
+                newcommand.Parameters.AddWithValue("balance", balance);
+
+                using NpgsqlDataReader newreader = newcommand.ExecuteReader();
+                newreader.Read();
+                newbillid = newreader.GetInt64(0);
+            }
 
             const string sqlforhistory = """
                         INSERT INTO history (user_id, operation)
@@ -115,6 +100,18 @@ public class UserRepository : IUserRepository
             {
                 historycommand.Parameters.AddWithValue("userid", userid);
                 historycommand.ExecuteNonQuery();
+            }
+
+            const string sqlpassword = """
+                        INSERT INTO password (bill_id, billpassword)
+                       VALUES (@newbillid, @password);
+                       """;
+
+            using (var passwordcommand = new NpgsqlCommand(sqlpassword, connection))
+            {
+                passwordcommand.Parameters.AddWithValue("newbillid", newbillid);
+                passwordcommand.Parameters.AddWithValue("password", password);
+                passwordcommand.ExecuteNonQuery();
             }
         }
     }
@@ -306,14 +303,8 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public IList<string> TransactionHistory(long billid)
+    public IList<string>? TransactionHistory(User? user)
     {
-        const string sql = """
-                       select user_id
-                       from bill
-                       WHERE bill_id = @billid;
-                       """;
-
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
         {
             Host = "localhost",
@@ -324,40 +315,35 @@ public class UserRepository : IUserRepository
         }.ConnectionString);
         connection.Open();
 
-        long userid;
-        using (var command = new NpgsqlCommand(sql, connection))
+        if (user is not null)
         {
-            command.Parameters.AddWithValue("billid", billid);
+            long userid = user.Id;
 
-            using (NpgsqlDataReader reader = command.ExecuteReader())
-            {
-                reader.Read();
-                userid = reader.GetInt64(0);
-            }
-        }
-
-        const string sqlforhistory = """
+            const string sqlforhistory = """
                        select operation
                        from history
                        WHERE user_id = @userid;
                        """;
 
-        var historyList = new List<string>();
+            var historyList = new List<string>();
 
-        using (var newcommand = new NpgsqlCommand(sqlforhistory, connection))
-        {
-            newcommand.Parameters.AddWithValue("userid", userid);
-
-            using (NpgsqlDataReader newreader = newcommand.ExecuteReader())
+            using (var newcommand = new NpgsqlCommand(sqlforhistory, connection))
             {
-                while (newreader.Read())
+                newcommand.Parameters.AddWithValue("userid", userid);
+
+                using (NpgsqlDataReader newreader = newcommand.ExecuteReader())
                 {
-                    historyList.Add(newreader.GetString(0));
+                    while (newreader.Read())
+                    {
+                        historyList.Add(newreader.GetString(0));
+                    }
                 }
             }
+
+            return historyList;
         }
 
-        return historyList;
+        return null;
     }
 
     public bool PasswordVerification(long billid, string inputpassword)

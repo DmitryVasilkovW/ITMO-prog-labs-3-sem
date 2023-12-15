@@ -47,4 +47,40 @@ public class AdminRepository : IAdminRepository
 
         return false;
     }
+
+    public IList<string> TransactionHistory(long userid)
+    {
+        const string sqlforhistory = """
+                       select operation
+                       from history
+                       WHERE user_id = @userid;
+                       """;
+
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
+
+        var historyList = new List<string>();
+
+        using (var newcommand = new NpgsqlCommand(sqlforhistory, connection))
+        {
+            newcommand.Parameters.AddWithValue("userid", userid);
+
+            using (NpgsqlDataReader newreader = newcommand.ExecuteReader())
+            {
+                while (newreader.Read())
+                {
+                    historyList.Add(newreader.GetString(0));
+                }
+            }
+        }
+
+        return historyList;
+    }
 }

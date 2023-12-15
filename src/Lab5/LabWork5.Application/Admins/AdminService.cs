@@ -22,4 +22,9 @@ public class AdminService : IAdminService
 
         return LoginResult.Success;
     }
+
+    public IList<string> TransactionHistory(long userid)
+    {
+        return _repository.TransactionHistory(userid);
+    }
 }

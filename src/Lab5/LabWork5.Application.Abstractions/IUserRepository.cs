@@ -6,10 +6,10 @@ namespace LabWork5.Application.Abstractions;
 public interface IUserRepository
 {
     User? FindUserByBillid(long billid);
-    void BillCreation(long billid);
+    void BillCreation(string password, User? user);
     long ViewBalance(long billid);
     TransactionResults Withdrawal(long billid, long withdrawals);
     void AccountFunding(long billid, long depositmoney);
-    IList<string> TransactionHistory(long billid);
+    IList<string>? TransactionHistory(User? user);
     bool PasswordVerification(long billid, string inputpassword);
 }

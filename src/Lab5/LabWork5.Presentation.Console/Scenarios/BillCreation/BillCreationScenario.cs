@@ -16,9 +16,9 @@ public class BillCreationScenario : IScenario
 
     public void Run()
     {
-        long bill = AnsiConsole.Ask<long>("Enter your bill");
+        string password = AnsiConsole.Ask<string>("Enter password");
 
-        _userService.BillCreation(bill);
+        _userService.BillCreation(password);
 
         AnsiConsole.WriteLine("Ok");
     }
