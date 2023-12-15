@@ -19,7 +19,7 @@ public class ViewBalanceScenario : IScenario
     {
         long bill = AnsiConsole.Ask<long>("Enter your bill");
 
-        long result = _userService.ViewBalance(bill);
+        decimal result = _userService.ViewBalance(bill);
 
         AnsiConsole.WriteLine(CultureInfo.InvariantCulture, "{0}", result);
         AnsiConsole.WriteLine("Ok");

@@ -3,7 +3,7 @@ using Spectre.Console;
 
 namespace LabWork5.Presentation.Console.Admin.Scenarios.TransactionHistory;
 
-public class TransactionHistoryScenarioForAdmins : IScenario
+public class TransactionHistoryScenarioForAdmins : IScenarioForAdmin
 {
     private readonly IAdminService _adminService;
 

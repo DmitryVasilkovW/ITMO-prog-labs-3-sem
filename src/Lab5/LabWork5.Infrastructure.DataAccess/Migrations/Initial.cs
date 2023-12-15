@@ -35,13 +35,13 @@ public class Initial : SqlMigration
 
     CREATE TABLE bill
     (
-        bill_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('bill_id_seq'),
-        user_id BIGINT NOT NULL,
-        balance BIGINT NOT NULL
+        bill_id bigint PRIMARY KEY DEFAULT NEXTVAL('bill_id_seq'),
+        user_id bigint NOT NULL,
+        balance numeric NOT NULL
     );
 
     insert into bill (user_id, balance)
-    values (1, 1000);
+    values (1, 239239239);
 
     insert into password (bill_id, billpassword)
     values (1000000000000000, 239);
@@ -50,7 +50,7 @@ public class Initial : SqlMigration
     values (239241);
 
     insert into users (user_name)
-    values ('pablo');
+    values ('Emin');
     """;
 
     protected override string GetDownSql(IServiceProvider serviceProvider) =>

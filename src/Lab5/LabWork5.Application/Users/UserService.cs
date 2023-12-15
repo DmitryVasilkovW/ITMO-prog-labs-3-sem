@@ -38,19 +38,19 @@ internal class UserService : IUserService
         _repository.BillCreation(password, _currentUserManager.User);
     }
 
-    public long ViewBalance(long billid)
+    public decimal ViewBalance(long billid)
     {
         return _repository.ViewBalance(billid);
     }
 
     public TransactionResults Withdrawal(long billid, long withdrawals)
     {
-        return _repository.Withdrawal(billid, withdrawals);
+        return _repository.Withdrawal(billid, withdrawals, _currentUserManager.User);
     }
 
     public void AccountFunding(long billid, long depositmoney)
     {
-        _repository.AccountFunding(billid, depositmoney);
+        _repository.AccountFunding(billid, depositmoney, _currentUserManager.User);
     }
 
     public IList<string>? TransactionHistory()

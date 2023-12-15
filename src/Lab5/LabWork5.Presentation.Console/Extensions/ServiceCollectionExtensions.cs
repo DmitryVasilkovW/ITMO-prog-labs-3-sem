@@ -24,7 +24,9 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IScenarioProvider, TransactionHistoryScenarioProvider>();
         collection.AddScoped<IScenarioProvider, ViewBalanceScenarioProvider>();
         collection.AddScoped<IScenarioProvider, WithdrawalScenarioProvider>();
-        collection.AddScoped<IScenarioProvider, TransactionHistoryScenarioProviderForAdmons>();
+
+        collection.AddScoped<ScenarioRunnerForAdmin>();
+        collection.AddScoped<IScenarioProviderForAdmin, TransactionHistoryScenarioProviderForAdmons>();
 
         return collection;
     }

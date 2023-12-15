@@ -7,9 +7,9 @@ public interface IUserRepository
 {
     User? FindUserByBillid(long billid);
     void BillCreation(string password, User? user);
-    long ViewBalance(long billid);
-    TransactionResults Withdrawal(long billid, long withdrawals);
-    void AccountFunding(long billid, long depositmoney);
+    decimal ViewBalance(long billid);
+    TransactionResults Withdrawal(long billid, long withdrawals, User? user);
+    void AccountFunding(long billid, long depositmoney, User? user);
     IList<string>? TransactionHistory(User? user);
     bool PasswordVerification(long billid, string inputpassword);
 }

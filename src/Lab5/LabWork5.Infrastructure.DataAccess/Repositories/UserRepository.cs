@@ -116,7 +116,7 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public long ViewBalance(long billid)
+    public decimal ViewBalance(long billid)
     {
         const string sql = """
         select balance
@@ -173,7 +173,7 @@ public class UserRepository : IUserRepository
         return result;
     }
 
-    public TransactionResults Withdrawal(long billid, long withdrawals)
+    public TransactionResults Withdrawal(long billid, long withdrawals, User? user)
     {
         const string sqlchecker = """
     select balance
@@ -220,37 +220,26 @@ public class UserRepository : IUserRepository
             newcommand.ExecuteNonQuery();
         }
 
-        const string sqlforuserid = """
-                        select user_id
-                        from bill
-                        where bill_id = @billid 
-                       """;
-        long userid;
-        using (var useridcommand = new NpgsqlCommand(sqlforuserid, connection))
+        if (user is not null)
         {
-            useridcommand.Parameters.AddWithValue("billid", billid);
-            using (NpgsqlDataReader idreader = useridcommand.ExecuteReader())
-            {
-                idreader.Read();
-                userid = idreader.GetInt64(0);
-            }
-        }
+            long userid = user.Id;
 
-        const string sqlforhistory = """
+            const string sqlforhistory = """
                         INSERT INTO history (user_id, operation)
                        VALUES (@userid, 'withdrawal');
                        """;
 
-        using (var historycommand = new NpgsqlCommand(sqlforhistory, connection))
-        {
-            historycommand.Parameters.AddWithValue("userid", userid);
-            historycommand.ExecuteNonQuery();
+            using (var historycommand = new NpgsqlCommand(sqlforhistory, connection))
+            {
+                historycommand.Parameters.AddWithValue("userid", userid);
+                historycommand.ExecuteNonQuery();
+            }
         }
 
         return TransactionResults.Success;
     }
 
-    public void AccountFunding(long billid, long depositmoney)
+    public void AccountFunding(long billid, long depositmoney, User? user)
     {
         const string sql = """
                            UPDATE bill
@@ -275,31 +264,19 @@ public class UserRepository : IUserRepository
         command.ExecuteNonQuery();
         }
 
-        const string sqlforuserid = """
-                        select user_id
-                        from bill
-                        where bill_id = @billid 
-                       """;
-        long userid;
-        using (var useridcommand = new NpgsqlCommand(sqlforuserid, connection))
+        if (user is not null)
         {
-            useridcommand.Parameters.AddWithValue("billid", billid);
-            using (NpgsqlDataReader reader = useridcommand.ExecuteReader())
-            {
-                reader.Read();
-                userid = reader.GetInt64(0);
-            }
-        }
-
-        const string sqlforhistory = """
+            long userid = user.Id;
+            const string sqlforhistory = """
                         INSERT INTO history (user_id, operation)
                        VALUES (@userid, 'Account funding');
                        """;
 
-        using (var historycommand = new NpgsqlCommand(sqlforhistory, connection))
-        {
-            historycommand.Parameters.AddWithValue("userid", userid);
-            historycommand.ExecuteNonQuery();
+            using (var historycommand = new NpgsqlCommand(sqlforhistory, connection))
+            {
+                historycommand.Parameters.AddWithValue("userid", userid);
+                historycommand.ExecuteNonQuery();
+            }
         }
     }
 

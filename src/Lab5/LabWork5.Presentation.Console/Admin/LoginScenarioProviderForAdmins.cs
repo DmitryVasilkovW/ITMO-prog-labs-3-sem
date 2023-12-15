@@ -9,12 +9,12 @@ public class LoginScenarioProviderForAdmins : ILoginScenarioProvider
 {
     private readonly IAdminService _service;
     private readonly ICurrentUserService _currentUser;
-    private readonly ScenarioRunner _scenarioProvider;
+    private readonly ScenarioRunnerForAdmin _scenarioProvider;
 
     public LoginScenarioProviderForAdmins(
         IAdminService service,
         ICurrentUserService currentUser,
-        ScenarioRunner scenarioProvider)
+        ScenarioRunnerForAdmin scenarioProvider)
     {
         _service = service;
         _currentUser = currentUser;

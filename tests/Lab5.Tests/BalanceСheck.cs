@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Tests;
 
-public class CheckThatWithdrawalsCorrectWhenBalanceIsSufficient : IEnumerable<object[]>
+public class BalanceСheck : IEnumerable<object[]>
 {
     public static IEnumerable<object[]> GetCommands
     {
@@ -44,8 +44,8 @@ public class CheckThatWithdrawalsCorrectWhenBalanceIsSufficient : IEnumerable<ob
     }
 
     [Theory]
-    [MemberData(nameof(GetCommands), MemberType = typeof(CheckThatWithdrawalsCorrectWhenBalanceIsSufficient))]
-    public void ComputerAssembly(
+    [MemberData(nameof(GetCommands), MemberType = typeof(BalanceСheck))]
+    public void BalanceСhecker(
         long withdrawableamount,
         long cashthatcannotbewithdrawn,
         long creditamount)

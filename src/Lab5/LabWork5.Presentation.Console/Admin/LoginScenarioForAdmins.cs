@@ -8,9 +8,9 @@ namespace LabWork5.Presentation.Console.Admin;
 public class LoginScenarioForAdmins : ILoginOptionScenario
 {
     private readonly IAdminService _adminService;
-    private readonly ScenarioRunner _scenarioRunner;
+    private readonly ScenarioRunnerForAdmin _scenarioRunner;
 
-    public LoginScenarioForAdmins(IAdminService adminService, ScenarioRunner scenarioRunner)
+    public LoginScenarioForAdmins(IAdminService adminService, ScenarioRunnerForAdmin scenarioRunner)
     {
         _adminService = adminService;
         _scenarioRunner = scenarioRunner;

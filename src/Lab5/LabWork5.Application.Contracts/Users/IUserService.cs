@@ -4,7 +4,7 @@ public interface IUserService
 {
     LoginResult Login(long billid, string password);
     void BillCreation(string password);
-    long ViewBalance(long billid);
+    decimal ViewBalance(long billid);
     TransactionResults Withdrawal(long billid, long withdrawals);
     void AccountFunding(long billid, long depositmoney);
     public IList<string>? TransactionHistory();
