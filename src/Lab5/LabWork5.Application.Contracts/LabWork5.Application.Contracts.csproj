@@ -11,8 +11,4 @@
       <ProjectReference Include="..\LabWork5.Application.Models\LabWork5.Application.Models.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Admins" />
-    </ItemGroup>
-
 </Project>

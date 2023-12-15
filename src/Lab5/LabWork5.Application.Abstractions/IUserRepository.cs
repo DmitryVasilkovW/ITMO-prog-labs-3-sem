@@ -11,4 +11,5 @@ public interface IUserRepository
     TransactionResults Withdrawal(long billid, long withdrawals);
     void AccountFunding(long billid, long depositmoney);
     IList<string> TransactionHistory(long billid);
+    bool PasswordVerification(long billid, string inputpassword);
 }

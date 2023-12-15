@@ -5,4 +5,5 @@ public enum LoginResult
     None,
     Success,
     NotFound,
+    IncorrectPassword,
 }

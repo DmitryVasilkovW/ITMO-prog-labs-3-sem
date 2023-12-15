@@ -3,13 +3,13 @@ using LabWork5.Application.Contracts.Users;
 
 namespace LabWork5.Presentation.Console.Scenarios.Login;
 
-public class LoginScenarioProvider : ILoginScenarioProvider
+public class LoginScenarioProviderForUsers : ILoginScenarioProvider
 {
     private readonly IUserService _service;
     private readonly ICurrentUserService _currentUser;
     private readonly ScenarioRunner _scenarioProvider;
 
-    public LoginScenarioProvider(
+    public LoginScenarioProviderForUsers(
         IUserService service,
         ICurrentUserService currentUser,
         ScenarioRunner scenarioProvider)
@@ -28,7 +28,7 @@ public class LoginScenarioProvider : ILoginScenarioProvider
             return false;
         }
 
-        scenario = new LoginScenario(_service, _scenarioProvider);
+        scenario = new LoginScenarioForUsers(_service, _scenarioProvider);
         return true;
     }
 }

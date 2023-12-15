@@ -11,14 +11,18 @@ public class Initial : SqlMigration
     create table users
     (
         user_id bigint primary key generated always as identity,
-        user_name text not null,
-        password text not null
+        user_name text not null
+    );
+    
+    create table password
+    (
+        bill_id bigint not null,
+        billpassword text not null
     );
 
-    create table atm
+    create table admin
     (
-        atm_id bigint primary key generated always as identity ,
-        atm_name text not null 
+        adminpassword text not null
     );
 
     create table history
@@ -37,8 +41,14 @@ public class Initial : SqlMigration
     insert into bill (user_id, balance)
     values (1, 1000);
 
-    insert into users (user_name, password)
-    values ('pablo', 239);
+    insert into password (bill_id, billpassword)
+    values (1, 239);
+
+    insert into admin (adminpassword)
+    values (239241);
+
+    insert into users (user_name)
+    values ('pablo');
     """;
 
     protected override string GetDownSql(IServiceProvider serviceProvider) =>
@@ -46,6 +56,6 @@ public class Initial : SqlMigration
     drop table users;
     drop table history;
     drop table bill;
-    drop table atm;
+    drop table password;
     """;
 }

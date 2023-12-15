@@ -1,5 +1,5 @@
-using LabWork5.Application.ATMs;
-using LabWork5.Application.Contracts.ATMs;
+using LabWork5.Application.Admins;
+using LabWork5.Application.Contracts.Admins;
 using LabWork5.Application.Contracts.Users;
 using LabWork5.Application.Users;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +11,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplication(this IServiceCollection collection)
     {
         collection.AddScoped<IUserService, UserService>();
-        collection.AddScoped<IATMService, ATMService>();
+        collection.AddScoped<IAdminService, AdminService>();
 
         collection.AddScoped<CurrentUserManager>();
         collection.AddScoped<ICurrentUserService>(

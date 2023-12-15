@@ -6,8 +6,8 @@ namespace LabWork5.Application.Users;
 
 internal class UserService : IUserService
 {
+    private static CurrentUserManager? _currentUserManager;
     private readonly IUserRepository _repository;
-    private readonly CurrentUserManager _currentUserManager;
 
     public UserService(IUserRepository repository, CurrentUserManager currentUserManager)
     {
@@ -15,7 +15,7 @@ internal class UserService : IUserService
         _currentUserManager = currentUserManager;
     }
 
-    public LoginResult Login(long billid)
+    public LoginResult Login(long billid, string password)
     {
         User? user = _repository.FindUserByBillid(billid);
 
@@ -24,7 +24,12 @@ internal class UserService : IUserService
             return LoginResult.NotFound;
         }
 
-        _currentUserManager.User = user;
+        if (!_repository.PasswordVerification(billid, password))
+        {
+            return LoginResult.IncorrectPassword;
+        }
+
+        if (_currentUserManager is not null) _currentUserManager.User = user;
         return LoginResult.Success;
     }
 

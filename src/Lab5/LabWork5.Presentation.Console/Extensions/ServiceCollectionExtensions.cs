@@ -1,3 +1,4 @@
+using LabWork5.Presentation.Console.Admin;
 using LabWork5.Presentation.Console.Scenarios.AccountFunding;
 using LabWork5.Presentation.Console.Scenarios.BillCreation;
 using LabWork5.Presentation.Console.Scenarios.Login;
@@ -13,7 +14,8 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddPresentationConsole(this IServiceCollection collection)
     {
         collection.AddScoped<LoginScenarioRunner>();
-        collection.AddScoped<ILoginScenarioProvider, LoginScenarioProvider>();
+        collection.AddScoped<ILoginScenarioProvider, LoginScenarioProviderForUsers>();
+        collection.AddScoped<ILoginScenarioProvider, LoginScenarioProviderForAdmins>();
 
         collection.AddScoped<ScenarioRunner>();
         collection.AddScoped<IScenarioProvider, AccountFundingScenarioProvider>();

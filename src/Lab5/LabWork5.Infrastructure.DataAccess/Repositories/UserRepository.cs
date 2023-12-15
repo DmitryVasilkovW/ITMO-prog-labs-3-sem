@@ -359,4 +359,42 @@ public class UserRepository : IUserRepository
 
         return historyList;
     }
+
+    public bool PasswordVerification(long billid, string inputpassword)
+    {
+        const string sql = """
+                       select billpassword
+                       from password
+                       WHERE bill_id = @billid;
+                       """;
+
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
+
+        string password;
+        using (var command = new NpgsqlCommand(sql, connection))
+        {
+            command.Parameters.AddWithValue("billid", billid);
+
+            using (NpgsqlDataReader reader = command.ExecuteReader())
+            {
+                reader.Read();
+                password = reader.GetString(0);
+            }
+        }
+
+        if (inputpassword.Equals(password, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

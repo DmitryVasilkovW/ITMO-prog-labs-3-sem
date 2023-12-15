@@ -1,7 +1,5 @@
 using Itmo.Dev.Platform.Postgres.Connection;
-using Itmo.Dev.Platform.Postgres.Extensions;
 using LabWork5.Application.Abstractions;
-using LabWork5.Application.Models.Admins;
 using Npgsql;
 
 namespace LabWork5.Infrastructure.DataAccess.Repositories;
@@ -15,32 +13,38 @@ public class AdminRepository : IAdminRepository
         _connectionProvider = connectionProvider;
     }
 
-    public Admin? FindAdminByUsername(string adminname)
+    public bool PasswordVerification(string inputpassword)
     {
         const string sql = """
-        select admin_id, admin_name
-        from admins
-        where admin_name = :username;
-        """;
+                       select adminpassword
+                       from admin
+                       """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider
-                    .GetConnectionAsync(default)
-                    .ConfigureAwait(false))
-            .GetAwaiter()
-            .GetResult();
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
 
-        using var command = new NpgsqlCommand(sql, connection);
-        command.AddParameter("adminname", adminname);
+        string password;
+        using (var command = new NpgsqlCommand(sql, connection))
+        {
+            using (NpgsqlDataReader reader = command.ExecuteReader())
+            {
+                reader.Read();
+                password = reader.GetString(0);
+            }
+        }
 
-        using NpgsqlDataReader reader = command.ExecuteReader();
+        if (inputpassword.Equals(password, StringComparison.Ordinal))
+        {
+            return true;
+        }
 
-        if (reader.Read() is false)
-            return null;
-
-        return new Admin(
-            Id: reader.GetInt64(0),
-            Adminname: reader.GetString(1));
+        return false;
     }
 }
