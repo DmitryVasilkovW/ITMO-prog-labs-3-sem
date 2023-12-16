@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>LabWork5.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Itmo.Dev.Platform.Postgres" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+      <PackageReference Include="Npgsql" />
+      <PackageReference Include="Spectre.Console" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\LabWork5.Application.Abstractions\LabWork5.Application.Abstractions.csproj" />
+        <ProjectReference Include="..\LabWork5.Application.Contracts\LabWork5.Application.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Workshop5.Application.Abstractions</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LabWork5.Application.Contracts\LabWork5.Application.Contracts.csproj" />
+      <ProjectReference Include="..\LabWork5.Application.Models\LabWork5.Application.Models.csproj" />
+    </ItemGroup>
+
+</Project>
